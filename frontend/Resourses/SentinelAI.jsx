@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const SentinelAI = () => {
+  const [currentView, setCurrentView] = useState('home');
+
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
@@ -21,7 +23,7 @@ const SentinelAI = () => {
     return () => {
       elements.forEach((el) => observer.unobserve(el));
     };
-  }, []);
+  }, [currentView]);
 
   return (
     <div className="bg-background text-on-surface antialiased overflow-x-hidden relative">
@@ -36,48 +38,49 @@ const SentinelAI = () => {
       {/* BEGIN: TopNavBar */}
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-max-width rounded-full z-50 bg-white/75 backdrop-blur-xl border border-white/100 flex justify-between items-center px-gutter py-stack-sm shadow-sm">
         <div className="flex items-center gap-2">
-          <div className="font-bold text-2xl text-on-background tracking-tighter">
+          <div className="font-bold text-2xl text-on-background tracking-tighter cursor-pointer" onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
             SentinelAI
           </div>
         </div>
         <div className="hidden md:flex items-center gap-8">
           <a
-            className="text-primary font-bold border-b-2 border-primary transition-colors text-body-md"
-            href="#"
+            className={currentView === 'home' ? "text-primary font-bold border-b-2 border-primary transition-colors text-body-md cursor-pointer" : "text-on-surface-variant hover:text-primary transition-colors text-body-md cursor-pointer"}
+            onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           >
             Home
-            <br />
           </a>
           <a
-            className="text-on-surface-variant hover:text-primary transition-colors text-body-md"
-            href="#"
+            className="text-on-surface-variant hover:text-primary transition-colors text-body-md cursor-pointer"
+            onClick={() => { setCurrentView('home'); setTimeout(() => document.getElementById('analyze-app')?.scrollIntoView({ behavior: 'smooth' }), 100); }}
           >
             Analyze App
           </a>
           <a
-            className="text-on-surface-variant hover:text-primary transition-colors text-body-md"
-            href="#"
+            className="text-on-surface-variant hover:text-primary transition-colors text-body-md cursor-pointer"
+            onClick={() => { setCurrentView('home'); setTimeout(() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }), 100); }}
           >
             How it's Work
           </a>
           <a
-            className="text-on-surface-variant hover:text-primary transition-colors text-body-md"
-            href="#"
+            className={currentView === 'about' ? "text-primary font-bold border-b-2 border-primary transition-colors text-body-md cursor-pointer" : "text-on-surface-variant hover:text-primary transition-colors text-body-md cursor-pointer"}
+            onClick={() => { setCurrentView('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           >
             About Us
           </a>
         </div>
-        <button className="bg-[#0A0F29] text-white px-6 py-2.5 rounded-full text-body-md font-semibold hover:opacity-90 transition-all active:scale-95">
+        <button className="bg-[#0A0F29] text-white px-6 py-2.5 rounded-full text-body-md font-semibold hover:opacity-90 transition-all active:scale-95 cursor-pointer" onClick={() => setCurrentView('home')}>
           Get Started
         </button>
       </nav>
       {/* END: TopNavBar */}
 
       {/* BEGIN: HeroSection */}
-      <main className="relative pt-48 pb-section-gap px-container-margin-mobile md:px-container-margin max-w-max-width mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+      {currentView === 'home' ? (
+        <>
+          <main className="relative min-h-[100vh] flex items-center pt-36 pb-8 px-container-margin-mobile md:px-container-margin max-w-max-width mx-auto overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center w-full">
           {/* BEGIN: Hero Content */}
-          <div className="lg:col-span-5 space-y-stack-md z-10">
+          <div className="lg:col-span-5 space-y-4 z-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant">
               <span
                 className="material-symbols-outlined text-primary text-sm"
@@ -89,7 +92,7 @@ const SentinelAI = () => {
                 Advanced Threat Defense
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight text-on-surface">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-on-surface">
               Detect Fake <br />
               <span
                 style={{
@@ -103,13 +106,13 @@ const SentinelAI = () => {
               <br />
               Before They Scam You
             </h1>
-            <p className="text-body-lg text-on-surface-variant max-w-lg">
+            <p className="text-body-md text-on-surface-variant max-w-lg">
               SentinelAI uses advanced AI, similarity analysis, and risk scoring
               to identify fake and look-alike investment applications in
               real-time and protect users from financial fraud.
             </p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <button className="bg-[#0A0F29] text-white px-8 py-4 rounded-full font-bold hover:shadow-lg transition-all hover:-translate-y-1">
+            <div className="flex flex-wrap gap-4 mt-16">
+              <button className="bg-[#0A0F29] text-white px-8 py-3.5 rounded-full font-bold hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer">
                 Get Started
               </button>
             </div>
@@ -117,7 +120,7 @@ const SentinelAI = () => {
           {/* END: Hero Content */}
 
           {/* BEGIN: Hero Visual */}
-          <div className="lg:col-span-7 relative h-[600px] flex items-center justify-center glow-effect mt-12 lg:mt-0">
+          <div className="lg:col-span-7 relative h-[450px] flex items-center justify-center glow-effect mt-12 lg:mt-0">
             {/* Floating Glass Cards */}
             <div
               className="absolute top-10 left-10 glass-panel p-4 rounded-2xl shadow-sm animate-bounce z-20 flex items-center gap-3"
@@ -139,7 +142,7 @@ const SentinelAI = () => {
               </div>
             </div>
             <div
-              className="absolute bottom-20 right-10 glass-panel p-4 rounded-2xl shadow-sm animate-bounce z-20 flex items-center gap-3"
+              className="absolute bottom-10 right-10 glass-panel p-4 rounded-2xl shadow-sm animate-bounce z-20 flex items-center gap-3"
               style={{ animationDuration: '5s', animationDelay: '1s' }}
             >
               <div className="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
@@ -159,7 +162,7 @@ const SentinelAI = () => {
             </div>
 
             {/* 3D Shield Centerpiece Placeholder */}
-            <div className="relative w-full max-w-[500px] aspect-square flex items-center justify-center">
+            <div className="relative w-full max-w-[420px] aspect-square flex items-center justify-center">
               {/* Central Abstract 3D Image */}
               <img
                 alt="3D Holographic AI Shield"
@@ -273,7 +276,7 @@ const SentinelAI = () => {
       {/* END: FeaturesSection */}
 
       {/* BEGIN: HowItWorks */}
-      <section className="py-section-gap bg-surface-container-low/50">
+      <section id="how-it-works" className="py-section-gap bg-surface-container-low/50">
         <div className="max-w-max-width mx-auto px-container-margin text-center mb-24">
           <span className="text-primary font-label-caps uppercase tracking-widest">
             How SentinelAI Works
@@ -345,7 +348,7 @@ const SentinelAI = () => {
       {/* END: HowItWorks */}
 
       {/* BEGIN: DashboardPreview */}
-      <section className="py-section-gap overflow-hidden">
+      <section id="analyze-app" className="py-section-gap overflow-hidden">
         <div className="max-w-max-width mx-auto px-container-margin grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
           <div className="lg:col-span-4 space-y-8">
             <span className="text-primary font-label-caps uppercase tracking-widest">
@@ -531,6 +534,113 @@ const SentinelAI = () => {
         </div>
       </section>
       {/* END: CTASection */}
+        </>
+      ) : (
+        <main className="relative pt-32 pb-16 px-container-margin-mobile md:px-container-margin max-w-max-width mx-auto space-y-12">
+          {/* Header Section */}
+          <div className="text-center space-y-4 max-w-2xl mx-auto reveal-on-scroll active">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant">
+              <span className="material-symbols-outlined text-primary text-xs">shield</span>
+              <span className="font-label-caps text-[10px] text-primary tracking-widest uppercase">
+                About SentinelAI
+              </span>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold leading-tight text-on-surface">
+              Unmasking Fake Apps. <br />
+              <span className="bg-gradient-to-br from-primary to-tertiary bg-clip-text text-transparent">
+                Securing Real Trust.
+              </span>
+            </h1>
+            <p className="text-base text-on-surface-variant italic font-medium border-l-4 border-primary pl-3 py-1.5 bg-white/40 rounded-r-xl">
+              "Protecting users from digital investment scams through intelligent threat detection and risk analysis."
+            </p>
+          </div>
+
+          {/* About & Mission Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch reveal-on-scroll active">
+            <div className="glass-card p-6 rounded-2xl flex flex-col justify-between border border-white/40 shadow-sm">
+              <div>
+                <h3 className="text-xl font-bold text-on-background mb-3">Our Platform</h3>
+                <p className="text-on-surface-variant text-sm leading-relaxed">
+                  <strong>SentinelAI</strong> is an AI-powered cybersecurity platform designed to detect fake investment applications, fraudulent websites, and suspicious APK files. By analyzing app details, descriptions, developer information, and security indicators, SentinelAI helps users identify potential threats before they become victims of financial fraud.
+                </p>
+              </div>
+              <div className="mt-6 p-3 bg-primary/5 rounded-xl border border-primary/10 flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary text-xl">radar</span>
+                <span className="text-xs font-semibold text-primary">Advanced multi-factor risk assessment active.</span>
+              </div>
+            </div>
+
+            <div className="glass-card p-6 rounded-2xl flex flex-col justify-between border border-white/40 shadow-sm">
+              <div>
+                <h3 className="text-xl font-bold text-on-background mb-3">Our Mission</h3>
+                <p className="text-on-surface-variant text-sm leading-relaxed">
+                  To create a safer digital ecosystem by helping users verify apps, websites, and financial platforms before trusting them with their hard-earned assets and data.
+                </p>
+              </div>
+              <div className="mt-6 p-3 bg-secondary/5 rounded-xl border border-secondary/10 flex items-center gap-2">
+                <span className="material-symbols-outlined text-secondary text-xl">verified_user</span>
+                <span className="text-xs font-semibold text-secondary">Providing trust verification across the globe.</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Team Section */}
+          <div className="space-y-8 reveal-on-scroll active">
+            <div className="text-center max-w-md mx-auto space-y-2">
+              <h2 className="text-2xl font-bold">Meet the Team</h2>
+              <p className="text-xs text-on-surface-variant">The minds behind SentinelAI dedicated to securing the mobile ecosystem.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Member 1: Vishal */}
+              <div className="glass-card p-6 rounded-2xl text-center space-y-4 hover:border-primary border border-white/35">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white text-xl font-bold mx-auto shadow-sm">
+                  VK
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-lg font-bold text-on-surface">Vishal Kumar Singh</h4>
+                  <p className="text-primary font-semibold text-xs">Backend Developer • AI Integration • Deployment</p>
+                </div>
+                <p className="text-on-surface-variant text-xs leading-relaxed">Architects robust server architectures, machine learning models, and secure cloud pipelines.</p>
+              </div>
+
+              {/* Member 2: Ajay */}
+              <div className="glass-card p-6 rounded-2xl text-center space-y-4 hover:border-secondary border border-white/35">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-secondary to-tertiary flex items-center justify-center text-white text-xl font-bold mx-auto shadow-sm">
+                  AR
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-lg font-bold text-on-surface">Ajay Raj</h4>
+                  <p className="text-secondary font-semibold text-xs">Frontend Developer • UI/UX Designer</p>
+                </div>
+                <p className="text-on-surface-variant text-xs leading-relaxed">Crafts stunning, intuitive, and interactive interfaces with modern responsive designs.</p>
+              </div>
+
+              {/* Member 3: Prachi */}
+              <div className="glass-card p-6 rounded-2xl text-center space-y-4 hover:border-tertiary border border-white/35">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-tertiary to-primary flex items-center justify-center text-white text-xl font-bold mx-auto shadow-sm">
+                  PP
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-lg font-bold text-on-surface">Prachi Phadke</h4>
+                  <p className="text-tertiary font-semibold text-xs">Project Manager • Spokesperson • Strategy Lead</p>
+                </div>
+                <p className="text-on-surface-variant text-xs leading-relaxed">Drives strategic alignment, public relations, and business growth.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action or Platform Signoff */}
+          <div className="glass-panel p-8 rounded-2xl text-center space-y-4 border border-white/50 max-w-2xl mx-auto reveal-on-scroll active">
+            <span className="material-symbols-outlined text-primary text-3xl animate-pulse">security</span>
+            <h3 className="text-xl font-bold text-on-background">SentinelAI</h3>
+            <p className="text-lg font-bold text-primary italic">
+              "Unmasking Fake Apps. Securing Real Trust." 🛡️🤖
+            </p>
+          </div>
+        </main>
+      )}
 
       {/* BEGIN: Footer */}
       <footer className="bg-surface border-t border-outline-variant w-full mt-24">
@@ -576,7 +686,10 @@ const SentinelAI = () => {
             <h4 className="font-bold text-on-surface mb-6">Company</h4>
             <ul className="space-y-4 text-on-surface-variant text-sm">
               <li>
-                <a className="hover:text-primary transition-colors" href="#">
+                <a
+                  className="hover:text-primary transition-colors cursor-pointer"
+                  onClick={() => { setCurrentView('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                >
                   About Us
                 </a>
               </li>
