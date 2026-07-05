@@ -8,6 +8,7 @@ const ScanApplication = () => {
   const [progress, setProgress] = useState(0);
   const [scanStatus, setScanStatus] = useState('Initializing...');
   const [scanDetail, setScanDetail] = useState('Establishing secure connection to repository...');
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
   // Handles the scan animation and state updates
   const handleAnalyze = () => {
@@ -44,7 +45,7 @@ const ScanApplication = () => {
   };
 
   return (
-    <div className="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden flex">
+    <div className="bg-background text-on-background min-h-screen font-body-md overflow-hidden flex">
       {/* Inline styles for custom animations and effects */}
       <style dangerouslySetInnerHTML={{ __html: `
         body {
@@ -123,8 +124,8 @@ const ScanApplication = () => {
       `}} />
 
       {/* SideNavBar */}
-      <nav className="hidden md:flex flex-col bg-white/75 backdrop-blur-xl h-[calc(100vh-48px)] m-6 w-72 rounded-lg border border-white/100 p-6 z-10 shrink-0 sticky top-6">
-        <div className="mb-stack-xl flex items-center gap-4 cursor-pointer" onClick={() => navigate('/')}>
+      <nav className={`hidden md:flex flex-col bg-white/75 backdrop-blur-xl h-[calc(100vh-48px)] m-6 rounded-lg border border-white/100 p-6 z-10 shrink-0 sticky top-6 transition-all duration-300 ${isSidebarVisible ? 'w-72 opacity-100' : 'w-0 p-0 m-0 border-0 opacity-0 overflow-hidden'}`}>
+        <div className="mb-16 flex items-center gap-4 cursor-pointer" onClick={() => navigate('/')}>
           <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-outline-variant bg-surface">
             <img 
               alt="SentinelAI Node" 
@@ -144,6 +145,11 @@ const ScanApplication = () => {
         
         <ul className="flex flex-col gap-2 flex-grow">
           <li>
+            <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" onClick={(e) => { e.preventDefault(); navigate('/'); }} href="/">
+              <span className="material-symbols-outlined">home</span>Home
+            </a>
+          </li>
+          <li>
             <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" onClick={(e) => { e.preventDefault(); navigate('/dashboard'); }} href="/dashboard">
               <span className="material-symbols-outlined">language</span>Dashboard
             </a>
@@ -158,8 +164,6 @@ const ScanApplication = () => {
               <span className="material-symbols-outlined">analytics</span>Flagged App
             </a>
           </li>
-          <li></li>
-          <li></li>
           <li>
             <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" href="#">
               <span className="material-symbols-outlined">security</span>Threat Intelligence
@@ -170,47 +174,42 @@ const ScanApplication = () => {
               <span className="material-symbols-outlined">history</span>Scan History
             </a>
           </li>
+          <li>
+            <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" onClick={(e) => { e.preventDefault(); navigate('/', { state: { view: 'about' } }); }} href="/#about">
+              <span className="material-symbols-outlined">info</span>About Us
+            </a>
+          </li>
         </ul>
         <div className="mt-auto pt-6"></div>
       </nav>
 
       {/* Main Content Canvas */}
-      <main className="flex-grow relative z-10 w-full">
+      <main className="flex-grow relative z-10 w-full flex flex-col justify-between h-screen p-6">
+        {/* Toggle button on the top right */}
+        <div className="absolute top-6 right-6 z-50">
+          <button 
+            onClick={() => setIsSidebarVisible(!isSidebarVisible)}
+            className="bg-white/75 backdrop-blur-xl border border-white/100 p-2.5 rounded-lg shadow-sm hover:bg-white transition-all cursor-pointer flex items-center justify-center text-on-surface-variant hover:text-primary"
+          >
+            <span className="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+
         {/* Hero Section */}
-        <section className="hero-fade-in relative overflow-hidden pt-[120px] pb-stack-xl px-container-margin-mobile md:px-container-margin">
+        <section className="hero-fade-in relative overflow-hidden pt-8 pb-4">
           {/* Background Decorators */}
           <div className="watermark-text absolute left-[-5%] top-[10%] font-bold">SCAN</div>
           <div className="glow-sphere left-[10%] top-[20%]"></div>
-          <div className="particle left-[15%] top-[30%]" style={{ animationDelay: '0s' }}></div>
-          <div className="particle left-[45%] top-[20%]" style={{ animationDelay: '2s' }}></div>
-          <div className="particle left-[30%] top-[60%]" style={{ animationDelay: '4s' }}></div>
           
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-stack-xl relative z-10">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
             {/* Left Side Content */}
-            <div className="flex-1 text-left py-8">
-              <h1 className="text-[48px] md:text-[56px] font-bold text-on-surface leading-tight mb-stack-sm">
+            <div className="flex-1 text-left py-2">
+              <h1 className="text-3xl md:text-4xl font-bold text-on-surface leading-tight mb-1">
                 Welcome back
               </h1>
-              <p className="text-[20px] text-[#6B7280] font-body-lg mb-stack-md max-w-lg">
+              <p className="text-sm text-[#6B7280] font-body-lg max-w-lg">
                 Scan. Analyze. Protect. Stay ahead of investment fraud.
               </p>
-              
-              {/* Input Area */}
-              <div className="w-full max-w-xl flex flex-col sm:flex-row gap-4 mt-6">
-                <input 
-                  type="text" 
-                  value={appUrl}
-                  onChange={(e) => setAppUrl(e.target.value)}
-                  placeholder="Paste Google Play Store Link..." 
-                  className="flex-1 glow-input bg-surface-container-low border border-outline-variant rounded-xl px-4 py-3 focus:outline-none" 
-                />
-                <button 
-                  onClick={handleAnalyze}
-                  className="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:opacity-90 transition-all shadow-md"
-                >
-                  Analyze
-                </button>
-              </div>
             </div>
             
             {/* Right Side Illustration */}
@@ -224,100 +223,95 @@ const ScanApplication = () => {
           </div>
         </section>
 
-        <section className="px-container-margin-mobile md:px-container-margin pb-section-gap relative z-10">
+        <section className="pb-4 relative z-10">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               
               {/* Card 1: Play Store */}
-              <div className="glass-card rounded-xl p-8 border border-outline-variant/30 flex flex-col justify-between h-full transition-all hover:border-tertiary/50">
-                <div className="flex justify-between items-start mb-stack-md">
-                  <div className="flex gap-4">
-                    <div className="w-8 h-8 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-bold text-body-md">1</div>
-                    <div className="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center">
+              <div className="glass-card rounded-xl p-5 border border-outline-variant/30 flex flex-col justify-between h-56 transition-all hover:border-tertiary/50">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="flex gap-2">
+                    <div className="w-6 h-6 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-bold text-xs">1</div>
+                    <div className="w-8 h-8 rounded-lg bg-tertiary/10 flex items-center justify-center">
                       <img 
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOGSyt_n_Qp_53G-OO77YHuzlMq7ERegvmi11efO0AvSEu6Ubi_URpl69LiciaDKYpvgfX-NvsSByxnjoq5vVY8xEjn_ElQ0ZQXudJRf7sgRuF7JnVXbQzwZmuTqH0AGOa3IMSnhCajpI7z5aD51bJYLoDX1di3bJEqnChHcUMVJQbQ6w9b-wWkPB5P9UYVYjwIS9e31gPH1IejN_tfdDyNfU7fdz5_wyTCfWXaWpSas3AJaBA5PfSREnddxkl0zDFic2GxsEUCT2czw" 
                         alt="Play Store Logo" 
-                        className="w-full h-full object-contain p-2" 
+                        className="w-full h-full object-contain p-1" 
                       />
                     </div>
                   </div>
-                  <div className="w-24 h-16 bg-inverse-surface rounded-lg flex items-center justify-center gap-2">
-                    <span className="material-symbols-outlined text-white/50 text-[20px]">shop</span>
-                    <span className="material-symbols-outlined text-white/50 text-[20px]">link</span>
+                  <div className="w-16 h-10 bg-inverse-surface rounded-lg flex items-center justify-center gap-1">
+                    <span className="material-symbols-outlined text-white/50 text-[16px]">shop</span>
+                    <span className="material-symbols-outlined text-white/50 text-[16px]">link</span>
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-title-lg font-bold mb-2">Play Store App Analysis</h3>
-                  <p className="text-on-surface-variant mb-stack-md">Paste a Google Play Store link to fetch details and analyze the app for fraudulent behavior.</p>
-                  <button className="px-6 py-2 rounded-full border border-tertiary text-tertiary font-bold hover:bg-tertiary hover:text-on-tertiary transition-all">Analyze App →</button>
+                  <h3 className="text-base font-bold mb-1">Play Store Analysis</h3>
+                  <p className="text-xs text-on-surface-variant mb-3 line-clamp-2">Paste a Play Store link to fetch details and analyze behavioral signatures.</p>
+                  <button className="text-xs px-4 py-1.5 rounded-full border border-tertiary text-tertiary font-bold hover:bg-tertiary hover:text-on-tertiary transition-all cursor-pointer">Analyze App →</button>
                 </div>
               </div>
 
               {/* Card 2: Manual */}
-              <div className="glass-card rounded-xl p-8 border border-outline-variant/30 flex flex-col justify-between h-full transition-all hover:border-primary/50">
-                <div className="flex justify-between items-start mb-stack-md">
-                  <div className="flex gap-4">
-                    <div className="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-body-md">2</div>
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <span className="material-symbols-outlined text-primary">edit_note</span>
+              <div className="glass-card rounded-xl p-5 border border-outline-variant/30 flex flex-col justify-between h-56 transition-all hover:border-primary/50">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="flex gap-2">
+                    <div className="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xs">2</div>
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <span className="material-symbols-outlined text-primary text-lg">edit_note</span>
                     </div>
                   </div>
-                  <div className="w-24 h-16 bg-on-primary-fixed-variant rounded-lg flex items-center justify-center gap-2">
-                    <span className="material-symbols-outlined text-white/50 text-[20px]">assignment</span>
-                    <span className="material-symbols-outlined text-white/50 text-[20px]">edit</span>
+                  <div className="w-16 h-10 bg-on-primary-fixed-variant rounded-lg flex items-center justify-center gap-1">
+                    <span className="material-symbols-outlined text-white/50 text-[16px]">assignment</span>
+                    <span className="material-symbols-outlined text-white/50 text-[16px]">edit</span>
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-title-lg font-bold mb-2">Manual App Verification</h3>
-                  <p className="text-on-surface-variant mb-stack-md">Enter app name and description manually to analyze for potential fraudulent indicators.</p>
-                  <button className="px-6 py-2 rounded-full border border-primary text-primary font-bold hover:bg-primary hover:text-on-primary transition-all">Analyze Manually →</button>
+                  <h3 className="text-base font-bold mb-1">Manual Verification</h3>
+                  <p className="text-xs text-on-surface-variant mb-3 line-clamp-2">Enter app name and description manually to scan for fraudulent indicators.</p>
+                  <button className="text-xs px-4 py-1.5 rounded-full border border-primary text-primary font-bold hover:bg-primary hover:text-on-primary transition-all cursor-pointer">Analyze Manually →</button>
                 </div>
               </div>
 
               {/* Card 3: APK */}
-              <div className="glass-card rounded-xl p-8 border border-outline-variant/30 flex flex-col justify-between h-full transition-all hover:border-secondary/50">
-                <div className="flex justify-between items-start mb-stack-md">
-                  <div className="flex gap-4">
-                    <div className="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-body-md">3</div>
-                    <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center">
-                      <span className="material-symbols-outlined text-secondary">android</span>
+              <div className="glass-card rounded-xl p-5 border border-outline-variant/30 flex flex-col justify-between h-56 transition-all hover:border-secondary/50">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="flex gap-2">
+                    <div className="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs">3</div>
+                    <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center">
+                      <span className="material-symbols-outlined text-secondary text-lg">android</span>
                     </div>
                   </div>
-                  <div className="w-24 h-16 bg-[#1B4332] rounded-lg flex items-center justify-center gap-2">
-                    <span className="material-symbols-outlined text-white/50 text-[20px]">description</span>
-                    <span className="material-symbols-outlined text-white/50 text-[20px]">verified_user</span>
+                  <div className="w-16 h-10 bg-[#1B4332] rounded-lg flex items-center justify-center gap-1">
+                    <span className="material-symbols-outlined text-white/50 text-[16px]">description</span>
+                    <span className="material-symbols-outlined text-white/50 text-[16px]">verified_user</span>
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-title-lg font-bold mb-2">APK Security Scanner</h3>
-                  <p className="text-on-surface-variant mb-4">Upload an APK file to scan for malicious permissions, suspicious activities and security risks.</p>
-                  <div className="border-2 border-dashed border-outline-variant rounded-xl p-4 mb-stack-md text-center bg-surface-container-low">
-                    <span className="material-symbols-outlined text-outline mb-1">cloud_upload</span>
-                    <p className="text-label-caps text-outline">Drag &amp; drop APK file here or click to browse</p>
-                  </div>
-                  <button className="px-6 py-2 rounded-full border border-secondary text-secondary font-bold hover:bg-secondary hover:text-on-secondary transition-all">Upload &amp; Scan →</button>
+                  <h3 className="text-base font-bold mb-1">APK Security Scanner</h3>
+                  <p className="text-xs text-on-surface-variant mb-3 line-clamp-2">Upload APK file to scan for obfuscated payloads and permissions.</p>
+                  <button className="text-xs px-4 py-1.5 rounded-full border border-secondary text-secondary font-bold hover:bg-secondary hover:text-on-secondary transition-all cursor-pointer">Upload &amp; Scan →</button>
                 </div>
               </div>
 
               {/* Card 4: Website */}
-              <div className="glass-card rounded-xl p-8 border border-outline-variant/30 flex flex-col justify-between h-full transition-all hover:border-error/50">
-                <div className="flex justify-between items-start mb-stack-md">
-                  <div className="flex gap-4">
-                    <div className="w-8 h-8 rounded-full bg-[#E67E22] text-white flex items-center justify-center font-bold text-body-md">4</div>
-                    <div className="w-12 h-12 rounded-xl bg-[#E67E22]/10 flex items-center justify-center">
-                      <span className="material-symbols-outlined text-[#E67E22]">language</span>
+              <div className="glass-card rounded-xl p-5 border border-outline-variant/30 flex flex-col justify-between h-56 transition-all hover:border-error/50">
+                <div className="flex justify-between items-start mb-2">
+                  <div className="flex gap-2">
+                    <div className="w-6 h-6 rounded-full bg-[#E67E22] text-white flex items-center justify-center font-bold text-xs">4</div>
+                    <div className="w-8 h-8 rounded-lg bg-[#E67E22]/10 flex items-center justify-center">
+                      <span className="material-symbols-outlined text-[#E67E22] text-lg">language</span>
                     </div>
                   </div>
-                  <div className="w-24 h-16 bg-[#4A2311] rounded-lg flex items-center justify-center gap-2">
-                    <span className="material-symbols-outlined text-white/50 text-[20px]">public</span>
-                    <span className="material-symbols-outlined text-white/50 text-[20px]">search</span>
+                  <div className="w-16 h-10 bg-[#4A2311] rounded-lg flex items-center justify-center gap-1">
+                    <span className="material-symbols-outlined text-white/50 text-[16px]">public</span>
+                    <span className="material-symbols-outlined text-white/50 text-[16px]">search</span>
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-title-lg font-bold mb-2">Website Analyzer</h3>
-                  <p className="text-on-surface-variant mb-4">Analyze websites for phishing, scam patterns, suspicious content and investment fraud indicators.</p>
-                  <input type="text" placeholder="https://example-website.com" className="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-2 mb-stack-md focus:outline-none focus:border-[#E67E22]" />
-                  <button className="px-6 py-2 rounded-full border border-[#E67E22] text-[#E67E22] font-bold hover:bg-[#E67E22] hover:text-white transition-all">Analyze Website →</button>
+                  <h3 className="text-base font-bold mb-1">Website Analyzer</h3>
+                  <p className="text-xs text-on-surface-variant mb-3 line-clamp-2">Analyze URLs for phishing, scam patterns, and fake investment setups.</p>
+                  <button className="text-xs px-4 py-1.5 rounded-full border border-[#E67E22] text-[#E67E22] font-bold hover:bg-[#E67E22] hover:text-white transition-all cursor-pointer">Analyze Website →</button>
                 </div>
               </div>
 

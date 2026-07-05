@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const SentinelAI = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [currentView, setCurrentView] = useState('home');
+
+  useEffect(() => {
+    if (location.state && location.state.view) {
+      setCurrentView(location.state.view);
+    }
+  }, [location]);
 
   useEffect(() => {
     const observerOptions = {
