@@ -70,7 +70,17 @@ const ManualVerification = () => {
 
   return (
     <div className="max-w-2xl mx-auto hero-fade-in">
-      <div className="glass-panel rounded-2xl p-8">
+      <div className="glass-panel rounded-2xl p-8 relative">
+        {/* Close Button */}
+        <button 
+          onClick={() => navigate('/scan-app')}
+          className="absolute top-6 right-6 text-on-surface-variant hover:text-primary border border-outline-variant/50 bg-white/50 backdrop-blur-sm hover:bg-surface-variant/20 transition-all cursor-pointer flex items-center justify-center p-1.5 rounded-lg"
+          title="Go back to Scanner"
+        >
+          <span className="material-symbols-outlined text-[16px] font-bold">close</span>
+        </button>
+
+        {/* Header */}
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
             <span className="material-symbols-outlined text-primary text-2xl">edit_note</span>

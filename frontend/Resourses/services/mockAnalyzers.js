@@ -124,29 +124,111 @@ export async function analyzePlayStore(url, onProgress) {
     { progress: 55, status: 'Running Similarity Analysis...', detail: 'Comparing icon, name, and behavior against known threat patterns.' },
     { progress: 75, status: 'AI Security Assessment...', detail: 'Neural network evaluating permission combinations and risk indicators.' },
     { progress: 90, status: 'Generating Report...', detail: 'Compiling comprehensive threat analysis and recommendations.' },
-    { progress: 100, status: 'Analysis Complete', detail: 'Security report generated successfully.' },
   ];
 
+  // Fire the API request in parallel
+  const apiPromise = fetch('http://localhost:8080/analyze-playstore-app', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ url }),
+  }).then(async (res) => {
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.detail || 'Analysis failed');
+    }
+    return res.json();
+  });
+
   for (const stage of stages) {
-    await delay(randomBetween(500, 900));
+    await delay(randomBetween(300, 600));
     onProgress?.(stage);
   }
 
-  // Extract a pseudo app name from the URL
-  const urlAppName = url.includes('id=') ? url.split('id=')[1]?.split('&')[0] || 'Unknown App' : 'Play Store App';
-  
-  return buildResult('playstore', {
-    appName: urlAppName.replace(/\./g, ' ').replace(/com /i, '').trim() || 'Play Store App',
+  const responseData = await apiPromise;
+
+  onProgress?.({ progress: 100, status: 'Analysis Complete', detail: 'Security report generated successfully.' });
+
+  const appDetails = responseData.app_details;
+  const analysis = responseData.analysis;
+  const riskScore = analysis.risk_score;
+  const riskLevel = getRiskLevel(riskScore);
+
+  const detectedIssues = [];
+  if (analysis.breakdown.name.risk >= 50) {
+    detectedIssues.push({
+      severity: analysis.breakdown.name.risk >= 90 ? 'Critical' : 'High',
+      title: 'Brand Impersonation',
+      description: `App name is highly similar to '${analysis.breakdown.name.matched}' (${analysis.breakdown.name.similarity}% similarity).`
+    });
+  }
+  if (analysis.breakdown.developer.risk >= 50) {
+    detectedIssues.push({
+      severity: 'High',
+      title: 'Developer Mismatch',
+      description: `Developer name '${appDetails.developer}' does not match expected developer '${analysis.breakdown.developer.expected}'.`
+    });
+  }
+  if (analysis.breakdown.description.risk >= 50) {
+    detectedIssues.push({
+      severity: 'High',
+      title: 'Suspicious Description Keywords',
+      description: `Detected fraud-associated keywords: ${analysis.breakdown.description.keywords_found.join(', ')}.`
+    });
+  }
+  if (analysis.breakdown.installs.risk >= 50) {
+    detectedIssues.push({
+      severity: 'Medium',
+      title: 'Low Install Count',
+      description: analysis.breakdown.installs.note
+    });
+  }
+
+  const recommendations = [];
+  if (riskScore >= 70) recommendations.push('Immediately uninstall this application and change any passwords used with it.');
+  if (riskScore >= 50) recommendations.push('Do not enter any personal or financial information into this application.');
+  if (riskScore >= 30) recommendations.push('Verify the developer identity through official channels before trusting this app.');
+  recommendations.push('Report this application to the relevant app store if suspicious activity is confirmed.');
+
+  const verdicts = {
+    Critical: 'This application exhibits multiple critical security threats and has been classified as extremely dangerous. Immediate removal is strongly recommended.',
+    High: 'Significant security concerns have been identified. This application shows patterns commonly associated with fraudulent software.',
+    Medium: 'This application shows some suspicious indicators that warrant further investigation before continued use.',
+    Low: 'Minor concerns detected. The application appears mostly legitimate but has some unusual characteristics.',
+    Safe: 'No significant threats detected. This application appears to be legitimate and safe for use.',
+  };
+
+  const evidence = [
+    { type: 'metric', label: 'Threat Score', value: `${riskScore}/100` },
+    { type: 'metric', label: 'Ratings Count', value: `${(appDetails.ratings || 0).toLocaleString()}` },
+    { type: 'text', label: 'Analysis Engine', value: 'SentinelAI Play Store Scraper' },
+    { type: 'text', label: 'Category/Genre', value: appDetails.genre || 'Finance' }
+  ];
+
+  return {
+    id: 'scan_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+    type: 'playstore',
+    appName: appDetails.title,
+    developer: appDetails.developer,
+    riskScore,
+    riskLevel,
+    summary: `Real-time Play Store analysis completed. ${riskScore >= 70 ? 'Flagged critical threats' : riskScore >= 40 ? 'Identified some concerns' : 'Found no major issues'} in ${appDetails.title} by ${appDetails.developer}. Risk score: ${riskScore}/100.`,
+    detectedIssues,
+    permissions: [],
+    recommendations,
+    evidence,
     metadata: {
       playStoreUrl: url,
-      downloads: `${randomBetween(100, 9999).toLocaleString()}+`,
-      version: `${randomBetween(1, 5)}.${randomBetween(0, 9)}.${randomBetween(0, 99)}`,
-      category: ['Finance', 'Business', 'Productivity', 'Tools'][randomBetween(0, 3)],
-      lastUpdated: new Date(Date.now() - randomBetween(1, 365) * 86400000).toLocaleDateString(),
-      contentRating: 'Everyone',
-      installs: `${randomBetween(10, 999)}K+`,
+      downloads: appDetails.installs,
+      category: appDetails.genre,
+      contentRating: appDetails.content_rating,
+      version: appDetails.version || 'N/A',
+      rating: appDetails.score ? Number(appDetails.score).toFixed(1) : 'N/A',
     },
-  });
+    timestamp: new Date().toISOString(),
+    aiVerdict: verdicts[riskLevel],
+  };
 }
 
 // ── Manual Verification ──────────────────────────────────────────────────

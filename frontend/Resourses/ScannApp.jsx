@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const API_BASE = 'http://localhost:8000';
 
 const ScanApplication = () => {
   const navigate = useNavigate();
@@ -10,38 +13,84 @@ const ScanApplication = () => {
   const [scanDetail, setScanDetail] = useState('Establishing secure connection to repository...');
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
-  // Handles the scan animation and state updates
-  const handleAnalyze = () => {
-    // Only proceed if there is some input (for the demo, we check appUrl)
-    if (!appUrl) return;
+  // Play Store Analysis state
+  const [analysisResult, setAnalysisResult] = useState(null);
+  const [analysisError, setAnalysisError] = useState('');
+  const [showPlayStoreInput, setShowPlayStoreInput] = useState(false);
 
+  // Helper: get risk color
+  const getRiskColor = (score) => {
+    if (score <= 30) return '#10B981'; // green
+    if (score <= 60) return '#F59E0B'; // orange
+    return '#EF4444'; // red
+  };
+  const getRiskBg = (score) => {
+    if (score <= 30) return 'rgba(16, 185, 129, 0.1)';
+    if (score <= 60) return 'rgba(245, 158, 11, 0.1)';
+    return 'rgba(239, 68, 68, 0.1)';
+  };
+
+  // Handles the real Play Store analysis API call
+  const handleAnalyze = async () => {
+    if (!appUrl.trim()) {
+      setAnalysisError('Please enter a valid Play Store URL.');
+      return;
+    }
+
+    // Reset state
+    setAnalysisError('');
+    setAnalysisResult(null);
     setIsScanning(true);
     setProgress(0);
     setScanStatus('Initializing...');
     setScanDetail('Establishing secure connection to repository...');
 
-    let currentProgress = 0;
+    // Simulate progress during API call
     const stages = [
-      { limit: 25, status: 'Ingesting Metadata...', detail: 'Fetching manifest, permissions, and developer info.' },
-      { limit: 60, status: 'Running Similarity Analysis...', detail: 'Comparing behavioral signatures against global threat intelligence.' },
-      { limit: 90, status: 'Deep Code Inspection...', detail: 'Scanning binaries for obfuscated payload indicators.' },
-      { limit: 100, status: 'Analysis Complete', detail: 'Generating comprehensive security report.' }
+      { limit: 20, status: 'Ingesting Metadata...', detail: 'Fetching manifest, permissions, and developer info.' },
+      { limit: 50, status: 'Running Similarity Analysis...', detail: 'Comparing behavioral signatures against global threat intelligence.' },
+      { limit: 80, status: 'Deep Code Inspection...', detail: 'Scanning binaries for obfuscated payload indicators.' },
     ];
 
-    const interval = setInterval(() => {
-      currentProgress += Math.floor(Math.random() * 5) + 1;
-      
-      if (currentProgress >= 100) {
-        currentProgress = 100;
-        clearInterval(interval);
-      }
-
+    let currentProgress = 0;
+    const progressInterval = setInterval(() => {
+      currentProgress += Math.floor(Math.random() * 4) + 1;
+      if (currentProgress > 85) currentProgress = 85; // Cap at 85 until API responds
       setProgress(currentProgress);
-      
-      const currentStage = stages.find(s => currentProgress <= s.limit) || stages[3];
+      const currentStage = stages.find(s => currentProgress <= s.limit) || stages[2];
       setScanStatus(currentStage.status);
       setScanDetail(currentStage.detail);
-    }, 200);
+    }, 300);
+
+    try {
+      const response = await axios.post(`${API_BASE}/analyze-playstore-app`, {
+        url: appUrl.trim(),
+      });
+
+      clearInterval(progressInterval);
+      setProgress(100);
+      setScanStatus('Analysis Complete');
+      setScanDetail('Comprehensive security report generated.');
+      setAnalysisResult(response.data);
+
+    } catch (err) {
+      clearInterval(progressInterval);
+      setIsScanning(false);
+      setProgress(0);
+
+      if (err.response) {
+        const detail = err.response.data?.detail || 'Analysis failed.';
+        if (err.response.status === 400) {
+          setAnalysisError(detail);
+        } else {
+          setAnalysisError(`Server Error: ${detail}`);
+        }
+      } else if (err.request) {
+        setAnalysisError('Unable to reach the analysis server. Make sure the backend is running on port 8000.');
+      } else {
+        setAnalysisError(`Error: ${err.message}`);
+      }
+    }
   };
 
   return (
@@ -238,7 +287,7 @@ const ScanApplication = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               
               {/* Card 1: Play Store */}
-              <div className="glass-card rounded-xl p-5 border border-outline-variant/30 flex flex-col justify-between h-56 transition-all hover:border-tertiary/50">
+              <div className={`glass-card rounded-xl p-5 border flex flex-col justify-between h-56 transition-all cursor-pointer ${showPlayStoreInput ? 'border-tertiary shadow-lg' : 'border-outline-variant/30 hover:border-tertiary/50'}`} onClick={() => setShowPlayStoreInput(true)}>
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex gap-2">
                     <div className="w-6 h-6 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-bold text-xs">1</div>
@@ -258,7 +307,12 @@ const ScanApplication = () => {
                 <div>
                   <h3 className="text-base font-bold mb-1">Play Store Analysis</h3>
                   <p className="text-xs text-on-surface-variant mb-3 line-clamp-2">Paste a Play Store link to fetch details and analyze behavioral signatures.</p>
-                  <button className="text-xs px-4 py-1.5 rounded-full border border-tertiary text-tertiary font-bold hover:bg-tertiary hover:text-on-tertiary transition-all cursor-pointer">Analyze App →</button>
+                  <button 
+                    onClick={(e) => { e.stopPropagation(); setShowPlayStoreInput(true); }}
+                    className="text-xs px-4 py-1.5 rounded-full border border-tertiary text-tertiary font-bold hover:bg-tertiary hover:text-on-tertiary transition-all cursor-pointer"
+                  >
+                    Analyze App →
+                  </button>
                 </div>
               </div>
 
@@ -329,11 +383,57 @@ const ScanApplication = () => {
           </div>
         </section>
 
+        {/* Play Store URL Input Section */}
+        {showPlayStoreInput && (
+          <section className="pb-4 relative z-10">
+            <div className="max-w-3xl mx-auto">
+              <div className="glass-card rounded-xl p-6 border border-tertiary/30">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="material-symbols-outlined text-tertiary">link</span>
+                  <h3 className="text-lg font-bold text-on-surface">Play Store URL</h3>
+                </div>
+                <div className="flex gap-3">
+                  <input
+                    type="text"
+                    value={appUrl}
+                    onChange={(e) => { setAppUrl(e.target.value); setAnalysisError(''); }}
+                    onKeyDown={(e) => { if (e.key === 'Enter') handleAnalyze(); }}
+                    placeholder="https://play.google.com/store/apps/details?id=com.example.app"
+                    className="flex-grow px-4 py-3 rounded-lg bg-white/80 border border-outline-variant focus:border-tertiary focus:ring-1 focus:ring-tertiary outline-none transition-all text-on-surface text-sm placeholder-outline"
+                    disabled={isScanning}
+                  />
+                  <button
+                    onClick={handleAnalyze}
+                    disabled={isScanning || !appUrl.trim()}
+                    className={`px-6 py-3 rounded-lg font-bold text-sm transition-all flex items-center gap-2 shrink-0 ${
+                      isScanning
+                        ? 'bg-outline/20 text-outline cursor-not-allowed'
+                        : 'bg-tertiary text-on-tertiary hover:opacity-90 cursor-pointer'
+                    }`}
+                  >
+                    {isScanning ? (
+                      <><span className="material-symbols-outlined animate-spin text-sm">progress_activity</span> Analyzing...</>
+                    ) : (
+                      <><span className="material-symbols-outlined text-sm">search</span> Analyze</>  
+                    )}
+                  </button>
+                </div>
+                {analysisError && (
+                  <div className="mt-3 flex items-center gap-2 text-error text-sm bg-error/5 px-4 py-2 rounded-lg border border-error/20">
+                    <span className="material-symbols-outlined text-sm">error</span>
+                    {analysisError}
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Scan Progress Container */}
-        <section className="px-container-margin-mobile md:px-container-margin pb-section-gap">
+        <section className="px-container-margin-mobile md:px-container-margin pb-4">
           <div 
             className={`max-w-3xl mx-auto transition-all duration-500 overflow-hidden ${
-              isScanning ? 'opacity-100 h-auto mt-12' : 'opacity-0 h-0'
+              isScanning ? 'opacity-100 h-auto mt-6' : 'opacity-0 h-0'
             }`} 
             id="scan-container"
           >
@@ -364,18 +464,169 @@ const ScanApplication = () => {
                   ></div>
                 </div>
                 <p className="font-label-caps text-label-caps text-outline mt-4">{scanDetail}</p>
-                {progress === 100 && (
-                  <button 
-                    onClick={() => navigate('/flagged-apps')}
-                    className="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:opacity-90 transition-all shadow-md mt-6 cursor-pointer"
-                  >
-                    View Flagged Apps
-                  </button>
-                )}
               </div>
             </div>
           </div>
         </section>
+
+        {/* ═══════════ Analysis Results Section ═══════════ */}
+        {analysisResult && analysisResult.success && (
+          <section className="pb-12 relative z-10">
+            <div className="max-w-5xl mx-auto space-y-6">
+
+              {/* Row 1: App Overview + Risk Score */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                {/* App Overview Card */}
+                <div className="md:col-span-2 glass-card rounded-xl p-6 border border-outline-variant/30">
+                  <div className="flex items-start gap-4">
+                    {analysisResult.app_details.icon && (
+                      <img 
+                        src={analysisResult.app_details.icon} 
+                        alt={analysisResult.app_details.title} 
+                        className="w-20 h-20 rounded-2xl border border-outline-variant shadow-sm object-cover shrink-0"
+                      />
+                    )}
+                    <div className="flex-grow min-w-0">
+                      <h3 className="text-xl font-bold text-on-surface truncate">{analysisResult.app_details.title}</h3>
+                      <p className="text-sm text-on-surface-variant">{analysisResult.app_details.developer}</p>
+                      <div className="flex flex-wrap gap-4 mt-3 text-xs text-on-surface-variant">
+                        <div className="flex items-center gap-1">
+                          <span className="material-symbols-outlined text-sm">download</span>
+                          {analysisResult.app_details.installs}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="material-symbols-outlined text-sm text-[#F59E0B]">star</span>
+                          {analysisResult.app_details.score ? Number(analysisResult.app_details.score).toFixed(1) : 'N/A'}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="material-symbols-outlined text-sm">rate_review</span>
+                          {analysisResult.app_details.ratings?.toLocaleString() || '0'} ratings
+                        </div>
+                        {analysisResult.app_details.genre && (
+                          <div className="flex items-center gap-1">
+                            <span className="material-symbols-outlined text-sm">category</span>
+                            {analysisResult.app_details.genre}
+                          </div>
+                        )}
+                      </div>
+                      {analysisResult.app_details.description && (
+                        <p className="text-xs text-on-surface-variant mt-3 line-clamp-2">{analysisResult.app_details.description}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Risk Score Card */}
+                <div className="glass-card rounded-xl p-6 border border-outline-variant/30 flex flex-col items-center justify-center text-center">
+                  <div 
+                    className="w-28 h-28 rounded-full flex items-center justify-center mb-3 border-4 transition-all"
+                    style={{ 
+                      borderColor: getRiskColor(analysisResult.analysis.risk_score),
+                      backgroundColor: getRiskBg(analysisResult.analysis.risk_score),
+                    }}
+                  >
+                    <span className="text-3xl font-bold" style={{ color: getRiskColor(analysisResult.analysis.risk_score) }}>
+                      {analysisResult.analysis.risk_score}%
+                    </span>
+                  </div>
+                  <span 
+                    className="text-sm font-bold px-4 py-1.5 rounded-full"
+                    style={{ 
+                      color: getRiskColor(analysisResult.analysis.risk_score),
+                      backgroundColor: getRiskBg(analysisResult.analysis.risk_score),
+                    }}
+                  >
+                    {analysisResult.analysis.threat_level}
+                  </span>
+                  {analysisResult.analysis.matched_app && analysisResult.analysis.name_similarity >= 70 && (
+                    <p className="text-xs text-on-surface-variant mt-2">
+                      Similar to <strong>{analysisResult.analysis.matched_app}</strong> ({analysisResult.analysis.name_similarity}%)
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Row 2: Threat Reasons + Risk Breakdown */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {/* Threat Reasons Card */}
+                <div className="glass-card rounded-xl p-6 border border-outline-variant/30">
+                  <h4 className="text-base font-bold text-on-surface mb-4 flex items-center gap-2">
+                    <span className="material-symbols-outlined text-error">report</span>
+                    Threat Analysis
+                  </h4>
+                  <ul className="space-y-3">
+                    {analysisResult.analysis.reasons.map((reason, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm">
+                        <span className="material-symbols-outlined text-sm mt-0.5" style={{ color: getRiskColor(analysisResult.analysis.risk_score) }}>
+                          {analysisResult.analysis.risk_score <= 30 ? 'check_circle' : 'warning'}
+                        </span>
+                        <span className="text-on-surface-variant">{reason}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Risk Breakdown Card */}
+                <div className="glass-card rounded-xl p-6 border border-outline-variant/30">
+                  <h4 className="text-base font-bold text-on-surface mb-4 flex items-center gap-2">
+                    <span className="material-symbols-outlined text-primary">analytics</span>
+                    Risk Breakdown
+                  </h4>
+                  <div className="space-y-4">
+                    {[
+                      { label: 'Name Similarity', value: analysisResult.analysis.breakdown.name.risk, weight: '35%' },
+                      { label: 'Description', value: analysisResult.analysis.breakdown.description.risk, weight: '25%' },
+                      { label: 'Developer', value: analysisResult.analysis.breakdown.developer.risk, weight: '25%' },
+                      { label: 'Install Count', value: analysisResult.analysis.breakdown.installs.risk, weight: '15%' },
+                    ].map((item) => (
+                      <div key={item.label}>
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="text-on-surface-variant font-medium">{item.label} <span className="text-outline">({item.weight})</span></span>
+                          <span className="font-bold" style={{ color: getRiskColor(item.value) }}>{item.value}/100</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-surface-variant rounded-full overflow-hidden">
+                          <div className="h-full rounded-full transition-all" style={{ width: `${item.value}%`, backgroundColor: getRiskColor(item.value) }}></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Row 3: Screenshots Gallery */}
+              {analysisResult.app_details.screenshots && analysisResult.app_details.screenshots.length > 0 && (
+                <div className="glass-card rounded-xl p-6 border border-outline-variant/30">
+                  <h4 className="text-base font-bold text-on-surface mb-4 flex items-center gap-2">
+                    <span className="material-symbols-outlined text-secondary">photo_library</span>
+                    App Screenshots
+                  </h4>
+                  <div className="flex gap-4 overflow-x-auto pb-2" style={{ scrollbarWidth: 'thin' }}>
+                    {analysisResult.app_details.screenshots.map((src, i) => (
+                      <img 
+                        key={i}
+                        src={src} 
+                        alt={`Screenshot ${i + 1}`}
+                        className="h-52 w-auto rounded-lg border border-outline-variant/30 shadow-sm shrink-0 object-contain bg-white"
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* New Analysis Button */}
+              <div className="text-center">
+                <button
+                  onClick={() => { setAnalysisResult(null); setIsScanning(false); setProgress(0); setAppUrl(''); }}
+                  className="text-sm px-6 py-2.5 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-variant transition-all cursor-pointer"
+                >
+                  ← Scan Another App
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
       </main>
     </div>
   );

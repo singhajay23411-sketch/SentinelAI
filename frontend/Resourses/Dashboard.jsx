@@ -160,7 +160,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           </li>
           <li>
             <a 
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${activeTab === 'scan' ? 'text-primary font-bold border-b-2 border-primary pb-1 bg-primary/5' : 'text-on-surface-variant hover:bg-primary-container/20'}`}
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${(activeTab === 'scan' || activeTab.startsWith('scan-')) ? 'text-primary font-bold border-b-2 border-primary pb-1 bg-primary/5' : 'text-on-surface-variant hover:bg-primary-container/20'}`}
               onClick={(e) => { e.preventDefault(); setActiveTab('scan'); navigate('/scan-app'); }} 
               href="/scan-app"
             >
@@ -1045,7 +1045,19 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           <div className="py-6">
             <ScanResults 
               result={currentResult} 
-              onScanAgain={() => navigate('/scan-app')} 
+              onScanAgain={() => {
+                if (currentResult?.type === 'playstore') {
+                  navigate('/scan/playstore');
+                } else if (currentResult?.type === 'manual') {
+                  navigate('/scan/manual');
+                } else if (currentResult?.type === 'apk') {
+                  navigate('/scan/apk');
+                } else if (currentResult?.type === 'website') {
+                  navigate('/scan/website');
+                } else {
+                  navigate('/scan-app');
+                }
+              }} 
               onBack={() => navigate('/scan-app')} 
             />
           </div>
