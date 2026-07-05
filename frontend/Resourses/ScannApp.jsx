@@ -125,22 +125,30 @@ const ScanApplication = () => {
 
       {/* SideNavBar */}
       <nav className={`hidden md:flex flex-col bg-white/75 backdrop-blur-xl h-[calc(100vh-48px)] m-6 rounded-lg border border-white/100 p-6 z-10 shrink-0 sticky top-6 transition-all duration-300 ${isSidebarVisible ? 'w-72 opacity-100' : 'w-0 p-0 m-0 border-0 opacity-0 overflow-hidden'}`}>
-        <div className="mb-16 flex items-center gap-4 cursor-pointer" onClick={() => navigate('/')}>
-          <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-outline-variant bg-surface">
-            <img 
-              alt="SentinelAI Node" 
-              className="w-full h-full object-cover" 
-              data-alt="A futuristic AI node avatar, abstract geometric shapes, glowing blue center on a white background, high tech aesthetic, minimal, vector style" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbq_X4xrqjCuAqP0h0H0l_J2YfzOTE6Y_DH1-e6RGUjWJlGXP1SMBKrd4UHToJkW0yOBGcMWf0EvDVZVNi5MDMZCEXDI0YJCWXiyxHXikKFxsLN3ZWMMILT-SoJITibzQS0eJuFhSaGhIrwxQjF7BA5_IdMQ2d0T-94EzsC7pR0KNno2NGDwN3wGv6EgOObmDSGtCuMDU4SrZb_6uwA1JC20oTri8NShquTrfnVM8EXlSkrY1bgYbTwu-18dJt6d6AfkVdoiTLJak" 
-            />
-          </div>
-          <div>
-            <h1 className="font-title-lg text-title-lg font-bold text-on-surface">SentinelAI</h1>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="w-2 h-2 rounded-full bg-[#06B6D4] glow-accent"></span>
-              <span className="text-xs text-on-surface-variant font-medium">AI-Core Active</span>
+        <div className="mb-16 flex items-center justify-between gap-4 cursor-pointer">
+          <div className="flex items-center gap-4" onClick={() => navigate('/')}>
+            <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-outline-variant bg-surface">
+              <img 
+                alt="SentinelAI Node" 
+                className="w-full h-full object-cover" 
+                data-alt="A futuristic AI node avatar, abstract geometric shapes, glowing blue center on a white background, high tech aesthetic, minimal, vector style" 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbq_X4xrqjCuAqP0h0H0l_J2YfzOTE6Y_DH1-e6RGUjWJlGXP1SMBKrd4UHToJkW0yOBGcMWf0EvDVZVNi5MDMZCEXDI0YJCWXiyxHXikKFxsLN3ZWMMILT-SoJITibzQS0eJuFhSaGhIrwxQjF7BA5_IdMQ2d0T-94EzsC7pR0KNno2NGDwN3wGv6EgOObmDSGtCuMDU4SrZb_6uwA1JC20oTri8NShquTrfnVM8EXlSkrY1bgYbTwu-18dJt6d6AfkVdoiTLJak" 
+              />
+            </div>
+            <div>
+              <h1 className="font-title-lg text-title-lg font-bold text-on-surface">SentinelAI</h1>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="w-2 h-2 rounded-full bg-[#06B6D4] glow-accent"></span>
+                <span className="text-xs text-on-surface-variant font-medium">AI-Core Active</span>
+              </div>
             </div>
           </div>
+          <button 
+            onClick={() => setIsSidebarVisible(false)}
+            className="text-on-surface-variant hover:text-primary cursor-pointer flex items-center justify-center p-1 rounded hover:bg-slate-100"
+          >
+            <span className="material-symbols-outlined">menu_open</span>
+          </button>
         </div>
         
         <ul className="flex flex-col gap-2 flex-grow">
@@ -185,15 +193,17 @@ const ScanApplication = () => {
 
       {/* Main Content Canvas */}
       <main className="flex-grow relative z-10 w-full flex flex-col justify-between h-screen p-6">
-        {/* Toggle button on the top right */}
-        <div className="absolute top-6 right-6 z-50">
-          <button 
-            onClick={() => setIsSidebarVisible(!isSidebarVisible)}
-            className="bg-white/75 backdrop-blur-xl border border-white/100 p-2.5 rounded-lg shadow-sm hover:bg-white transition-all cursor-pointer flex items-center justify-center text-on-surface-variant hover:text-primary"
-          >
-            <span className="material-symbols-outlined">menu</span>
-          </button>
-        </div>
+        {/* Toggle button on the top left when hidden */}
+        {!isSidebarVisible && (
+          <div className="fixed top-6 left-6 z-50">
+            <button 
+              onClick={() => setIsSidebarVisible(true)}
+              className="bg-white/75 backdrop-blur-xl border border-white/100 p-2.5 rounded-lg shadow-sm hover:bg-white transition-all cursor-pointer flex items-center justify-center text-on-surface-variant hover:text-primary"
+            >
+              <span className="material-symbols-outlined">menu</span>
+            </button>
+          </div>
+        )}
 
         {/* Hero Section */}
         <section className="hero-fade-in relative overflow-hidden pt-8 pb-4">
