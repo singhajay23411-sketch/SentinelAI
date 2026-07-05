@@ -11,9 +11,15 @@ function AnimatedRoutes() {
     <div key={location.pathname} className="page-transition">
       <Routes location={location}>
         <Route path="/" element={<SentinelAI />} />
+<<<<<<< Updated upstream
         <Route path="/dashboard" element={<SentinelAIDashboard defaultTab="dashboard" />} />
         <Route path="/scan-app" element={<SentinelAIDashboard defaultTab="scan" />} />
         <Route path="/flagged-apps" element={<SentinelAIDashboard defaultTab="flagged" />} />
+=======
+        <Route path="/dashboard" element={<SentinelAIDashboard />} />
+        <Route path="/scan-app" element={<ScanApplication />} />
+        <Route path="/flagged-apps" element={<SentinelAIFlaggedApps />} />
+>>>>>>> Stashed changes
       </Routes>
     </div>
   );
