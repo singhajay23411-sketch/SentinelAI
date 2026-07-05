@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1A38B0;
+  --color-secondary: #06B6D4;
+  --color-tertiary: #7C3AED;
+  --color-background: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-container-low: #F1F5F9;
+  --color-surface-container-high: #E2E8F0;
+  --color-on-background: #0A0F29;
+  --color-on-surface: #1E293B;
+  --color-on-surface-variant: #64748B;
+  --color-outline-variant: #E2E8F0;
+  --color-error: #EF4444;
+  --color-error-container: #FEE2E2;
+
+  --spacing-gutter: 2rem;
+  --spacing-stack-sm: 0.75rem;
+  --spacing-stack-md: 1.5rem;
+  --spacing-section-gap: 6rem;
+  --spacing-container-margin: 2rem;
+  --spacing-container-margin-mobile: 1rem;
+
+  --max-width-max-width: 1280px;
+
+  --font-hero-display: 'Outfit', sans-serif;
+  --font-label-caps: 'Inter', sans-serif;
+
+  --font-size-hero-display: 4.5rem;
+  --font-size-label-caps: 0.75rem;
+  --font-size-body-md: 1rem;
+  --font-size-body-lg: 1.125rem;
+
+  --animate-spin-slow: spin 20s linear infinite;
+}
+
+@layer base {
+  :root {
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: var(--sans);
+    background-color: #F8FAFC;
+    color: #1E293B;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.02);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.75);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(26, 56, 176, 0.05);
+}
+
+/* Scroll Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Text Gradient */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Massive background typography styling */
+.hero-bg-text {
+  opacity: 0.03;
+  user-select: none;
+  pointer-events: none;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+}
+
+/* Glow Effect */
+.glow-effect::before {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(26, 56, 176, 0.15) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Keyframes for floats */
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+/* Adjust root margins for full screen content preview */
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
