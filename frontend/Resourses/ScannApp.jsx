@@ -168,7 +168,7 @@ const ScanApplication = () => {
             </a>
           </li>
           <li>
-            <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" href="#">
+            <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" onClick={(e) => { e.preventDefault(); navigate('/flagged-apps'); }} href="/flagged-apps">
               <span className="material-symbols-outlined">analytics</span>Flagged App
             </a>
           </li>
@@ -364,6 +364,14 @@ const ScanApplication = () => {
                   ></div>
                 </div>
                 <p className="font-label-caps text-label-caps text-outline mt-4">{scanDetail}</p>
+                {progress === 100 && (
+                  <button 
+                    onClick={() => navigate('/flagged-apps')}
+                    className="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:opacity-90 transition-all shadow-md mt-6 cursor-pointer"
+                  >
+                    View Flagged Apps
+                  </button>
+                )}
               </div>
             </div>
           </div>

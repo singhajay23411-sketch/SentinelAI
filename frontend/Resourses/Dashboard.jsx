@@ -162,12 +162,17 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
             </a>
           </li>
           <li>
+<<<<<<< HEAD
             <a 
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${activeTab === 'flagged' ? 'text-primary font-bold border-b-2 border-primary pb-1 bg-primary/5' : 'text-on-surface-variant hover:bg-primary-container/20'}`}
               onClick={(e) => { e.preventDefault(); setActiveTab('flagged'); }} 
               href="#"
             >
               <span className="material-symbols-outlined">analytics</span>Flagged App
+=======
+            <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" onClick={(e) => { e.preventDefault(); navigate('/flagged-apps'); }} href="/flagged-apps">
+              <span className="material-symbols-outlined">analytics</span>Flagged Apps
+>>>>>>> d6bbf07 (Flagged screen)
             </a>
           </li>
           <li>
