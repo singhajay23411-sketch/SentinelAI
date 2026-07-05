@@ -139,7 +139,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           <li>
             <a 
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${activeTab === 'home' ? 'text-primary font-bold border-b-2 border-primary pb-1 bg-primary/5' : 'text-on-surface-variant hover:bg-primary-container/20'}`}
-              onClick={(e) => { e.preventDefault(); setActiveTab('home'); }} 
+              onClick={(e) => { e.preventDefault(); setActiveTab('home'); navigate('/dashboard'); }} 
               href="#"
             >
               <span className="material-symbols-outlined">home</span>Home
@@ -148,7 +148,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           <li>
             <a 
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${activeTab === 'dashboard' ? 'text-primary font-bold border-b-2 border-primary pb-1 bg-primary/5' : 'text-on-surface-variant hover:bg-primary-container/20'}`}
-              onClick={(e) => { e.preventDefault(); navigate('/dashboard'); }} 
+              onClick={(e) => { e.preventDefault(); setActiveTab('dashboard'); navigate('/dashboard'); }} 
               href="/dashboard"
             >
               <span className="material-symbols-outlined">language</span>Dashboard
@@ -157,7 +157,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           <li>
             <a 
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${activeTab === 'scan' ? 'text-primary font-bold border-b-2 border-primary pb-1 bg-primary/5' : 'text-on-surface-variant hover:bg-primary-container/20'}`}
-              onClick={(e) => { e.preventDefault(); navigate('/scan-app'); }} 
+              onClick={(e) => { e.preventDefault(); setActiveTab('scan'); navigate('/scan-app'); }} 
               href="/scan-app"
             >
               <span className="material-symbols-outlined">security</span>Scan App
@@ -166,7 +166,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           <li>
             <a 
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${activeTab === 'flagged' ? 'text-primary font-bold border-b-2 border-primary pb-1 bg-primary/5' : 'text-on-surface-variant hover:bg-primary-container/20'}`}
-              onClick={(e) => { e.preventDefault(); navigate('/flagged-apps'); }} 
+              onClick={(e) => { e.preventDefault(); setActiveTab('flagged'); navigate('/flagged-apps'); }} 
               href="/flagged-apps"
             >
               <span className="material-symbols-outlined">analytics</span>Flagged Apps
