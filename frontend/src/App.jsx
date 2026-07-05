@@ -14,6 +14,13 @@ function AnimatedRoutes() {
         <Route path="/dashboard" element={<SentinelAIDashboard defaultTab="dashboard" />} />
         <Route path="/scan-app" element={<SentinelAIDashboard defaultTab="scan" />} />
         <Route path="/flagged-apps" element={<SentinelAIDashboard defaultTab="flagged" />} />
+        <Route path="/threat-intelligence" element={<SentinelAIDashboard defaultTab="threats" />} />
+        <Route path="/scan/playstore" element={<SentinelAIDashboard defaultTab="scan-playstore" />} />
+        <Route path="/scan/manual" element={<SentinelAIDashboard defaultTab="scan-manual" />} />
+        <Route path="/scan/apk" element={<SentinelAIDashboard defaultTab="scan-apk" />} />
+        <Route path="/scan/website" element={<SentinelAIDashboard defaultTab="scan-website" />} />
+        <Route path="/scan/results/:id" element={<SentinelAIDashboard defaultTab="scan-results" />} />
+        <Route path="/scan-history" element={<SentinelAIDashboard defaultTab="history" />} />
       </Routes>
     </div>
   );
