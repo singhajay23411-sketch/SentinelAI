@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SentinelAI = () => {
+  const navigate = useNavigate();
   const [currentView, setCurrentView] = useState('home');
 
   useEffect(() => {
@@ -68,7 +70,7 @@ const SentinelAI = () => {
             About Us
           </a>
         </div>
-        <button className="bg-[#0A0F29] text-white px-6 py-2.5 rounded-full text-body-md font-semibold hover:opacity-90 transition-all active:scale-95 cursor-pointer" onClick={() => setCurrentView('home')}>
+        <button className="bg-[#0A0F29] text-white px-6 py-2.5 rounded-full text-body-md font-semibold hover:opacity-90 transition-all active:scale-95 cursor-pointer" onClick={() => navigate('/dashboard')}>
           Get Started
         </button>
       </nav>
@@ -112,7 +114,7 @@ const SentinelAI = () => {
               real-time and protect users from financial fraud.
             </p>
             <div className="flex flex-wrap gap-4 mt-16">
-              <button className="bg-[#0A0F29] text-white px-8 py-3.5 rounded-full font-bold hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer">
+              <button className="bg-[#0A0F29] text-white px-8 py-3.5 rounded-full font-bold hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer" onClick={() => navigate('/dashboard')}>
                 Get Started
               </button>
             </div>
@@ -523,7 +525,7 @@ const SentinelAI = () => {
               their mobile ecosystem and protect brand integrity.
             </p>
             <div className="flex flex-col md:flex-row gap-6 justify-center pt-8">
-              <button className="bg-on-background text-white px-12 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-2xl">
+              <button className="bg-on-background text-white px-12 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-2xl" onClick={() => navigate('/dashboard')}>
                 Request a Demo
               </button>
               <button className="border border-on-background/20 bg-on-background/5 backdrop-blur-md px-12 py-5 rounded-full font-bold text-lg hover:bg-on-background/10 transition-all text-white">
@@ -636,7 +638,7 @@ const SentinelAI = () => {
             <span className="material-symbols-outlined text-primary text-3xl animate-pulse">security</span>
             <h3 className="text-xl font-bold text-on-background">SentinelAI</h3>
             <p className="text-lg font-bold text-primary italic">
-              "Unmasking Fake Apps. Securing Real Trust." 🛡️🤖
+              "Unmasking Fake Apps. Securing Real Trust." 
             </p>
           </div>
         </main>
