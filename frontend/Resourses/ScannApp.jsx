@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = 'http://127.0.0.1:8000';
 
 const ScanApplication = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const ScanApplication = () => {
 
     let currentProgress = 0;
     const progressInterval = setInterval(() => {
-      currentProgress += Math.floor(Math.random() * 4) + 1;
+      currentProgress += 2;
       if (currentProgress > 85) currentProgress = 85; // Cap at 85 until API responds
       setProgress(currentProgress);
       const currentStage = stages.find(s => currentProgress <= s.limit) || stages[2];

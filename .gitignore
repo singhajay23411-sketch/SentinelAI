@@ -1,22 +1,30 @@
 # Node.js
 node_modules/
 
-# Environment Variables
-.env
-.env.*
-!.env.example
-
-# Python
+# Python Virtual Environment
 venv/
 .venv/
 __pycache__/
 *.pyc
 *.pyo
 
-# IDE
+# Environment Variables
+.env
+.env.*
+!.env.example
+backend/.env
+frontend/.env
+
+# Certificates and keys
+*.pem
+*.key
+*.p12
+*.crt
+
+# IDE Settings
 .vscode/
 .idea/
 
-# OS
+# OS specific files
 .DS_Store
 Thumbs.db
