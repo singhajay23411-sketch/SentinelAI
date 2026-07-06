@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useScanContext } from '../src/context/ScanContext.jsx';
 import PlayStoreAnalysis from './scans/PlayStoreAnalysis.jsx';
@@ -7,6 +7,9 @@ import APKScanner from './scans/APKScanner.jsx';
 import WebsiteAnalyzer from './scans/WebsiteAnalyzer.jsx';
 import ScanResults from './scans/ScanResults.jsx';
 import ScanHistory from './scans/ScanHistory.jsx';
+import vishalImg from '../src/assets/team/vishal.jpg';
+import ajayImg from '../src/assets/team/ajay.jpg';
+import prachiImg from '../src/assets/team/prachi.jpg';
 
 const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
   const navigate = useNavigate();
@@ -982,8 +985,8 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
 
                   <div className="relative w-20 h-20 mx-auto z-10">
                     <div className="absolute inset-[-4px] rounded-full border-2 border-dashed border-[#4e8cff]/20 group-hover:rotate-45 transition-transform duration-700" />
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#4e8cff] to-[#7a5cff] flex items-center justify-center text-white text-xl font-bold shadow-md relative z-10">
-                      VK
+                    <div className="w-20 h-20 rounded-full overflow-hidden shadow-md relative z-10">
+                      <img src={vishalImg} alt="Vishal Kumar Singh" className="w-full h-full object-cover" />
                     </div>
                     <div className="absolute bottom-0 right-0 w-5 h-5 bg-[#4e8cff] rounded-full flex items-center justify-center border-2 border-white z-20">
                       <span className="material-symbols-outlined text-white text-[12px] font-bold">check</span>
@@ -995,7 +998,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                   </div>
                   <div className="space-y-1 relative z-10">
                     <p className="text-[#4e8cff] font-bold text-xs uppercase tracking-wider">Backend Developer</p>
-                    <p className="text-[10px] text-slate-400 font-semibold">AI Integration ΓÇó Deployment</p>
+                    <p className="text-[10px] text-slate-400 font-semibold">AI Integration • Deployment</p>
                   </div>
                   <div className="pt-2 relative z-10">
                     <a href="#" className="w-8 h-8 rounded-full bg-white/80 hover:bg-[#4e8cff]/10 text-slate-400 hover:text-[#4e8cff] inline-flex items-center justify-center transition-colors">
@@ -1027,8 +1030,8 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                   </div>
                   <div className="relative w-20 h-20 mx-auto z-10">
                     <div className="absolute inset-[-4px] rounded-full border-2 border-dashed border-[#7a5cff]/20 group-hover:rotate-45 transition-transform duration-700" />
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#7a5cff] to-[#a855f7] flex items-center justify-center text-white text-xl font-bold shadow-md relative z-10">
-                      AR
+                    <div className="w-20 h-20 rounded-full overflow-hidden shadow-md relative z-10">
+                      <img src={ajayImg} alt="Ajay Raj" className="w-full h-full object-cover" />
                     </div>
                     <div className="absolute bottom-0 right-0 w-5 h-5 bg-[#7a5cff] rounded-full flex items-center justify-center border-2 border-white z-20">
                       <span className="material-symbols-outlined text-white text-[12px] font-bold">check</span>
@@ -1040,7 +1043,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                   </div>
                   <div className="space-y-1 relative z-10">
                     <p className="text-[#7a5cff] font-bold text-xs uppercase tracking-wider">Frontend Engineer</p>
-                    <p className="text-[10px] text-slate-400 font-semibold">UI/UX ΓÇó Component Architecture</p>
+                    <p className="text-[10px] text-slate-400 font-semibold">UI/UX • Component Architecture</p>
                   </div>
                   <div className="pt-2 relative z-10">
                     <a href="#" className="w-8 h-8 rounded-full bg-white/80 hover:bg-[#7a5cff]/10 text-slate-400 hover:text-[#7a5cff] inline-flex items-center justify-center transition-colors">
@@ -1072,8 +1075,8 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                   </div>
                   <div className="relative w-20 h-20 mx-auto z-10">
                     <div className="absolute inset-[-4px] rounded-full border-2 border-dashed border-[#7a5cff]/20 group-hover:rotate-45 transition-transform duration-700" />
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#7a5cff] to-[#a855f7] flex items-center justify-center text-white text-xl font-bold shadow-md relative z-10">
-                      PP
+                    <div className="w-20 h-20 rounded-full overflow-hidden shadow-md relative z-10">
+                      <img src={prachiImg} alt="Prachi Phadke" className="w-full h-full object-cover" />
                     </div>
                     <div className="absolute bottom-0 right-0 w-5 h-5 bg-[#7a5cff] rounded-full flex items-center justify-center border-2 border-white z-20">
                       <span className="material-symbols-outlined text-white text-[12px] font-bold">check</span>
@@ -1085,7 +1088,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                   </div>
                   <div className="space-y-1 relative z-10">
                     <p className="text-[#7a5cff] font-bold text-xs uppercase tracking-wider">Project Manager</p>
-                    <p className="text-[10px] text-slate-400 font-semibold">Spokesperson ΓÇó Strategy Lead</p>
+                    <p className="text-[10px] text-slate-400 font-semibold">Spokesperson • Strategy Lead</p>
                   </div>
                   <div className="pt-2 relative z-10">
                     <a href="#" className="w-8 h-8 rounded-full bg-white/80 hover:bg-[#7a5cff]/10 text-slate-400 hover:text-[#7a5cff] inline-flex items-center justify-center transition-colors">
