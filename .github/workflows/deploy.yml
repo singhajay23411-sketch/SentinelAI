@@ -1,0 +1,198 @@
+name: 🚀 Deploy SentinelAI to Oracle VM
+
+on:
+  push:
+    branches:
+      - main
+
+# ─────────────────────────────────────────────────────────────────────────────
+# REQUIRED GITHUB SECRETS (Settings → Secrets and variables → Actions → New):
+#
+#   SSH_PRIVATE_KEY  →  Contents of your .pem / private key file
+#   VM_HOST          →  161.118.177.73
+#   VM_USER          →  ubuntu
+# ─────────────────────────────────────────────────────────────────────────────
+
+jobs:
+  # ───────────────────────────── BACKEND DEPLOY ─────────────────────────────
+  deploy-backend:
+    name: 🐍 Deploy Backend
+    runs-on: ubuntu-latest
+
+    # Only run when playstore-service files actually changed
+    if: |
+      contains(github.event.commits[0].modified, 'playstore-service/') ||
+      contains(github.event.commits[0].added, 'playstore-service/') ||
+      contains(github.event.commits[0].removed, 'playstore-service/')
+
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔑 Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: 📡 Add VM to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.VM_HOST }} >> ~/.ssh/known_hosts
+
+      - name: 🚀 Pull latest code & restart backend
+        run: |
+          ssh ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'EOF'
+            set -e
+            echo "=== Pulling latest code ==="
+            cd ~/SentinelAI
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "=== Installing Python dependencies ==="
+            source ~/venv/bin/activate
+            pip install -r playstore-service/requirements.txt -q
+
+            echo "=== Restarting SentinelAI service ==="
+            sudo systemctl restart sentinelai
+
+            echo "=== Verifying service is running ==="
+            sleep 2
+            sudo systemctl is-active sentinelai && echo "✅ sentinelai is running!" || echo "❌ sentinelai failed to start"
+
+            echo "=== Health check ==="
+            curl -s http://127.0.0.1:8000/health
+          EOF
+
+  # ─────────────────────────── FRONTEND DEPLOY ──────────────────────────────
+  deploy-frontend:
+    name: ⚛️  Build & Deploy Frontend
+    runs-on: ubuntu-latest
+
+    # Only run when frontend files actually changed
+    if: |
+      contains(github.event.commits[0].modified, 'frontend/') ||
+      contains(github.event.commits[0].added, 'frontend/') ||
+      contains(github.event.commits[0].removed, 'frontend/')
+
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 📦 Install dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: 🏗️  Build production bundle
+        working-directory: frontend
+        env:
+          VITE_API_URL: http://${{ secrets.VM_HOST }}
+        run: npm run build
+
+      - name: 🔑 Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: 📡 Add VM to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.VM_HOST }} >> ~/.ssh/known_hosts
+
+      - name: 📤 Upload dist to Oracle VM
+        run: |
+          rsync -avz --delete \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            frontend/dist/ \
+            ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:/var/www/sentinelai/
+
+      - name: 🔄 Reload Nginx
+        run: |
+          ssh ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} "sudo systemctl reload nginx && echo '✅ Nginx reloaded'"
+
+      - name: 🌐 Smoke test website
+        run: |
+          sleep 3
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://${{ secrets.VM_HOST }}/)
+          echo "HTTP Status: $STATUS"
+          if [ "$STATUS" = "200" ]; then
+            echo "✅ Website is live at http://${{ secrets.VM_HOST }}/"
+          else
+            echo "❌ Website returned $STATUS"
+            exit 1
+          fi
+
+  # ────────────────────── DEPLOY BOTH (full push) ───────────────────────────
+  deploy-all:
+    name: 🔥 Full Deploy (both changed)
+    runs-on: ubuntu-latest
+
+    # Run if neither individual filter matches — i.e. both changed, or root files changed
+    if: |
+      !(contains(github.event.commits[0].modified, 'playstore-service/') ||
+        contains(github.event.commits[0].added, 'playstore-service/') ||
+        contains(github.event.commits[0].removed, 'playstore-service/') ||
+        contains(github.event.commits[0].modified, 'frontend/') ||
+        contains(github.event.commits[0].added, 'frontend/') ||
+        contains(github.event.commits[0].removed, 'frontend/'))
+
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 📦 Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: 🏗️  Build production bundle
+        working-directory: frontend
+        env:
+          VITE_API_URL: http://${{ secrets.VM_HOST }}
+        run: npm run build
+
+      - name: 🔑 Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: 📡 Add VM to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.VM_HOST }} >> ~/.ssh/known_hosts
+
+      - name: 🚀 Deploy backend + frontend
+        run: |
+          # Pull latest code on VM
+          ssh ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} << 'EOF'
+            set -e
+            cd ~/SentinelAI
+            git fetch origin main
+            git reset --hard origin/main
+            source ~/venv/bin/activate
+            pip install -r playstore-service/requirements.txt -q
+            sudo systemctl restart sentinelai
+            echo "✅ Backend deployed"
+          EOF
+
+          # Upload built frontend
+          rsync -avz --delete \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            frontend/dist/ \
+            ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:/var/www/sentinelai/
+
+          # Reload nginx
+          ssh ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }} "sudo systemctl reload nginx"
+          echo "✅ Frontend deployed"
