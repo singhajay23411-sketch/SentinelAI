@@ -25,39 +25,74 @@ const typeLabels = {
 const ScanResults = ({ result, onScanAgain, onBack }) => {
   if (!result) return null;
 
-  const colors = riskColors[result.riskLevel] || riskColors.Medium;
+  // ── Null-safe field normalization ──────────────────────────────────────
+  // APK results use different field names; normalize them here so the rest
+  // of the component never has to worry about undefined arrays.
+  const detectedIssues = Array.isArray(result.detectedIssues)
+    ? result.detectedIssues
+    : Array.isArray(result.issues)
+      ? result.issues
+      : [];
+
+  const permissions = Array.isArray(result.permissions)
+    ? result.permissions
+    : Array.isArray(result.permissions?.requested)
+      ? result.permissions.requested
+      : [];
+
+  const recommendations = Array.isArray(result.recommendations)
+    ? result.recommendations
+    : [];
+
+  const evidence = Array.isArray(result.evidence)
+    ? result.evidence
+    : [];
+
+  // aiVerdict may come as "aiVerdict" or "verdict" depending on scan type
+  const aiVerdict = result.aiVerdict || result.verdict || 'No verdict available.';
+
+  const appName   = result.appName   || 'Unknown Application';
+  const developer = result.developer || 'Unknown Developer';
+  const riskScore = result.riskScore ?? 0;
+  const riskLevel = result.riskLevel || 'Medium';
+  const summary   = result.summary   || '';
+  const timestamp = result.timestamp ? new Date(result.timestamp).toLocaleString() : 'Unknown';
+  const metadata  = result.metadata  && typeof result.metadata === 'object' ? result.metadata : {};
+  // ──────────────────────────────────────────────────────────────────────
+
+  const colors = riskColors[riskLevel] || riskColors.Medium;
   const circumference = 2 * Math.PI * 40;
-  const offset = circumference - (result.riskScore / 100) * circumference;
+  const offset = circumference - (riskScore / 100) * circumference;
 
   const handleDownloadReport = () => {
     const lines = [
       `SentinelAI Security Report`,
       `${'='.repeat(50)}`,
       ``,
-      `App Name: ${result.appName}`,
-      `Developer: ${result.developer}`,
+      `App Name: ${appName}`,
+      `Developer: ${developer}`,
       `Scan Type: ${typeLabels[result.type] || result.type}`,
-      `Risk Score: ${result.riskScore}/100`,
-      `Risk Level: ${result.riskLevel}`,
-      `Date: ${new Date(result.timestamp).toLocaleString()}`,
+      `Risk Score: ${riskScore}/100`,
+      `Risk Level: ${riskLevel}`,
+      `Date: ${timestamp}`,
       ``,
       `AI Verdict`,
       `${'-'.repeat(50)}`,
-      result.aiVerdict,
+      aiVerdict,
       ``,
-      `Detected Issues (${result.detectedIssues.length})`,
+      `Detected Issues (${detectedIssues.length})`,
       `${'-'.repeat(50)}`,
-      ...result.detectedIssues.map((issue, i) => `${i + 1}. [${issue.severity}] ${issue.title}: ${issue.description}`),
+      ...detectedIssues.map((issue, i) => `${i + 1}. [${issue.severity}] ${issue.title}: ${issue.description}`),
       ``,
       `Recommendations`,
       `${'-'.repeat(50)}`,
-      ...result.recommendations.map((r, i) => `${i + 1}. ${r}`),
+      ...recommendations.map((r, i) => `${i + 1}. ${r}`),
     ];
     const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `SentinelAI_Report_${result.appName.replace(/\s+/g, '_')}.txt`;
+    a.download = `SentinelAI_Report_${appName.replace(/\s+/g, '_')}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -81,7 +116,7 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
             />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className={`text-3xl font-bold ${colors.text}`}>{result.riskScore}</span>
+            <span className={`text-3xl font-bold ${colors.text}`}>{riskScore}</span>
             <span className="text-[10px] text-outline font-medium uppercase tracking-widest">/ 100</span>
           </div>
         </div>
@@ -89,16 +124,16 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
         {/* Info */}
         <div className="flex-1 text-center md:text-left">
           <div className="flex items-center gap-3 justify-center md:justify-start mb-2">
-            <h2 className="text-2xl font-bold text-on-surface">{result.appName}</h2>
+            <h2 className="text-2xl font-bold text-on-surface">{appName}</h2>
             <span className={`px-3 py-1 rounded-full text-xs font-bold border ${colors.badge}`}>
-              {result.riskLevel}
+              {riskLevel}
             </span>
           </div>
-          <p className="text-sm text-on-surface-variant mb-1">{result.developer}</p>
+          <p className="text-sm text-on-surface-variant mb-1">{developer}</p>
           <p className="text-xs text-outline">
-            {typeLabels[result.type]} · {new Date(result.timestamp).toLocaleString()}
+            {typeLabels[result.type]} · {timestamp}
           </p>
-          <p className="text-sm text-on-surface-variant mt-3">{result.summary}</p>
+          <p className="text-sm text-on-surface-variant mt-3">{summary}</p>
         </div>
       </div>
 
@@ -108,18 +143,18 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
           <span className="material-symbols-outlined text-primary text-xl">psychology</span>
           <h3 className="text-lg font-bold text-on-surface">AI Verdict</h3>
         </div>
-        <p className="text-sm text-on-surface-variant leading-relaxed">{result.aiVerdict}</p>
+        <p className="text-sm text-on-surface-variant leading-relaxed">{aiVerdict}</p>
       </div>
 
       {/* Detected Issues */}
-      {result.detectedIssues.length > 0 && (
+      {detectedIssues.length > 0 && (
         <div className="glass-panel rounded-2xl p-6">
           <div className="flex items-center gap-3 mb-4">
             <span className="material-symbols-outlined text-error text-xl">bug_report</span>
-            <h3 className="text-lg font-bold text-on-surface">Detected Issues ({result.detectedIssues.length})</h3>
+            <h3 className="text-lg font-bold text-on-surface">Detected Issues ({detectedIssues.length})</h3>
           </div>
           <div className="space-y-3">
-            {result.detectedIssues.map((issue, i) => (
+            {detectedIssues.map((issue, i) => (
               <div key={i} className={`border-l-4 rounded-lg p-4 ${severityColors[issue.severity] || severityColors.Medium}`}>
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xs font-bold uppercase tracking-wider opacity-70">{issue.severity}</span>
@@ -135,16 +170,16 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
       {/* Two-column: Permissions + Evidence */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Permissions */}
-        {result.permissions.length > 0 && (
+        {permissions.length > 0 && (
           <div className="glass-panel rounded-2xl p-6">
             <div className="flex items-center gap-3 mb-4">
               <span className="material-symbols-outlined text-[#F59E0B] text-xl">key</span>
-              <h3 className="text-lg font-bold text-on-surface">Permissions ({result.permissions.length})</h3>
+              <h3 className="text-lg font-bold text-on-surface">Permissions ({permissions.length})</h3>
             </div>
             <div className="flex flex-wrap gap-2">
-              {result.permissions.map((perm, i) => (
+              {permissions.map((perm, i) => (
                 <span key={i} className="px-2 py-1 rounded-md bg-surface-variant text-xs font-medium text-on-surface-variant">
-                  {perm.split('.').pop()}
+                  {typeof perm === 'string' ? perm.split('.').pop() : perm}
                 </span>
               ))}
             </div>
@@ -152,49 +187,55 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
         )}
 
         {/* Evidence */}
-        <div className="glass-panel rounded-2xl p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="material-symbols-outlined text-secondary text-xl">fact_check</span>
-            <h3 className="text-lg font-bold text-on-surface">Evidence</h3>
+        {evidence.length > 0 && (
+          <div className="glass-panel rounded-2xl p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="material-symbols-outlined text-secondary text-xl">fact_check</span>
+              <h3 className="text-lg font-bold text-on-surface">Evidence</h3>
+            </div>
+            <div className="space-y-3">
+              {evidence.map((ev, i) => (
+                <div key={i} className="flex justify-between items-center border-b border-outline-variant/20 pb-2 last:border-0">
+                  <span className="text-xs text-on-surface-variant">{ev.label}</span>
+                  <span className="text-xs font-bold text-on-surface">{ev.value}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="space-y-3">
-            {result.evidence.map((ev, i) => (
-              <div key={i} className="flex justify-between items-center border-b border-outline-variant/20 pb-2 last:border-0">
-                <span className="text-xs text-on-surface-variant">{ev.label}</span>
-                <span className="text-xs font-bold text-on-surface">{ev.value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Metadata (type-specific) */}
-      {result.metadata && Object.keys(result.metadata).length > 0 && (
+      {Object.keys(metadata).length > 0 && (
         <div className="glass-panel rounded-2xl p-6">
           <div className="flex items-center gap-3 mb-4">
             <span className="material-symbols-outlined text-tertiary text-xl">info</span>
             <h3 className="text-lg font-bold text-on-surface">Metadata</h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {Object.entries(result.metadata).map(([key, val]) => (
-              <div key={key}>
-                <span className="text-[10px] text-outline uppercase tracking-widest block mb-0.5">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
-                <span className="text-sm font-medium text-on-surface break-all">{String(val)}</span>
-              </div>
-            ))}
+            {Object.entries(metadata).map(([key, val]) => {
+              // Skip arrays/objects — only render scalar values
+              if (Array.isArray(val) || (val !== null && typeof val === 'object')) return null;
+              return (
+                <div key={key}>
+                  <span className="text-[10px] text-outline uppercase tracking-widest block mb-0.5">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                  <span className="text-sm font-medium text-on-surface break-all">{String(val)}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
 
       {/* Recommendations */}
-      {result.recommendations.length > 0 && (
+      {recommendations.length > 0 && (
         <div className="glass-panel rounded-2xl p-6">
           <div className="flex items-center gap-3 mb-4">
             <span className="material-symbols-outlined text-[#10B981] text-xl">tips_and_updates</span>
             <h3 className="text-lg font-bold text-on-surface">Recommendations</h3>
           </div>
           <ul className="space-y-2">
-            {result.recommendations.map((rec, i) => (
+            {recommendations.map((rec, i) => (
               <li key={i} className="flex items-start gap-3 text-sm text-on-surface-variant">
                 <span className="material-symbols-outlined text-[#10B981] text-base mt-0.5 shrink-0">check_circle</span>
                 {rec}

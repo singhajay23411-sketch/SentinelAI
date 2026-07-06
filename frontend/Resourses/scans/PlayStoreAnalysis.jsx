@@ -38,7 +38,7 @@ const PlayStoreAnalysis = () => {
       addScan(scanResult);
       navigate(`/scan/results/${scanResult.id}`);
     } catch (err) {
-      setError('Analysis failed. Please try again.');
+      setError(err.message || 'Analysis failed. Please try again.');
       setPhase('input');
     }
   };

@@ -2,16 +2,42 @@
 // Each function returns Promise<ScanResult> with realistic delays.
 // Replace the body of each function with real API calls later.
 
-function generateId() {
-  return 'scan_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+function createDeterministicRandom(seedStr) {
+  let hash = 0;
+  for (let i = 0; i < seedStr.length; i++) {
+    hash = (hash << 5) - hash + seedStr.charCodeAt(i);
+    hash |= 0; // Convert to 32bit integer
+  }
+  let seed = Math.abs(hash) || 1;
+  return function() {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+}
+
+function cyrb128(str) {
+  let h1 = 1779033703, h2 = 3024733165, h3 = 3362453659, h4 = 2804903375;
+  for (let i = 0, k; i < str.length; i++) {
+    k = str.charCodeAt(i);
+    h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
+    h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+    h3 = h4 ^ Math.imul(h3 ^ k, 951274213);
+    h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+  }
+  h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
+  h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+  h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
+  h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+  return [(h1^h2^h3^h4)>>>0, (h2^h1)>>>0, (h3^h1)>>>0, (h4^h1)>>>0];
+}
+
+function generateDeterministicId(seed) {
+  const hash = cyrb128(seed || 'default');
+  return 'scan_' + hash[0].toString(36) + '_' + hash[1].toString(36);
 }
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function randomBetween(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function getRiskLevel(score) {
@@ -56,12 +82,22 @@ const issuePool = {
   ],
 };
 
-function pickRandom(arr, count) {
-  const shuffled = [...arr].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
-}
+function buildResult(type, overrides = {}, seed = 'default') {
+  const rand = createDeterministicRandom(seed);
+  
+  const randomBetween = (min, max) => {
+    return Math.floor(rand() * (max - min + 1)) + min;
+  };
+  
+  const pickRandom = (arr, count) => {
+    const shuffled = [...arr];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled.slice(0, count);
+  };
 
-function buildResult(type, overrides = {}) {
   const riskScore = overrides.riskScore ?? randomBetween(15, 98);
   const riskLevel = getRiskLevel(riskScore);
   const appName = overrides.appName || appNames[randomBetween(0, appNames.length - 1)];
@@ -91,7 +127,7 @@ function buildResult(type, overrides = {}) {
   };
 
   return {
-    id: generateId(),
+    id: generateDeterministicId(seed),
     type,
     appName,
     developer,
@@ -108,7 +144,7 @@ function buildResult(type, overrides = {}) {
       { type: 'text', label: 'Scan Duration', value: `${randomBetween(3, 8)}s` },
     ],
     metadata: overrides.metadata || {},
-    timestamp: new Date().toISOString(),
+    timestamp: new Date('2026-07-06T10:00:00Z').toISOString(),
     aiVerdict: verdicts[riskLevel],
     ...overrides,
     riskScore,
@@ -127,7 +163,7 @@ export async function analyzePlayStore(url, onProgress) {
   ];
 
   // Fire the API request in parallel
-  const apiPromise = fetch('http://localhost:8080/analyze-playstore-app', {
+  const apiPromise = fetch('http://127.0.0.1:8080/analyze-playstore-app', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -139,10 +175,40 @@ export async function analyzePlayStore(url, onProgress) {
       throw new Error(errData.detail || 'Analysis failed');
     }
     return res.json();
+  }).catch(async (err) => {
+    if (err.message && err.message !== 'Failed to fetch' && !err.message.includes('fetch')) {
+      throw err;
+    }
+    
+    if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+      throw new Error('Network disconnected');
+    }
+    
+    try {
+      const healthCheckPromise = fetch('http://127.0.0.1:8080/health', {
+        method: 'GET',
+        mode: 'no-cors'
+      });
+      
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('timeout')), 3000)
+      );
+      
+      await Promise.race([healthCheckPromise, timeoutPromise]);
+      throw new Error('CORS blocked or API endpoint unavailable on port 8080');
+    } catch (checkErr) {
+      if (checkErr.message === 'timeout') {
+        throw new Error('API request timed out (service is unresponsive)');
+      } else if (checkErr.message && (checkErr.message.includes('CORS') || checkErr.message.includes('unavailable'))) {
+        throw checkErr;
+      } else {
+        throw new Error('Backend service not running on port 8080');
+      }
+    }
   });
 
   for (const stage of stages) {
-    await delay(randomBetween(300, 600));
+    await delay(400);
     onProgress?.(stage);
   }
 
@@ -207,7 +273,7 @@ export async function analyzePlayStore(url, onProgress) {
   ];
 
   return {
-    id: 'scan_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+    id: generateDeterministicId(url),
     type: 'playstore',
     appName: appDetails.title,
     developer: appDetails.developer,
@@ -226,7 +292,7 @@ export async function analyzePlayStore(url, onProgress) {
       version: appDetails.version || 'N/A',
       rating: appDetails.score ? Number(appDetails.score).toFixed(1) : 'N/A',
     },
-    timestamp: new Date().toISOString(),
+    timestamp: responseData.timestamp || new Date('2026-07-06T10:00:00Z').toISOString(),
     aiVerdict: verdicts[riskLevel],
   };
 }
@@ -243,9 +309,11 @@ export async function analyzeManual(formData, onProgress) {
   ];
 
   for (const stage of stages) {
-    await delay(randomBetween(500, 800));
+    await delay(500);
     onProgress?.(stage);
   }
+
+  const seed = formData.appName + '_' + (formData.developer || 'unknown');
 
   return buildResult('manual', {
     appName: formData.appName,
@@ -255,42 +323,153 @@ export async function analyzeManual(formData, onProgress) {
       website: formData.website || 'N/A',
       apkLink: formData.apkLink || 'N/A',
     },
-  });
+  }, seed);
 }
 
-// ── APK Security Scanner ─────────────────────────────────────────────────
+// ── APK Security Scanner ──────────────────────────────────────────────────
 export async function analyzeAPK(file, onProgress) {
-  const stages = [
-    { progress: 10, status: 'Uploading APK...', detail: `Processing ${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB)` },
-    { progress: 25, status: 'Extracting Manifest...', detail: 'Reading AndroidManifest.xml for package info and permissions.' },
-    { progress: 40, status: 'Analyzing Permissions...', detail: 'Evaluating requested permissions against security policies.' },
-    { progress: 55, status: 'Scanning Activities & Services...', detail: 'Checking for background services, receivers, and hidden activities.' },
-    { progress: 70, status: 'Certificate Verification...', detail: 'Validating APK signature and developer certificate chain.' },
-    { progress: 85, status: 'AI Malware Detection...', detail: 'Running deep neural network analysis for malware signatures.' },
-    { progress: 95, status: 'Generating Threat Report...', detail: 'Compiling security findings and recommendations.' },
-    { progress: 100, status: 'Scan Complete', detail: 'APK security report generated.' },
-  ];
+  // Step 1: Request upload ticket
+  const ticketRes = await fetch('http://127.0.0.1:8080/api/v1/scans/upload-ticket', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ file_name: file.name, file_size: file.size }),
+  });
+  
+  if (!ticketRes.ok) {
+    throw new Error('Failed to initialize upload ticket on backend.');
+  }
+  
+  const { scan_id, upload_url } = await ticketRes.json();
+  onProgress?.({ progress: 5, status: 'Uploading APK...', detail: `Initialized upload ticket for ${file.name}` });
 
-  for (const stage of stages) {
-    await delay(randomBetween(400, 800));
-    onProgress?.(stage);
+  // Step 2: Perform binary PUT upload of the file
+  const uploadRes = await fetch(upload_url, {
+    method: 'PUT',
+    body: file,
+  });
+
+  if (!uploadRes.ok) {
+    throw new Error('Failed to upload APK file binary.');
+  }
+  onProgress?.({ progress: 15, status: 'File Uploaded', detail: 'APK binary successfully uploaded.' });
+
+  // Step 3: Trigger the scan pipeline
+  const triggerRes = await fetch('http://127.0.0.1:8080/api/v1/scans/trigger', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ scan_id }),
+  });
+
+  if (!triggerRes.ok) {
+    throw new Error('Failed to start scan execution pipeline.');
   }
 
-  return buildResult('apk', {
-    appName: file.name.replace('.apk', ''),
-    metadata: {
-      fileName: file.name,
-      fileSize: `${(file.size / 1024 / 1024).toFixed(2)} MB`,
-      packageName: `com.${file.name.replace('.apk', '').toLowerCase().replace(/[^a-z0-9]/g, '')}.app`,
-      minSdkVersion: randomBetween(21, 28),
-      targetSdkVersion: randomBetween(30, 34),
-      certificate: randomBetween(0, 1) ? 'Valid (SHA-256)' : 'Self-Signed (Untrusted)',
-      obfuscation: randomBetween(0, 1) ? 'ProGuard Detected' : 'No Obfuscation',
-      activities: randomBetween(5, 25),
-      services: randomBetween(2, 12),
-      receivers: randomBetween(1, 8),
-    },
-  });
+  // Step 4: Poll status
+  let status = 'QUEUED';
+  let progress = 15;
+  let attempts = 0;
+  const maxAttempts = 60; // Max 60 seconds
+
+  while (status !== 'COMPLETED' && status !== 'FAILED' && attempts < maxAttempts) {
+    await delay(1000);
+    attempts++;
+    
+    const statusRes = await fetch(`http://127.0.0.1:8080/api/v1/scans/status/${scan_id}`);
+    if (!statusRes.ok) {
+      continue; // Retry next time
+    }
+    
+    const statusData = await statusRes.json();
+    status = statusData.status;
+    progress = statusData.progress;
+    onProgress?.({
+      progress: progress,
+      status: statusData.current_stage || 'Processing...',
+      detail: statusData.detail || 'Analyzing APK structure...'
+    });
+  }
+
+  if (status !== 'COMPLETED') {
+    throw new Error('APK analysis timed out or failed on the server.');
+  }
+
+  // Step 5: Retrieve finalized report and format it for the frontend
+  const resultsRes = await fetch(`http://127.0.0.1:8080/api/v1/scans/results/${scan_id}`);
+  if (!resultsRes.ok) {
+    throw new Error('Failed to fetch analysis report.');
+  }
+
+  const report = await resultsRes.json();
+
+  // ── Detected Issues ─────────────────────────────────────────────────────
+  // Read the structured findings array returned by the backend.
+  // Each entry already has: { severity, title, description, recommendation }.
+  // This is the ONLY source of truth — no keyword guessing, no fallbacks.
+  const detectedIssues = Array.isArray(report.findings)
+    ? report.findings.map(f => ({
+        severity:    f.severity,
+        title:       f.title,
+        description: f.description,
+      }))
+    : [];
+
+  // ── Risk score & level ──────────────────────────────────────────────────
+  const riskScore = report.risk_score ?? 0;
+  const threatLevel = report.threat_level || 'SAFE';
+  const riskLevelFormatted =
+    threatLevel.charAt(0).toUpperCase() + threatLevel.slice(1).toLowerCase();
+
+  // ── AI Verdict ──────────────────────────────────────────────────────────
+  // Read directly from the backend — generated from actual findings.
+  // Never use a hardcoded lookup table.
+  const aiVerdict = report.ai_verdict || 'No verdict available.';
+
+  // ── Recommendations ─────────────────────────────────────────────────────
+  // Read directly from the backend — deduplicated from finding recommendations.
+  const recommendations = Array.isArray(report.recommendations)
+    ? report.recommendations
+    : [];
+
+  // ── Permissions ─────────────────────────────────────────────────────────
+  const rawPerms = report.permissions;
+  const permissions = Array.isArray(rawPerms)
+    ? rawPerms
+    : Array.isArray(rawPerms?.requested)
+      ? rawPerms.requested
+      : [];
+
+  // ── Evidence ────────────────────────────────────────────────────────────
+  // Findings count must always reflect the actual number of generated findings.
+  const evidence = [
+    { type: 'metric', label: 'Threat Score',  value: `${riskScore}/100` },
+    { type: 'metric', label: 'Findings',      value: `${detectedIssues.length}` },
+    { type: 'text',   label: 'Analysis Engine', value: 'SentinelAI Androguard Parser' },
+  ];
+  if (report.metadata?.package_name) {
+    evidence.push({ type: 'text', label: 'Package', value: report.metadata.package_name });
+  }
+  if (report.metadata?.obfuscation) {
+    evidence.push({ type: 'text', label: 'Obfuscation', value: report.metadata.obfuscation });
+  }
+
+  return {
+    id:          report.scan_id || scan_id,
+    type:        'apk',
+    appName:     report.app_name || 'Unknown Application',
+    developer:   report.metadata?.package_name
+                   ? report.metadata.package_name.split('.').slice(0, 2).join('.')
+                   : 'External Developer',
+    riskScore,
+    riskLevel:   riskLevelFormatted,
+    summary: `APK security scan ${riskScore >= 70 ? 'flagged critical threats' : riskScore >= 40 ? 'identified some concerns' : 'found no major issues'} in ${report.app_name || 'this application'}. Risk score: ${riskScore}/100.`,
+    aiVerdict,
+    detectedIssues,
+    permissions,
+    recommendations,
+    evidence,
+    timestamp:   report.timestamp || new Date().toISOString(),
+    metadata:    report.metadata || {},
+  };
 }
 
 // ── Website Analyzer ─────────────────────────────────────────────────────
@@ -306,9 +485,12 @@ export async function analyzeWebsite(url, onProgress) {
   ];
 
   for (const stage of stages) {
-    await delay(randomBetween(500, 900));
+    await delay(500);
     onProgress?.(stage);
   }
+
+  const rand = createDeterministicRandom(url);
+  const randomBetween = (min, max) => Math.floor(rand() * (max - min + 1)) + min;
 
   const hasSSL = url.startsWith('https');
   const domainAge = randomBetween(1, 3650);
@@ -328,5 +510,5 @@ export async function analyzeWebsite(url, onProgress) {
       suspiciousForms: randomBetween(0, 3),
       dangerousJS: randomBetween(0, 2),
     },
-  });
+  }, url);
 }

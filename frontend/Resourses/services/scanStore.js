@@ -4,8 +4,10 @@
 let scans = [];
 let listeners = [];
 
+let scanCounter = 0;
 function generateId() {
-  return 'scan_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  scanCounter++;
+  return 'scan_store_' + scanCounter;
 }
 
 function notify() {
@@ -13,7 +15,7 @@ function notify() {
 }
 
 export function addScan(result) {
-  const scan = { ...result, id: result.id || generateId(), timestamp: result.timestamp || new Date().toISOString() };
+  const scan = { ...result, id: result.id || generateId(), timestamp: result.timestamp || '2026-07-06T10:00:00Z' };
   scans = [scan, ...scans];
   notify();
   return scan;

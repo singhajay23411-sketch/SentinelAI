@@ -45,7 +45,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
     ];
 
     const interval = setInterval(() => {
-      currentProgress += Math.floor(Math.random() * 5) + 1;
+      currentProgress += 3;
       
       if (currentProgress >= 100) {
         currentProgress = 100;
