@@ -143,8 +143,8 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           <li>
             <a 
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${activeTab === 'home' ? 'text-primary font-bold border-b-2 border-primary pb-1 bg-primary/5' : 'text-on-surface-variant hover:bg-primary-container/20'}`}
-              onClick={(e) => { e.preventDefault(); setActiveTab('home'); navigate('/dashboard'); }} 
-              href="#"
+              onClick={(e) => { e.preventDefault(); setActiveTab('home'); navigate('/home'); }} 
+              href="/home"
             >
               <span className="material-symbols-outlined">home</span>Home
             </a>
@@ -197,8 +197,8 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           <li>
             <a 
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${activeTab === 'about' ? 'text-primary font-bold border-b-2 border-primary pb-1 bg-primary/5' : 'text-on-surface-variant hover:bg-primary-container/20'}`}
-              onClick={(e) => { e.preventDefault(); setActiveTab('about'); }} 
-              href="#"
+              onClick={(e) => { e.preventDefault(); setActiveTab('about'); navigate('/about'); }} 
+              href="/about"
             >
               <span className="material-symbols-outlined">info</span>About Us
             </a>

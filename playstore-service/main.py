@@ -22,6 +22,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # pyrefly: ignore [missing-import]
 from pydantic import BaseModel, Field
 from app_fetcher import run_full_analysis
+from manual_analyzer import run_manual_analysis
 
 # ─────────────────────────────────────────────
 # App Initialization
@@ -71,6 +72,13 @@ class AnalyzeRequest(BaseModel):
         "https://play.google.com/store/apps/details?id=com.upstox.app"
     ])
 
+class ManualAnalysisRequest(BaseModel):
+    app_name: str = Field(..., description="Name of the app")
+    description: str = Field(..., description="App description or promotional text")
+    developer: str = Field(default="", description="Developer name")
+    website: str = Field(default="", description="App website URL")
+    apk_link: str = Field(default="", description="Direct link to APK file")
+
 
 # ─────────────────────────────────────────────
 # TASK 11: Health Endpoint
@@ -112,7 +120,6 @@ async def analyze_playstore_app(request: AnalyzeRequest):
             status_code=500,
             detail=f"Internal server error: {str(e)}"
         )
-
 
 # ─────────────────────────────────────────────
 # APK Scanner Background Task & Endpoints
@@ -382,6 +389,34 @@ def get_scan_results(scan_id: str):
         result["timestamp"] = result["timestamp"].strftime("%Y-%m-%dT%H:%M:%SZ")
         
     return result
+
+# ─────────────────────────────────────────────
+# TASK 12: Manual Verification Endpoint
+# ─────────────────────────────────────────────
+
+@app.post("/manual-analysis")
+async def manual_analysis(request: ManualAnalysisRequest):
+    """
+    Analyzes a manually provided app for fraud indicators.
+    """
+    try:
+        data = request.model_dump() if hasattr(request, 'model_dump') else request.dict()
+        result = run_manual_analysis(data)
+
+        if not result.get("success"):
+            raise HTTPException(
+                status_code=400,
+                detail=result.get("error", "Analysis failed.")
+            )
+
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal server error: {str(e)}"
+        )
 
 if __name__ == "__main__":
     # pyrefly: ignore [missing-import]

@@ -137,13 +137,46 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
         </div>
       </div>
 
-      {/* AI Verdict */}
-      <div className="glass-panel rounded-2xl p-6">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="material-symbols-outlined text-primary text-xl">psychology</span>
-          <h3 className="text-lg font-bold text-on-surface">AI Verdict</h3>
+      {/* AI Security Assessment */}
+      <div className="bg-[#162238] border border-[#2B3D5E] rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+        {/* Decorative cyber grid background */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(#2B3D5E 1px, transparent 1px), linear-gradient(90deg, #2B3D5E 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+        
+        <div className="flex items-center gap-3 mb-4 relative z-10 border-b border-[#2B3D5E] pb-4">
+          <div className="w-10 h-10 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center">
+            <span className="material-symbols-outlined text-primary text-xl">shield_person</span>
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-white tracking-wide">AI Security Assessment</h3>
+            <p className="text-[10px] text-primary font-mono uppercase tracking-widest">Powered by Gemini AI</p>
+          </div>
         </div>
-        <p className="text-sm text-on-surface-variant leading-relaxed">{aiVerdict}</p>
+        
+        <div className="relative z-10 w-full">
+          {typeof aiVerdict === 'string' ? (
+            <div className="max-h-80 overflow-y-auto pr-2 custom-scrollbar text-sm text-slate-200 leading-relaxed font-sans space-y-4">
+              {aiVerdict.split('\n\n').map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {aiVerdict.findings?.map((finding, idx) => (
+                  <div key={idx} className="bg-[#1D2B44] border border-[#3B82F6]/20 p-4 rounded-xl flex flex-col gap-2 shadow-md">
+                     <span className="text-[#60A5FA] font-bold text-sm tracking-wide">{finding.heading}</span>
+                     <span className="text-slate-100 text-sm leading-relaxed">{finding.detail}</span>
+                  </div>
+                ))}
+              </div>
+              {aiVerdict.summary && (
+                <div className="mt-4 p-4 bg-[#1E2D4A] border border-[#3B82F6]/30 rounded-xl text-slate-100 text-sm leading-relaxed font-normal">
+                   {aiVerdict.summary}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Detected Issues */}

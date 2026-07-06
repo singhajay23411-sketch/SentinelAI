@@ -3,24 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import { useScanContext } from '../../src/context/ScanContext.jsx';
 import { analyzeManual } from '../services/mockAnalyzers.js';
 import ScanProgress from './ScanProgress.jsx';
-import ScanResults from './ScanResults.jsx';
 
 const ManualVerification = () => {
   const navigate = useNavigate();
   const { addScan } = useScanContext();
-  const [phase, setPhase] = useState('input');
+  const [phase, setPhase] = useState('input'); // input | scanning
   const [form, setForm] = useState({ appName: '', description: '', developer: '', website: '', apkLink: '' });
   const [errors, setErrors] = useState({});
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState('');
   const [detail, setDetail] = useState('');
-  const [result, setResult] = useState(null);
 
   const validate = () => {
     const errs = {};
-    if (!form.appName.trim()) errs.appName = 'App name is required.';
-    if (!form.description.trim()) errs.description = 'Description is required.';
-    else if (form.description.trim().length < 20) errs.description = 'Description must be at least 20 characters.';
+    if (!form.appName.trim()) errs.appName = 'Please enter required fields';
+    if (!form.description.trim()) errs.description = 'Please enter required fields';
     return errs;
   };
 
@@ -32,7 +29,10 @@ const ManualVerification = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate();
-    if (Object.keys(errs).length) { setErrors(errs); return; }
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
     setErrors({});
     setPhase('scanning');
 
@@ -44,34 +44,22 @@ const ManualVerification = () => {
       });
       addScan(scanResult);
       navigate(`/scan/results/${scanResult.id}`);
-    } catch {
-      setErrors({ appName: 'Analysis failed. Please try again.' });
+    } catch (err) {
+      setErrors({ formError: err.message || 'Analysis failed. Please try again.' });
       setPhase('input');
     }
   };
 
-  const handleScanAgain = () => {
-    setForm({ appName: '', description: '', developer: '', website: '', apkLink: '' });
-    setResult(null);
-    setProgress(0);
-    setPhase('input');
-  };
+  const inputClass = (field) =>
+    `w-full px-4 py-3 rounded-xl bg-surface-container-lowest border ${errors[field] ? 'border-error' : 'border-outline-variant'} focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-on-surface text-sm placeholder-outline`;
 
   if (phase === 'scanning') {
     return <ScanProgress progress={progress} status={status} detail={detail} scanType="manual" />;
   }
 
-  if (phase === 'results' && result) {
-    return <ScanResults result={result} onScanAgain={handleScanAgain} onBack={() => navigate('/scan-app')} />;
-  }
-
-  const inputClass = (field) =>
-    `w-full px-4 py-3 rounded-xl bg-surface-container-lowest border ${errors[field] ? 'border-error' : 'border-outline-variant'} focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-on-surface text-sm placeholder-outline`;
-
   return (
-    <div className="max-w-2xl mx-auto hero-fade-in">
+    <div className="max-w-2xl mx-auto hero-fade-in space-y-6 pb-12">
       <div className="glass-panel rounded-2xl p-8 relative">
-        {/* Close Button */}
         <button 
           onClick={() => navigate('/scan-app')}
           className="absolute top-6 right-6 text-on-surface-variant hover:text-primary border border-outline-variant/50 bg-white/50 backdrop-blur-sm hover:bg-surface-variant/20 transition-all cursor-pointer flex items-center justify-center p-1.5 rounded-lg"
@@ -80,7 +68,6 @@ const ManualVerification = () => {
           <span className="material-symbols-outlined text-[16px] font-bold">close</span>
         </button>
 
-        {/* Header */}
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
             <span className="material-symbols-outlined text-primary text-2xl">edit_note</span>
@@ -90,6 +77,13 @@ const ManualVerification = () => {
             <p className="text-xs text-on-surface-variant">Enter app details manually to verify authenticity.</p>
           </div>
         </div>
+
+        {errors.formError && (
+            <div className="mb-4 p-4 rounded-xl bg-error/10 text-error text-sm font-bold border border-error/20 flex items-center gap-2">
+                <span className="material-symbols-outlined">error</span>
+                {errors.formError}
+            </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
