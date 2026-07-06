@@ -20,9 +20,9 @@ const ScanApplication = () => {
 
   // Helper: get risk color
   const getRiskColor = (score) => {
-    if (score <= 30) return '#10B981'; // green
-    if (score <= 60) return '#F59E0B'; // orange
-    return '#EF4444'; // red
+    if (score <= 30) return '#10B981';
+    if (score <= 60) return '#F59E0B';
+    return '#EF4444';
   };
   const getRiskBg = (score) => {
     if (score <= 30) return 'rgba(16, 185, 129, 0.1)';
@@ -55,7 +55,7 @@ const ScanApplication = () => {
     let currentProgress = 0;
     const progressInterval = setInterval(() => {
       currentProgress += 2;
-      if (currentProgress > 85) currentProgress = 85; // Cap at 85 until API responds
+      if (currentProgress > 85) currentProgress = 85;
       setProgress(currentProgress);
       const currentStage = stages.find(s => currentProgress <= s.limit) || stages[2];
       setScanStatus(currentStage.status);
@@ -95,93 +95,150 @@ const ScanApplication = () => {
 
   return (
     <div className="bg-background text-on-background min-h-screen font-body-md overflow-hidden flex">
-      {/* Inline styles for custom animations and effects */}
+      {/* Inline styles */}
       <style dangerouslySetInnerHTML={{ __html: `
         body {
-            background-image: radial-gradient(circle at top right, #bbc3ff 0%, transparent 40%),
-                              radial-gradient(circle at bottom left, #e1dfff 0%, transparent 40%);
-            background-attachment: fixed;
+          background: #f4f6ff;
         }
+
+        /* ── Scan card ── */
+        .sc-card {
+          background: #ffffff;
+          border: 1px solid #e8edf8;
+          border-radius: 20px;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+          transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+          display: flex;
+          flex-direction: column;
+          padding: 24px 22px 22px 22px;
+          cursor: pointer;
+          min-height: 260px;
+        }
+        .sc-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 36px rgba(0,0,0,0.1);
+        }
+        .sc-card-1:hover { border-color: rgba(99,102,241,0.4); }
+        .sc-card-2:hover { border-color: rgba(59,130,246,0.4); }
+        .sc-card-3:hover { border-color: rgba(20,184,166,0.4); }
+        .sc-card-4:hover { border-color: rgba(245,158,11,0.4); }
+        .sc-card-1.sc-active { border-color: rgba(99,102,241,0.5); box-shadow: 0 10px 36px rgba(99,102,241,0.15); }
+
+        /* ── Number badge ── */
+        .sc-badge {
+          width: 26px; height: 26px;
+          border-radius: 7px;
+          display: flex; align-items: center; justify-content: center;
+          font-size: 12px; font-weight: 700; color: #fff;
+          flex-shrink: 0;
+          margin-bottom: 20px;
+        }
+
+        /* ── Icon box ── */
+        .sc-icon-box {
+          width: 80px; height: 80px;
+          border-radius: 18px;
+          background: #f4f6fa;
+          display: flex; align-items: center; justify-content: center;
+          margin-bottom: 20px;
+        }
+
+        /* ── Card button ── */
+        .sc-btn {
+          display: inline-block;
+          padding: 9px 0;
+          width: 100%;
+          border-radius: 50px;
+          font-size: 13px; font-weight: 600;
+          border: 1.5px solid;
+          cursor: pointer;
+          transition: all 0.22s ease;
+          background: transparent;
+          text-align: center;
+          margin-top: auto;
+        }
+        .sc-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+        .sc-btn-indigo { border-color: #6366f1; color: #6366f1; }
+        .sc-btn-indigo:hover { background: #6366f1; color: #fff; box-shadow: 0 4px 14px rgba(99,102,241,0.3); }
+
+        .sc-btn-blue { border-color: #3b82f6; color: #3b82f6; }
+        .sc-btn-blue:hover { background: #3b82f6; color: #fff; box-shadow: 0 4px 14px rgba(59,130,246,0.3); }
+
+        .sc-btn-teal { border-color: #14b8a6; color: #14b8a6; }
+        .sc-btn-teal:hover { background: #14b8a6; color: #fff; box-shadow: 0 4px 14px rgba(20,184,166,0.3); }
+
+        .sc-btn-amber { border-color: #f59e0b; color: #d97706; }
+        .sc-btn-amber:hover { background: #f59e0b; color: #fff; box-shadow: 0 4px 14px rgba(245,158,11,0.3); }
+
+        /* ── Glass card (URL input, results, scan progress) ── */
         .glass-card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 1);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 1);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
         }
-        .hero-fade-in { animation: fadeIn 1s ease-out forwards; }
+
+        /* ── Hero fade in ── */
+        .hero-fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+          from { opacity: 0; transform: translateY(10px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
-        .watermark-text {
-            font-size: 20vw;
-            color: rgba(0, 47, 220, 0.06);
-            line-height: 1;
-            z-index: 0;
-            user-select: none;
-            pointer-events: none;
+
+        /* ── Card appear ── */
+        .sc-appear { opacity: 0; animation: scAppear 0.55s ease-out forwards; }
+        .sc-d1 { animation-delay: 0.08s; }
+        .sc-d2 { animation-delay: 0.16s; }
+        .sc-d3 { animation-delay: 0.24s; }
+        .sc-d4 { animation-delay: 0.32s; }
+        @keyframes scAppear {
+          from { opacity: 0; transform: translateY(18px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #002fdc;
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: float 6s infinite ease-in-out;
+
+        /* ── Fluid art animations ── */
+        @keyframes fluidShift {
+          0%, 100% { transform: scale(1) rotate(0deg) translateY(0); }
+          33%       { transform: scale(1.03) rotate(1.5deg) translateY(-6px); }
+          66%       { transform: scale(0.98) rotate(-1deg) translateY(4px); }
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
-            50% { transform: translateY(-20px) translateX(10px); opacity: 0.5; }
-        }
-        .glow-sphere {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(41, 75, 255, 0.1) 0%, transparent 70%);
-            filter: blur(40px);
-            z-index: 0;
-            pointer-events: none;
-        }
-        .glow-input:focus-within {
-            box-shadow: 0 0 20px rgba(41, 75, 255, 0.15);
-            border-color: #002fdc;
-        }
+        .fluid-animate { animation: fluidShift 9s ease-in-out infinite; }
+        .fluid-animate-2 { animation: fluidShift 12s ease-in-out infinite reverse; }
+
+        /* ── Scan animations ── */
         @keyframes scan-pulse {
-            0% { transform: scale(0.95); opacity: 0.5; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(0.95); opacity: 0.5; }
+          0% { transform: scale(0.95); opacity: 0.5; }
+          50% { transform: scale(1.05); opacity: 0.8; }
+          100% { transform: scale(0.95); opacity: 0.5; }
         }
         @keyframes orbit {
-            0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
-            100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+          0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+          100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
         }
         @keyframes scan-line {
-            0% { top: 0%; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { top: 100%; opacity: 0; }
+          0% { top: 0%; opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
         }
         .scan-core { animation: scan-pulse 2s infinite ease-in-out; }
         .orbiting-element { animation: orbit 4s linear infinite; }
-        .floating-illustration { animation: floating 4s infinite ease-in-out; }
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
       `}} />
 
-      {/* SideNavBar */}
+      {/* ══════════════════════════════
+          SIDEBAR — ORIGINAL UNCHANGED
+      ══════════════════════════════ */}
       <nav className={`hidden md:flex flex-col bg-white/75 backdrop-blur-xl h-[calc(100vh-48px)] m-6 rounded-lg border border-white/100 p-6 z-10 shrink-0 sticky top-6 transition-all duration-300 ${isSidebarVisible ? 'w-72 opacity-100' : 'w-0 p-0 m-0 border-0 opacity-0 overflow-hidden'}`}>
         <div className="mb-16 flex items-center justify-between gap-4 cursor-pointer">
           <div className="flex items-center gap-4" onClick={() => navigate('/')}>
             <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-outline-variant bg-surface">
-              <img 
-                alt="SentinelAI Node" 
-                className="w-full h-full object-cover" 
-                data-alt="A futuristic AI node avatar, abstract geometric shapes, glowing blue center on a white background, high tech aesthetic, minimal, vector style" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbq_X4xrqjCuAqP0h0H0l_J2YfzOTE6Y_DH1-e6RGUjWJlGXP1SMBKrd4UHToJkW0yOBGcMWf0EvDVZVNi5MDMZCEXDI0YJCWXiyxHXikKFxsLN3ZWMMILT-SoJITibzQS0eJuFhSaGhIrwxQjF7BA5_IdMQ2d0T-94EzsC7pR0KNno2NGDwN3wGv6EgOObmDSGtCuMDU4SrZb_6uwA1JC20oTri8NShquTrfnVM8EXlSkrY1bgYbTwu-18dJt6d6AfkVdoiTLJak" 
+              <img
+                alt="SentinelAI Node"
+                className="w-full h-full object-cover"
+                data-alt="A futuristic AI node avatar, abstract geometric shapes, glowing blue center on a white background, high tech aesthetic, minimal, vector style"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbq_X4xrqjCuAqP0h0H0l_J2YfzOTE6Y_DH1-e6RGUjWJlGXP1SMBKrd4UHToJkW0yOBGcMWf0EvDVZVNi5MDMZCEXDI0YJCWXiyxHXikKFxsLN3ZWMMILT-SoJITibzQS0eJuFhSaGhIrwxQjF7BA5_IdMQ2d0T-94EzsC7pR0KNno2NGDwN3wGv6EgOObmDSGtCuMDU4SrZb_6uwA1JC20oTri8NShquTrfnVM8EXlSkrY1bgYbTwu-18dJt6d6AfkVdoiTLJak"
               />
             </div>
             <div>
@@ -192,14 +249,14 @@ const ScanApplication = () => {
               </div>
             </div>
           </div>
-          <button 
+          <button
             onClick={() => setIsSidebarVisible(false)}
             className="text-on-surface-variant hover:text-primary cursor-pointer flex items-center justify-center p-1 rounded hover:bg-slate-100"
           >
             <span className="material-symbols-outlined">menu_open</span>
           </button>
         </div>
-        
+
         <ul className="flex flex-col gap-2 flex-grow">
           <li>
             <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" onClick={(e) => { e.preventDefault(); navigate('/'); }} href="/">
@@ -240,12 +297,15 @@ const ScanApplication = () => {
         <div className="mt-auto pt-6"></div>
       </nav>
 
-      {/* Main Content Canvas */}
-      <main className="flex-grow relative z-10 w-full flex flex-col justify-between h-screen p-6">
-        {/* Toggle button on the top left when hidden */}
+      {/* ══════════════════════════════
+          MAIN CONTENT
+      ══════════════════════════════ */}
+      <main className="flex-grow relative z-10 w-full flex flex-col h-screen overflow-y-auto p-6">
+
+        {/* Toggle button when sidebar hidden */}
         {!isSidebarVisible && (
           <div className="fixed top-6 left-6 z-50">
-            <button 
+            <button
               onClick={() => setIsSidebarVisible(true)}
               className="bg-white/75 backdrop-blur-xl border border-white/100 p-2.5 rounded-lg shadow-sm hover:bg-white transition-all cursor-pointer flex items-center justify-center text-on-surface-variant hover:text-primary"
             >
@@ -254,136 +314,194 @@ const ScanApplication = () => {
           </div>
         )}
 
-        {/* Hero Section */}
-        <section className="hero-fade-in relative overflow-hidden pt-8 pb-4">
-          {/* Background Decorators */}
-          <div className="watermark-text absolute left-[-5%] top-[10%] font-bold">SCAN</div>
-          <div className="glow-sphere left-[10%] top-[20%]"></div>
-          
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
-            {/* Left Side Content */}
-            <div className="flex-1 text-left py-2">
-              <h1 className="text-3xl md:text-4xl font-bold text-on-surface leading-tight mb-1">
-                Welcome back
-              </h1>
-              <p className="text-sm text-[#6B7280] font-body-lg max-w-lg">
-                Scan. Analyze. Protect. Stay ahead of investment fraud.
-              </p>
-            </div>
-            
-            {/* Right Side Illustration */}
-            <div className="flex-1 flex justify-center md:justify-end">
-              <div className="relative w-full max-w-[500px]">
-                <div className="floating-illustration">
-                  {/* Placeholder for optional right-side illustration */}
-                </div>
-              </div>
-            </div>
+        {/* ── HERO SECTION ── */}
+        <section
+          className="hero-fade-in relative overflow-hidden mb-5"
+          style={{
+            borderRadius: 22,
+            background: 'linear-gradient(135deg, #eef0ff 0%, #eff2ff 40%, #e8eeff 100%)',
+            minHeight: 160,
+            padding: '40px 44px',
+          }}
+        >
+          {/* Fluid flowing art — right side */}
+          <div
+            style={{
+              position: 'absolute', right: 0, top: 0, bottom: 0,
+              width: '56%', overflow: 'hidden', zIndex: 0,
+            }}
+          >
+            {/* Outer soft lavender fade-in from left */}
+            <div style={{
+              position: 'absolute', inset: 0,
+              background: 'linear-gradient(to right, rgba(238,240,255,1) 0%, rgba(238,240,255,0) 30%)',
+              zIndex: 10,
+            }} />
+
+            {/* Base gradient — matches reference indigo/violet palette */}
+            <div className="fluid-animate" style={{
+              position: 'absolute', inset: '-10%',
+              background: 'linear-gradient(140deg, #c7d2fe 0%, #a5b4fc 18%, #818cf8 34%, #6366f1 50%, #7c3aed 68%, #6d28d9 82%, #581c87 100%)',
+              opacity: 0.88,
+            }} />
+
+            {/* Flowing highlight layer 1 — top right bright violet */}
+            <div className="fluid-animate-2" style={{
+              position: 'absolute',
+              top: '-20%', right: '-10%',
+              width: '65%', height: '75%',
+              background: 'radial-gradient(ellipse at 50% 40%, rgba(196,181,253,0.95) 0%, rgba(167,139,250,0.7) 35%, transparent 70%)',
+              borderRadius: '60% 40% 55% 45% / 45% 55% 45% 55%',
+              filter: 'blur(4px)',
+            }} />
+
+            {/* Flowing wave layer 2 — mid indigo */}
+            <div className="fluid-animate" style={{
+              position: 'absolute',
+              top: '10%', left: '-5%',
+              width: '80%', height: '65%',
+              background: 'radial-gradient(ellipse at 40% 55%, rgba(99,102,241,0.85) 0%, rgba(79,70,229,0.5) 45%, transparent 72%)',
+              borderRadius: '45% 55% 40% 60% / 55% 45% 55% 45%',
+              filter: 'blur(3px)',
+            }} />
+
+            {/* Deep shadow blob — bottom purple */}
+            <div className="fluid-animate-2" style={{
+              position: 'absolute',
+              bottom: '-15%', right: '5%',
+              width: '70%', height: '60%',
+              background: 'radial-gradient(ellipse at 55% 50%, rgba(109,40,217,0.8) 0%, rgba(88,28,135,0.5) 45%, transparent 70%)',
+              borderRadius: '55% 45% 60% 40% / 40% 60% 40% 60%',
+              filter: 'blur(5px)',
+            }} />
+
+            {/* Bright cyan-blue highlight accent — upper-mid */}
+            <div style={{
+              position: 'absolute',
+              top: '15%', left: '25%',
+              width: '40%', height: '35%',
+              background: 'radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.35) 0%, rgba(196,181,253,0.2) 50%, transparent 70%)',
+              borderRadius: '50%',
+              filter: 'blur(8px)',
+            }} />
+
+            {/* Sparkle dots */}
+            <div style={{ position: 'absolute', top: '38%', left: '35%', width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.95)', boxShadow: '0 0 6px rgba(255,255,255,0.8)' }} />
+            <div style={{ position: 'absolute', top: '22%', left: '55%', width: 5, height: 5, borderRadius: '50%', background: 'rgba(255,255,255,0.85)' }} />
+            <div style={{ position: 'absolute', top: '60%', left: '45%', width: 4, height: 4, borderRadius: '50%', background: 'rgba(255,255,255,0.7)' }} />
+            <div style={{ position: 'absolute', top: '48%', left: '70%', width: 6, height: 6, borderRadius: '50%', background: 'rgba(255,255,255,0.6)' }} />
+          </div>
+
+          {/* Text content — left, above fluid art */}
+          <div style={{ position: 'relative', zIndex: 2 }}>
+            <h1 style={{
+              fontSize: 'clamp(28px, 3.5vw, 42px)',
+              fontWeight: 800,
+              color: '#0f172a',
+              lineHeight: 1.1,
+              letterSpacing: '-0.025em',
+              marginBottom: 10,
+            }}>
+              Welcome back
+            </h1>
+            <p style={{ fontSize: 14, color: '#6b7280', fontWeight: 400, lineHeight: 1.5 }}>
+              Scan. Analyze. Protect. Stay ahead of investment fraud.
+            </p>
           </div>
         </section>
 
-        <section className="pb-4 relative z-10">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              
-              {/* Card 1: Play Store */}
-              <div className={`glass-card rounded-xl p-5 border flex flex-col justify-between h-56 transition-all cursor-pointer ${showPlayStoreInput ? 'border-tertiary shadow-lg' : 'border-outline-variant/30 hover:border-tertiary/50'}`} onClick={() => setShowPlayStoreInput(true)}>
-                <div className="flex justify-between items-start mb-2">
-                  <div className="flex gap-2">
-                    <div className="w-6 h-6 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-bold text-xs">1</div>
-                    <div className="w-8 h-8 rounded-lg bg-tertiary/10 flex items-center justify-center">
-                      <img 
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOGSyt_n_Qp_53G-OO77YHuzlMq7ERegvmi11efO0AvSEu6Ubi_URpl69LiciaDKYpvgfX-NvsSByxnjoq5vVY8xEjn_ElQ0ZQXudJRf7sgRuF7JnVXbQzwZmuTqH0AGOa3IMSnhCajpI7z5aD51bJYLoDX1di3bJEqnChHcUMVJQbQ6w9b-wWkPB5P9UYVYjwIS9e31gPH1IejN_tfdDyNfU7fdz5_wyTCfWXaWpSas3AJaBA5PfSREnddxkl0zDFic2GxsEUCT2czw" 
-                        alt="Play Store Logo" 
-                        className="w-full h-full object-contain p-1" 
-                      />
-                    </div>
-                  </div>
-                  <div className="w-16 h-10 bg-inverse-surface rounded-lg flex items-center justify-center gap-1">
-                    <span className="material-symbols-outlined text-white/50 text-[16px]">shop</span>
-                    <span className="material-symbols-outlined text-white/50 text-[16px]">link</span>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-base font-bold mb-1">Play Store Analysis</h3>
-                  <p className="text-xs text-on-surface-variant mb-3 line-clamp-2">Paste a Play Store link to fetch details and analyze behavioral signatures.</p>
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); setShowPlayStoreInput(true); }}
-                    className="text-xs px-4 py-1.5 rounded-full border border-tertiary text-tertiary font-bold hover:bg-tertiary hover:text-on-tertiary transition-all cursor-pointer"
-                  >
-                    Analyze App →
-                  </button>
-                </div>
-              </div>
+        {/* ── FOUR SCAN CARDS ── */}
+        <section className="mb-5" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
 
-              {/* Card 2: Manual */}
-              <div className="glass-card rounded-xl p-5 border border-outline-variant/30 flex flex-col justify-between h-56 transition-all hover:border-primary/50">
-                <div className="flex justify-between items-start mb-2">
-                  <div className="flex gap-2">
-                    <div className="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xs">2</div>
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <span className="material-symbols-outlined text-primary text-lg">edit_note</span>
-                    </div>
-                  </div>
-                  <div className="w-16 h-10 bg-on-primary-fixed-variant rounded-lg flex items-center justify-center gap-1">
-                    <span className="material-symbols-outlined text-white/50 text-[16px]">assignment</span>
-                    <span className="material-symbols-outlined text-white/50 text-[16px]">edit</span>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-base font-bold mb-1">Manual Verification</h3>
-                  <p className="text-xs text-on-surface-variant mb-3 line-clamp-2">Enter app name and description manually to scan for fraudulent indicators.</p>
-                  <button className="text-xs px-4 py-1.5 rounded-full border border-primary text-primary font-bold hover:bg-primary hover:text-on-primary transition-all cursor-pointer">Analyze Manually →</button>
-                </div>
-              </div>
+          {/* Card 1: Play Store Analysis */}
+          <div
+            className={`sc-card sc-card-1 sc-appear sc-d1 ${showPlayStoreInput ? 'sc-active' : ''}`}
+            onClick={() => setShowPlayStoreInput(true)}
+          >
+            {/* Badge */}
+            <div className="sc-badge" style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}>1</div>
 
-              {/* Card 3: APK */}
-              <div className="glass-card rounded-xl p-5 border border-outline-variant/30 flex flex-col justify-between h-56 transition-all hover:border-secondary/50">
-                <div className="flex justify-between items-start mb-2">
-                  <div className="flex gap-2">
-                    <div className="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-xs">3</div>
-                    <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center">
-                      <span className="material-symbols-outlined text-secondary text-lg">android</span>
-                    </div>
-                  </div>
-                  <div className="w-16 h-10 bg-[#1B4332] rounded-lg flex items-center justify-center gap-1">
-                    <span className="material-symbols-outlined text-white/50 text-[16px]">description</span>
-                    <span className="material-symbols-outlined text-white/50 text-[16px]">verified_user</span>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-base font-bold mb-1">APK Security Scanner</h3>
-                  <p className="text-xs text-on-surface-variant mb-3 line-clamp-2">Upload APK file to scan for obfuscated payloads and permissions.</p>
-                  <button className="text-xs px-4 py-1.5 rounded-full border border-secondary text-secondary font-bold hover:bg-secondary hover:text-on-secondary transition-all cursor-pointer">Upload &amp; Scan →</button>
-                </div>
-              </div>
-
-              {/* Card 4: Website */}
-              <div className="glass-card rounded-xl p-5 border border-outline-variant/30 flex flex-col justify-between h-56 transition-all hover:border-error/50">
-                <div className="flex justify-between items-start mb-2">
-                  <div className="flex gap-2">
-                    <div className="w-6 h-6 rounded-full bg-[#E67E22] text-white flex items-center justify-center font-bold text-xs">4</div>
-                    <div className="w-8 h-8 rounded-lg bg-[#E67E22]/10 flex items-center justify-center">
-                      <span className="material-symbols-outlined text-[#E67E22] text-lg">language</span>
-                    </div>
-                  </div>
-                  <div className="w-16 h-10 bg-[#4A2311] rounded-lg flex items-center justify-center gap-1">
-                    <span className="material-symbols-outlined text-white/50 text-[16px]">public</span>
-                    <span className="material-symbols-outlined text-white/50 text-[16px]">search</span>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-base font-bold mb-1">Website Analyzer</h3>
-                  <p className="text-xs text-on-surface-variant mb-3 line-clamp-2">Analyze URLs for phishing, scam patterns, and fake investment setups.</p>
-                  <button className="text-xs px-4 py-1.5 rounded-full border border-[#E67E22] text-[#E67E22] font-bold hover:bg-[#E67E22] hover:text-white transition-all cursor-pointer">Analyze Website →</button>
-                </div>
-              </div>
-
+            {/* Icon */}
+            <div className="sc-icon-box">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOGSyt_n_Qp_53G-OO77YHuzlMq7ERegvmi11efO0AvSEu6Ubi_URpl69LiciaDKYpvgfX-NvsSByxnjoq5vVY8xEjn_ElQ0ZQXudJRf7sgRuF7JnVXbQzwZmuTqH0AGOa3IMSnhCajpI7z5aD51bJYLoDX1di3bJEqnChHcUMVJQbQ6w9b-wWkPB5P9UYVYjwIS9e31gPH1IejN_tfdDyNfU7fdz5_wyTCfWXaWpSas3AJaBA5PfSREnddxkl0zDFic2GxsEUCT2czw"
+                alt="Play Store"
+                style={{ width: 44, height: 44, objectFit: 'contain' }}
+              />
             </div>
+
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1e293b', marginBottom: 8, letterSpacing: '-0.01em' }}>
+              Play Store Analysis
+            </h3>
+            <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.55, marginBottom: 20, flex: 1 }}>
+              Paste a Play Store link to fetch details and analyze behavioral signatures.
+            </p>
+
+            <button
+              className="sc-btn sc-btn-indigo"
+              onClick={(e) => { e.stopPropagation(); setShowPlayStoreInput(true); }}
+            >
+              Analyze App →
+            </button>
           </div>
+
+          {/* Card 2: Manual Verification */}
+          <div className="sc-card sc-card-2 sc-appear sc-d2">
+            <div className="sc-badge" style={{ background: 'linear-gradient(135deg, #3b82f6, #6366f1)' }}>2</div>
+
+            <div className="sc-icon-box">
+              <span className="material-symbols-outlined" style={{ fontSize: 36, color: '#3b82f6' }}>edit_note</span>
+            </div>
+
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1e293b', marginBottom: 8, letterSpacing: '-0.01em' }}>
+              Manual Verification
+            </h3>
+            <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.55, marginBottom: 20, flex: 1 }}>
+              Enter app name and description manually to scan for fraudulent indicators.
+            </p>
+
+            <button className="sc-btn sc-btn-blue">Analyze Manually →</button>
+          </div>
+
+          {/* Card 3: APK Security Scanner */}
+          <div className="sc-card sc-card-3 sc-appear sc-d3">
+            <div className="sc-badge" style={{ background: 'linear-gradient(135deg, #14b8a6, #0ea5e9)' }}>3</div>
+
+            <div className="sc-icon-box">
+              <span className="material-symbols-outlined" style={{ fontSize: 36, color: '#14b8a6' }}>android</span>
+            </div>
+
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1e293b', marginBottom: 8, letterSpacing: '-0.01em' }}>
+              APK Security Scanner
+            </h3>
+            <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.55, marginBottom: 20, flex: 1 }}>
+              Upload APK file to scan for obfuscated payloads and permissions.
+            </p>
+
+            <button className="sc-btn sc-btn-teal">Upload &amp; Scan →</button>
+          </div>
+
+          {/* Card 4: Website Analyzer */}
+          <div className="sc-card sc-card-4 sc-appear sc-d4">
+            <div className="sc-badge" style={{ background: 'linear-gradient(135deg, #f59e0b, #f97316)' }}>4</div>
+
+            <div className="sc-icon-box">
+              <span className="material-symbols-outlined" style={{ fontSize: 36, color: '#d97706' }}>language</span>
+            </div>
+
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1e293b', marginBottom: 8, letterSpacing: '-0.01em' }}>
+              Website Analyzer
+            </h3>
+            <p style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.55, marginBottom: 20, flex: 1 }}>
+              Analyze URLs for phishing, scam patterns, and fake investment setups.
+            </p>
+
+            <button className="sc-btn sc-btn-amber">Analyze Website →</button>
+          </div>
+
         </section>
 
-        {/* Play Store URL Input Section */}
+        {/* ── Play Store URL Input Section ── */}
         {showPlayStoreInput && (
           <section className="pb-4 relative z-10">
             <div className="max-w-3xl mx-auto">
@@ -414,7 +532,7 @@ const ScanApplication = () => {
                     {isScanning ? (
                       <><span className="material-symbols-outlined animate-spin text-sm">progress_activity</span> Analyzing...</>
                     ) : (
-                      <><span className="material-symbols-outlined text-sm">search</span> Analyze</>  
+                      <><span className="material-symbols-outlined text-sm">search</span> Analyze</>
                     )}
                   </button>
                 </div>
@@ -429,17 +547,17 @@ const ScanApplication = () => {
           </section>
         )}
 
-        {/* Scan Progress Container */}
+        {/* ── Scan Progress Container ── */}
         <section className="px-container-margin-mobile md:px-container-margin pb-4">
-          <div 
+          <div
             className={`max-w-3xl mx-auto transition-all duration-500 overflow-hidden ${
               isScanning ? 'opacity-100 h-auto mt-6' : 'opacity-0 h-0'
-            }`} 
+            }`}
             id="scan-container"
           >
             <div className="glass-card rounded-xl p-8 md:p-12 flex flex-col items-center relative overflow-hidden">
               <div className="absolute inset-0 bg-primary-container/5 rounded-xl pointer-events-none"></div>
-              
+
               {/* Holographic Scanning Visual */}
               <div className="relative w-48 h-48 mb-8 flex items-center justify-center">
                 <div className="absolute inset-0 bg-secondary-container/20 rounded-full blur-xl scan-core"></div>
@@ -450,7 +568,7 @@ const ScanApplication = () => {
                 <div className="absolute inset-2 rounded-full border border-secondary/20 orbiting-element" style={{ animationDuration: '5s', animationDirection: 'reverse' }}></div>
                 <div className="absolute top-0 left-0 w-full h-[2px] bg-tertiary shadow-[0_0_10px_#5b21c4] animate-[scan-line_2s_ease-in-out_infinite]"></div>
               </div>
-              
+
               {/* Progress & Status */}
               <div className="w-full max-w-md text-center">
                 <div className="flex justify-between items-end mb-2 font-body-md text-body-md">
@@ -458,8 +576,8 @@ const ScanApplication = () => {
                   <span className="text-on-surface-variant font-label-caps text-label-caps">{progress}%</span>
                 </div>
                 <div className="w-full h-2 bg-surface-variant rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-300 ease-out" 
+                  <div
+                    className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-300 ease-out"
                     style={{ width: `${progress}%` }}
                   ></div>
                 </div>
@@ -469,7 +587,7 @@ const ScanApplication = () => {
           </div>
         </section>
 
-        {/* ═══════════ Analysis Results Section ═══════════ */}
+        {/* ══════════ Analysis Results Section ══════════ */}
         {analysisResult && analysisResult.success && (
           <section className="pb-12 relative z-10">
             <div className="max-w-5xl mx-auto space-y-6">
@@ -481,9 +599,9 @@ const ScanApplication = () => {
                 <div className="md:col-span-2 glass-card rounded-xl p-6 border border-outline-variant/30">
                   <div className="flex items-start gap-4">
                     {analysisResult.app_details.icon && (
-                      <img 
-                        src={analysisResult.app_details.icon} 
-                        alt={analysisResult.app_details.title} 
+                      <img
+                        src={analysisResult.app_details.icon}
+                        alt={analysisResult.app_details.title}
                         className="w-20 h-20 rounded-2xl border border-outline-variant shadow-sm object-cover shrink-0"
                       />
                     )}
@@ -519,9 +637,9 @@ const ScanApplication = () => {
 
                 {/* Risk Score Card */}
                 <div className="glass-card rounded-xl p-6 border border-outline-variant/30 flex flex-col items-center justify-center text-center">
-                  <div 
+                  <div
                     className="w-28 h-28 rounded-full flex items-center justify-center mb-3 border-4 transition-all"
-                    style={{ 
+                    style={{
                       borderColor: getRiskColor(analysisResult.analysis.risk_score),
                       backgroundColor: getRiskBg(analysisResult.analysis.risk_score),
                     }}
@@ -530,9 +648,9 @@ const ScanApplication = () => {
                       {analysisResult.analysis.risk_score}%
                     </span>
                   </div>
-                  <span 
+                  <span
                     className="text-sm font-bold px-4 py-1.5 rounded-full"
-                    style={{ 
+                    style={{
                       color: getRiskColor(analysisResult.analysis.risk_score),
                       backgroundColor: getRiskBg(analysisResult.analysis.risk_score),
                     }}
@@ -604,9 +722,9 @@ const ScanApplication = () => {
                   </h4>
                   <div className="flex gap-4 overflow-x-auto pb-2" style={{ scrollbarWidth: 'thin' }}>
                     {analysisResult.app_details.screenshots.map((src, i) => (
-                      <img 
+                      <img
                         key={i}
-                        src={src} 
+                        src={src}
                         alt={`Screenshot ${i + 1}`}
                         className="h-52 w-auto rounded-lg border border-outline-variant/30 shadow-sm shrink-0 object-contain bg-white"
                       />

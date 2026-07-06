@@ -124,41 +124,41 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
       </div>
 
       {/* AI Security Assessment */}
-      <div className="bg-[#162238] border border-[#2B3D5E] rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+      <div className="bg-[#DEF2FA] border border-[#b2dcf0] rounded-2xl p-6 shadow-md relative overflow-hidden">
         {/* Decorative cyber grid background */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(#2B3D5E 1px, transparent 1px), linear-gradient(90deg, #2B3D5E 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+        <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ backgroundImage: 'linear-gradient(#b2dcf0 1px, transparent 1px), linear-gradient(90deg, #b2dcf0 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
         
-        <div className="flex items-center gap-3 mb-4 relative z-10 border-b border-[#2B3D5E] pb-4">
-          <div className="w-10 h-10 rounded-lg bg-primary/20 border border-primary/30 flex items-center justify-center">
-            <span className="material-symbols-outlined text-primary text-xl">shield_person</span>
+        <div className="flex items-center gap-3 mb-4 relative z-10 border-b border-[#b2dcf0] pb-4">
+          <div className="w-10 h-10 rounded-lg bg-[#3b82f6]/10 border border-[#3b82f6]/20 flex items-center justify-center">
+            <span className="material-symbols-outlined text-[#1e40af] text-xl">shield_person</span>
           </div>
           <div>
-            <h3 className="text-lg font-bold text-white tracking-wide">AI Security Assessment</h3>
-            <p className="text-[10px] text-primary font-mono uppercase tracking-widest">Powered by Gemini AI</p>
+            <h3 className="text-lg font-bold text-[#1e293b] tracking-wide">AI Security Assessment</h3>
+            <p className="text-[10px] text-[#1e40af] font-mono uppercase tracking-widest">Powered by Gemini AI</p>
           </div>
         </div>
         
         <div className="relative z-10 w-full">
           {typeof result.aiVerdict === 'string' ? (
-            <div className="max-h-80 overflow-y-auto pr-2 custom-scrollbar text-sm text-slate-200 leading-relaxed font-sans space-y-4">
+            <div className="max-h-80 overflow-y-auto pr-2 custom-scrollbar text-sm text-[#334155] leading-relaxed font-sans space-y-4">
               {result.aiVerdict.split('\n\n').map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
+                <p key={index} className="text-[#334155]">{paragraph}</p>
               ))}
             </div>
           ) : (
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {result.aiVerdict?.findings?.map((finding, idx) => (
-                  <div key={idx} className="bg-[#1D2B44] border border-[#3B82F6]/20 p-4 rounded-xl flex flex-col gap-2 shadow-md">
-                     <span className="text-[#60A5FA] font-bold text-sm tracking-wide">{finding.heading}</span>
-                     <span className="text-slate-100 text-sm leading-relaxed">{finding.detail}</span>
+                  <div key={idx} className="bg-white/80 border border-[#b2dcf0] p-4 rounded-xl flex flex-col gap-2 shadow-sm">
+                     <span className="text-[#1e40af] font-bold text-sm tracking-wide">{finding.heading}</span>
+                     <span className="text-[#334155] text-sm leading-relaxed">{finding.detail}</span>
                   </div>
                 ))}
               </div>
               {result.aiVerdict?.summary && (
-                <div className="mt-4 p-4 bg-[#1E2D4A] border border-[#3B82F6]/30 rounded-xl text-slate-100 text-sm leading-relaxed font-normal">
+                <div className="mt-4 p-4 bg-white/60 border border-[#b2dcf0] rounded-xl text-[#334155] text-sm leading-relaxed font-normal">
                    {result.aiVerdict.summary}
-                </div>
+                 </div>
               )}
             </div>
           )}

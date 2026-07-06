@@ -104,38 +104,85 @@ const ScanHistory = () => {
   };
 
   return (
-    <div className="py-6 hero-fade-in">
-      <header className="mb-8 flex flex-col md:flex-row justify-between md:items-center gap-4">
-        <div>
-          <h1 className="font-headline-section-mobile md:font-headline-section text-headline-section-mobile md:text-headline-section text-on-surface mb-2">
-            Scan History
-          </h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant">
-            Complete log of all security scans performed.
-          </p>
+    <div className="py-6 space-y-8 relative hero-fade-in">
+      {/* Ambient Background Wave & Glows */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-[-1]">
+        <div className="absolute top-[5%] left-[25%] w-[380px] h-[380px] rounded-full bg-[#4e8cff]/5 blur-[100px]" />
+        <div className="absolute bottom-[10%] right-[10%] w-[420px] h-[420px] rounded-full bg-[#7a5cff]/5 blur-[120px]" />
+        
+        {/* Abstract flowing mesh wave (Spacecloud style) */}
+        <div className="absolute top-[2%] right-[-15%] w-[80%] h-[320px] opacity-[0.25]">
+          <svg viewBox="0 0 500 150" fill="none" className="w-full h-full">
+            <path d="M20 90 C 130 30, 200 120, 320 50 C 440 -20, 410 120, 560 50" stroke="url(#historyMeshGrad)" strokeWidth="5.5" strokeLinecap="round" />
+            <path d="M20 100 C 120 40, 190 130, 310 60 C 430 -10, 400 130, 550 60" stroke="url(#historyMeshGrad)" strokeWidth="1.8" strokeLinecap="round" opacity="0.4" />
+            <defs>
+              <linearGradient id="historyMeshGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#4e8cff" />
+                <stop offset="100%" stopColor="#7a5cff" />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
-        <div className="flex gap-3">
-          <button onClick={handleExport} className="px-4 py-2 bg-surface-container border border-outline-variant rounded-lg text-on-surface text-sm font-bold hover:bg-surface-variant transition-colors flex items-center gap-2">
-            <span className="material-symbols-outlined text-sm">download</span> Export
+      </div>
+
+      {/* Header */}
+      <header className="flex flex-col md:flex-row justify-between md:items-center gap-4 w-full relative z-10">
+        <div className="flex items-start gap-4">
+          {/* Thin vertical gradient accent line */}
+          <div style={{ width: '4px', height: '56px', background: 'linear-gradient(180deg, #4e8cff 0%, #7a5cff 100%)', borderRadius: '4px' }} className="shrink-0" />
+          <div>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-[#1B2E6F] tracking-tight">
+              Scan History
+            </h1>
+            <p className="text-sm text-slate-500 mt-1">
+              Complete log of all security scans performed.
+            </p>
+          </div>
+        </div>
+        <div className="flex gap-3 shrink-0">
+          <button 
+            onClick={handleExport} 
+            className="px-6 py-2.5 rounded-full border border-slate-200 bg-white/70 text-[#1B2E6F] text-sm font-semibold hover:border-[#4e8cff] transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+          >
+            <span className="material-symbols-outlined text-[16px]">download</span> Export
           </button>
-          <button onClick={handleImport} className="px-4 py-2 bg-primary text-on-primary rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors flex items-center gap-2 shadow-sm">
-            <span className="material-symbols-outlined text-sm">upload</span> Import
+          <button 
+            onClick={handleImport} 
+            className="px-6 py-2.5 rounded-full text-white text-sm font-semibold transition-all flex items-center gap-2 cursor-pointer shadow-md hover:scale-[1.02]"
+            style={{
+              background: 'linear-gradient(135deg, #4e8cff 0%, #7a5cff 100%)',
+            }}
+          >
+            <span className="material-symbols-outlined text-[16px]">upload</span> Import
           </button>
         </div>
       </header>
 
-      {/* Filters */}
-      <div className="glass-panel p-4 rounded-xl mb-6 flex flex-col md:flex-row gap-4 items-center justify-between">
-        <div className="flex items-center gap-2 text-sm text-on-surface-variant">
-          <span className="material-symbols-outlined text-primary">filter_list</span>
-          <span className="font-medium">{filtered.length} scan{filtered.length !== 1 ? 's' : ''}</span>
+      {/* Filters inside frosted glass container */}
+      <div 
+        className="p-5 rounded-2xl flex flex-col md:flex-row gap-5 items-center justify-between w-full relative z-10"
+        style={{
+          background: 'rgba(255, 255, 255, 0.65)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.8)',
+          boxShadow: '0 10px 30px rgba(99, 102, 241, 0.03)',
+        }}
+      >
+        <div className="flex items-center gap-2 text-sm text-[#1B2E6F] font-semibold">
+          <span className="material-symbols-outlined text-[#4e8cff] text-[18px]">filter_list</span>
+          <span>{filtered.length} scan{filtered.length !== 1 ? 's' : ''}</span>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <div className="relative">
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="appearance-none bg-surface-container-lowest border border-outline-variant px-4 py-2 pr-8 rounded-full text-sm text-on-surface focus:border-primary outline-none cursor-pointer"
+              style={{
+                border: '1.5px solid rgba(99, 102, 241, 0.15)',
+                background: 'rgba(255, 255, 255, 0.8)',
+              }}
+              className="appearance-none px-6 py-2 rounded-full text-xs font-semibold text-[#1B2E6F] outline-none cursor-pointer hover:border-[#4e8cff] transition-all"
             >
               <option value="all">All Types</option>
               <option value="playstore">Play Store</option>
@@ -143,13 +190,17 @@ const ScanHistory = () => {
               <option value="apk">APK Scan</option>
               <option value="website">Website</option>
             </select>
-            <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-sm">expand_more</span>
+            <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#1B2E6F] pointer-events-none text-sm">expand_more</span>
           </div>
           <div className="relative">
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="appearance-none bg-surface-container-lowest border border-outline-variant px-4 py-2 pr-8 rounded-full text-sm text-on-surface focus:border-primary outline-none cursor-pointer"
+              style={{
+                border: '1.5px solid rgba(99, 102, 241, 0.15)',
+                background: 'rgba(255, 255, 255, 0.8)',
+              }}
+              className="appearance-none px-6 py-2 rounded-full text-xs font-semibold text-[#1B2E6F] outline-none cursor-pointer hover:border-[#4e8cff] transition-all"
             >
               <option value="all">All Statuses</option>
               <option value="Official Verified Application">Official Verified</option>
@@ -159,19 +210,52 @@ const ScanHistory = () => {
               <option value="Suspicious">Suspicious</option>
               <option value="High Risk Fraud">High Risk Fraud</option>
             </select>
-            <span className="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-sm">expand_more</span>
+            <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#1B2E6F] pointer-events-none text-sm">expand_more</span>
           </div>
         </div>
       </div>
 
-      {/* Empty State */}
+      {/* Empty State Card */}
       {filtered.length === 0 && (
-        <div className="glass-panel rounded-2xl p-12 text-center">
-          <span className="material-symbols-outlined text-outline text-5xl mb-4 block">history</span>
-          <h3 className="text-lg font-bold text-on-surface mb-2">
+        <div 
+          className="rounded-[2.5rem] p-16 text-center relative overflow-hidden flex flex-col items-center justify-center border border-white/90"
+          style={{
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(222, 242, 250, 0.4) 100%)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            boxShadow: '0 20px 50px rgba(99, 102, 241, 0.05)',
+          }}
+        >
+          {/* Faded background history/clock illustration on the right */}
+          <div 
+            className="absolute right-[-10%] bottom-[-10%] select-none pointer-events-none opacity-[0.03] text-[#1B2E6F] z-0"
+            style={{ fontSize: '280px', transform: 'rotate(-15deg)' }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: 'inherit' }}>history</span>
+          </div>
+
+          {/* Tiny dot matrix decoration in bottom left corner */}
+          <div className="absolute left-10 bottom-10 opacity-25 pointer-events-none" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 4px)', gap: '6px' }}>
+            {[...Array(25)].map((_, i) => <div key={i} className="w-[4px] h-[4px] rounded-full bg-[#4e8cff]" />)}
+          </div>
+
+          {/* Small floating decorative dots */}
+          <div style={{ position: 'absolute', top: '15%', left: '20%', width: 6, height: 6, borderRadius: '50%', background: '#4e8cff', opacity: 0.3 }} />
+          <div style={{ position: 'absolute', bottom: '20%', left: '15%', width: 8, height: 8, borderRadius: '50%', background: '#7a5cff', opacity: 0.2 }} />
+          <div style={{ position: 'absolute', top: '25%', right: '22%', width: 5, height: 5, borderRadius: '50%', background: '#7a5cff', opacity: 0.3 }} />
+
+          {/* Center aligned security history illustration */}
+          <div className="relative w-24 h-24 mb-6 flex items-center justify-center z-10">
+            <div className="absolute inset-0 bg-[#4e8cff]/10 rounded-full blur-xl animate-pulse" />
+            <div className="w-16 h-16 rounded-2xl bg-white border border-[#4e8cff]/20 flex items-center justify-center shadow-md relative z-10">
+              <span className="material-symbols-outlined text-[#4e8cff] text-3xl" style={{ fontVariationSettings: '"FILL" 1' }}>history</span>
+            </div>
+          </div>
+
+          <h3 className="text-xl font-bold text-[#1B2E6F] mb-2 z-10">
             {history.length === 0 ? 'No scans yet' : 'No matching scans'}
           </h3>
-          <p className="text-sm text-on-surface-variant">
+          <p className="text-sm text-slate-500 max-w-md mx-auto leading-relaxed z-10">
             {history.length === 0 ? 'Run your first scan from the Scan App page to see results here.' : 'Try adjusting your filters.'}
           </p>
         </div>
@@ -179,51 +263,64 @@ const ScanHistory = () => {
 
       {/* Scan Cards */}
       {filtered.length > 0 && (
-        <div className="space-y-3">
+        <div className="space-y-4 relative z-10">
           {filtered.map((scan) => {
             const ti = typeIcons[scan.type] || typeIcons.manual;
             return (
               <div
                 key={scan.id}
                 onClick={() => setViewingScan(scan)}
-                className="glass-panel rounded-xl p-5 flex flex-col md:flex-row md:items-center gap-4 cursor-pointer hover:shadow-md transition-all group"
+                className="rounded-2xl p-5 flex flex-col md:flex-row md:items-center gap-4 cursor-pointer hover:shadow-lg transition-all group border border-white/60"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.65)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  boxShadow: '0 4px 20px rgba(99, 102, 241, 0.02)',
+                  transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.transform = '';
+                }}
               >
                 <div className="flex items-center gap-4 flex-1">
-                  {/* Type Icon */}
-                  <div className={`w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center shrink-0`}>
-                    <span className={`material-symbols-outlined ${ti.color}`}>{ti.icon}</span>
+                  {/* Type Icon Container */}
+                  <div className="w-11 h-11 rounded-xl bg-white border border-slate-200/80 flex items-center justify-center shadow-sm shrink-0">
+                    <span className={`material-symbols-outlined ${ti.color} text-xl`}>{ti.icon}</span>
                   </div>
 
                   {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <h4 className="text-sm font-bold text-on-surface truncate">{scan.appName}</h4>
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${statusBadge[scan.verificationStatus] || statusBadge['Unknown']}`}>
+                    <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                      <h4 className="text-sm font-bold text-[#1B2E6F] truncate max-w-[220px]">{scan.appName}</h4>
+                      <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${statusBadge[scan.verificationStatus] || statusBadge['Unknown']}`}>
                         {scan.verificationStatus}
                       </span>
                     </div>
-                    <p className="text-xs text-on-surface-variant">
+                    <p className="text-[11px] text-slate-400">
                       {typeLabels[scan.type]} · {scan.developer} · {new Date(scan.timestamp).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
 
                 {/* Scores */}
-                <div className="flex items-center gap-4 self-end md:self-auto shrink-0">
+                <div className="flex items-center gap-6 self-end md:self-auto shrink-0 pr-2">
                   <div className="text-right">
                     <span className="text-sm font-bold text-[#10B981]">{scan.trustScore || 0}</span>
-                    <span className="text-[10px] text-outline block uppercase">Trust</span>
+                    <span className="text-[9px] text-slate-400 block uppercase font-semibold">Trust</span>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right border-l border-slate-100 pl-4">
                     <span className="text-sm font-bold text-error">{scan.threatScore || 0}</span>
-                    <span className="text-[10px] text-outline block uppercase">Threat</span>
+                    <span className="text-[9px] text-slate-400 block uppercase font-semibold">Threat</span>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right border-l border-slate-100 pl-4">
                     <span className="text-sm font-bold text-[#3B82F6]">{scan.confidenceScore || 0}%</span>
-                    <span className="text-[10px] text-outline block uppercase">Conf</span>
+                    <span className="text-[9px] text-slate-400 block uppercase font-semibold">Conf</span>
                   </div>
-                  {/* Arrow */}
-                  <span className="material-symbols-outlined text-outline group-hover:text-primary transition-colors ml-2 hidden md:block">chevron_right</span>
+                  {/* Action Arrow */}
+                  <span className="material-symbols-outlined text-slate-300 group-hover:text-[#4e8cff] transition-colors ml-2 hidden md:block" style={{ fontSize: 20 }}>chevron_right</span>
                 </div>
               </div>
             );
