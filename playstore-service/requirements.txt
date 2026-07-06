@@ -1,4 +1,4 @@
-﻿alembic==1.18.5
+alembic==1.18.5
 altair==6.1.0
 altgraph==0.17.5
 androguard==4.1.4
@@ -44,7 +44,7 @@ httptools==0.7.1
 httpx==0.28.1
 idna==3.18
 ImageHash==4.3.2
-ipython==9.15.0
+ipython==8.31.0
 ipython_pygments_lexers==1.1.1
 itsdangerous==2.2.0
 jedi==0.20.0
