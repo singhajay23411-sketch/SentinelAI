@@ -1,788 +1,788 @@
 {
   "1 Finance: Financial Advisory": [
-    "1 Finance: Registered Investment Advisor & Planner"
+    "app.onefin"
   ],
   "5paisa: Stocks, MF, F&O App": [
-    "5paisa - Stock Market, Demat Account, Mutual Fund"
+    "com.fivepaisa.trade"
   ],
   "A+ Wallet": [
-    "A bank"
+    "com.jits.mbanking.abank.consumer"
   ],
   "ACKO Insurance": [
-    "Acko Technology & Services Private Limited"
+    "com.acko.android"
   ],
   "AU 0101: Mobile Banking App": [
-    "AU Small Finance Bank Limited"
+    "com.ausmallfinancebank.amb"
   ],
   "Aadhaar": [
-    "Unique Identification Authority of India"
+    "in.gov.uidai.pehchaan"
   ],
   "Activ Health": [
-    "Aditya Birla Health"
+    "com.adityabirlahealth.insurance"
   ],
   "Adobe Acrobat Reader: Edit PDF": [
-    "Adobe"
+    "com.adobe.reader"
   ],
   "Adobe Scan AI PDF Scanner, OCR": [
-    "Adobe"
+    "com.adobe.scan.android"
   ],
   "Airtel: Recharge, Bank & Loans": [
-    "Airtel"
+    "com.myairtelapp"
   ],
   "Alan: Health Insurance": [
-    "Alan Health"
+    "com.alanmobile"
   ],
   "All India ITR, Tax Filing App": [
-    "All India ITR - Income Tax Return Filing - India"
+    "dell.com.allindiaitr"
   ],
   "Angel One: Stocks, Mutual Fund": [
-    "Angel One - Stock Market, Demat Account & IPO"
+    "com.msf.angelmobile"
   ],
   "AssetPlus - Mutual Funds & SIP": [
-    "AssetPlus - Mutual Funds"
+    "io.assetplus"
   ],
   "Axis Max life Insurance": [
-    "AXIS MAX LIFE INSURANCE LIMITED"
+    "com.maxlifeinsurance.www.twa"
   ],
   "Axis Mobile: Pay, Invest & UPI": [
-    "Axis Bank Ltd."
+    "com.axis.mobile"
   ],
   "Axis Mutual Fund Invest Online": [
-    "Axis Mutual Fund"
+    "com.axismf.investorapp"
   ],
   "BHIM Bharat's Own Payments App": [
-    "National Payments Corporation of India (NPCI)"
+    "in.org.npci.upiapp"
   ],
   "Bachatt: FD, Mutual Fund, Gold": [
-    "Bachatt Smart Savings (AMFI Registered)"
+    "app.bachatt.customer"
   ],
   "Bajaj Broking: Demat & Trading": [
-    "Bajaj Broking: Demat Account,Trading,Stock Market"
+    "com.msf.bfsltrade"
   ],
   "Bajaj Finance : UPI & Loan App": [
-    "Bajaj Finance Limited"
+    "org.altruist.BajajExperia"
   ],
   "Banco Itaú: Conta, Cartão e +": [
-    "Itaú Unibanco S. A."
+    "com.itau"
   ],
   "Bank of America Mobile Banking": [
-    "Bank of America"
+    "com.infonow.bofa"
   ],
   "Beyond Budget - Budget Planner": [
-    "Beyond Budget"
+    "com.beyondbudget"
   ],
   "BharatLoan: Personal Loan App": [
-    "DEVMUNI LEASING & FINANCE LIMITED"
+    "com.devmunifin.bharatloan"
   ],
   "BharatPe UPI Payment, Loan App": [
-    "Resilient Innovation Private Limited"
+    "com.postpe.app"
   ],
   "Binance: Buy Bitcoin & Crypto": [
-    "Binance Inc."
+    "com.binance.dev"
   ],
   "BitValve - P2P Crypto Exchange": [
-    "BitValve Developer"
+    "com.bitvalve.android"
   ],
   "Bitcoin.com Wallet": [
-    "Bitcoin.com Developer"
+    "com.bitcoin.mwallet"
   ],
   "Bitget Wallet: Crypto, Bitcoin": [
-    "Bitget Wallet"
+    "com.bitkeep.wallet"
   ],
   "BloFin: Trade Crypto & Bitcoin": [
-    "Blofin Inc."
+    "com.blofin.android"
   ],
   "Blockchain Wallet: Buy BTC": [
-    "Blockchain.com"
+    "piuk.blockchain.android"
   ],
   "Branch Instant Personal Loan": [
-    "Branch International Financial Services Limited"
+    "com.branch_international.branch.branch_demo_android"
   ],
   "Budget App & Tracker: Spendee": [
-    "SPENDEE a.s."
+    "com.cleevio.spendee"
   ],
   "Budget planner—Expense tracker": [
-    "Battery Stats Saver"
+    "com.colpit.diamondcoming.isavemoney"
   ],
   "Budgeting App - Spend Tracker": [
-    "The Budgeting App"
+    "com.thebudgetingapp.thebudgetingapp"
   ],
   "Budge・Savings & Budget Planner": [
-    "Vladimir Chernysh"
+    "com.fin.plan"
   ],
   "Buy Bitcoin and Crypto app": [
-    "Bitkuber Investments Private Limited"
+    "com.coinswitch.kuber"
   ],
   "Bybit: Buy Bitcoin & Crypto": [
-    "Bybit"
+    "com.bybit.app"
   ],
   "CRED: Credit Cards, Bills, UPI": [
-    "Dreamplug Technologies Private Limited"
+    "com.dreamplug.androidapp"
   ],
   "CUB All in one Mobile App": [
-    "CITY UNION BANK LTD"
+    "com.cub.plus.gui"
   ],
   "Canara ai1- Mobile Banking App": [
-    "CANARA BANK"
+    "com.canarabank.mobility"
   ],
   "CarInfo - RTO Vehicle Info App": [
-    "CarInfo - Challans| FASTag | Buy & Sell Cars"
+    "com.cuvora.carinfo"
   ],
   "Care Health - Customer App": [
-    "Care Health Insurance limited"
+    "com.religare.healthinsurance"
   ],
   "Cashew—Expense Budget Tracker": [
-    "Dapper App Developer"
+    "com.budget.tracker_app"
   ],
   "Chase Mobile": [
-    "JPMorgan Chase"
+    "com.chase.sig.android"
   ],
   "Choice FinX: Demat Account App": [
-    "Choice - Share Market, Demat Account & Mutual Fund"
+    "com.choiceequitybroking.jiffy"
   ],
   "CoinDCX: Bitcoin Crypto App": [
-    "CoinDCX Official"
+    "com.coindcx.btc"
   ],
   "CoinMarketCap: Crypto Tracker": [
-    "CoinMarketCap.com"
+    "com.coinmarketcap.android"
   ],
   "Compte ameli": [
-    "l'Assurance Maladie"
+    "fr.cnamts.it.activity"
   ],
   "CoverSure: Insurance made easy": [
-    "Claycove23 Insurance Tech Pvt. Ltd."
+    "com.coversure"
   ],
   "Coverfox: Bike & Car Insurance": [
-    "Coverfox Insurance"
+    "com.coverfox.app"
   ],
   "Crypto exchange: USDT, Bitcoin": [
-    "ChangeNOW"
+    "io.changenow.changenow"
   ],
   "Crypto.com: Onchain Wallet": [
-    "Crypto.com Onchain Wallet"
+    "com.defi.wallet"
   ],
   "Curie Money UPI: Grow & Pay": [
-    "Curie Money (AMFI Registered)"
+    "com.yield.curie_money"
   ],
   "Cuvva": [
-    "Cuvva"
+    "co.cuvva.hourly"
   ],
   "DEX Screener": [
-    "DEX Screener"
+    "com.dexscreener"
   ],
   "Delta Exchange: Crypto Options": [
-    "Delta Exchange India"
+    "com.deltaexchangeindia"
   ],
   "Dhan: Stock Market Trading App": [
-    "RAISE FINTECH VENTURES PRIVATE LIMITED"
+    "com.dhan.live"
   ],
   "DigiLocker": [
-    "National eGovernance Division, Government of India"
+    "com.digilocker.android"
   ],
   "Digihaat – Bharat ka Apna App": [
-    "Nirmit Bharat Official"
+    "org.ondc.nirmitbap"
   ],
   "Digit Insurance": [
-    "Digit Insurance"
+    "com.godigit.digit"
   ],
   "E*TRADE: Invest. Trade. Save.": [
-    "E*TRADE from Morgan Stanley"
+    "com.etrade.mobilepro.activity"
   ],
   "EPF Balance, UAN & Salary Calc": [
-    "ideanexxt"
+    "com.mpawer.fin.pf"
   ],
   "ET Money Mutual Fund, SIF, SIP": [
-    "ET Money: AMFI, SEBI Registered Investment Advisor"
+    "com.smartspends"
   ],
   "FNB Banking App": [
-    "FirstRand Bank Limited."
+    "za.co.fnb.connect.itt"
   ],
   "FYERS: Stocks & Option Trading": [
-    "FYERS"
+    "com.fyers.trader"
   ],
   "FamApp by Trio: UPI & Card": [
-    "Tri O Tech Solutions Pvt Ltd"
+    "com.fampay.in"
   ],
   "Family budget—Spending tracker": [
-    "Digit Leaf, llc"
+    "com.colpit.diamondcoming.isavemoneygo"
   ],
   "Fast Budget - Expense Manager": [
-    "AppFer SRL"
+    "com.blodhgard.easybudget"
   ],
   "FinArt: AI Expense Tracker": [
-    "FinArt - Expense Tracker"
+    "com.finart"
   ],
   "Flipkart Online Shopping App": [
-    "Flipkart"
+    "com.flipkart.android"
   ],
   "Folio: Digital Wallet App": [
-    "Folio Technologies"
+    "com.folioltd"
   ],
   "Forex Trading for Beginners": [
-    "Go Forex"
+    "com.tiim.goforexx24"
   ],
   "Freecharge UPI & Bill Payments": [
-    "FreechargeBiz - An Axis Bank Subsidiary"
+    "com.freecharge.android"
   ],
   "FrontPage: Stock Market Clubs": [
-    "FrontPage India"
+    "in.crowdware.one"
   ],
   "FundsInda: Mutual Funds & SIP": [
-    "FundsIndia - Mutual Funds and Stock Investments"
+    "com.fundsindia"
   ],
   "GS Finance : Personal Loan": [
-    "G. S. LEASING AND FINANCE PRIVATE LIMITED"
+    "com.GSFinance.gsfinanceApp"
   ],
   "Gift & Credit Card Wallet": [
-    "Texode Technologies LLC"
+    "com.texode.securecard"
   ],
   "Giottus: Crypto Investing App": [
-    "Giottus Technologies Private Limited"
+    "com.giottus.giottus_mobile"
   ],
   "GoPay: Transfer, Payment, QRIS": [
-    "PT. GoTo Gojek Tokopedia Tbk"
+    "com.gojek.gopay"
   ],
   "Google Home": [
-    "Google LLC"
+    "com.google.android.apps.chromecast.app"
   ],
   "Google Pay for Business": [
-    "Google LLC"
+    "com.google.android.apps.nbu.paisa.merchant"
   ],
   "Google Pay: Secure UPI payment": [
-    "Google LLC"
+    "com.google.android.apps.nbu.paisa.user"
   ],
   "Google Sheets": [
-    "Google LLC"
+    "com.google.android.apps.docs.editors.sheets"
   ],
   "Groww Stocks, Mutual Fund, IPO": [
-    "Groww: Demat, Invest & Trade, Gold, Silver, Loans"
+    "com.nextbillion.groww"
   ],
   "HDFC Bank App: Banking & Cards": [
-    "HDFC BANK"
+    "com.hdfcbank.android.now"
   ],
   "HDFC Bank SmartWealth": [
-    "HDFC BANK"
+    "com.hdfcbank.smartwealthapp"
   ],
   "HDFC Life Insurance App": [
-    "HDFC Life"
+    "com.hdfcclife.activities"
   ],
   "HDFC SKY: Demat Stocks IPO MF": [
-    "HDFC SEC: Share Market Trading & Demat Account App"
+    "com.cloudtradetech.sky"
   ],
   "HDFC Securities InvestRight": [
-    "HDFC SEC: Share Market Trading & Demat Account App"
+    "com.hsl.investright"
   ],
   "HSBC India": [
-    "HSBC"
+    "in.hsbc.hsbcindia"
   ],
   "Halifax Mobile Banking": [
-    "Lloyds Banking Group PLC"
+    "com.grppl.android.shell.halifax"
   ],
   "Here by HDFC ERGO": [
-    "HDFC ERGO"
+    "com.hdfcergo.here"
   ],
   "IBKR Mobile": [
-    "Interactive Brokers Group"
+    "atws.app"
   ],
   "ICICI Prudential Life App": [
-    "ICICI Prudential Life Insurance"
+    "com.ipru.iciciprulife.customer.release"
   ],
   "IDBI Bank GO Mobile+": [
-    "IDBI BANK"
+    "com.snapwork.IDBI"
   ],
   "IDEdge by InsuranceDekho": [
-    "Girnar Insurance Brokers Private Limited"
+    "com.insurancedekho.pos"
   ],
   "IDFC FIRST Bank: MobileBanking": [
-    "IDFC FIRST Bank Ltd."
+    "com.idfcfirstbank.optimus"
   ],
   "IFMS 3.0 Govt. of Rajasthan": [
-    "DoIT&C, GoR"
+    "gov.ifms.ess"
   ],
   "IIFL : Stocks, Demat & IPOs": [
-    "IIFL Capital - Stock Market & Demat Account App"
+    "com.indiainfoline"
   ],
   "IL TakeCare Insurance App": [
-    "ICICI Lombard GIC Ltd."
+    "icici.lombard.ghi"
   ],
   "INDmoney: Stocks, Mutual Funds": [
-    "INDmoney: Indian & US Stocks, SIP, Flash Trading"
+    "in.indwealth"
   ],
   "IOB Connect - Mobile Banking": [
-    "IOB"
+    "com.iob.iobconnect"
   ],
   "IPPB Mobile Banking": [
-    "India Post Payments Bank Ltd"
+    "com.iexceed.appzillon.ippbMB"
   ],
   "Income Tax 2025, 2026-FinCalC": [
-    "RRR APPS"
+    "com.rrr.apps.financialcalculator"
   ],
   "Income Tax Calculator": [
-    "RS eSupport"
+    "com.rsesupport.incometax"
   ],
   "Income Tax Filing, ITR - Black": [
-    "ClearTax"
+    "in.cleartax.consumer2"
   ],
   "Income tax Act, 1961 - India": [
-    "Interactive Media"
+    "com.offlineappsindia.incometaxacts"
   ],
   "IndSMART IndianBank Mobile App": [
-    "Indian Bank"
+    "com.iexceed.ib.digitalbankingprod"
   ],
   "IndiaFilings: Taxes Simplified": [
-    "IndiaFilings"
+    "com.IndiaFilings.iCFO"
   ],
   "IndiaMART B2B Marketplace App": [
-    "IndiaMART InterMESH Ltd."
+    "com.indiamart.m"
   ],
   "IndusInd Bank: Savings A/C, FD": [
-    "IndusInd Bank Ltd."
+    "com.indusind.indie"
   ],
   "IndusInd Insurance": [
-    "IndusInd General Insurance"
+    "com.rgi.customerapp.live"
   ],
   "Instagram": [
-    "Instagram"
+    "com.instagram.android"
   ],
   "Invest BharatPe: Gold & Silver": [
-    "Resilient Innovation Private Limited"
+    "com.twelve.club"
   ],
   "Investing.com: Stock Market": [
-    "INVESTING.com"
+    "com.fusionmedia.investing"
   ],
   "IronWallet: Crypto Wallet": [
-    "INWAY AKTIENGESELLSCHAFT"
+    "com.wallet.crypto.btc.eth"
   ],
   "JM Pro: Demat & Stock Broking": [
-    "JM FINANCIAL SERVICES LIMITED"
+    "com.jmfs.jmpro"
   ],
   "JanSamarth - Applicant": [
-    "Online PSB Loans"
+    "com.projects.jansamarth"
   ],
   "Jana Bank Mobile Banking": [
-    "Jana Small Finance Bank"
+    "com.janabank.mtc"
   ],
   "Jupiter: Cards, UPI, Banking": [
-    "Amica Financial Technologies Private Limited"
+    "money.jupiter"
   ],
   "KB손해보험 공식앱 (대표+다이렉트 통합)": [
-    "KB손해보험"
+    "com.kbins.kbinsure"
   ],
   "KCEX: The Lowest Crypto Fees": [
-    "KCEX"
+    "com.kcex"
   ],
   "Kissht: Instant Personal Loans": [
-    "OnEMI Technology Solutions Limited."
+    "com.fastbanking"
   ],
   "Kiwi - UPI & Credit Card App": [
-    "GoKiwi Tech pvt ltd"
+    "in.gokiwi.kiwitpap"
   ],
   "Klarna: Smarter everyday money": [
-    "Klarna Bank AB (publ)"
+    "com.myklarnamobile"
   ],
   "Kotak Bank": [
-    "Kotak Mahindra Bank Ltd."
+    "com.kotak.bank.mobile"
   ],
   "Kotak Bank (Old)": [
-    "Kotak Mahindra Bank Ltd."
+    "com.msf.kbank.mobile"
   ],
   "Kotak Bank: 811 Mobile App": [
-    "Kotak Mahindra Bank Ltd."
+    "com.kotak811mobilebankingapp.instantsavingsupiscanandpayrecharge"
   ],
   "Kotak Neo: Stock Trading App": [
-    "Kotak NEO: Stocks, F&O, Demat, Mutual Funds"
+    "com.kotak.neo"
   ],
   "KuCoin: Buy Bitcoin & Crypto": [
-    "Kugame Global Limited"
+    "com.kubi.kucoin"
   ],
   "LIC Digital": [
-    "LIFE INSURANCE CORPORATION OF INDIA"
+    "com.lic.liccustomer"
   ],
   "Lemonn Trade Futures & Options": [
-    "Bitkuber Investments Private Limited"
+    "com.lemonn.app"
   ],
   "MAven - Borderless Benefits": [
-    "Medi Assist Healthcare Services"
+    "in.mediassist.malite"
   ],
   "MO RIISE: Stocks, IPO & Demat": [
-    "Motilal Oswal - Stock Market, Demat Account & IPO"
+    "com.mosl.mobile"
   ],
   "MOVCAR - Fleet Management": [
-    "Limitless Solutions SRL"
+    "com.movcar"
   ],
   "MY Bharat": [
-    "Digital India Corporation, MeitY, GoI"
+    "com.gov.mybharat"
   ],
   "Meesho: Online Shopping App": [
-    "Meesho"
+    "com.meesho.supply"
   ],
   "Meine AOK": [
-    "AOK – Die Gesundheitskasse"
+    "de.aoksystems.amg"
   ],
   "MetaMask: Trade Crypto": [
-    "MetaMask Web3 Wallet"
+    "io.metamask"
   ],
   "Meu INSS – Central de Serviços": [
-    "Serviços e Informações do Brasil"
+    "br.gov.dataprev.meuinss"
   ],
   "Microsoft Excel: Spreadsheets": [
-    "Microsoft Corporation"
+    "com.microsoft.office.excel"
   ],
   "Mint by Investwell": [
-    "Excel Net Solutions Pvt. Ltd."
+    "com.iw.mint.app"
   ],
   "Mirae Asset Mutual Fund": [
-    "MIRAE ASSET INVESTMENT MANAGERS (INDIA) PVT LTD"
+    "com.mirae.investor.app"
   ],
   "MobiKwik: Loans, UPI & Wallet": [
-    "One MobiKwik Systems Limited"
+    "com.mobikwik_new"
   ],
   "Mobile Banking UniCredit": [
-    "UniCredit S.p.A."
+    "com.unicredit"
   ],
   "Money Manager Expense & Budget": [
-    "Realbyte Inc."
+    "com.realbyteapps.moneymanagerfree"
   ],
   "Money Manager ：Bills & Budget": [
-    "Wow Techs"
+    "com.happy.money_manager"
   ],
   "Money Manager: Expense Tracker": [
-    "KTW Apps"
+    "com.ktwapps.walletmanager"
   ],
   "Money Tracker-Expense & Budget": [
-    "Horoscope365"
+    "com.freeman.moneymanager"
   ],
   "Money manager & expenses": [
-    "Cleaner + Antivirus + VPN company"
+    "ru.innim.my_finance"
   ],
   "Moneyview: UPI, Personal Loans": [
-    "Moneyview"
+    "com.whizdm.moneyview.loans"
   ],
   "Monzo Bank - Mobile Banking": [
-    "Monzo"
+    "co.uk.getmondo"
   ],
   "Mudrex : Bitcoin & Crypto App": [
-    "Mudrex Inc."
+    "com.mudrexmobile"
   ],
   "Muthoot FinCorp ONE": [
-    "Muthoot FinCorp ONE"
+    "com.muthootfincorpone.superapp"
   ],
   "My Card Wallet": [
-    "Blackhawk Network"
+    "com.blackhawk.myprepaidcenter"
   ],
   "My LIC": [
-    "LIFE INSURANCE CORPORATION OF INDIA"
+    "com.lic.customer.superapp"
   ],
   "My Wallet • Crypto & Web3": [
-    "MyTonWallet"
+    "org.mytonwallet.app"
   ],
   "MyGov": [
-    "MyGovIndia"
+    "in.mygov.mobile"
   ],
   "MyJio: For Everything Jio": [
-    "Jio Platforms Limited"
+    "com.jio.myjio"
   ],
   "MyMoney—Track Expense & Budget": [
-    "Ananta Raha"
+    "com.raha.app.mymoney.free"
   ],
   "MySIPonline: SIP & Mutual Fund": [
-    "MY SIP ONLINE"
+    "com.mysiponline"
   ],
   "MyWealth": [
-    "Fintso"
+    "mobi.mywealth"
   ],
   "National Park Service": [
-    "National Park Service"
+    "gov.nps.mobileapp"
   ],
   "Navi: UPI, Payments, Insurance": [
-    "Navi"
+    "com.naviapp"
   ],
   "Net Banking For All Bank": [
-    "R & S Apps"
+    "com.rnsapps.ifsccodes"
   ],
   "Nickel - An account for all": [
-    "NiCKEL"
+    "com.fpe.comptenickel"
   ],
   "Nippon India Mutual Fund": [
-    "NAM India"
+    "com.godbtech.reliancemf"
   ],
   "Niva Bupa Health": [
-    "Niva Bupa Health Insurance"
+    "com.maxbupa.healthapp"
   ],
   "OPay": [
-    "OPay Digital Services Limited"
+    "team.opay.pay"
   ],
   "Okto: Crypto Trading Wallet": [
-    "Okto Official"
+    "com.coindcx.okto"
   ],
   "OmniCard: UPI, Card & Rewards": [
-    "Eroute Technologies Private Limited"
+    "com.eroute.omnicard"
   ],
   "PF Balance, PF Passbook-My PF": [
-    "Version Systems Pvt. Ltd."
+    "com.vspl.pf"
   ],
   "PF Balance, UAN, EPF balance": [
-    "MWCI PVT. LTD."
+    "com.versionsystems.pfbalancecheck"
   ],
   "PNB ONE": [
-    "PNB"
+    "com.Version1"
   ],
   "PSB UnIC": [
-    "Punjab & Sind Bank"
+    "com.psb.omniretail"
   ],
   "PayRupik Instant Personal Loan": [
-    "Sayyam Investments Pvt Ltd"
+    "in.hanafintech"
   ],
   "PayZapp UPI Wallet, Pixel Card": [
-    "HDFC Bank Limited"
+    "com.hdfcbank.payzapp"
   ],
   "Paytm Money Stocks, MF, IPO": [
-    "Paytm - One97 Communications Ltd."
+    "com.paytmmoney"
   ],
   "Paytm: Secure UPI Payments": [
-    "Paytm - One97 Communications Ltd."
+    "net.one97.paytm"
   ],
   "Pensionbazaar": [
-    "Pensionbazaar"
+    "com.pensionbazaar"
   ],
   "Phantom": [
-    "Phantom Technologies, Inc."
+    "app.phantom"
   ],
   "PhonePe Business: Merchant App": [
-    "PhonePe"
+    "com.phonepe.app.business"
   ],
   "PhonePe UPI Payments, Loan App": [
-    "PhonePe"
+    "com.phonepe.app"
   ],
   "Piramal Finance - Loans & More": [
-    "Piramal Finance LTD"
+    "com.piramal.app.pchf"
   ],
   "Policybazaar - Buy Insurance": [
-    "Policybazaar - Buy Insurance Online"
+    "com.policybazaar"
   ],
   "PowerUp Money: Mutual Funds": [
-    "Powerup Money"
+    "money.powerup.uni.invest.app"
   ],
   "Probus Insurance": [
-    "Probus Insurance"
+    "in.probusinsurance.app"
   ],
   "QIC: Insurance, Market, Travel": [
-    "Qatar Insurance Company"
+    "app.qd.qatardrive"
   ],
   "RedotPay: Crypto Card & Pay": [
-    "Red Dot Technology Limited"
+    "com.redotpay"
   ],
   "Rupee112: Personal Loan App": [
-    "DACPL"
+    "com.vrindafinlease.rupee112"
   ],
   "Rupeeontime – Instant Loan": [
-    "DACPL"
+    "com.devaashishcapitals.rot"
   ],
   "SBI Card: Manage Credit Card": [
-    "SBI Cards and Payment Services Limited"
+    "com.ge.capital.konysbiapp"
   ],
   "SBI Mutual Fund - InvesTap Nxt": [
-    "SBI Funds Management Limited"
+    "com.sbi.mf"
   ],
   "SBI Securities: Stocks & SIP": [
-    "SBICAP Securities"
+    "com.msf.sbicap.securities"
   ],
   "SMC Ace: Demat, Stocks & IPO": [
-    "SMC Global Securities Ltd"
+    "com.smc.ace"
   ],
   "SSO+": [
-    "Social Security Office of Thailand"
+    "com.sso.ssoplus"
   ],
   "SafePal: Crypto Wallet BTC NFT": [
-    "SafePal Wallet"
+    "io.safepal.wallet"
   ],
   "Sahi : Options & Stock Trading": [
-    "Aaritya Technologies Pvt Limited"
+    "com.aaritya.sahi_trade_app"
   ],
   "Samsung Wallet (Samsung Pay)": [
-    "Samsung Electronics Co.,  Ltd."
+    "com.samsung.android.spay"
   ],
   "Scripbox Mutual Fund & SIP App": [
-    "Scripbox - Invest in Mutual Funds"
+    "com.scripbox.takecharge"
   ],
   "Shriram One: FD, UPI, Loans": [
-    "Shriram Finance Limited"
+    "com.shriram.one"
   ],
   "Simple:  Сrypto BTC, USDC": [
-    "Simple Europe"
+    "app.simple.com"
   ],
   "Stable Money: FDs & Bonds": [
-    "Stable-Alpha Technologies Private Limited"
+    "in.stablemoney.app"
   ],
   "Standard Bank / Stanbic Bank": [
-    "Standard Bank / Stanbic Bank"
+    "com.sbg.mobile.phone"
   ],
   "Star Health": [
-    "Star Health And Allied Insurance Company Limited"
+    "com.star.customer_app"
   ],
   "Stock Market Simulator Game": [
-    "Three Investeers"
+    "com.threeinvesteers.app"
   ],
   "StockEdge: Stock Market App": [
-    "StockEdge Fintech Private Limited"
+    "in.stockedge.app"
   ],
   "Sun Crypto: Buy & Sell Crypto": [
-    "SunCrypto"
+    "com.suncrypto.in"
   ],
   "Sweat Wallet: Walk Into Crypto": [
-    "The Sweat Foundation"
+    "com.sweatwallet"
   ],
   "TATA AIG Insurance": [
-    "Tata AIG General Insurance Co. Ltd."
+    "com.tataaig.android"
   ],
   "TK-App": [
-    "Techniker Krankenkasse (TK)"
+    "de.tk.tkapp"
   ],
   "TMB MBank": [
-    "Tamilnad Mercantile Bank"
+    "com.tmb.mbank"
   ],
   "Tata AIA Life Insurance": [
-    "SecureLife App TataAIA Life Insurance Products"
+    "com.tataaialife"
   ],
   "Tata Capital Loan App & Wealth": [
-    "Tata Capital Limited."
+    "com.snapwork.tcl"
   ],
   "Tax Calculator India 2025-2026": [
-    "Quintet Solutions Pvt Ltd"
+    "com.quintetsolutions"
   ],
   "TaxBuddy: Income Tax & Finance": [
-    "TaxBuddy.com"
+    "com.taxbuddy.gst"
   ],
   "TaxSlayer: File your taxes": [
-    "TaxSlayer"
+    "com.taxslayerRFC"
   ],
   "TokenPocket: Crypto & Bitcoin": [
-    "TP Global Ltd"
+    "vip.mytokenpocket"
   ],
   "TradingOcta: smart trading app": [
-    "Cygata Solutions"
+    "com.octa8"
   ],
   "TradingView: Bitcoin & crypto": [
-    "TradingView Inc."
+    "com.tradingview.tradingviewapp"
   ],
   "Trust: Crypto & Bitcoin Wallet": [
-    "DApps Platform, Inc."
+    "com.wallet.crypto.trustapp"
   ],
   "Turtlemint Insurance & Claims": [
-    "Turtlemint Fintech Solutions Limited"
+    "com.turtlemintconsumerapp"
   ],
   "TurtlemintPro - Sell Insurance": [
-    "Turtlemint Fintech Solutions Limited"
+    "in.mintpro"
   ],
   "UBA Mobile Banking": [
-    "United Bank for Africa Plc"
+    "com.uba.vericash"
   ],
   "UCO mBanking Plus": [
-    "UCO BANK"
+    "com.lcode.ucomobilebanking"
   ],
   "UMANG": [
-    "MeitY, Government Of India"
+    "in.gov.umang.negd.g2c"
   ],
   "UPI Payment Announcer SoundBox": [
-    "TrackMyPhones Mobile Solutions Pvt Ltd"
+    "com.trackmyphones.upipaymentannouncer"
   ],
   "Univest: Stocks, F&O, Equity": [
-    "Univest Communication Technologies Pvt Ltd"
+    "com.univest.capp"
   ],
   "Upstox Stocks IPO Mutual Funds": [
-    "Upstox - Stock Market Trading & Demat Account App"
+    "in.upstox.app"
   ],
   "Vantage:All-In-One Trading App": [
-    "Vantage Global Prime PTY LTD"
+    "cn.com.vau"
   ],
   "Vehicleinfo - RTO Information": [
-    "CARS24 Services Private Limited"
+    "com.vehicle.rto.vahan.status.information.register"
   ],
   "WEEX - Buy Bitcoin & Crypto": [
-    "WEEX PRO"
+    "com.wake.weexprd"
   ],
   "Wallet - Digital Wallet Card": [
-    "SUNMARE DIGITAL TEKNOLOJI YAZILIM SANAYI TICARET"
+    "com.cards.wallet.cardsapp"
   ],
   "Wallet Safe Card: Card Wallet": [
-    "SUNMARE DIGITAL TEKNOLOJI YAZILIM SANAYI TICARET"
+    "com.nfc.creditcard.wallet.cardkeeperx"
   ],
   "Wallet: Budget Expense Tracker": [
-    "BudgetBakers"
+    "com.droid4you.application.wallet"
   ],
   "Way2News Daily News App": [
-    "Way2News ( Formerly Way2SMS )"
+    "sun.way2sms.hyd.com"
   ],
   "Wealth Elite": [
-    "Red Vision Global Technologies"
+    "com.redvision.wealth_elite"
   ],
   "Wealth Monitor: MF & Stocks": [
-    "Dezerv"
+    "com.dezerv.wealth.checkup"
   ],
   "Wealthy: Stocks & Mutual Funds": [
-    "Wealthy.in"
+    "in.wealthy.android.wealthy"
   ],
   "XT.com: Buy Bitcoin & Ethereum": [
-    "XT.COM Inc."
+    "com.app.xt"
   ],
   "YONO SBI: Banking & Lifestyle": [
-    "State Bank of India"
+    "com.sbi.lotusintouch"
   ],
   "Yahoo Finance: Stocks & News": [
-    "Yahoo"
+    "com.yahoo.mobile.client.android.finance"
   ],
   "ZebPay: Bitcoin & Crypto App": [
-    "ZebPay"
+    "zebpay.Application"
   ],
   "Zen Lyfe - Bank of Maharashtra": [
-    "Bank of Maharashtra"
+    "com.bom.lifestylebanking"
   ],
   "Zerodha Kite - Trade & Invest": [
-    "Zerodha"
+    "com.zerodha.kite3"
   ],
   "ZestMoney - Shop on easy EMIs": [
-    "DMI Info Tech Solutions"
+    "in.zestmoney.android.zestlife"
   ],
   "Zomato: Food Delivery & Dining": [
-    "Zomato"
+    "com.application.zomato"
   ],
   "Zuno General Insurance": [
-    "Zuno General Insurance"
+    "app.edelweissinsurance.com"
   ],
   "axio: Expense Tracker & Budget": [
-    "Axio Digital Pvt. Ltd."
+    "com.daamitt.walnut.app"
   ],
   "blinkX-Stocks, IPO & Demat App": [
-    "blinkX - Demat Account, Stock Market Trading & IPO"
+    "com.msf.blinktrade"
   ],
   "bob World:Banking & Experience": [
-    "Bank of Baroda"
+    "com.bankofbaroda.mconnect"
   ],
   "eToro: Trade. Invest. Connect.": [
-    "eToro"
+    "com.etoro.openbook"
   ],
   "iMobile: Loan, Cards & Banking": [
-    "ICICI Bank Ltd."
+    "com.csam.icici.bank.imobile"
   ],
   "mStock: Demat & Stock Trading": [
-    "Mirae Asset Capital Markets (India) Pvt. Ltd."
+    "com.rs.mirae"
   ],
   "myCAMS Mutual Fund App": [
-    "Computer Age Management Services Limited"
+    "com.KCamsApp"
   ],
   "slice: UPI credit card & bank": [
-    "slice small finance bank"
+    "indwin.c3.shareapp"
   ],
   "smallcase: Stocks, MFs, FDs": [
-    "CASE Platforms: Invest with confidence"
+    "com.smallcase.android"
   ],
   "super.money - UPI by Flipkart": [
-    "Super.money"
+    "money.super.payments"
   ],
   "건강보험25시": [
-    "국민건강보험공단"
+    "kr.or.nhic"
   ],
   "내 곁에 국민연금": [
-    "National Pension Service"
+    "kr.or.nps.smart"
   ]
 }

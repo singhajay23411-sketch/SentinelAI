@@ -1,0 +1,1122 @@
+[
+  {
+    "app_name": "0% EMI Shopping App",
+    "developer": "Snapmint",
+    "package_name": "com.snapmint.customerapp",
+    "category": "Electronics Retail",
+    "rating": 4.6,
+    "installs": "47M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.snapmint.customerapp&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "AJIO Online Shopping App",
+    "developer": "Reliance Retail Ltd",
+    "package_name": "com.ril.ajio",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "253M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.ril.ajio&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Alibaba.com - B2B marketplace",
+    "developer": "Alibaba Mobile",
+    "package_name": "com.alibaba.intl.android.apps.poseidon",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "643M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.alibaba.intl.android.apps.poseidon&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Amazon India Shop, Pay, miniTV",
+    "developer": "Amazon Mobile LLC",
+    "package_name": "in.amazon.mShop.android.shopping",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "694M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=in.amazon.mShop.android.shopping&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Amazon Seller App for Business",
+    "developer": "Amazon Mobile LLC",
+    "package_name": "com.amazon.sellermobile.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.0,
+    "installs": "40M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.amazon.sellermobile.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Apna Mart: Best Prices in mins",
+    "developer": "Log2 Retail Service Private Limited",
+    "package_name": "com.apnamart.apnaconsumer",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "2M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.apnamart.apnaconsumer&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Banggood - Online Shopping",
+    "developer": "Banggood",
+    "package_name": "com.banggood.client",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "55M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.banggood.client&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Bewakoof - Online Shopping App",
+    "developer": "Bewakoof - Online Shopping App",
+    "package_name": "com.bewakoof.bewakoof",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "30M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.bewakoof.bewakoof&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Bistro: Food in minutes",
+    "developer": "Blinkit",
+    "package_name": "com.blinkit.bistro",
+    "category": "Food Delivery",
+    "rating": 4.7,
+    "installs": "4M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.blinkit.bistro&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Blinkit Delivery Partner",
+    "developer": "Blinkit",
+    "package_name": "app.blinkit.onboarding",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "19M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=app.blinkit.onboarding&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Blinkit: Groceries & more",
+    "developer": "Blinkit",
+    "package_name": "com.grofers.customerapp",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "203M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.grofers.customerapp&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Bolt Food: Delivery & Takeaway",
+    "developer": "Bolt Technology",
+    "package_name": "com.bolt.deliveryclient",
+    "category": "Food Delivery",
+    "rating": 4.4,
+    "installs": "17M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.bolt.deliveryclient&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Borzo: Parcel Delivery App",
+    "developer": "INCRIN LIMITED",
+    "package_name": "global.dostavista.client",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.7,
+    "installs": "6M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=global.dostavista.client&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Burger King India",
+    "developer": "Restaurant Brands Asia Limited",
+    "package_name": "in.burgerking.android",
+    "category": "Food Delivery",
+    "rating": 4.7,
+    "installs": "18M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=in.burgerking.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Buyhatke:AI Shopping assistant",
+    "developer": "Buyhatke Online Shopping",
+    "package_name": "com.buyhatke.assistant",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "6M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.buyhatke.assistant&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Buywow Online Beauty Shopping",
+    "developer": "Buywow",
+    "package_name": "co.tapcart.app.id_99G6QNo3nu",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.3,
+    "installs": "4M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=co.tapcart.app.id_99G6QNo3nu&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Carousell: Sell and Buy",
+    "developer": "Carousell",
+    "package_name": "com.thecarousell.Carousell",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "24M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.thecarousell.Carousell&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Cashify: Sell & Buy Old Phones",
+    "developer": "Cashify.in",
+    "package_name": "com.reglobe.cashify",
+    "category": "Electronics Retail",
+    "rating": 4.5,
+    "installs": "56M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.reglobe.cashify&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "CityMall: Online Shopping App",
+    "developer": "City Mall Live",
+    "package_name": "live.citymall.customer.prod",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "45M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=live.citymall.customer.prod&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Country Delight Milk & Grocery",
+    "developer": "Country Delight",
+    "package_name": "app.mycountrydelight.in.countrydelight",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "30M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=app.mycountrydelight.in.countrydelight&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "DMart Ready Online Grocery App",
+    "developer": "Avenue E-Commerce Ltd.",
+    "package_name": "in.dmart",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.7,
+    "installs": "38M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=in.dmart&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Daraz Online Shopping App",
+    "developer": "Daraz Mobile",
+    "package_name": "com.daraz.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "154M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.daraz.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Dealshare: Online Grocery App",
+    "developer": "dealshare.in",
+    "package_name": "com.dealshare",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "35M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.dealshare&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Deliveroo: Food & Shopping",
+    "developer": "Deliveroo",
+    "package_name": "com.deliveroo.orderapp",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "40M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.deliveroo.orderapp&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Domino's Pizza - Food Delivery",
+    "developer": "Jubilant Foodworks",
+    "package_name": "com.Dominos",
+    "category": "Food Delivery",
+    "rating": 4.5,
+    "installs": "156M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.Dominos&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "DoorDash: Food, Grocery, More",
+    "developer": "DoorDash",
+    "package_name": "com.dd.doordash",
+    "category": "Food Delivery",
+    "rating": 4.7,
+    "installs": "87M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.dd.doordash&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Dot & Key Skincare Shopping",
+    "developer": "DOT & KEY WELLNESS LIMITED",
+    "package_name": "com.dotandkey",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "2M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.dotandkey&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "EatClub: Food Delivery App",
+    "developer": "PHPL",
+    "package_name": "com.poncho.eatclub",
+    "category": "Food Delivery",
+    "rating": 4.6,
+    "installs": "9M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.poncho.eatclub&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "EatSure Food Delivery",
+    "developer": "Rebel Marketplace Private Limited",
+    "package_name": "com.done.faasos",
+    "category": "Food Delivery",
+    "rating": 4.0,
+    "installs": "26M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.done.faasos&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Electrodoc - electronics tools",
+    "developer": "IODEMA Srl",
+    "package_name": "it.android.demi.elettronica",
+    "category": "Electronics Retail",
+    "rating": 4.3,
+    "installs": "15M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=it.android.demi.elettronica&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Etsy: Shop Home, Style & More",
+    "developer": "Etsy, Inc",
+    "package_name": "com.etsy.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "74M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.etsy.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "EveryCircuit",
+    "developer": "MuseMaze",
+    "package_name": "com.everycircuit.free",
+    "category": "Electronics Retail",
+    "rating": 4.3,
+    "installs": "5M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.everycircuit.free&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "FARFETCH - Shop Luxury Fashion",
+    "developer": "Farfetch UK Limited",
+    "package_name": "com.farfetch.farfetchshop",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "14M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.farfetch.farfetchshop&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Facebook",
+    "developer": "Meta Platforms, Inc.",
+    "package_name": "com.facebook.katana",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "11B+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.facebook.katana&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Fashion Nova: Trendy Shopping",
+    "developer": "FashionNova.com",
+    "package_name": "co.tapcart.app.npQt0DXZpj",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "9M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=co.tapcart.app.npQt0DXZpj&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Flipkart Online Shopping App",
+    "developer": "Flipkart",
+    "package_name": "com.flipkart.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "982M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.flipkart.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Flipkart Seller : Sell Online",
+    "developer": "Flipkart",
+    "package_name": "com.flipkart.seller",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "23M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.flipkart.seller&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Foxy: Korean & Derma Skin Care",
+    "developer": "Foxy : Beauty & Grooming shopping",
+    "package_name": "in.foxy",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.3,
+    "installs": "3M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=in.foxy&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Fresh To Home - Meat Delivery",
+    "developer": "FreshToHome",
+    "package_name": "com.freshtohome",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.2,
+    "installs": "14M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.freshtohome&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Gada Electronics Business Inc.",
+    "developer": "TMKOCPlay (Neela Mediatech Pvt Ltd)",
+    "package_name": "com.neelamediatech.gadaelectronics",
+    "category": "Electronics Retail",
+    "rating": 4.0,
+    "installs": "16M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.neelamediatech.gadaelectronics&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Grab - Taxi & Food Delivery",
+    "developer": "Grab Holdings",
+    "package_name": "com.grabtaxi.passenger",
+    "category": "Food Delivery",
+    "rating": 4.7,
+    "installs": "356M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.grabtaxi.passenger&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Grubhub: Food Delivery",
+    "developer": "Grubhub",
+    "package_name": "com.grubhub.android",
+    "category": "Food Delivery",
+    "rating": 4.6,
+    "installs": "34M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.grubhub.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "H&M",
+    "developer": "H&M",
+    "package_name": "com.hm.goe",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "100M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.hm.goe&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Hopscotch - Kids Fashion Brand",
+    "developer": "Hopscotch",
+    "package_name": "in.hopscotch.android",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.4,
+    "installs": "15M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=in.hopscotch.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "IRCTC eCatering Food on Track",
+    "developer": "IRCTC Official",
+    "package_name": "com.irctc.fot",
+    "category": "Food Delivery",
+    "rating": 4.8,
+    "installs": "9M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.irctc.fot&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "IndiaMART B2B Marketplace App",
+    "developer": "IndiaMART InterMESH Ltd.",
+    "package_name": "com.indiamart.m",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.8,
+    "installs": "43M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.indiamart.m&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Instamart Delivery Partner App",
+    "developer": "SwiggyInstamart",
+    "package_name": "in.swiggy.deliveryapp.instamart",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "1M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=in.swiggy.deliveryapp.instamart&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Instamart: Groceries & more",
+    "developer": "SwiggyInstamart",
+    "package_name": "in.swiggy.android.instamart",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "60M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=in.swiggy.android.instamart&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Jiffy by Spencers",
+    "developer": "Omnipresent Retail India Private Limited",
+    "package_name": "com.bsl.spencers.activity",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "5M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.bsl.spencers.activity&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Joybuy-Don't Just Buy!",
+    "developer": "Joybuy",
+    "package_name": "com.joybuy.jdi",
+    "category": "International Shopping Platforms",
+    "rating": 4.3,
+    "installs": "1M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.joybuy.jdi&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "KPN Fresh: Best Priced Grocery",
+    "developer": "KPN Fresh",
+    "package_name": "com.kpn.android",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "2M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.kpn.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Libas: Fashion Shopping App",
+    "developer": "Libas",
+    "package_name": "libasdelhinew.android.app",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "3M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=libasdelhinew.android.app&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Licious: Chicken, Meat & More",
+    "developer": "DELIGHTFUL GOURMET PRIVATE LIMITED",
+    "package_name": "com.licious",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.7,
+    "installs": "18M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.licious&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "LightInTheBox Online Shopping",
+    "developer": "Light In The Box Limited",
+    "package_name": "com.lightinthebox.android",
+    "category": "Electronics Retail",
+    "rating": 4.5,
+    "installs": "31M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.lightinthebox.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "LimeRoad: Online Fashion Shop",
+    "developer": "By VMart - Online fashion marketplace",
+    "package_name": "com.shopping.limeroad",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "108M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.shopping.limeroad&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "LoveLocal: Grocery App",
+    "developer": "LoveLocal",
+    "package_name": "chotelal.mpaani.com.android.chotelal",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.7,
+    "installs": "1M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=chotelal.mpaani.com.android.chotelal&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Maccaron Beauty Shopping App",
+    "developer": "Maccaron India Pvt. Ltd.",
+    "package_name": "in.maccaron",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.2,
+    "installs": "1M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=in.maccaron&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Mamaearth: Beauty Skincare App",
+    "developer": "Honasa Consumer Limited",
+    "package_name": "com.mamaearthapp",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.5,
+    "installs": "23M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.mamaearthapp&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Marketplace: Tradet Buy & Sell",
+    "developer": "MarketPlace",
+    "package_name": "com.app.disposeit",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.0,
+    "installs": "1M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.app.disposeit&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Max Fashion India",
+    "developer": "Landmark Online India Pvt. Ltd.",
+    "package_name": "com.applications.max",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.1,
+    "installs": "35M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.applications.max&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Meesho: Online Shopping App",
+    "developer": "Meesho",
+    "package_name": "com.meesho.supply",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "884M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.meesho.supply&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Milkbasket: Grocery Delivery",
+    "developer": "Milkbasket",
+    "package_name": "com.milkbasket.app",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.3,
+    "installs": "7M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.milkbasket.app&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Mirraw: Online Shopping App",
+    "developer": "Mirraw.com",
+    "package_name": "com.mirraw.android",
+    "category": "International Shopping Platforms",
+    "rating": 4.0,
+    "installs": "12M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.mirraw.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Moglix - B2B & B2C Shopping",
+    "developer": "Mogli Labs India Pvt. Ltd.",
+    "package_name": "com.moglix.online",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "5M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.moglix.online&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Myntra - Fashion Shopping App",
+    "developer": "Myntra",
+    "package_name": "com.myntra.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "408M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.myntra.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "NEWME-Freshest Fashion Fastest",
+    "developer": "newme.asia",
+    "package_name": "com.newme.mobile",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "6M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.newme.mobile&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Nykaa - Beauty Shopping App",
+    "developer": "NYKAA",
+    "package_name": "com.fsn.nykaa",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.5,
+    "installs": "95M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.fsn.nykaa&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Nykaa Fashion – Shopping App",
+    "developer": "NYKAA",
+    "package_name": "com.fsn.nds",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.5,
+    "installs": "71M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.fsn.nds&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "OLX: Buy & Sell Near You",
+    "developer": "Sobek Auto India Private Limited",
+    "package_name": "com.olx.southasia",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "272M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.olx.southasia&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "OnePlus Store",
+    "developer": "OnePlus Ltd.",
+    "package_name": "com.oneplus.mall",
+    "category": "Electronics Retail",
+    "rating": 4.5,
+    "installs": "10M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.oneplus.mall&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "PULL&BEAR: Fashion and Trends",
+    "developer": "Inditex",
+    "package_name": "com.inditex.pullandbear",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.1,
+    "installs": "24M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.inditex.pullandbear&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "PatPat - Kids & Baby Clothing",
+    "developer": "Interfocus Inc",
+    "package_name": "com.interfocusllc.patpat",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.2,
+    "installs": "24M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.interfocusllc.patpat&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Pilgrim India",
+    "developer": "Pilgrim India",
+    "package_name": "com.discoverpilgrim",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.4,
+    "installs": "2M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.discoverpilgrim&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Price Comparison - Smartprix",
+    "developer": "Smartprix.com",
+    "package_name": "com.smartprix.main",
+    "category": "Electronics Retail",
+    "rating": 4.5,
+    "installs": "4M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.smartprix.main&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Priceoye Online Mobile Shop",
+    "developer": "Priceoye",
+    "package_name": "com.priceoye.app",
+    "category": "Electronics Retail",
+    "rating": 4.2,
+    "installs": "1M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.priceoye.app&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Purplle Online Beauty Shopping",
+    "developer": "Purplle.com",
+    "package_name": "com.manash.purplle",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.0,
+    "installs": "87M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.manash.purplle&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "SHEIN India Fast Fashion",
+    "developer": "Reliance Retail Ltd",
+    "package_name": "com.ril.shein",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.5,
+    "installs": "19M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.ril.shein&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "SNITCH Online Fashion Shopping",
+    "developer": "SNITCH",
+    "package_name": "co.shopney.snitch",
+    "category": "Electronics Retail",
+    "rating": 4.5,
+    "installs": "5M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=co.shopney.snitch&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Samsung Shop : Meet the New AI",
+    "developer": "Samsung Electronics Co. Ltd",
+    "package_name": "com.samsung.ecomm.global.in",
+    "category": "Electronics Retail",
+    "rating": 4.4,
+    "installs": "197M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.samsung.ecomm.global.in&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Savana - UK Fashion",
+    "developer": "ENVOGUE STYLES GLOBAL LLP",
+    "package_name": "com.savana.in",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "23M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.savana.in&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Shiprocket - Courier Delivery",
+    "developer": "Shiprocket - eCommerce Logistics Solution",
+    "package_name": "com.shiprocket.shiprocket",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.0,
+    "installs": "6M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.shiprocket.shiprocket&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Shopify: Sell online/in person",
+    "developer": "Shopify Inc.",
+    "package_name": "com.shopify.mobile",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "30M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.shopify.mobile&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Shoppers Stop Fashion Shopping",
+    "developer": "Shoppers Stop",
+    "package_name": "shoppersstop.shoppersstop",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.1,
+    "installs": "10M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=shoppersstop.shoppersstop&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Shopsy Shopping App - Flipkart",
+    "developer": "Shopsy",
+    "package_name": "com.flipkart.shopsy",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "357M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.flipkart.shopsy&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Smytten-Try Samples & Shop",
+    "developer": "Smytten",
+    "package_name": "com.app.smytten",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.4,
+    "installs": "27M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.app.smytten&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Snapdeal Trendy Budget Fashion",
+    "developer": "Snapdeal Limited",
+    "package_name": "com.snapdeal.main",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "227M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.snapdeal.main&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Swiggy Delivery Partner App",
+    "developer": "Swiggy",
+    "package_name": "in.swiggy.deliveryapp",
+    "category": "Food Delivery",
+    "rating": 4.1,
+    "installs": "34M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=in.swiggy.deliveryapp&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Swiggy: Food Instamart Dineout",
+    "developer": "Swiggy",
+    "package_name": "in.swiggy.android",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "283M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=in.swiggy.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Swish: 10-Min Food Delivery",
+    "developer": "justswish.in",
+    "package_name": "com.swishapp",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.7,
+    "installs": "1M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.swishapp&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Tata CLiQ Fashion Shopping",
+    "developer": "Tata Unistore Limited",
+    "package_name": "com.tul.tatacliq",
+    "category": "Electronics Retail",
+    "rating": 4.3,
+    "installs": "69M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.tul.tatacliq&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Titan World: Online Shopping",
+    "developer": "Titan Company Limited",
+    "package_name": "com.titancompany.tx37consumerapp",
+    "category": "International Shopping Platforms",
+    "rating": 4.3,
+    "installs": "6M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.titancompany.tx37consumerapp&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Ubuy Global Shopping App India",
+    "developer": "Ubuy Co.",
+    "package_name": "com.ubuy",
+    "category": "International Shopping Platforms",
+    "rating": 4.2,
+    "installs": "3M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.ubuy&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Vishal Mega Mart-Select Cities",
+    "developer": "AIRPLAZA RETAIL HOLDINGS PRIVATE LIMITED",
+    "package_name": "com.vmm.android",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.0,
+    "installs": "12M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.vmm.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Wix - Website Builder",
+    "developer": "Wix.com, INC.",
+    "package_name": "com.wix.admin",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "9M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.wix.admin&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "WooCommerce: Store & POS",
+    "developer": "Automattic, Inc",
+    "package_name": "com.woocommerce.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.7,
+    "installs": "1M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.woocommerce.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "ZALORA-Online Fashion Shopping",
+    "developer": "Zalora South East Asia Pte Ltd.",
+    "package_name": "com.zalora.android",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "37M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.zalora.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Zara",
+    "developer": "Inditex",
+    "package_name": "com.inditex.zara",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.7,
+    "installs": "92M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.inditex.zara&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Zepto Delivery Partner App",
+    "developer": "Zepto Marketplace Private Limited",
+    "package_name": "com.zepto.rider",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "13M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.zepto.rider&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Zepto: Groceries in minutes",
+    "developer": "Zepto Marketplace Private Limited",
+    "package_name": "com.zeptoconsumerapp",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "135M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.zeptoconsumerapp&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "Zomato: Food Delivery & Dining",
+    "developer": "Zomato",
+    "package_name": "com.application.zomato",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "373M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.application.zomato&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "adidas: Shop Shoes & Clothing",
+    "developer": "adidas",
+    "package_name": "com.adidas.app",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "90M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.adidas.app&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "bbdaily: Online Milk & Grocery",
+    "developer": "Bigbasket.com",
+    "package_name": "com.raincan.android.hybrid",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.2,
+    "installs": "10M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.raincan.android.hybrid&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "bigbasket: Groceries and more",
+    "developer": "Bigbasket.com",
+    "package_name": "com.bigbasket.mobileapp",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.7,
+    "installs": "142M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.bigbasket.mobileapp&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "mCaffeine: Natural Skin Care",
+    "developer": "mCaffeine",
+    "package_name": "com.coffye.mcaffeine",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "2M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.coffye.mcaffeine&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "magicpin:Food Delivery, Dining",
+    "developer": "magicpin: cashback / home delivery on local retail",
+    "package_name": "com.magicpin.local",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.3,
+    "installs": "24M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.magicpin.local&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "noon Online Shopping & Grocery",
+    "developer": "noon e-commerce",
+    "package_name": "com.noon.buyerapp",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.5,
+    "installs": "61M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.noon.buyerapp&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "realme Store",
+    "developer": "realme Ltd.",
+    "package_name": "com.realmestore.app",
+    "category": "Electronics Retail",
+    "rating": 4.0,
+    "installs": "45M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.realmestore.app&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "talabat: Food, grocery & more",
+    "developer": "Talabat",
+    "package_name": "com.talabat",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "49M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.talabat&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "toing - Food Delivery",
+    "developer": "Swiggy",
+    "package_name": "in.swiggy.android.toing",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.3,
+    "installs": "17M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=in.swiggy.android.toing&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "udaan: B2B for Retailers",
+    "developer": "Udaan.com",
+    "package_name": "com.udaan.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "11M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.udaan.android&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "vivo Store",
+    "developer": "Vivo Website",
+    "package_name": "com.vivo.website",
+    "category": "Electronics Retail",
+    "rating": 4.0,
+    "installs": "1B+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.vivo.website&hl=en&gl=in",
+    "source": "google_play_store"
+  },
+  {
+    "app_name": "السوق المفتوح - OpenSooq",
+    "developer": "OpenSooq FZ-LLC",
+    "package_name": "com.opensooq.OpenSooq",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.8,
+    "installs": "50M+",
+    "playstore_url": "https://play.google.com/store/apps/details?id=com.opensooq.OpenSooq&hl=en&gl=in",
+    "source": "google_play_store"
+  }
+]

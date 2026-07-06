@@ -1,0 +1,1836 @@
+{
+  "1 Finance: Financial Advisory": {
+    "developer": "1 Finance: Registered Investment Advisor & Planner",
+    "package_name": "app.onefin",
+    "category": "Wealth Management",
+    "rating": 4.4,
+    "installs": "166K+"
+  },
+  "5paisa: Stocks, MF, F&O App": {
+    "developer": "5paisa - Stock Market, Demat Account, Mutual Fund",
+    "package_name": "com.fivepaisa.trade",
+    "category": "Broker",
+    "rating": 4.2,
+    "installs": "19M+"
+  },
+  "A+ Wallet": {
+    "developer": "A bank",
+    "package_name": "com.jits.mbanking.abank.consumer",
+    "category": "UPI",
+    "rating": 4.3,
+    "installs": "1M+"
+  },
+  "ACKO Insurance": {
+    "developer": "Acko Technology & Services Private Limited",
+    "package_name": "com.acko.android",
+    "category": "Insurance",
+    "rating": 4.6,
+    "installs": "20M+"
+  },
+  "AU 0101: Mobile Banking App": {
+    "developer": "AU Small Finance Bank Limited",
+    "package_name": "com.ausmallfinancebank.amb",
+    "category": "Bank",
+    "rating": 4.3,
+    "installs": "9M+"
+  },
+  "Aadhaar": {
+    "developer": "Unique Identification Authority of India",
+    "package_name": "in.gov.uidai.pehchaan",
+    "category": "Government Finance",
+    "rating": 4.2,
+    "installs": "25M+"
+  },
+  "Activ Health": {
+    "developer": "Aditya Birla Health",
+    "package_name": "com.adityabirlahealth.insurance",
+    "category": "Insurance",
+    "rating": 4.6,
+    "installs": "3M+"
+  },
+  "Adobe Acrobat Reader: Edit PDF": {
+    "developer": "Adobe",
+    "package_name": "com.adobe.reader",
+    "category": "Government Finance",
+    "rating": 4.4,
+    "installs": "915M+"
+  },
+  "Adobe Scan AI PDF Scanner, OCR": {
+    "developer": "Adobe",
+    "package_name": "com.adobe.scan.android",
+    "category": "Government Finance",
+    "rating": 4.6,
+    "installs": "242M+"
+  },
+  "Airtel: Recharge, Bank & Loans": {
+    "developer": "Airtel",
+    "package_name": "com.myairtelapp",
+    "category": "UPI",
+    "rating": 4.1,
+    "installs": "610M+"
+  },
+  "Alan: Health Insurance": {
+    "developer": "Alan Health",
+    "package_name": "com.alanmobile",
+    "category": "Insurance",
+    "rating": 5,
+    "installs": "526K+"
+  },
+  "All India ITR, Tax Filing App": {
+    "developer": "All India ITR - Income Tax Return Filing - India",
+    "package_name": "dell.com.allindiaitr",
+    "category": "Government Finance",
+    "rating": 4.6,
+    "installs": "1M+"
+  },
+  "Angel One: Stocks, Mutual Fund": {
+    "developer": "Angel One - Stock Market, Demat Account & IPO",
+    "package_name": "com.msf.angelmobile",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "112M+"
+  },
+  "AssetPlus - Mutual Funds & SIP": {
+    "developer": "AssetPlus - Mutual Funds",
+    "package_name": "io.assetplus",
+    "category": "Broker",
+    "rating": 4.7,
+    "installs": "583K+"
+  },
+  "Axis Max life Insurance": {
+    "developer": "AXIS MAX LIFE INSURANCE LIMITED",
+    "package_name": "com.maxlifeinsurance.www.twa",
+    "category": "Insurance",
+    "rating": 4.5,
+    "installs": "1M+"
+  },
+  "Axis Mobile: Pay, Invest & UPI": {
+    "developer": "Axis Bank Ltd.",
+    "package_name": "com.axis.mobile",
+    "category": "Bank",
+    "rating": 4.8,
+    "installs": "75M+"
+  },
+  "Axis Mutual Fund Invest Online": {
+    "developer": "Axis Mutual Fund",
+    "package_name": "com.axismf.investorapp",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "5M+"
+  },
+  "BHIM Bharat's Own Payments App": {
+    "developer": "National Payments Corporation of India (NPCI)",
+    "package_name": "in.org.npci.upiapp",
+    "category": "Bank",
+    "rating": 4.5,
+    "installs": "151M+"
+  },
+  "Bachatt: FD, Mutual Fund, Gold": {
+    "developer": "Bachatt Smart Savings (AMFI Registered)",
+    "package_name": "app.bachatt.customer",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "4M+"
+  },
+  "Bajaj Broking: Demat & Trading": {
+    "developer": "Bajaj Broking: Demat Account,Trading,Stock Market",
+    "package_name": "com.msf.bfsltrade",
+    "category": "Broker",
+    "rating": 4.8,
+    "installs": "5M+"
+  },
+  "Bajaj Finance : UPI & Loan App": {
+    "developer": "Bajaj Finance Limited",
+    "package_name": "org.altruist.BajajExperia",
+    "category": "Bank",
+    "rating": 4.8,
+    "installs": "193M+"
+  },
+  "Banco Itaú: Conta, Cartão e +": {
+    "developer": "Itaú Unibanco S. A.",
+    "package_name": "com.itau",
+    "category": "Bank",
+    "rating": 4.2,
+    "installs": "118M+"
+  },
+  "Bank of America Mobile Banking": {
+    "developer": "Bank of America",
+    "package_name": "com.infonow.bofa",
+    "category": "Bank",
+    "rating": 4.8,
+    "installs": "53M+"
+  },
+  "Beyond Budget - Budget Planner": {
+    "developer": "Beyond Budget",
+    "package_name": "com.beyondbudget",
+    "category": "Wealth Management",
+    "rating": 4.5,
+    "installs": "173K+"
+  },
+  "BharatLoan: Personal Loan App": {
+    "developer": "DEVMUNI LEASING & FINANCE LIMITED",
+    "package_name": "com.devmunifin.bharatloan",
+    "category": "Government Finance",
+    "rating": 4.8,
+    "installs": "6M+"
+  },
+  "BharatPe UPI Payment, Loan App": {
+    "developer": "Resilient Innovation Private Limited",
+    "package_name": "com.postpe.app",
+    "category": "UPI",
+    "rating": 4.6,
+    "installs": "18M+"
+  },
+  "Binance: Buy Bitcoin & Crypto": {
+    "developer": "Binance Inc.",
+    "package_name": "com.binance.dev",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "215M+"
+  },
+  "BitValve - P2P Crypto Exchange": {
+    "developer": "BitValve Developer",
+    "package_name": "com.bitvalve.android",
+    "category": "Crypto",
+    "rating": 4.6,
+    "installs": "139K+"
+  },
+  "Bitcoin.com Wallet": {
+    "developer": "Bitcoin.com Developer",
+    "package_name": "com.bitcoin.mwallet",
+    "category": "Crypto",
+    "rating": 4.4,
+    "installs": "14M+"
+  },
+  "Bitget Wallet: Crypto, Bitcoin": {
+    "developer": "Bitget Wallet",
+    "package_name": "com.bitkeep.wallet",
+    "category": "UPI",
+    "rating": 4.5,
+    "installs": "18M+"
+  },
+  "BloFin: Trade Crypto & Bitcoin": {
+    "developer": "Blofin Inc.",
+    "package_name": "com.blofin.android",
+    "category": "Crypto",
+    "rating": 4.1,
+    "installs": "430K+"
+  },
+  "Blockchain Wallet: Buy BTC": {
+    "developer": "Blockchain.com",
+    "package_name": "piuk.blockchain.android",
+    "category": "UPI",
+    "rating": 4.7,
+    "installs": "17M+"
+  },
+  "Branch Instant Personal Loan": {
+    "developer": "Branch International Financial Services Limited",
+    "package_name": "com.branch_international.branch.branch_demo_android",
+    "category": "Bank",
+    "rating": 4.6,
+    "installs": "70M+"
+  },
+  "Budget App & Tracker: Spendee": {
+    "developer": "SPENDEE a.s.",
+    "package_name": "com.cleevio.spendee",
+    "category": "Wealth Management",
+    "rating": 4.5,
+    "installs": "2M+"
+  },
+  "Budget planner—Expense tracker": {
+    "developer": "Battery Stats Saver",
+    "package_name": "com.colpit.diamondcoming.isavemoney",
+    "category": "Wealth Management",
+    "rating": 4.6,
+    "installs": "5M+"
+  },
+  "Budgeting App - Spend Tracker": {
+    "developer": "The Budgeting App",
+    "package_name": "com.thebudgetingapp.thebudgetingapp",
+    "category": "Wealth Management",
+    "rating": 4.7,
+    "installs": "204K+"
+  },
+  "Budge・Savings & Budget Planner": {
+    "developer": "Vladimir Chernysh",
+    "package_name": "com.fin.plan",
+    "category": "Wealth Management",
+    "rating": 4,
+    "installs": "595K+"
+  },
+  "Buy Bitcoin and Crypto app": {
+    "developer": "Bitkuber Investments Private Limited",
+    "package_name": "com.coinswitch.kuber",
+    "category": "Crypto",
+    "rating": 4.4,
+    "installs": "24M+"
+  },
+  "Bybit: Buy Bitcoin & Crypto": {
+    "developer": "Bybit",
+    "package_name": "com.bybit.app",
+    "category": "Crypto",
+    "rating": 4.5,
+    "installs": "47M+"
+  },
+  "CRED: Credit Cards, Bills, UPI": {
+    "developer": "Dreamplug Technologies Private Limited",
+    "package_name": "com.dreamplug.androidapp",
+    "category": "UPI",
+    "rating": 4.8,
+    "installs": "69M+"
+  },
+  "CUB All in one Mobile App": {
+    "developer": "CITY UNION BANK LTD",
+    "package_name": "com.cub.plus.gui",
+    "category": "Bank",
+    "rating": 4.2,
+    "installs": "3M+"
+  },
+  "Canara ai1- Mobile Banking App": {
+    "developer": "CANARA BANK",
+    "package_name": "com.canarabank.mobility",
+    "category": "Bank",
+    "rating": 4.4,
+    "installs": "56M+"
+  },
+  "CarInfo - RTO Vehicle Info App": {
+    "developer": "CarInfo - Challans| FASTag | Buy & Sell Cars",
+    "package_name": "com.cuvora.carinfo",
+    "category": "Insurance",
+    "rating": 4.6,
+    "installs": "85M+"
+  },
+  "Care Health - Customer App": {
+    "developer": "Care Health Insurance limited",
+    "package_name": "com.religare.healthinsurance",
+    "category": "Insurance",
+    "rating": 4.2,
+    "installs": "9M+"
+  },
+  "Cashew—Expense Budget Tracker": {
+    "developer": "Dapper App Developer",
+    "package_name": "com.budget.tracker_app",
+    "category": "Wealth Management",
+    "rating": 4.9,
+    "installs": "835K+"
+  },
+  "Chase Mobile": {
+    "developer": "JPMorgan Chase",
+    "package_name": "com.chase.sig.android",
+    "category": "Bank",
+    "rating": 4.9,
+    "installs": "57M+"
+  },
+  "Choice FinX: Demat Account App": {
+    "developer": "Choice - Share Market, Demat Account & Mutual Fund",
+    "package_name": "com.choiceequitybroking.jiffy",
+    "category": "Broker",
+    "rating": 4.3,
+    "installs": "2M+"
+  },
+  "CoinDCX: Bitcoin Crypto App": {
+    "developer": "CoinDCX Official",
+    "package_name": "com.coindcx.btc",
+    "category": "Crypto",
+    "rating": 4.5,
+    "installs": "32M+"
+  },
+  "CoinMarketCap: Crypto Tracker": {
+    "developer": "CoinMarketCap.com",
+    "package_name": "com.coinmarketcap.android",
+    "category": "Crypto",
+    "rating": 4.6,
+    "installs": "20M+"
+  },
+  "Compte ameli": {
+    "developer": "l'Assurance Maladie",
+    "package_name": "fr.cnamts.it.activity",
+    "category": "Insurance",
+    "rating": 4.5,
+    "installs": "28M+"
+  },
+  "CoverSure: Insurance made easy": {
+    "developer": "Claycove23 Insurance Tech Pvt. Ltd.",
+    "package_name": "com.coversure",
+    "category": "Insurance",
+    "rating": 4.9,
+    "installs": "511K+"
+  },
+  "Coverfox: Bike & Car Insurance": {
+    "developer": "Coverfox Insurance",
+    "package_name": "com.coverfox.app",
+    "category": "Insurance",
+    "rating": 4.4,
+    "installs": "263K+"
+  },
+  "Crypto exchange: USDT, Bitcoin": {
+    "developer": "ChangeNOW",
+    "package_name": "io.changenow.changenow",
+    "category": "Crypto",
+    "rating": 4.5,
+    "installs": "333K+"
+  },
+  "Crypto.com: Onchain Wallet": {
+    "developer": "Crypto.com Onchain Wallet",
+    "package_name": "com.defi.wallet",
+    "category": "Crypto",
+    "rating": 4.3,
+    "installs": "5M+"
+  },
+  "Curie Money UPI: Grow & Pay": {
+    "developer": "Curie Money (AMFI Registered)",
+    "package_name": "com.yield.curie_money",
+    "category": "UPI",
+    "rating": 4.5,
+    "installs": "717K+"
+  },
+  "Cuvva": {
+    "developer": "Cuvva",
+    "package_name": "co.cuvva.hourly",
+    "category": "Insurance",
+    "rating": 4.5,
+    "installs": "2M+"
+  },
+  "DEX Screener": {
+    "developer": "DEX Screener",
+    "package_name": "com.dexscreener",
+    "category": "Crypto",
+    "rating": 4.7,
+    "installs": "2M+"
+  },
+  "Delta Exchange: Crypto Options": {
+    "developer": "Delta Exchange India",
+    "package_name": "com.deltaexchangeindia",
+    "category": "Crypto",
+    "rating": 4.3,
+    "installs": "5M+"
+  },
+  "Dhan: Stock Market Trading App": {
+    "developer": "RAISE FINTECH VENTURES PRIVATE LIMITED",
+    "package_name": "com.dhan.live",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "15M+"
+  },
+  "DigiLocker": {
+    "developer": "National eGovernance Division, Government of India",
+    "package_name": "com.digilocker.android",
+    "category": "Government Finance",
+    "rating": 4.2,
+    "installs": "177M+"
+  },
+  "Digihaat – Bharat ka Apna App": {
+    "developer": "Nirmit Bharat Official",
+    "package_name": "org.ondc.nirmitbap",
+    "category": "Government Finance",
+    "rating": 4.3,
+    "installs": "2M+"
+  },
+  "Digit Insurance": {
+    "developer": "Digit Insurance",
+    "package_name": "com.godigit.digit",
+    "category": "Insurance",
+    "rating": 4.8,
+    "installs": "6M+"
+  },
+  "E*TRADE: Invest. Trade. Save.": {
+    "developer": "E*TRADE from Morgan Stanley",
+    "package_name": "com.etrade.mobilepro.activity",
+    "category": "Broker",
+    "rating": 4.3,
+    "installs": "4M+"
+  },
+  "EPF Balance, UAN & Salary Calc": {
+    "developer": "ideanexxt",
+    "package_name": "com.mpawer.fin.pf",
+    "category": "Government Finance",
+    "rating": 4.0,
+    "installs": "2M+"
+  },
+  "ET Money Mutual Fund, SIF, SIP": {
+    "developer": "ET Money: AMFI, SEBI Registered Investment Advisor",
+    "package_name": "com.smartspends",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "11M+"
+  },
+  "FNB Banking App": {
+    "developer": "FirstRand Bank Limited.",
+    "package_name": "za.co.fnb.connect.itt",
+    "category": "Bank",
+    "rating": 4.7,
+    "installs": "21M+"
+  },
+  "FYERS: Stocks & Option Trading": {
+    "developer": "FYERS",
+    "package_name": "com.fyers.trader",
+    "category": "Broker",
+    "rating": 4.3,
+    "installs": "3M+"
+  },
+  "FamApp by Trio: UPI & Card": {
+    "developer": "Tri O Tech Solutions Pvt Ltd",
+    "package_name": "com.fampay.in",
+    "category": "Bank",
+    "rating": 4.5,
+    "installs": "62M+"
+  },
+  "Family budget—Spending tracker": {
+    "developer": "Digit Leaf, llc",
+    "package_name": "com.colpit.diamondcoming.isavemoneygo",
+    "category": "Wealth Management",
+    "rating": 4.5,
+    "installs": "218K+"
+  },
+  "Fast Budget - Expense Manager": {
+    "developer": "AppFer SRL",
+    "package_name": "com.blodhgard.easybudget",
+    "category": "Wealth Management",
+    "rating": 4.5,
+    "installs": "6M+"
+  },
+  "FinArt: AI Expense Tracker": {
+    "developer": "FinArt - Expense Tracker",
+    "package_name": "com.finart",
+    "category": "Wealth Management",
+    "rating": 4.5,
+    "installs": "1M+"
+  },
+  "Flipkart Online Shopping App": {
+    "developer": "Flipkart",
+    "package_name": "com.flipkart.android",
+    "category": "Government Finance",
+    "rating": 4.3,
+    "installs": "982M+"
+  },
+  "Folio: Digital Wallet App": {
+    "developer": "Folio Technologies",
+    "package_name": "com.folioltd",
+    "category": "UPI",
+    "rating": 4.7,
+    "installs": "891K+"
+  },
+  "Forex Trading for Beginners": {
+    "developer": "Go Forex",
+    "package_name": "com.tiim.goforexx24",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "6M+"
+  },
+  "Freecharge UPI & Bill Payments": {
+    "developer": "FreechargeBiz - An Axis Bank Subsidiary",
+    "package_name": "com.freecharge.android",
+    "category": "UPI",
+    "rating": 4.2,
+    "installs": "56M+"
+  },
+  "FrontPage: Stock Market Clubs": {
+    "developer": "FrontPage India",
+    "package_name": "in.crowdware.one",
+    "category": "Broker",
+    "rating": 4.5,
+    "installs": "6M+"
+  },
+  "FundsInda: Mutual Funds & SIP": {
+    "developer": "FundsIndia - Mutual Funds and Stock Investments",
+    "package_name": "com.fundsindia",
+    "category": "Broker",
+    "rating": 4.5,
+    "installs": "2M+"
+  },
+  "GS Finance : Personal Loan": {
+    "developer": "G. S. LEASING AND FINANCE PRIVATE LIMITED",
+    "package_name": "com.GSFinance.gsfinanceApp",
+    "category": "Government Finance",
+    "rating": 4.7,
+    "installs": "1M+"
+  },
+  "Gift & Credit Card Wallet": {
+    "developer": "Texode Technologies LLC",
+    "package_name": "com.texode.securecard",
+    "category": "UPI",
+    "rating": 4.2,
+    "installs": "867K+"
+  },
+  "Giottus: Crypto Investing App": {
+    "developer": "Giottus Technologies Private Limited",
+    "package_name": "com.giottus.giottus_mobile",
+    "category": "Crypto",
+    "rating": 4.4,
+    "installs": "1M+"
+  },
+  "GoPay: Transfer, Payment, QRIS": {
+    "developer": "PT. GoTo Gojek Tokopedia Tbk",
+    "package_name": "com.gojek.gopay",
+    "category": "UPI",
+    "rating": 4.2,
+    "installs": "100M+"
+  },
+  "Google Home": {
+    "developer": "Google LLC",
+    "package_name": "com.google.android.apps.chromecast.app",
+    "category": "Government Finance",
+    "rating": 4.1,
+    "installs": "1B+"
+  },
+  "Google Pay for Business": {
+    "developer": "Google LLC",
+    "package_name": "com.google.android.apps.nbu.paisa.merchant",
+    "category": "UPI",
+    "rating": 4.2,
+    "installs": "84M+"
+  },
+  "Google Pay: Secure UPI payment": {
+    "developer": "Google LLC",
+    "package_name": "com.google.android.apps.nbu.paisa.user",
+    "category": "UPI",
+    "rating": 4.3,
+    "installs": "1B+"
+  },
+  "Google Sheets": {
+    "developer": "Google LLC",
+    "package_name": "com.google.android.apps.docs.editors.sheets",
+    "category": "Government Finance",
+    "rating": 4.6,
+    "installs": "1B+"
+  },
+  "Groww Stocks, Mutual Fund, IPO": {
+    "developer": "Groww: Demat, Invest & Trade, Gold, Silver, Loans",
+    "package_name": "com.nextbillion.groww",
+    "category": "Broker",
+    "rating": 4.8,
+    "installs": "135M+"
+  },
+  "HDFC Bank App: Banking & Cards": {
+    "developer": "HDFC BANK",
+    "package_name": "com.hdfcbank.android.now",
+    "category": "Bank",
+    "rating": 4.7,
+    "installs": "22M+"
+  },
+  "HDFC Bank SmartWealth": {
+    "developer": "HDFC BANK",
+    "package_name": "com.hdfcbank.smartwealthapp",
+    "category": "Wealth Management",
+    "rating": 4.8,
+    "installs": "1M+"
+  },
+  "HDFC Life Insurance App": {
+    "developer": "HDFC Life",
+    "package_name": "com.hdfcclife.activities",
+    "category": "Insurance",
+    "rating": 4.0,
+    "installs": "7M+"
+  },
+  "HDFC SKY: Demat Stocks IPO MF": {
+    "developer": "HDFC SEC: Share Market Trading & Demat Account App",
+    "package_name": "com.cloudtradetech.sky",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "10M+"
+  },
+  "HDFC Securities InvestRight": {
+    "developer": "HDFC SEC: Share Market Trading & Demat Account App",
+    "package_name": "com.hsl.investright",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "2M+"
+  },
+  "HSBC India": {
+    "developer": "HSBC",
+    "package_name": "in.hsbc.hsbcindia",
+    "category": "Bank",
+    "rating": 4.5,
+    "installs": "1M+"
+  },
+  "Halifax Mobile Banking": {
+    "developer": "Lloyds Banking Group PLC",
+    "package_name": "com.grppl.android.shell.halifax",
+    "category": "Bank",
+    "rating": 4.7,
+    "installs": "11M+"
+  },
+  "Here by HDFC ERGO": {
+    "developer": "HDFC ERGO",
+    "package_name": "com.hdfcergo.here",
+    "category": "Insurance",
+    "rating": 4.3,
+    "installs": "8M+"
+  },
+  "IBKR Mobile": {
+    "developer": "Interactive Brokers Group",
+    "package_name": "atws.app",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "4M+"
+  },
+  "ICICI Prudential Life App": {
+    "developer": "ICICI Prudential Life Insurance",
+    "package_name": "com.ipru.iciciprulife.customer.release",
+    "category": "Insurance",
+    "rating": 4.6,
+    "installs": "2M+"
+  },
+  "IDBI Bank GO Mobile+": {
+    "developer": "IDBI BANK",
+    "package_name": "com.snapwork.IDBI",
+    "category": "Bank",
+    "rating": 4.6,
+    "installs": "13M+"
+  },
+  "IDEdge by InsuranceDekho": {
+    "developer": "Girnar Insurance Brokers Private Limited",
+    "package_name": "com.insurancedekho.pos",
+    "category": "Insurance",
+    "rating": 4.2,
+    "installs": "333K+"
+  },
+  "IDFC FIRST Bank: MobileBanking": {
+    "developer": "IDFC FIRST Bank Ltd.",
+    "package_name": "com.idfcfirstbank.optimus",
+    "category": "Bank",
+    "rating": 4.9,
+    "installs": "41M+"
+  },
+  "IFMS 3.0 Govt. of Rajasthan": {
+    "developer": "DoIT&C, GoR",
+    "package_name": "gov.ifms.ess",
+    "category": "Government Finance",
+    "rating": 4.2,
+    "installs": "485K+"
+  },
+  "IIFL : Stocks, Demat & IPOs": {
+    "developer": "IIFL Capital - Stock Market & Demat Account App",
+    "package_name": "com.indiainfoline",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "10M+"
+  },
+  "IL TakeCare Insurance App": {
+    "developer": "ICICI Lombard GIC Ltd.",
+    "package_name": "icici.lombard.ghi",
+    "category": "Insurance",
+    "rating": 4.6,
+    "installs": "18M+"
+  },
+  "INDmoney: Stocks, Mutual Funds": {
+    "developer": "INDmoney: Indian & US Stocks, SIP, Flash Trading",
+    "package_name": "in.indwealth",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "22M+"
+  },
+  "IOB Connect - Mobile Banking": {
+    "developer": "IOB",
+    "package_name": "com.iob.iobconnect",
+    "category": "Bank",
+    "rating": 4.3,
+    "installs": "6M+"
+  },
+  "IPPB Mobile Banking": {
+    "developer": "India Post Payments Bank Ltd",
+    "package_name": "com.iexceed.appzillon.ippbMB",
+    "category": "Bank",
+    "rating": 4.1,
+    "installs": "103M+"
+  },
+  "Income Tax 2025, 2026-FinCalC": {
+    "developer": "RRR APPS",
+    "package_name": "com.rrr.apps.financialcalculator",
+    "category": "Government Finance",
+    "rating": 4.4,
+    "installs": "158K+"
+  },
+  "Income Tax Calculator": {
+    "developer": "RS eSupport",
+    "package_name": "com.rsesupport.incometax",
+    "category": "Government Finance",
+    "rating": 4.7,
+    "installs": "781K+"
+  },
+  "Income Tax Filing, ITR - Black": {
+    "developer": "ClearTax",
+    "package_name": "in.cleartax.consumer2",
+    "category": "Government Finance",
+    "rating": 4.2,
+    "installs": "817K+"
+  },
+  "Income tax Act, 1961 - India": {
+    "developer": "Interactive Media",
+    "package_name": "com.offlineappsindia.incometaxacts",
+    "category": "Government Finance",
+    "rating": 4.5,
+    "installs": "463K+"
+  },
+  "IndSMART IndianBank Mobile App": {
+    "developer": "Indian Bank",
+    "package_name": "com.iexceed.ib.digitalbankingprod",
+    "category": "Bank",
+    "rating": 4.3,
+    "installs": "22M+"
+  },
+  "IndiaFilings: Taxes Simplified": {
+    "developer": "IndiaFilings",
+    "package_name": "com.IndiaFilings.iCFO",
+    "category": "Government Finance",
+    "rating": 4.6,
+    "installs": "867K+"
+  },
+  "IndiaMART B2B Marketplace App": {
+    "developer": "IndiaMART InterMESH Ltd.",
+    "package_name": "com.indiamart.m",
+    "category": "Government Finance",
+    "rating": 4.8,
+    "installs": "43M+"
+  },
+  "IndusInd Bank: Savings A/C, FD": {
+    "developer": "IndusInd Bank Ltd.",
+    "package_name": "com.indusind.indie",
+    "category": "Bank",
+    "rating": 4.6,
+    "installs": "15M+"
+  },
+  "IndusInd Insurance": {
+    "developer": "IndusInd General Insurance",
+    "package_name": "com.rgi.customerapp.live",
+    "category": "Insurance",
+    "rating": 4.1,
+    "installs": "1M+"
+  },
+  "Instagram": {
+    "developer": "Instagram",
+    "package_name": "com.instagram.android",
+    "category": "Government Finance",
+    "rating": 4.3,
+    "installs": "7B+"
+  },
+  "Invest BharatPe: Gold & Silver": {
+    "developer": "Resilient Innovation Private Limited",
+    "package_name": "com.twelve.club",
+    "category": "Wealth Management",
+    "rating": 4.5,
+    "installs": "4M+"
+  },
+  "Investing.com: Stock Market": {
+    "developer": "INVESTING.com",
+    "package_name": "com.fusionmedia.investing",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "75M+"
+  },
+  "IronWallet: Crypto Wallet": {
+    "developer": "INWAY AKTIENGESELLSCHAFT",
+    "package_name": "com.wallet.crypto.btc.eth",
+    "category": "UPI",
+    "rating": 4.3,
+    "installs": "2M+"
+  },
+  "JM Pro: Demat & Stock Broking": {
+    "developer": "JM FINANCIAL SERVICES LIMITED",
+    "package_name": "com.jmfs.jmpro",
+    "category": "Broker",
+    "rating": 4.5,
+    "installs": "171K+"
+  },
+  "JanSamarth - Applicant": {
+    "developer": "Online PSB Loans",
+    "package_name": "com.projects.jansamarth",
+    "category": "Government Finance",
+    "rating": 4.1,
+    "installs": "685K+"
+  },
+  "Jana Bank Mobile Banking": {
+    "developer": "Jana Small Finance Bank",
+    "package_name": "com.janabank.mtc",
+    "category": "Bank",
+    "rating": 4.6,
+    "installs": "2M+"
+  },
+  "Jupiter: Cards, UPI, Banking": {
+    "developer": "Amica Financial Technologies Private Limited",
+    "package_name": "money.jupiter",
+    "category": "UPI",
+    "rating": 4.3,
+    "installs": "14M+"
+  },
+  "KB손해보험 공식앱 (대표+다이렉트 통합)": {
+    "developer": "KB손해보험",
+    "package_name": "com.kbins.kbinsure",
+    "category": "Insurance",
+    "rating": 4.2,
+    "installs": "6M+"
+  },
+  "KCEX: The Lowest Crypto Fees": {
+    "developer": "KCEX",
+    "package_name": "com.kcex",
+    "category": "Crypto",
+    "rating": 4.6,
+    "installs": "1M+"
+  },
+  "Kissht: Instant Personal Loans": {
+    "developer": "OnEMI Technology Solutions Limited.",
+    "package_name": "com.fastbanking",
+    "category": "Government Finance",
+    "rating": 4.8,
+    "installs": "55M+"
+  },
+  "Kiwi - UPI & Credit Card App": {
+    "developer": "GoKiwi Tech pvt ltd",
+    "package_name": "in.gokiwi.kiwitpap",
+    "category": "UPI",
+    "rating": 4.6,
+    "installs": "5M+"
+  },
+  "Klarna: Smarter everyday money": {
+    "developer": "Klarna Bank AB (publ)",
+    "package_name": "com.myklarnamobile",
+    "category": "Bank",
+    "rating": 4.7,
+    "installs": "81M+"
+  },
+  "Kotak Bank": {
+    "developer": "Kotak Mahindra Bank Ltd.",
+    "package_name": "com.kotak.bank.mobile",
+    "category": "Bank",
+    "rating": 4.7,
+    "installs": "7M+"
+  },
+  "Kotak Bank (Old)": {
+    "developer": "Kotak Mahindra Bank Ltd.",
+    "package_name": "com.msf.kbank.mobile",
+    "category": "Bank",
+    "rating": 4.2,
+    "installs": "89M+"
+  },
+  "Kotak Bank: 811 Mobile App": {
+    "developer": "Kotak Mahindra Bank Ltd.",
+    "package_name": "com.kotak811mobilebankingapp.instantsavingsupiscanandpayrecharge",
+    "category": "Bank",
+    "rating": 4.7,
+    "installs": "50M+"
+  },
+  "Kotak Neo: Stock Trading App": {
+    "developer": "Kotak NEO: Stocks, F&O, Demat, Mutual Funds",
+    "package_name": "com.kotak.neo",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "12M+"
+  },
+  "KuCoin: Buy Bitcoin & Crypto": {
+    "developer": "Kugame Global Limited",
+    "package_name": "com.kubi.kucoin",
+    "category": "Crypto",
+    "rating": 4.3,
+    "installs": "23M+"
+  },
+  "LIC Digital": {
+    "developer": "LIFE INSURANCE CORPORATION OF INDIA",
+    "package_name": "com.lic.liccustomer",
+    "category": "Government Finance",
+    "rating": 4.4,
+    "installs": "32M+"
+  },
+  "Lemonn Trade Futures & Options": {
+    "developer": "Bitkuber Investments Private Limited",
+    "package_name": "com.lemonn.app",
+    "category": "Broker",
+    "rating": 4.2,
+    "installs": "2M+"
+  },
+  "MAven - Borderless Benefits": {
+    "developer": "Medi Assist Healthcare Services",
+    "package_name": "in.mediassist.malite",
+    "category": "Insurance",
+    "rating": 4.2,
+    "installs": "1M+"
+  },
+  "MO RIISE: Stocks, IPO & Demat": {
+    "developer": "Motilal Oswal - Stock Market, Demat Account & IPO",
+    "package_name": "com.mosl.mobile",
+    "category": "Broker",
+    "rating": 4.1,
+    "installs": "16M+"
+  },
+  "MOVCAR - Fleet Management": {
+    "developer": "Limitless Solutions SRL",
+    "package_name": "com.movcar",
+    "category": "Insurance",
+    "rating": 4.5,
+    "installs": "157K+"
+  },
+  "MY Bharat": {
+    "developer": "Digital India Corporation, MeitY, GoI",
+    "package_name": "com.gov.mybharat",
+    "category": "Government Finance",
+    "rating": 4.1,
+    "installs": "137K+"
+  },
+  "Meesho: Online Shopping App": {
+    "developer": "Meesho",
+    "package_name": "com.meesho.supply",
+    "category": "Government Finance",
+    "rating": 4.4,
+    "installs": "884M+"
+  },
+  "Meine AOK": {
+    "developer": "AOK – Die Gesundheitskasse",
+    "package_name": "de.aoksystems.amg",
+    "category": "Insurance",
+    "rating": 4.4,
+    "installs": "6M+"
+  },
+  "MetaMask: Trade Crypto": {
+    "developer": "MetaMask Web3 Wallet",
+    "package_name": "io.metamask",
+    "category": "Crypto",
+    "rating": 4.6,
+    "installs": "46M+"
+  },
+  "Meu INSS – Central de Serviços": {
+    "developer": "Serviços e Informações do Brasil",
+    "package_name": "br.gov.dataprev.meuinss",
+    "category": "Government Finance",
+    "rating": 4.5,
+    "installs": "91M+"
+  },
+  "Microsoft Excel: Spreadsheets": {
+    "developer": "Microsoft Corporation",
+    "package_name": "com.microsoft.office.excel",
+    "category": "Government Finance",
+    "rating": 4.6,
+    "installs": "2B+"
+  },
+  "Mint by Investwell": {
+    "developer": "Excel Net Solutions Pvt. Ltd.",
+    "package_name": "com.iw.mint.app",
+    "category": "Wealth Management",
+    "rating": 4.7,
+    "installs": "453K+"
+  },
+  "Mirae Asset Mutual Fund": {
+    "developer": "MIRAE ASSET INVESTMENT MANAGERS (INDIA) PVT LTD",
+    "package_name": "com.mirae.investor.app",
+    "category": "Broker",
+    "rating": 4.1,
+    "installs": "664K+"
+  },
+  "MobiKwik: Loans, UPI & Wallet": {
+    "developer": "One MobiKwik Systems Limited",
+    "package_name": "com.mobikwik_new",
+    "category": "UPI",
+    "rating": 4.4,
+    "installs": "131M+"
+  },
+  "Mobile Banking UniCredit": {
+    "developer": "UniCredit S.p.A.",
+    "package_name": "com.unicredit",
+    "category": "Bank",
+    "rating": 4.8,
+    "installs": "8M+"
+  },
+  "Money Manager Expense & Budget": {
+    "developer": "Realbyte Inc.",
+    "package_name": "com.realbyteapps.moneymanagerfree",
+    "category": "Wealth Management",
+    "rating": 4.6,
+    "installs": "22M+"
+  },
+  "Money Manager ：Bills & Budget": {
+    "developer": "Wow Techs",
+    "package_name": "com.happy.money_manager",
+    "category": "Wealth Management",
+    "rating": 4.5,
+    "installs": "564K+"
+  },
+  "Money Manager: Expense Tracker": {
+    "developer": "KTW Apps",
+    "package_name": "com.ktwapps.walletmanager",
+    "category": "Wealth Management",
+    "rating": 4.6,
+    "installs": "1M+"
+  },
+  "Money Tracker-Expense & Budget": {
+    "developer": "Horoscope365",
+    "package_name": "com.freeman.moneymanager",
+    "category": "Wealth Management",
+    "rating": 4.9,
+    "installs": "8M+"
+  },
+  "Money manager & expenses": {
+    "developer": "Cleaner + Antivirus + VPN company",
+    "package_name": "ru.innim.my_finance",
+    "category": "Wealth Management",
+    "rating": 4.8,
+    "installs": "12M+"
+  },
+  "Moneyview: UPI, Personal Loans": {
+    "developer": "Moneyview",
+    "package_name": "com.whizdm.moneyview.loans",
+    "category": "UPI",
+    "rating": 4.8,
+    "installs": "96M+"
+  },
+  "Monzo Bank - Mobile Banking": {
+    "developer": "Monzo",
+    "package_name": "co.uk.getmondo",
+    "category": "Bank",
+    "rating": 4.7,
+    "installs": "13M+"
+  },
+  "Mudrex : Bitcoin & Crypto App": {
+    "developer": "Mudrex Inc.",
+    "package_name": "com.mudrexmobile",
+    "category": "Crypto",
+    "rating": 4.2,
+    "installs": "2M+"
+  },
+  "Muthoot FinCorp ONE": {
+    "developer": "Muthoot FinCorp ONE",
+    "package_name": "com.muthootfincorpone.superapp",
+    "category": "Government Finance",
+    "rating": 4.5,
+    "installs": "9M+"
+  },
+  "My Card Wallet": {
+    "developer": "Blackhawk Network",
+    "package_name": "com.blackhawk.myprepaidcenter",
+    "category": "UPI",
+    "rating": 4.4,
+    "installs": "1M+"
+  },
+  "My LIC": {
+    "developer": "LIFE INSURANCE CORPORATION OF INDIA",
+    "package_name": "com.lic.customer.superapp",
+    "category": "Insurance",
+    "rating": 4.7,
+    "installs": "5M+"
+  },
+  "My Wallet • Crypto & Web3": {
+    "developer": "MyTonWallet",
+    "package_name": "org.mytonwallet.app",
+    "category": "UPI",
+    "rating": 4,
+    "installs": "7M+"
+  },
+  "MyGov": {
+    "developer": "MyGovIndia",
+    "package_name": "in.mygov.mobile",
+    "category": "Government Finance",
+    "rating": 4.1,
+    "installs": "8M+"
+  },
+  "MyJio: For Everything Jio": {
+    "developer": "Jio Platforms Limited",
+    "package_name": "com.jio.myjio",
+    "category": "Government Finance",
+    "rating": 4.5,
+    "installs": "892M+"
+  },
+  "MyMoney—Track Expense & Budget": {
+    "developer": "Ananta Raha",
+    "package_name": "com.raha.app.mymoney.free",
+    "category": "Wealth Management",
+    "rating": 4.7,
+    "installs": "2M+"
+  },
+  "MySIPonline: SIP & Mutual Fund": {
+    "developer": "MY SIP ONLINE",
+    "package_name": "com.mysiponline",
+    "category": "Broker",
+    "rating": 4.5,
+    "installs": "130K+"
+  },
+  "MyWealth": {
+    "developer": "Fintso",
+    "package_name": "mobi.mywealth",
+    "category": "Wealth Management",
+    "rating": 4.1,
+    "installs": "420K+"
+  },
+  "National Park Service": {
+    "developer": "National Park Service",
+    "package_name": "gov.nps.mobileapp",
+    "category": "Government Finance",
+    "rating": 4.9,
+    "installs": "1M+"
+  },
+  "Navi: UPI, Payments, Insurance": {
+    "developer": "Navi",
+    "package_name": "com.naviapp",
+    "category": "UPI",
+    "rating": 4.5,
+    "installs": "183M+"
+  },
+  "Net Banking For All Bank": {
+    "developer": "R & S Apps",
+    "package_name": "com.rnsapps.ifsccodes",
+    "category": "Bank",
+    "rating": 4.2,
+    "installs": "448K+"
+  },
+  "Nickel - An account for all": {
+    "developer": "NiCKEL",
+    "package_name": "com.fpe.comptenickel",
+    "category": "Bank",
+    "rating": 5.0,
+    "installs": "5M+"
+  },
+  "Nippon India Mutual Fund": {
+    "developer": "NAM India",
+    "package_name": "com.godbtech.reliancemf",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "3M+"
+  },
+  "Niva Bupa Health": {
+    "developer": "Niva Bupa Health Insurance",
+    "package_name": "com.maxbupa.healthapp",
+    "category": "Insurance",
+    "rating": 4.5,
+    "installs": "13M+"
+  },
+  "OPay": {
+    "developer": "OPay Digital Services Limited",
+    "package_name": "team.opay.pay",
+    "category": "UPI",
+    "rating": 4.4,
+    "installs": "78M+"
+  },
+  "Okto: Crypto Trading Wallet": {
+    "developer": "Okto Official",
+    "package_name": "com.coindcx.okto",
+    "category": "Crypto",
+    "rating": 5,
+    "installs": "359K+"
+  },
+  "OmniCard: UPI, Card & Rewards": {
+    "developer": "Eroute Technologies Private Limited",
+    "package_name": "com.eroute.omnicard",
+    "category": "UPI",
+    "rating": 4.5,
+    "installs": "3M+"
+  },
+  "PF Balance, PF Passbook-My PF": {
+    "developer": "Version Systems Pvt. Ltd.",
+    "package_name": "com.vspl.pf",
+    "category": "Government Finance",
+    "rating": 4.7,
+    "installs": "1M+"
+  },
+  "PF Balance, UAN, EPF balance": {
+    "developer": "MWCI PVT. LTD.",
+    "package_name": "com.versionsystems.pfbalancecheck",
+    "category": "Government Finance",
+    "rating": 4.6,
+    "installs": "16M+"
+  },
+  "PNB ONE": {
+    "developer": "PNB",
+    "package_name": "com.Version1",
+    "category": "Bank",
+    "rating": 4.3,
+    "installs": "59M+"
+  },
+  "PSB UnIC": {
+    "developer": "Punjab & Sind Bank",
+    "package_name": "com.psb.omniretail",
+    "category": "Bank",
+    "rating": 4.4,
+    "installs": "2M+"
+  },
+  "PayRupik Instant Personal Loan": {
+    "developer": "Sayyam Investments Pvt Ltd",
+    "package_name": "in.hanafintech",
+    "category": "Government Finance",
+    "rating": 4.5,
+    "installs": "26M+"
+  },
+  "PayZapp UPI Wallet, Pixel Card": {
+    "developer": "HDFC Bank Limited",
+    "package_name": "com.hdfcbank.payzapp",
+    "category": "Bank",
+    "rating": 4.6,
+    "installs": "29M+"
+  },
+  "Paytm Money Stocks, MF, IPO": {
+    "developer": "Paytm - One97 Communications Ltd.",
+    "package_name": "com.paytmmoney",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "26M+"
+  },
+  "Paytm: Secure UPI Payments": {
+    "developer": "Paytm - One97 Communications Ltd.",
+    "package_name": "net.one97.paytm",
+    "category": "UPI",
+    "rating": 4.7,
+    "installs": "729M+"
+  },
+  "Pensionbazaar": {
+    "developer": "Pensionbazaar",
+    "package_name": "com.pensionbazaar",
+    "category": "Government Finance",
+    "rating": 4.1,
+    "installs": "101K+"
+  },
+  "Phantom": {
+    "developer": "Phantom Technologies, Inc.",
+    "package_name": "app.phantom",
+    "category": "Crypto",
+    "rating": 4.6,
+    "installs": "19M+"
+  },
+  "PhonePe Business: Merchant App": {
+    "developer": "PhonePe",
+    "package_name": "com.phonepe.app.business",
+    "category": "UPI",
+    "rating": 4.0,
+    "installs": "104M+"
+  },
+  "PhonePe UPI Payments, Loan App": {
+    "developer": "PhonePe",
+    "package_name": "com.phonepe.app",
+    "category": "Bank",
+    "rating": 4.4,
+    "installs": "963M+"
+  },
+  "Piramal Finance - Loans & More": {
+    "developer": "Piramal Finance LTD",
+    "package_name": "com.piramal.app.pchf",
+    "category": "Government Finance",
+    "rating": 4.6,
+    "installs": "4M+"
+  },
+  "Policybazaar - Buy Insurance": {
+    "developer": "Policybazaar - Buy Insurance Online",
+    "package_name": "com.policybazaar",
+    "category": "Insurance",
+    "rating": 4.5,
+    "installs": "36M+"
+  },
+  "PowerUp Money: Mutual Funds": {
+    "developer": "Powerup Money",
+    "package_name": "money.powerup.uni.invest.app",
+    "category": "Broker",
+    "rating": 4.7,
+    "installs": "2M+"
+  },
+  "Probus Insurance": {
+    "developer": "Probus Insurance",
+    "package_name": "in.probusinsurance.app",
+    "category": "Insurance",
+    "rating": 4.6,
+    "installs": "107K+"
+  },
+  "QIC: Insurance, Market, Travel": {
+    "developer": "Qatar Insurance Company",
+    "package_name": "app.qd.qatardrive",
+    "category": "Insurance",
+    "rating": 4.7,
+    "installs": "141K+"
+  },
+  "RedotPay: Crypto Card & Pay": {
+    "developer": "Red Dot Technology Limited",
+    "package_name": "com.redotpay",
+    "category": "Crypto",
+    "rating": 4.8,
+    "installs": "4M+"
+  },
+  "Rupee112: Personal Loan App": {
+    "developer": "DACPL",
+    "package_name": "com.vrindafinlease.rupee112",
+    "category": "Government Finance",
+    "rating": 4.8,
+    "installs": "5M+"
+  },
+  "Rupeeontime – Instant Loan": {
+    "developer": "DACPL",
+    "package_name": "com.devaashishcapitals.rot",
+    "category": "Government Finance",
+    "rating": 4.6,
+    "installs": "1M+"
+  },
+  "SBI Card: Manage Credit Card": {
+    "developer": "SBI Cards and Payment Services Limited",
+    "package_name": "com.ge.capital.konysbiapp",
+    "category": "Bank",
+    "rating": 4.6,
+    "installs": "44M+"
+  },
+  "SBI Mutual Fund - InvesTap Nxt": {
+    "developer": "SBI Funds Management Limited",
+    "package_name": "com.sbi.mf",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "7M+"
+  },
+  "SBI Securities: Stocks & SIP": {
+    "developer": "SBICAP Securities",
+    "package_name": "com.msf.sbicap.securities",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "7M+"
+  },
+  "SMC Ace: Demat, Stocks & IPO": {
+    "developer": "SMC Global Securities Ltd",
+    "package_name": "com.smc.ace",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "854K+"
+  },
+  "SSO+": {
+    "developer": "Social Security Office of Thailand",
+    "package_name": "com.sso.ssoplus",
+    "category": "Insurance",
+    "rating": 4.8,
+    "installs": "8M+"
+  },
+  "SafePal: Crypto Wallet BTC NFT": {
+    "developer": "SafePal Wallet",
+    "package_name": "io.safepal.wallet",
+    "category": "UPI",
+    "rating": 4.7,
+    "installs": "6M+"
+  },
+  "Sahi : Options & Stock Trading": {
+    "developer": "Aaritya Technologies Pvt Limited",
+    "package_name": "com.aaritya.sahi_trade_app",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "3M+"
+  },
+  "Samsung Wallet (Samsung Pay)": {
+    "developer": "Samsung Electronics Co.,  Ltd.",
+    "package_name": "com.samsung.android.spay",
+    "category": "UPI",
+    "rating": 4.1,
+    "installs": "392M+"
+  },
+  "Scripbox Mutual Fund & SIP App": {
+    "developer": "Scripbox - Invest in Mutual Funds",
+    "package_name": "com.scripbox.takecharge",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "2M+"
+  },
+  "Shriram One: FD, UPI, Loans": {
+    "developer": "Shriram Finance Limited",
+    "package_name": "com.shriram.one",
+    "category": "Government Finance",
+    "rating": 4.5,
+    "installs": "21M+"
+  },
+  "Simple:  Сrypto BTC, USDC": {
+    "developer": "Simple Europe",
+    "package_name": "app.simple.com",
+    "category": "Crypto",
+    "rating": 4.7,
+    "installs": "1M+"
+  },
+  "Stable Money: FDs & Bonds": {
+    "developer": "Stable-Alpha Technologies Private Limited",
+    "package_name": "in.stablemoney.app",
+    "category": "Wealth Management",
+    "rating": 4.6,
+    "installs": "7M+"
+  },
+  "Standard Bank / Stanbic Bank": {
+    "developer": "Standard Bank / Stanbic Bank",
+    "package_name": "com.sbg.mobile.phone",
+    "category": "Bank",
+    "rating": 4.5,
+    "installs": "13M+"
+  },
+  "Star Health": {
+    "developer": "Star Health And Allied Insurance Company Limited",
+    "package_name": "com.star.customer_app",
+    "category": "Insurance",
+    "rating": 4.6,
+    "installs": "8M+"
+  },
+  "Stock Market Simulator Game": {
+    "developer": "Three Investeers",
+    "package_name": "com.threeinvesteers.app",
+    "category": "Broker",
+    "rating": 4.5,
+    "installs": "3M+"
+  },
+  "StockEdge: Stock Market App": {
+    "developer": "StockEdge Fintech Private Limited",
+    "package_name": "in.stockedge.app",
+    "category": "Broker",
+    "rating": 4.5,
+    "installs": "5M+"
+  },
+  "Sun Crypto: Buy & Sell Crypto": {
+    "developer": "SunCrypto",
+    "package_name": "com.suncrypto.in",
+    "category": "Crypto",
+    "rating": 4.4,
+    "installs": "3M+"
+  },
+  "Sweat Wallet: Walk Into Crypto": {
+    "developer": "The Sweat Foundation",
+    "package_name": "com.sweatwallet",
+    "category": "Crypto",
+    "rating": 4.4,
+    "installs": "22M+"
+  },
+  "TATA AIG Insurance": {
+    "developer": "Tata AIG General Insurance Co. Ltd.",
+    "package_name": "com.tataaig.android",
+    "category": "Insurance",
+    "rating": 4.6,
+    "installs": "3M+"
+  },
+  "TK-App": {
+    "developer": "Techniker Krankenkasse (TK)",
+    "package_name": "de.tk.tkapp",
+    "category": "Insurance",
+    "rating": 4.8,
+    "installs": "5M+"
+  },
+  "TMB MBank": {
+    "developer": "Tamilnad Mercantile Bank",
+    "package_name": "com.tmb.mbank",
+    "category": "Bank",
+    "rating": 4.0,
+    "installs": "2M+"
+  },
+  "Tata AIA Life Insurance": {
+    "developer": "SecureLife App TataAIA Life Insurance Products",
+    "package_name": "com.tataaialife",
+    "category": "Insurance",
+    "rating": 4.6,
+    "installs": "1M+"
+  },
+  "Tata Capital Loan App & Wealth": {
+    "developer": "Tata Capital Limited.",
+    "package_name": "com.snapwork.tcl",
+    "category": "Government Finance",
+    "rating": 4.4,
+    "installs": "9M+"
+  },
+  "Tax Calculator India 2025-2026": {
+    "developer": "Quintet Solutions Pvt Ltd",
+    "package_name": "com.quintetsolutions",
+    "category": "Government Finance",
+    "rating": 4.6,
+    "installs": "830K+"
+  },
+  "TaxBuddy: Income Tax & Finance": {
+    "developer": "TaxBuddy.com",
+    "package_name": "com.taxbuddy.gst",
+    "category": "Government Finance",
+    "rating": 4.2,
+    "installs": "1M+"
+  },
+  "TaxSlayer: File your taxes": {
+    "developer": "TaxSlayer",
+    "package_name": "com.taxslayerRFC",
+    "category": "Government Finance",
+    "rating": 4,
+    "installs": "769K+"
+  },
+  "TokenPocket: Crypto & Bitcoin": {
+    "developer": "TP Global Ltd",
+    "package_name": "vip.mytokenpocket",
+    "category": "Crypto",
+    "rating": 4.5,
+    "installs": "8M+"
+  },
+  "TradingOcta: smart trading app": {
+    "developer": "Cygata Solutions",
+    "package_name": "com.octa8",
+    "category": "Broker",
+    "rating": 4.3,
+    "installs": "12M+"
+  },
+  "TradingView: Bitcoin & crypto": {
+    "developer": "TradingView Inc.",
+    "package_name": "com.tradingview.tradingviewapp",
+    "category": "Broker",
+    "rating": 4.7,
+    "installs": "57M+"
+  },
+  "Trust: Crypto & Bitcoin Wallet": {
+    "developer": "DApps Platform, Inc.",
+    "package_name": "com.wallet.crypto.trustapp",
+    "category": "UPI",
+    "rating": 4.6,
+    "installs": "77M+"
+  },
+  "Turtlemint Insurance & Claims": {
+    "developer": "Turtlemint Fintech Solutions Limited",
+    "package_name": "com.turtlemintconsumerapp",
+    "category": "Insurance",
+    "rating": 4.4,
+    "installs": "310K+"
+  },
+  "TurtlemintPro - Sell Insurance": {
+    "developer": "Turtlemint Fintech Solutions Limited",
+    "package_name": "in.mintpro",
+    "category": "Insurance",
+    "rating": 4.5,
+    "installs": "5M+"
+  },
+  "UBA Mobile Banking": {
+    "developer": "United Bank for Africa Plc",
+    "package_name": "com.uba.vericash",
+    "category": "Bank",
+    "rating": 4.2,
+    "installs": "16M+"
+  },
+  "UCO mBanking Plus": {
+    "developer": "UCO BANK",
+    "package_name": "com.lcode.ucomobilebanking",
+    "category": "Bank",
+    "rating": 4.7,
+    "installs": "14M+"
+  },
+  "UMANG": {
+    "developer": "MeitY, Government Of India",
+    "package_name": "in.gov.umang.negd.g2c",
+    "category": "Government Finance",
+    "rating": 4.6,
+    "installs": "127M+"
+  },
+  "UPI Payment Announcer SoundBox": {
+    "developer": "TrackMyPhones Mobile Solutions Pvt Ltd",
+    "package_name": "com.trackmyphones.upipaymentannouncer",
+    "category": "UPI",
+    "rating": 4.4,
+    "installs": "2M+"
+  },
+  "Univest: Stocks, F&O, Equity": {
+    "developer": "Univest Communication Technologies Pvt Ltd",
+    "package_name": "com.univest.capp",
+    "category": "Broker",
+    "rating": 4.7,
+    "installs": "11M+"
+  },
+  "Upstox Stocks IPO Mutual Funds": {
+    "developer": "Upstox - Stock Market Trading & Demat Account App",
+    "package_name": "in.upstox.app",
+    "category": "Broker",
+    "rating": 4.3,
+    "installs": "46M+"
+  },
+  "Vantage:All-In-One Trading App": {
+    "developer": "Vantage Global Prime PTY LTD",
+    "package_name": "cn.com.vau",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "9M+"
+  },
+  "Vehicleinfo - RTO Information": {
+    "developer": "CARS24 Services Private Limited",
+    "package_name": "com.vehicle.rto.vahan.status.information.register",
+    "category": "Insurance",
+    "rating": 4.5,
+    "installs": "105M+"
+  },
+  "WEEX - Buy Bitcoin & Crypto": {
+    "developer": "WEEX PRO",
+    "package_name": "com.wake.weexprd",
+    "category": "Crypto",
+    "rating": 4.8,
+    "installs": "1M+"
+  },
+  "Wallet - Digital Wallet Card": {
+    "developer": "SUNMARE DIGITAL TEKNOLOJI YAZILIM SANAYI TICARET",
+    "package_name": "com.cards.wallet.cardsapp",
+    "category": "UPI",
+    "rating": 4.4,
+    "installs": "1M+"
+  },
+  "Wallet Safe Card: Card Wallet": {
+    "developer": "SUNMARE DIGITAL TEKNOLOJI YAZILIM SANAYI TICARET",
+    "package_name": "com.nfc.creditcard.wallet.cardkeeperx",
+    "category": "UPI",
+    "rating": 4.5,
+    "installs": "1M+"
+  },
+  "Wallet: Budget Expense Tracker": {
+    "developer": "BudgetBakers",
+    "package_name": "com.droid4you.application.wallet",
+    "category": "UPI",
+    "rating": 4.7,
+    "installs": "12M+"
+  },
+  "Way2News Daily News App": {
+    "developer": "Way2News ( Formerly Way2SMS )",
+    "package_name": "sun.way2sms.hyd.com",
+    "category": "Government Finance",
+    "rating": 4.7,
+    "installs": "71M+"
+  },
+  "Wealth Elite": {
+    "developer": "Red Vision Global Technologies",
+    "package_name": "com.redvision.wealth_elite",
+    "category": "Wealth Management",
+    "rating": 4.6,
+    "installs": "594K+"
+  },
+  "Wealth Monitor: MF & Stocks": {
+    "developer": "Dezerv",
+    "package_name": "com.dezerv.wealth.checkup",
+    "category": "Wealth Management",
+    "rating": 4.5,
+    "installs": "1M+"
+  },
+  "Wealthy: Stocks & Mutual Funds": {
+    "developer": "Wealthy.in",
+    "package_name": "in.wealthy.android.wealthy",
+    "category": "Wealth Management",
+    "rating": 4.2,
+    "installs": "290K+"
+  },
+  "XT.com: Buy Bitcoin & Ethereum": {
+    "developer": "XT.COM Inc.",
+    "package_name": "com.app.xt",
+    "category": "Crypto",
+    "rating": 4.3,
+    "installs": "1M+"
+  },
+  "YONO SBI: Banking & Lifestyle": {
+    "developer": "State Bank of India",
+    "package_name": "com.sbi.lotusintouch",
+    "category": "Bank",
+    "rating": 4.2,
+    "installs": "237M+"
+  },
+  "Yahoo Finance: Stocks & News": {
+    "developer": "Yahoo",
+    "package_name": "com.yahoo.mobile.client.android.finance",
+    "category": "Broker",
+    "rating": 4.6,
+    "installs": "25M+"
+  },
+  "ZebPay: Bitcoin & Crypto App": {
+    "developer": "ZebPay",
+    "package_name": "zebpay.Application",
+    "category": "Crypto",
+    "rating": 4.6,
+    "installs": "8M+"
+  },
+  "Zen Lyfe - Bank of Maharashtra": {
+    "developer": "Bank of Maharashtra",
+    "package_name": "com.bom.lifestylebanking",
+    "category": "Bank",
+    "rating": 4.2,
+    "installs": "2M+"
+  },
+  "Zerodha Kite - Trade & Invest": {
+    "developer": "Zerodha",
+    "package_name": "com.zerodha.kite3",
+    "category": "Broker",
+    "rating": 4.4,
+    "installs": "34M+"
+  },
+  "ZestMoney - Shop on easy EMIs": {
+    "developer": "DMI Info Tech Solutions",
+    "package_name": "in.zestmoney.android.zestlife",
+    "category": "Government Finance",
+    "rating": 4.3,
+    "installs": "16M+"
+  },
+  "Zomato: Food Delivery & Dining": {
+    "developer": "Zomato",
+    "package_name": "com.application.zomato",
+    "category": "Government Finance",
+    "rating": 4.6,
+    "installs": "373M+"
+  },
+  "Zuno General Insurance": {
+    "developer": "Zuno General Insurance",
+    "package_name": "app.edelweissinsurance.com",
+    "category": "Insurance",
+    "rating": 4.6,
+    "installs": "170K+"
+  },
+  "axio: Expense Tracker & Budget": {
+    "developer": "Axio Digital Pvt. Ltd.",
+    "package_name": "com.daamitt.walnut.app",
+    "category": "Wealth Management",
+    "rating": 4.5,
+    "installs": "15M+"
+  },
+  "blinkX-Stocks, IPO & Demat App": {
+    "developer": "blinkX - Demat Account, Stock Market Trading & IPO",
+    "package_name": "com.msf.blinktrade",
+    "category": "Broker",
+    "rating": 4.5,
+    "installs": "1M+"
+  },
+  "bob World:Banking & Experience": {
+    "developer": "Bank of Baroda",
+    "package_name": "com.bankofbaroda.mconnect",
+    "category": "Bank",
+    "rating": 4.3,
+    "installs": "85M+"
+  },
+  "eToro: Trade. Invest. Connect.": {
+    "developer": "eToro",
+    "package_name": "com.etoro.openbook",
+    "category": "Broker",
+    "rating": 4.0,
+    "installs": "23M+"
+  },
+  "iMobile: Loan, Cards & Banking": {
+    "developer": "ICICI Bank Ltd.",
+    "package_name": "com.csam.icici.bank.imobile",
+    "category": "Bank",
+    "rating": 4.6,
+    "installs": "69M+"
+  },
+  "mStock: Demat & Stock Trading": {
+    "developer": "Mirae Asset Capital Markets (India) Pvt. Ltd.",
+    "package_name": "com.rs.mirae",
+    "category": "Broker",
+    "rating": 4.1,
+    "installs": "18M+"
+  },
+  "myCAMS Mutual Fund App": {
+    "developer": "Computer Age Management Services Limited",
+    "package_name": "com.KCamsApp",
+    "category": "Broker",
+    "rating": 4.5,
+    "installs": "8M+"
+  },
+  "slice: UPI credit card & bank": {
+    "developer": "slice small finance bank",
+    "package_name": "indwin.c3.shareapp",
+    "category": "Bank",
+    "rating": 4.5,
+    "installs": "42M+"
+  },
+  "smallcase: Stocks, MFs, FDs": {
+    "developer": "CASE Platforms: Invest with confidence",
+    "package_name": "com.smallcase.android",
+    "category": "Broker",
+    "rating": 4.5,
+    "installs": "6M+"
+  },
+  "super.money - UPI by Flipkart": {
+    "developer": "Super.money",
+    "package_name": "money.super.payments",
+    "category": "UPI",
+    "rating": 4.5,
+    "installs": "54M+"
+  },
+  "건강보험25시": {
+    "developer": "국민건강보험공단",
+    "package_name": "kr.or.nhic",
+    "category": "Insurance",
+    "rating": 4.1,
+    "installs": "22M+"
+  },
+  "내 곁에 국민연금": {
+    "developer": "National Pension Service",
+    "package_name": "kr.or.nps.smart",
+    "category": "Government Finance",
+    "rating": 4,
+    "installs": "8M+"
+  }
+}

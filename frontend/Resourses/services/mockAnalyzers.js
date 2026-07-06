@@ -1,6 +1,5 @@
 // Mock AI analysis engines.
 // Each function returns Promise<ScanResult> with realistic delays.
-// Replace the body of each function with real API calls later.
 
 function generateId() {
   return 'scan_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
@@ -12,14 +11,6 @@ function delay(ms) {
 
 function randomBetween(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function getRiskLevel(score) {
-  if (score >= 90) return 'Critical';
-  if (score >= 70) return 'High';
-  if (score >= 50) return 'Medium';
-  if (score >= 25) return 'Low';
-  return 'Safe';
 }
 
 const appNames = ['CryptoGroww Pro', 'InvestEasy Plus', 'QuickTrade Hub', 'WealthGuard', 'StockMaster AI', 'PayFast Wallet', 'MoneyGrow App', 'TrustInvest Pro', 'SecureBank Lite', 'FinanceBot'];
@@ -62,32 +53,44 @@ function pickRandom(arr, count) {
 }
 
 function buildResult(type, overrides = {}) {
-  const riskScore = overrides.riskScore ?? randomBetween(15, 98);
-  const riskLevel = getRiskLevel(riskScore);
+  const threatScore = overrides.threatScore ?? randomBetween(15, 98);
+  const trustScore = overrides.trustScore ?? Math.max(0, 100 - threatScore - randomBetween(5, 15));
+  const confidenceScore = overrides.confidenceScore ?? randomBetween(60, 95);
+  
+  let verificationStatus = 'Unknown';
+  if (threatScore >= 80) verificationStatus = 'Critical Threat';
+  else if (threatScore >= 60) verificationStatus = 'High Risk Fraud';
+  else if (threatScore >= 40) verificationStatus = 'Suspicious';
+  else if (trustScore >= 80) verificationStatus = 'Trusted Financial Application';
+  else if (trustScore >= 50) verificationStatus = 'Likely Legitimate';
+  else verificationStatus = 'Needs Review';
+
   const appName = overrides.appName || appNames[randomBetween(0, appNames.length - 1)];
   const developer = overrides.developer || developers[randomBetween(0, developers.length - 1)];
 
   const issueCategories = type === 'website' ? [issuePool.web, issuePool.content] : [issuePool.permissions, issuePool.behavior, issuePool.content];
   const allPossibleIssues = issueCategories.flat();
-  const issueCount = riskScore >= 70 ? randomBetween(4, 6) : riskScore >= 40 ? randomBetween(2, 4) : randomBetween(0, 2);
+  const issueCount = threatScore >= 70 ? randomBetween(4, 6) : threatScore >= 40 ? randomBetween(2, 4) : randomBetween(0, 2);
   const detectedIssues = pickRandom(allPossibleIssues, issueCount);
 
   const permissionsList = ['android.permission.INTERNET', 'android.permission.READ_PHONE_STATE', 'android.permission.ACCESS_FINE_LOCATION', 'android.permission.CAMERA', 'android.permission.READ_CONTACTS', 'android.permission.SEND_SMS', 'android.permission.RECORD_AUDIO', 'android.permission.READ_EXTERNAL_STORAGE', 'android.permission.SYSTEM_ALERT_WINDOW', 'android.permission.RECEIVE_BOOT_COMPLETED'];
   const permissions = pickRandom(permissionsList, randomBetween(3, 8));
 
   const recommendations = [];
-  if (riskScore >= 70) recommendations.push('Immediately uninstall this application and change any passwords used with it.');
-  if (riskScore >= 50) recommendations.push('Do not enter any personal or financial information into this application.');
-  if (riskScore >= 30) recommendations.push('Verify the developer identity through official channels before trusting this app.');
+  if (threatScore >= 70) recommendations.push('Immediately uninstall this application and change any passwords used with it.');
+  if (threatScore >= 50) recommendations.push('Do not enter any personal or financial information into this application.');
+  if (threatScore >= 30) recommendations.push('Verify the developer identity through official channels before trusting this app.');
   recommendations.push('Report this application to the relevant app store if suspicious activity is confirmed.');
   if (type === 'website') recommendations.push('Do not click any links or download files from this website.');
 
   const verdicts = {
-    Critical: 'This application exhibits multiple critical security threats and has been classified as extremely dangerous. Immediate removal is strongly recommended.',
-    High: 'Significant security concerns have been identified. This application shows patterns commonly associated with fraudulent software.',
-    Medium: 'This application shows some suspicious indicators that warrant further investigation before continued use.',
-    Low: 'Minor concerns detected. The application appears mostly legitimate but has some unusual characteristics.',
-    Safe: 'No significant threats detected. This application appears to be legitimate and safe for use.',
+    'Critical Threat': 'This application exhibits multiple critical security threats and has been classified as extremely dangerous. Immediate removal is strongly recommended.',
+    'High Risk Fraud': 'Significant security concerns have been identified. This application shows patterns commonly associated with fraudulent software.',
+    'Suspicious': 'This application shows some suspicious indicators that warrant further investigation before continued use.',
+    'Needs Review': 'Minor concerns detected. The application appears mostly legitimate but has some unusual characteristics.',
+    'Likely Legitimate': 'No significant threats detected. This application appears to be legitimate.',
+    'Trusted Financial Application': 'No significant threats detected. This application appears to be highly trusted and safe for use.',
+    'Trusted Application': 'No significant threats detected. This application appears to be highly trusted and safe for use.',
   };
 
   return {
@@ -95,24 +98,24 @@ function buildResult(type, overrides = {}) {
     type,
     appName,
     developer,
-    riskScore,
-    riskLevel,
-    summary: `AI analysis ${riskScore >= 70 ? 'flagged critical threats' : riskScore >= 40 ? 'identified some concerns' : 'found no major issues'} in ${appName} by ${developer}. Risk score: ${riskScore}/100.`,
+    trustScore,
+    threatScore,
+    confidenceScore,
+    verificationStatus,
+    summary: `AI analysis ${threatScore >= 70 ? 'flagged critical threats' : threatScore >= 40 ? 'identified some concerns' : 'found no major issues'} in ${appName} by ${developer}. Threat score: ${threatScore}/100.`,
     detectedIssues,
     permissions,
     recommendations,
     evidence: [
-      { type: 'metric', label: 'Threat Score', value: `${riskScore}/100` },
+      { type: 'metric', label: 'Threat Score', value: `${threatScore}/100` },
       { type: 'metric', label: 'Issues Found', value: `${detectedIssues.length}` },
       { type: 'text', label: 'Analysis Engine', value: 'SentinelAI v3.2 Neural Classifier' },
       { type: 'text', label: 'Scan Duration', value: `${randomBetween(3, 8)}s` },
     ],
     metadata: overrides.metadata || {},
     timestamp: new Date().toISOString(),
-    aiVerdict: verdicts[riskLevel],
+    aiVerdict: verdicts[verificationStatus] || 'Assessment unavailable.',
     ...overrides,
-    riskScore,
-    riskLevel,
   };
 }
 
@@ -152,68 +155,48 @@ export async function analyzePlayStore(url, onProgress) {
 
   const appDetails = responseData.app_details;
   const analysis = responseData.analysis;
-  const riskScore = analysis.risk_score;
-  const riskLevel = getRiskLevel(riskScore);
+  
+  const trustScore = analysis.trust_score || 0;
+  const threatScore = analysis.threat_score || 0;
+  const confidenceScore = analysis.confidence_score || 0;
+  const verificationStatus = analysis.status || 'Unknown';
 
-  const detectedIssues = [];
-  if (analysis.breakdown.name.risk >= 50) {
-    detectedIssues.push({
-      severity: analysis.breakdown.name.risk >= 90 ? 'Critical' : 'High',
-      title: 'Brand Impersonation',
-      description: `App name is highly similar to '${analysis.breakdown.name.matched}' (${analysis.breakdown.name.similarity}% similarity).`
-    });
-  }
-  if (analysis.breakdown.developer.risk >= 50) {
-    detectedIssues.push({
-      severity: 'High',
-      title: 'Developer Mismatch',
-      description: `Developer name '${appDetails.developer}' does not match expected developer '${analysis.breakdown.developer.expected}'.`
-    });
-  }
-  if (analysis.breakdown.description.risk >= 50) {
-    detectedIssues.push({
-      severity: 'High',
-      title: 'Suspicious Description Keywords',
-      description: `Detected fraud-associated keywords: ${analysis.breakdown.description.keywords_found.join(', ')}.`
-    });
-  }
-  if (analysis.breakdown.installs.risk >= 50) {
-    detectedIssues.push({
-      severity: 'Medium',
-      title: 'Low Install Count',
-      description: analysis.breakdown.installs.note
-    });
-  }
+  const detectedIssues = (analysis.issues || []).map(r => ({
+      severity: threatScore >= 70 ? 'High' : 'Medium',
+      title: 'Fraud Indicator',
+      description: r
+  }));
 
   const recommendations = [];
-  if (riskScore >= 70) recommendations.push('Immediately uninstall this application and change any passwords used with it.');
-  if (riskScore >= 50) recommendations.push('Do not enter any personal or financial information into this application.');
-  if (riskScore >= 30) recommendations.push('Verify the developer identity through official channels before trusting this app.');
+  if (threatScore >= 70) recommendations.push('Immediately uninstall this application and change any passwords used with it.');
+  if (threatScore >= 50) recommendations.push('Do not enter any personal or financial information into this application.');
+  if (threatScore >= 30) recommendations.push('Verify the developer identity through official channels before trusting this app.');
   recommendations.push('Report this application to the relevant app store if suspicious activity is confirmed.');
 
-  const verdicts = {
-    Critical: 'This application exhibits multiple critical security threats and has been classified as extremely dangerous. Immediate removal is strongly recommended.',
-    High: 'Significant security concerns have been identified. This application shows patterns commonly associated with fraudulent software.',
-    Medium: 'This application shows some suspicious indicators that warrant further investigation before continued use.',
-    Low: 'Minor concerns detected. The application appears mostly legitimate but has some unusual characteristics.',
-    Safe: 'No significant threats detected. This application appears to be legitimate and safe for use.',
-  };
-
   const evidence = [
-    { type: 'metric', label: 'Threat Score', value: `${riskScore}/100` },
+    { type: 'metric', label: 'Trust Score', value: `${trustScore}/100` },
+    { type: 'metric', label: 'Threat Score', value: `${threatScore}/100` },
+    { type: 'metric', label: 'Confidence', value: `${confidenceScore}%` },
     { type: 'metric', label: 'Ratings Count', value: `${(appDetails.ratings || 0).toLocaleString()}` },
-    { type: 'text', label: 'Analysis Engine', value: 'SentinelAI Play Store Scraper' },
-    { type: 'text', label: 'Category/Genre', value: appDetails.genre || 'Finance' }
+    { type: 'text', label: 'Analysis Engine', value: 'SentinelAI Intelligence Engine 2.0' },
   ];
 
+  if (analysis.trust_signals) {
+    analysis.trust_signals.forEach(signal => {
+      evidence.push({ type: 'text', label: 'Verified Signal', value: signal });
+    });
+  }
+
   return {
-    id: 'scan_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+    id: responseData.id || 'scan_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
     type: 'playstore',
     appName: appDetails.title,
     developer: appDetails.developer,
-    riskScore,
-    riskLevel,
-    summary: `Real-time Play Store analysis completed. ${riskScore >= 70 ? 'Flagged critical threats' : riskScore >= 40 ? 'Identified some concerns' : 'Found no major issues'} in ${appDetails.title} by ${appDetails.developer}. Risk score: ${riskScore}/100.`,
+    trustScore,
+    threatScore,
+    confidenceScore,
+    verificationStatus,
+    summary: `Play Store analysis completed. ${threatScore >= 70 ? 'Flagged critical threats' : threatScore >= 40 ? 'Identified some concerns' : 'Found no major issues'} in ${appDetails.title} by ${appDetails.developer}. Threat score: ${threatScore}/100.`,
     detectedIssues,
     permissions: [],
     recommendations,
@@ -227,7 +210,7 @@ export async function analyzePlayStore(url, onProgress) {
       rating: appDetails.score ? Number(appDetails.score).toFixed(1) : 'N/A',
     },
     timestamp: new Date().toISOString(),
-    aiVerdict: analysis.ai_report || verdicts[riskLevel],
+    aiVerdict: analysis.ai_report || 'AI assessment unavailable',
   };
 }
 
@@ -269,39 +252,45 @@ export async function analyzeManual(formData, onProgress) {
   
   onProgress?.({ progress: 100, status: 'Analysis Complete', detail: 'Security report generated successfully.' });
 
-  const riskScore = responseData.risk_score;
-  let riskLevel = 'Low';
-  if (riskScore >= 70) riskLevel = 'High';
-  else if (riskScore >= 40) riskLevel = 'Medium';
-  else if (riskScore >= 20) riskLevel = 'Low';
-  else riskLevel = 'Safe';
+  const trustScore = responseData.trust_score || 0;
+  const threatScore = responseData.threat_score || 0;
+  const confidenceScore = responseData.confidence_score || 0;
+  const verificationStatus = responseData.status || 'Unknown';
 
-  const detectedIssues = responseData.reasons.map(r => ({
-      severity: riskLevel === 'High' ? 'High' : riskLevel === 'Medium' ? 'Medium' : 'Low',
+  const detectedIssues = (responseData.issues || []).map(r => ({
+      severity: threatScore >= 70 ? 'High' : 'Medium',
       title: 'Fraud Indicator',
       description: r
   }));
 
   const evidence = [
-    { type: 'metric', label: 'Threat Score', value: `${riskScore}/100` },
-    { type: 'text', label: 'Matched Brand', value: responseData.matched_app },
+    { type: 'metric', label: 'Trust Score', value: `${trustScore}/100` },
+    { type: 'metric', label: 'Threat Score', value: `${threatScore}/100` },
+    { type: 'metric', label: 'Confidence', value: `${confidenceScore}%` },
     { type: 'text', label: 'Developer Verified', value: responseData.developer_verified ? 'Yes' : 'No' },
-    { type: 'metric', label: 'Confidence', value: `${responseData.confidence}%` },
   ];
 
+  if (responseData.trust_signals) {
+    responseData.trust_signals.forEach(signal => {
+      evidence.push({ type: 'text', label: 'Verified Signal', value: signal });
+    });
+  }
+
   const recommendations = [];
-  if (riskScore >= 70) recommendations.push('Immediately avoid this application and do not share personal information.');
-  if (riskScore >= 50) recommendations.push('Do not enter any personal or financial information into this application.');
-  if (riskScore >= 30) recommendations.push('Verify the developer identity through official channels before trusting this app.');
+  if (threatScore >= 70) recommendations.push('Immediately avoid this application and do not share personal information.');
+  if (threatScore >= 50) recommendations.push('Do not enter any personal or financial information into this application.');
+  if (threatScore >= 30) recommendations.push('Verify the developer identity through official channels before trusting this app.');
 
   return {
-    id: generateId(),
+    id: responseData.id || 'scan_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
     type: 'manual',
-    appName: formData.appName,
-    developer: formData.developer || 'Unknown',
-    riskScore,
-    riskLevel,
-    summary: `Manual verification completed. Risk score: ${riskScore}/100.`,
+    appName: responseData.app_name || formData.appName,
+    developer: responseData.developer || formData.developer || 'Unknown',
+    trustScore,
+    threatScore,
+    confidenceScore,
+    verificationStatus,
+    summary: `Manual verification completed. Threat score: ${threatScore}/100.`,
     detectedIssues,
     permissions: [],
     recommendations,
@@ -312,6 +301,10 @@ export async function analyzeManual(formData, onProgress) {
     },
     timestamp: new Date().toISOString(),
     aiVerdict: responseData.ai_report || 'AI assessment unavailable',
+    playstoreDataFound: responseData.playstore_data_found || false,
+    playstoreRating: responseData.playstore_rating,
+    playstoreDownloads: responseData.playstore_downloads,
+    packageName: responseData.package_name,
   };
 }
 
@@ -373,7 +366,7 @@ export async function analyzeWebsite(url, onProgress) {
   return buildResult('website', {
     appName: new URL(url.startsWith('http') ? url : 'https://' + url).hostname,
     developer: 'Domain Owner',
-    riskScore: hasSSL ? randomBetween(10, 75) : randomBetween(50, 98),
+    threatScore: hasSSL ? randomBetween(10, 75) : randomBetween(50, 98),
     metadata: {
       url,
       ssl: hasSSL ? 'Valid (Let\'s Encrypt)' : 'Not Found',

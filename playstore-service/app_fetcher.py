@@ -88,6 +88,21 @@ def extract_package_name(url: str) -> dict:
     query_params = parse_qs(parsed.query)
     package_name = query_params.get("id", [None])[0]
 
+    # Handle search URLs (e.g., https://play.google.com/store/search?q=meesho)
+    if not package_name and "search" in parsed.path:
+        search_query = query_params.get("q", [None])[0]
+        if search_query:
+            try:
+                # google_play_scraper.search fails on top "hero" results for exact matches (returns appId=None)
+                # Fallback to direct HTTP request and regex
+                resp = requests.get(f"https://play.google.com/store/search?q={search_query}&c=apps", timeout=10)
+                if resp.status_code == 200:
+                    matches = re.findall(r'href="/store/apps/details\?id=([^"]+)"', resp.text)
+                    if matches:
+                        package_name = matches[0]
+            except Exception as e:
+                logger.error(f"Failed to fetch search results for query '{search_query}': {e}")
+
     # Resilient fallback: use regex search for id=...
     if not package_name:
         match = re.search(r'[?&]id=([^&]+)', url)
@@ -95,7 +110,7 @@ def extract_package_name(url: str) -> dict:
             package_name = match.group(1)
 
     if not package_name:
-        return {"success": False, "error": "Could not extract app package ID ('id' parameter) from URL."}
+        return {"success": False, "error": "Could not extract app package ID ('id' parameter) from URL, or search failed."}
 
     # Basic validation of the package name format
     if not re.match(r'^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)+$', package_name):
@@ -417,207 +432,8 @@ def _extract_from_meta_tags(html: str, package_name: str) -> dict | None:
     }
 
 
-# ─────────────────────────────────────────────
-# TASK 3: Name Similarity Analysis
-# ─────────────────────────────────────────────
-
-def analyze_name_similarity(app_name: str) -> dict:
-    """
-    Compares the app name against a list of known trusted investment apps
-    using fuzzy string matching to detect look-alikes.
-    
-    Returns:
-        dict with 'matched_app', 'similarity' score (0-100), and 'risk' level.
-    """
-    if not app_name:
-        return {"matched_app": None, "similarity": 0, "risk": 0}
-
-    best_match = None
-    best_score = 0
-
-    legitimate_apps = data_loader.load_legitimate_apps()
-    for known in legitimate_apps:
-        # Use token_set_ratio for flexibility with word ordering and subset matching
-        score = fuzz.token_set_ratio(app_name.lower(), known.lower())
-        if score > best_score:
-            best_score = score
-            best_match = known
-
-    # Determine risk based on similarity threshold
-    if best_score >= 90:
-        risk = 90
-    elif best_score >= 80:
-        risk = 70
-    elif best_score >= 70:
-        risk = 50
-    else:
-        risk = 10
-
-    return {
-        "matched_app": best_match,
-        "similarity": round(best_score),
-        "risk": risk,
-    }
-
-
-# ─────────────────────────────────────────────
-# TASK 4: Description Keyword Analysis
-# ─────────────────────────────────────────────
-
-def analyze_description(description: str) -> dict:
-    """
-    Scans the app description for suspicious keywords commonly found
-    in fraudulent investment apps.
-    
-    Returns:
-        dict with 'matches' (list of found keywords) and 'risk' score.
-    """
-    if not description:
-        return {"matches": [], "risk": 0}
-
-    desc_lower = description.lower()
-    suspicious_keywords = data_loader.load_suspicious_keywords()
-    matches = [kw for kw in suspicious_keywords if kw in desc_lower]
-
-    # Risk scales with number of matches
-    if len(matches) >= 4:
-        risk = 90
-    elif len(matches) >= 2:
-        risk = 60
-    elif len(matches) == 1:
-        risk = 30
-    else:
-        risk = 0
-
-    return {"matches": matches, "risk": risk}
-
-
-# ─────────────────────────────────────────────
-# TASK 5: Developer Verification
-# ─────────────────────────────────────────────
-
-def verify_developer(app_name: str, developer: str) -> dict:
-    """
-    Checks if the app's developer matches the official developer of a
-    similar known trusted app. A mismatch indicates potential impersonation.
-    
-    Returns:
-        dict with 'trusted' bool, 'expected_developer', and 'risk' score.
-    """
-    if not app_name or not developer:
-        return {"trusted": True, "expected_developer": None, "risk": 0}
-
-    # Find the closest matching known app
-    similarity_result = analyze_name_similarity(app_name)
-    matched_app = similarity_result.get("matched_app")
-    similarity_score = similarity_result.get("similarity", 0)
-
-    # Only check developer if the name is reasonably similar
-    if similarity_score < 60 or not matched_app:
-        return {"trusted": True, "expected_developer": None, "risk": 0}
-
-    trusted_devs = data_loader.load_trusted_developers()
-    expected = trusted_devs.get(matched_app)
-    if not expected:
-        return {"trusted": True, "expected_developer": None, "risk": 0}
-
-    # Fuzzy match developer names (allow for minor variations)
-    dev_similarity = fuzz.token_set_ratio(developer.lower(), expected.lower())
-
-    if dev_similarity >= 85:
-        return {"trusted": True, "expected_developer": expected, "risk": 0}
-    else:
-        # Higher risk when name is very similar but developer is different
-        risk = 90 if similarity_score >= 80 else 80
-        return {
-            "trusted": False,
-            "expected_developer": expected,
-            "risk": risk,
-        }
-
-
-# ─────────────────────────────────────────────
-# TASK 6: Install Count Analysis
-# ─────────────────────────────────────────────
-
-def analyze_installs(installs: str, real_installs: int = 0) -> dict:
-    """
-    Assesses risk based on install count. Fake apps typically have
-    far fewer installs than legitimate versions.
-    
-    Returns:
-        dict with 'install_count', 'risk' score, and 'note'.
-    """
-    # Parse install string to a number
-    count = real_installs
-    if count == 0 and installs:
-        cleaned = installs.replace(",", "").replace("+", "").strip()
-        try:
-            count = int(cleaned)
-        except (ValueError, TypeError):
-            count = 0
-
-    if count >= 10_000_000:
-        risk = 5
-        note = "Very high install count — likely legitimate."
-    elif count >= 1_000_000:
-        risk = 10
-        note = "High install count — likely legitimate."
-    elif count >= 100_000:
-        risk = 30
-        note = "Moderate install count."
-    elif count >= 10_000:
-        risk = 50
-        note = "Low install count — moderate concern."
-    elif count >= 1_000:
-        risk = 70
-        note = "Very low install count — elevated risk."
-    else:
-        risk = 90
-        note = "Extremely low install count — high risk indicator."
-
-    return {"install_count": count, "risk": risk, "note": note}
-
-
-# ─────────────────────────────────────────────
-# TASK 7: Risk Scoring Engine
-# ─────────────────────────────────────────────
-
-def calculate_risk_score(
-    name_risk: int,
-    description_risk: int,
-    developer_risk: int,
-    install_risk: int,
-) -> dict:
-    """
-    Computes the final weighted risk score and assigns a threat level.
-    
-    Weights:
-        Name Similarity:  35%
-        Description:      25%
-        Developer:        25%
-        Installs:         15%
-    
-    Returns:
-        dict with 'risk_score' (0-100) and 'threat_level' label.
-    """
-    score = (
-        name_risk * 0.35
-        + description_risk * 0.25
-        + developer_risk * 0.25
-        + install_risk * 0.15
-    )
-    risk_score = min(100, max(0, round(score)))
-
-    if risk_score <= 30:
-        threat_level = "Safe"
-    elif risk_score <= 60:
-        threat_level = "Suspicious"
-    else:
-        threat_level = "High Risk"
-
-    return {"risk_score": risk_score, "threat_level": threat_level}
-
+from services.intelligence_engine import IntelligenceEngine
+import services.gemini_service as gemini_service
 
 # ─────────────────────────────────────────────
 # Orchestrator: Full Analysis Pipeline
@@ -628,15 +444,8 @@ def run_full_analysis(url: str) -> dict:
     Orchestrates the entire Play Store analysis pipeline:
     1. Extract package name from URL
     2. Fetch app metadata
-    3. Run all analysis modules
-    4. Compute final risk score
-    5. Return structured result
-    
-    Args:
-        url: Google Play Store URL
-    
-    Returns:
-        Complete analysis result dict.
+    3. Run Intelligence Engine
+    4. Generate AI Report
     """
     # Step 1: Extract package name
     pkg_result = extract_package_name(url)
@@ -652,48 +461,31 @@ def run_full_analysis(url: str) -> dict:
 
     details = app_result["data"]
 
-    # Step 3: Run analysis modules
-    name_analysis = analyze_name_similarity(details["title"])
-    desc_analysis = analyze_description(details["description"])
-    dev_analysis = verify_developer(details["title"], details["developer"])
-    install_analysis = analyze_installs(details["installs"], details.get("real_installs", 0))
-
-    # Step 4: Calculate composite risk
-    risk_result = calculate_risk_score(
-        name_risk=name_analysis["risk"],
-        description_risk=desc_analysis["risk"],
-        developer_risk=dev_analysis["risk"],
-        install_risk=install_analysis["risk"],
+    # Step 3: Run through Intelligence Engine
+    analysis = IntelligenceEngine.analyze(
+        app_name=details["title"],
+        developer=details["developer"],
+        package_name=package_name,
+        description=details.get("summary") or details.get("description"),
+        rating=details.get("score", 0),
+        downloads=details.get("real_installs") or int(details.get("installs", "0").replace("+", "").replace(",", "") or 0),
+        category=details.get("genre", ""),
+        website=details.get("url", "")
     )
-
-    # Step 5: Compile reasons
-    reasons = []
-    if name_analysis["similarity"] >= 70:
-        reasons.append(f"Name similarity to '{name_analysis['matched_app']}' ({name_analysis['similarity']}%)")
-    if desc_analysis["matches"]:
-        reasons.append(f"Suspicious keywords found: {', '.join(desc_analysis['matches'])}")
-    if not dev_analysis["trusted"] and dev_analysis["expected_developer"]:
-        reasons.append(f"Developer mismatch — expected '{dev_analysis['expected_developer']}'")
-    if install_analysis["risk"] >= 50:
-        reasons.append(install_analysis["note"])
-
-    # If no major concerns found, note that
-    if not reasons:
-        reasons.append("No significant fraud indicators detected.")
-
-    return {
+    
+    result = {
         "success": True,
         "app_details": {
             "title": details["title"],
             "developer": details["developer"],
-            "description": details.get("summary", details["description"][:200]),
+            "description": details.get("summary", details.get("description", "")[:200]),
             "installs": details["installs"],
             "real_installs": details.get("real_installs", 0),
             "score": details["score"],
             "ratings": details["ratings"],
             "reviews": details.get("reviews", 0),
             "icon": details["icon"],
-            "screenshots": details["screenshots"][:8],  # Limit to 8
+            "screenshots": details["screenshots"][:8],
             "genre": details.get("genre", ""),
             "version": details.get("version", ""),
             "released": details.get("released", ""),
@@ -701,31 +493,10 @@ def run_full_analysis(url: str) -> dict:
             "content_rating": details.get("content_rating", ""),
             "url": details.get("url", ""),
         },
-        "analysis": {
-            "risk_score": risk_result["risk_score"],
-            "threat_level": risk_result["threat_level"],
-            "matched_app": name_analysis["matched_app"],
-            "name_similarity": name_analysis["similarity"],
-            "reasons": reasons,
-            "breakdown": {
-                "name": {"risk": name_analysis["risk"], "similarity": name_analysis["similarity"], "matched": name_analysis["matched_app"]},
-                "description": {"risk": desc_analysis["risk"], "keywords_found": desc_analysis["matches"]},
-                "developer": {"risk": dev_analysis["risk"], "trusted": dev_analysis["trusted"], "expected": dev_analysis.get("expected_developer")},
-                "installs": {"risk": install_analysis["risk"], "count": install_analysis["install_count"], "note": install_analysis["note"]},
-            },
-        },
+        "analysis": analysis,
     }
     
     # Generate Gemini report
-    gemini_payload = {
-        "app_name": details["title"],
-        "risk_score": risk_result["risk_score"],
-        "threat_level": risk_result["threat_level"],
-        "matched_app": name_analysis["matched_app"] or "None",
-        "developer_verified": dev_analysis["trusted"],
-        "matched_keywords": desc_analysis["matches"],
-        "reasons": reasons
-    }
-    result["analysis"]["ai_report"] = gemini_service.generate_ai_report(gemini_payload)
+    result["analysis"]["ai_report"] = gemini_service.generate_ai_report(analysis)
 
     return result

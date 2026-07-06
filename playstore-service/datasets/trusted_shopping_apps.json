@@ -1,0 +1,786 @@
+{
+  "0% EMI Shopping App": {
+    "developer": "Snapmint",
+    "package_name": "com.snapmint.customerapp",
+    "category": "Electronics Retail",
+    "rating": 4.6,
+    "installs": "47M+"
+  },
+  "AJIO Online Shopping App": {
+    "developer": "Reliance Retail Ltd",
+    "package_name": "com.ril.ajio",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "253M+"
+  },
+  "Alibaba.com - B2B marketplace": {
+    "developer": "Alibaba Mobile",
+    "package_name": "com.alibaba.intl.android.apps.poseidon",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "643M+"
+  },
+  "Amazon India Shop, Pay, miniTV": {
+    "developer": "Amazon Mobile LLC",
+    "package_name": "in.amazon.mShop.android.shopping",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "694M+"
+  },
+  "Amazon Seller App for Business": {
+    "developer": "Amazon Mobile LLC",
+    "package_name": "com.amazon.sellermobile.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.0,
+    "installs": "40M+"
+  },
+  "Apna Mart: Best Prices in mins": {
+    "developer": "Log2 Retail Service Private Limited",
+    "package_name": "com.apnamart.apnaconsumer",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "2M+"
+  },
+  "Banggood - Online Shopping": {
+    "developer": "Banggood",
+    "package_name": "com.banggood.client",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "55M+"
+  },
+  "Bewakoof - Online Shopping App": {
+    "developer": "Bewakoof - Online Shopping App",
+    "package_name": "com.bewakoof.bewakoof",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "30M+"
+  },
+  "Bistro: Food in minutes": {
+    "developer": "Blinkit",
+    "package_name": "com.blinkit.bistro",
+    "category": "Food Delivery",
+    "rating": 4.7,
+    "installs": "4M+"
+  },
+  "Blinkit Delivery Partner": {
+    "developer": "Blinkit",
+    "package_name": "app.blinkit.onboarding",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "19M+"
+  },
+  "Blinkit: Groceries & more": {
+    "developer": "Blinkit",
+    "package_name": "com.grofers.customerapp",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "203M+"
+  },
+  "Bolt Food: Delivery & Takeaway": {
+    "developer": "Bolt Technology",
+    "package_name": "com.bolt.deliveryclient",
+    "category": "Food Delivery",
+    "rating": 4.4,
+    "installs": "17M+"
+  },
+  "Borzo: Parcel Delivery App": {
+    "developer": "INCRIN LIMITED",
+    "package_name": "global.dostavista.client",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.7,
+    "installs": "6M+"
+  },
+  "Burger King India": {
+    "developer": "Restaurant Brands Asia Limited",
+    "package_name": "in.burgerking.android",
+    "category": "Food Delivery",
+    "rating": 4.7,
+    "installs": "18M+"
+  },
+  "Buyhatke:AI Shopping assistant": {
+    "developer": "Buyhatke Online Shopping",
+    "package_name": "com.buyhatke.assistant",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "6M+"
+  },
+  "Buywow Online Beauty Shopping": {
+    "developer": "Buywow",
+    "package_name": "co.tapcart.app.id_99G6QNo3nu",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.3,
+    "installs": "4M+"
+  },
+  "Carousell: Sell and Buy": {
+    "developer": "Carousell",
+    "package_name": "com.thecarousell.Carousell",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "24M+"
+  },
+  "Cashify: Sell & Buy Old Phones": {
+    "developer": "Cashify.in",
+    "package_name": "com.reglobe.cashify",
+    "category": "Electronics Retail",
+    "rating": 4.5,
+    "installs": "56M+"
+  },
+  "CityMall: Online Shopping App": {
+    "developer": "City Mall Live",
+    "package_name": "live.citymall.customer.prod",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "45M+"
+  },
+  "Country Delight Milk & Grocery": {
+    "developer": "Country Delight",
+    "package_name": "app.mycountrydelight.in.countrydelight",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "30M+"
+  },
+  "DMart Ready Online Grocery App": {
+    "developer": "Avenue E-Commerce Ltd.",
+    "package_name": "in.dmart",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.7,
+    "installs": "38M+"
+  },
+  "Daraz Online Shopping App": {
+    "developer": "Daraz Mobile",
+    "package_name": "com.daraz.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "154M+"
+  },
+  "Dealshare: Online Grocery App": {
+    "developer": "dealshare.in",
+    "package_name": "com.dealshare",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "35M+"
+  },
+  "Deliveroo: Food & Shopping": {
+    "developer": "Deliveroo",
+    "package_name": "com.deliveroo.orderapp",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "40M+"
+  },
+  "Domino's Pizza - Food Delivery": {
+    "developer": "Jubilant Foodworks",
+    "package_name": "com.Dominos",
+    "category": "Food Delivery",
+    "rating": 4.5,
+    "installs": "156M+"
+  },
+  "DoorDash: Food, Grocery, More": {
+    "developer": "DoorDash",
+    "package_name": "com.dd.doordash",
+    "category": "Food Delivery",
+    "rating": 4.7,
+    "installs": "87M+"
+  },
+  "Dot & Key Skincare Shopping": {
+    "developer": "DOT & KEY WELLNESS LIMITED",
+    "package_name": "com.dotandkey",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "2M+"
+  },
+  "EatClub: Food Delivery App": {
+    "developer": "PHPL",
+    "package_name": "com.poncho.eatclub",
+    "category": "Food Delivery",
+    "rating": 4.6,
+    "installs": "9M+"
+  },
+  "EatSure Food Delivery": {
+    "developer": "Rebel Marketplace Private Limited",
+    "package_name": "com.done.faasos",
+    "category": "Food Delivery",
+    "rating": 4.0,
+    "installs": "26M+"
+  },
+  "Electrodoc - electronics tools": {
+    "developer": "IODEMA Srl",
+    "package_name": "it.android.demi.elettronica",
+    "category": "Electronics Retail",
+    "rating": 4.3,
+    "installs": "15M+"
+  },
+  "Etsy: Shop Home, Style & More": {
+    "developer": "Etsy, Inc",
+    "package_name": "com.etsy.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "74M+"
+  },
+  "EveryCircuit": {
+    "developer": "MuseMaze",
+    "package_name": "com.everycircuit.free",
+    "category": "Electronics Retail",
+    "rating": 4.3,
+    "installs": "5M+"
+  },
+  "FARFETCH - Shop Luxury Fashion": {
+    "developer": "Farfetch UK Limited",
+    "package_name": "com.farfetch.farfetchshop",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "14M+"
+  },
+  "Facebook": {
+    "developer": "Meta Platforms, Inc.",
+    "package_name": "com.facebook.katana",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "11B+"
+  },
+  "Fashion Nova: Trendy Shopping": {
+    "developer": "FashionNova.com",
+    "package_name": "co.tapcart.app.npQt0DXZpj",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "9M+"
+  },
+  "Flipkart Online Shopping App": {
+    "developer": "Flipkart",
+    "package_name": "com.flipkart.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "982M+"
+  },
+  "Flipkart Seller : Sell Online": {
+    "developer": "Flipkart",
+    "package_name": "com.flipkart.seller",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "23M+"
+  },
+  "Foxy: Korean & Derma Skin Care": {
+    "developer": "Foxy : Beauty & Grooming shopping",
+    "package_name": "in.foxy",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.3,
+    "installs": "3M+"
+  },
+  "Fresh To Home - Meat Delivery": {
+    "developer": "FreshToHome",
+    "package_name": "com.freshtohome",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.2,
+    "installs": "14M+"
+  },
+  "Gada Electronics Business Inc.": {
+    "developer": "TMKOCPlay (Neela Mediatech Pvt Ltd)",
+    "package_name": "com.neelamediatech.gadaelectronics",
+    "category": "Electronics Retail",
+    "rating": 4.0,
+    "installs": "16M+"
+  },
+  "Grab - Taxi & Food Delivery": {
+    "developer": "Grab Holdings",
+    "package_name": "com.grabtaxi.passenger",
+    "category": "Food Delivery",
+    "rating": 4.7,
+    "installs": "356M+"
+  },
+  "Grubhub: Food Delivery": {
+    "developer": "Grubhub",
+    "package_name": "com.grubhub.android",
+    "category": "Food Delivery",
+    "rating": 4.6,
+    "installs": "34M+"
+  },
+  "H&M": {
+    "developer": "H&M",
+    "package_name": "com.hm.goe",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "100M+"
+  },
+  "Hopscotch - Kids Fashion Brand": {
+    "developer": "Hopscotch",
+    "package_name": "in.hopscotch.android",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.4,
+    "installs": "15M+"
+  },
+  "IRCTC eCatering Food on Track": {
+    "developer": "IRCTC Official",
+    "package_name": "com.irctc.fot",
+    "category": "Food Delivery",
+    "rating": 4.8,
+    "installs": "9M+"
+  },
+  "IndiaMART B2B Marketplace App": {
+    "developer": "IndiaMART InterMESH Ltd.",
+    "package_name": "com.indiamart.m",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.8,
+    "installs": "43M+"
+  },
+  "Instamart Delivery Partner App": {
+    "developer": "SwiggyInstamart",
+    "package_name": "in.swiggy.deliveryapp.instamart",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "1M+"
+  },
+  "Instamart: Groceries & more": {
+    "developer": "SwiggyInstamart",
+    "package_name": "in.swiggy.android.instamart",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "60M+"
+  },
+  "Jiffy by Spencers": {
+    "developer": "Omnipresent Retail India Private Limited",
+    "package_name": "com.bsl.spencers.activity",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "5M+"
+  },
+  "Joybuy-Don't Just Buy!": {
+    "developer": "Joybuy",
+    "package_name": "com.joybuy.jdi",
+    "category": "International Shopping Platforms",
+    "rating": 4.3,
+    "installs": "1M+"
+  },
+  "KPN Fresh: Best Priced Grocery": {
+    "developer": "KPN Fresh",
+    "package_name": "com.kpn.android",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "2M+"
+  },
+  "Libas: Fashion Shopping App": {
+    "developer": "Libas",
+    "package_name": "libasdelhinew.android.app",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "3M+"
+  },
+  "Licious: Chicken, Meat & More": {
+    "developer": "DELIGHTFUL GOURMET PRIVATE LIMITED",
+    "package_name": "com.licious",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.7,
+    "installs": "18M+"
+  },
+  "LightInTheBox Online Shopping": {
+    "developer": "Light In The Box Limited",
+    "package_name": "com.lightinthebox.android",
+    "category": "Electronics Retail",
+    "rating": 4.5,
+    "installs": "31M+"
+  },
+  "LimeRoad: Online Fashion Shop": {
+    "developer": "By VMart - Online fashion marketplace",
+    "package_name": "com.shopping.limeroad",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "108M+"
+  },
+  "LoveLocal: Grocery App": {
+    "developer": "LoveLocal",
+    "package_name": "chotelal.mpaani.com.android.chotelal",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.7,
+    "installs": "1M+"
+  },
+  "Maccaron Beauty Shopping App": {
+    "developer": "Maccaron India Pvt. Ltd.",
+    "package_name": "in.maccaron",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.2,
+    "installs": "1M+"
+  },
+  "Mamaearth: Beauty Skincare App": {
+    "developer": "Honasa Consumer Limited",
+    "package_name": "com.mamaearthapp",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.5,
+    "installs": "23M+"
+  },
+  "Marketplace: Tradet Buy & Sell": {
+    "developer": "MarketPlace",
+    "package_name": "com.app.disposeit",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.0,
+    "installs": "1M+"
+  },
+  "Max Fashion India": {
+    "developer": "Landmark Online India Pvt. Ltd.",
+    "package_name": "com.applications.max",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.1,
+    "installs": "35M+"
+  },
+  "Meesho: Online Shopping App": {
+    "developer": "Meesho",
+    "package_name": "com.meesho.supply",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "884M+"
+  },
+  "Milkbasket: Grocery Delivery": {
+    "developer": "Milkbasket",
+    "package_name": "com.milkbasket.app",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.3,
+    "installs": "7M+"
+  },
+  "Mirraw: Online Shopping App": {
+    "developer": "Mirraw.com",
+    "package_name": "com.mirraw.android",
+    "category": "International Shopping Platforms",
+    "rating": 4.0,
+    "installs": "12M+"
+  },
+  "Moglix - B2B & B2C Shopping": {
+    "developer": "Mogli Labs India Pvt. Ltd.",
+    "package_name": "com.moglix.online",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "5M+"
+  },
+  "Myntra - Fashion Shopping App": {
+    "developer": "Myntra",
+    "package_name": "com.myntra.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "408M+"
+  },
+  "NEWME-Freshest Fashion Fastest": {
+    "developer": "newme.asia",
+    "package_name": "com.newme.mobile",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "6M+"
+  },
+  "Nykaa - Beauty Shopping App": {
+    "developer": "NYKAA",
+    "package_name": "com.fsn.nykaa",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.5,
+    "installs": "95M+"
+  },
+  "Nykaa Fashion – Shopping App": {
+    "developer": "NYKAA",
+    "package_name": "com.fsn.nds",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.5,
+    "installs": "71M+"
+  },
+  "OLX: Buy & Sell Near You": {
+    "developer": "Sobek Auto India Private Limited",
+    "package_name": "com.olx.southasia",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "272M+"
+  },
+  "OnePlus Store": {
+    "developer": "OnePlus Ltd.",
+    "package_name": "com.oneplus.mall",
+    "category": "Electronics Retail",
+    "rating": 4.5,
+    "installs": "10M+"
+  },
+  "PULL&BEAR: Fashion and Trends": {
+    "developer": "Inditex",
+    "package_name": "com.inditex.pullandbear",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.1,
+    "installs": "24M+"
+  },
+  "PatPat - Kids & Baby Clothing": {
+    "developer": "Interfocus Inc",
+    "package_name": "com.interfocusllc.patpat",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.2,
+    "installs": "24M+"
+  },
+  "Pilgrim India": {
+    "developer": "Pilgrim India",
+    "package_name": "com.discoverpilgrim",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.4,
+    "installs": "2M+"
+  },
+  "Price Comparison - Smartprix": {
+    "developer": "Smartprix.com",
+    "package_name": "com.smartprix.main",
+    "category": "Electronics Retail",
+    "rating": 4.5,
+    "installs": "4M+"
+  },
+  "Priceoye Online Mobile Shop": {
+    "developer": "Priceoye",
+    "package_name": "com.priceoye.app",
+    "category": "Electronics Retail",
+    "rating": 4.2,
+    "installs": "1M+"
+  },
+  "Purplle Online Beauty Shopping": {
+    "developer": "Purplle.com",
+    "package_name": "com.manash.purplle",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.0,
+    "installs": "87M+"
+  },
+  "SHEIN India Fast Fashion": {
+    "developer": "Reliance Retail Ltd",
+    "package_name": "com.ril.shein",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.5,
+    "installs": "19M+"
+  },
+  "SNITCH Online Fashion Shopping": {
+    "developer": "SNITCH",
+    "package_name": "co.shopney.snitch",
+    "category": "Electronics Retail",
+    "rating": 4.5,
+    "installs": "5M+"
+  },
+  "Samsung Shop : Meet the New AI": {
+    "developer": "Samsung Electronics Co. Ltd",
+    "package_name": "com.samsung.ecomm.global.in",
+    "category": "Electronics Retail",
+    "rating": 4.4,
+    "installs": "197M+"
+  },
+  "Savana - UK Fashion": {
+    "developer": "ENVOGUE STYLES GLOBAL LLP",
+    "package_name": "com.savana.in",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "23M+"
+  },
+  "Shiprocket - Courier Delivery": {
+    "developer": "Shiprocket - eCommerce Logistics Solution",
+    "package_name": "com.shiprocket.shiprocket",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.0,
+    "installs": "6M+"
+  },
+  "Shopify: Sell online/in person": {
+    "developer": "Shopify Inc.",
+    "package_name": "com.shopify.mobile",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "30M+"
+  },
+  "Shoppers Stop Fashion Shopping": {
+    "developer": "Shoppers Stop",
+    "package_name": "shoppersstop.shoppersstop",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.1,
+    "installs": "10M+"
+  },
+  "Shopsy Shopping App - Flipkart": {
+    "developer": "Shopsy",
+    "package_name": "com.flipkart.shopsy",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.3,
+    "installs": "357M+"
+  },
+  "Smytten-Try Samples & Shop": {
+    "developer": "Smytten",
+    "package_name": "com.app.smytten",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.4,
+    "installs": "27M+"
+  },
+  "Snapdeal Trendy Budget Fashion": {
+    "developer": "Snapdeal Limited",
+    "package_name": "com.snapdeal.main",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "227M+"
+  },
+  "Swiggy Delivery Partner App": {
+    "developer": "Swiggy",
+    "package_name": "in.swiggy.deliveryapp",
+    "category": "Food Delivery",
+    "rating": 4.1,
+    "installs": "34M+"
+  },
+  "Swiggy: Food Instamart Dineout": {
+    "developer": "Swiggy",
+    "package_name": "in.swiggy.android",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "283M+"
+  },
+  "Swish: 10-Min Food Delivery": {
+    "developer": "justswish.in",
+    "package_name": "com.swishapp",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.7,
+    "installs": "1M+"
+  },
+  "Tata CLiQ Fashion Shopping": {
+    "developer": "Tata Unistore Limited",
+    "package_name": "com.tul.tatacliq",
+    "category": "Electronics Retail",
+    "rating": 4.3,
+    "installs": "69M+"
+  },
+  "Titan World: Online Shopping": {
+    "developer": "Titan Company Limited",
+    "package_name": "com.titancompany.tx37consumerapp",
+    "category": "International Shopping Platforms",
+    "rating": 4.3,
+    "installs": "6M+"
+  },
+  "Ubuy Global Shopping App India": {
+    "developer": "Ubuy Co.",
+    "package_name": "com.ubuy",
+    "category": "International Shopping Platforms",
+    "rating": 4.2,
+    "installs": "3M+"
+  },
+  "Vishal Mega Mart-Select Cities": {
+    "developer": "AIRPLAZA RETAIL HOLDINGS PRIVATE LIMITED",
+    "package_name": "com.vmm.android",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.0,
+    "installs": "12M+"
+  },
+  "Wix - Website Builder": {
+    "developer": "Wix.com, INC.",
+    "package_name": "com.wix.admin",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.4,
+    "installs": "9M+"
+  },
+  "WooCommerce: Store & POS": {
+    "developer": "Automattic, Inc",
+    "package_name": "com.woocommerce.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.7,
+    "installs": "1M+"
+  },
+  "ZALORA-Online Fashion Shopping": {
+    "developer": "Zalora South East Asia Pte Ltd.",
+    "package_name": "com.zalora.android",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "37M+"
+  },
+  "Zara": {
+    "developer": "Inditex",
+    "package_name": "com.inditex.zara",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.7,
+    "installs": "92M+"
+  },
+  "Zepto Delivery Partner App": {
+    "developer": "Zepto Marketplace Private Limited",
+    "package_name": "com.zepto.rider",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.5,
+    "installs": "13M+"
+  },
+  "Zepto: Groceries in minutes": {
+    "developer": "Zepto Marketplace Private Limited",
+    "package_name": "com.zeptoconsumerapp",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.6,
+    "installs": "135M+"
+  },
+  "Zomato: Food Delivery & Dining": {
+    "developer": "Zomato",
+    "package_name": "com.application.zomato",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "373M+"
+  },
+  "adidas: Shop Shoes & Clothing": {
+    "developer": "adidas",
+    "package_name": "com.adidas.app",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "90M+"
+  },
+  "bbdaily: Online Milk & Grocery": {
+    "developer": "Bigbasket.com",
+    "package_name": "com.raincan.android.hybrid",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.2,
+    "installs": "10M+"
+  },
+  "bigbasket: Groceries and more": {
+    "developer": "Bigbasket.com",
+    "package_name": "com.bigbasket.mobileapp",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.7,
+    "installs": "142M+"
+  },
+  "mCaffeine: Natural Skin Care": {
+    "developer": "mCaffeine",
+    "package_name": "com.coffye.mcaffeine",
+    "category": "Fashion & Lifestyle",
+    "rating": 4.6,
+    "installs": "2M+"
+  },
+  "magicpin:Food Delivery, Dining": {
+    "developer": "magicpin: cashback / home delivery on local retail",
+    "package_name": "com.magicpin.local",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.3,
+    "installs": "24M+"
+  },
+  "noon Online Shopping & Grocery": {
+    "developer": "noon e-commerce",
+    "package_name": "com.noon.buyerapp",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.5,
+    "installs": "61M+"
+  },
+  "realme Store": {
+    "developer": "realme Ltd.",
+    "package_name": "com.realmestore.app",
+    "category": "Electronics Retail",
+    "rating": 4.0,
+    "installs": "45M+"
+  },
+  "talabat: Food, grocery & more": {
+    "developer": "Talabat",
+    "package_name": "com.talabat",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.6,
+    "installs": "49M+"
+  },
+  "toing - Food Delivery": {
+    "developer": "Swiggy",
+    "package_name": "in.swiggy.android.toing",
+    "category": "Grocery & Quick Commerce",
+    "rating": 4.3,
+    "installs": "17M+"
+  },
+  "udaan: B2B for Retailers": {
+    "developer": "Udaan.com",
+    "package_name": "com.udaan.android",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.2,
+    "installs": "11M+"
+  },
+  "vivo Store": {
+    "developer": "Vivo Website",
+    "package_name": "com.vivo.website",
+    "category": "Electronics Retail",
+    "rating": 4.0,
+    "installs": "1B+"
+  },
+  "السوق المفتوح - OpenSooq": {
+    "developer": "OpenSooq FZ-LLC",
+    "package_name": "com.opensooq.OpenSooq",
+    "category": "E-Commerce Marketplaces",
+    "rating": 4.8,
+    "installs": "50M+"
+  }
+}

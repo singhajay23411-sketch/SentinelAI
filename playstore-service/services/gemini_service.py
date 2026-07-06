@@ -41,18 +41,24 @@ def generate_ai_report(analysis_data: dict) -> str:
         if not model:
             raise ValueError("Gemini model not initialized")
 
-    prompt = f"""
+        prompt = f"""
 You are SentinelAI, an expert cybersecurity fraud analyst.
 Analyze the following app verification results and generate a professional security assessment.
 
 App Name:
 {analysis_data.get('app_name', 'Unknown')}
 
-Risk Score:
-{analysis_data.get('risk_score', 'N/A')}
+Trust Score:
+{analysis_data.get('trust_score', 'N/A')}
 
-Threat Level:
-{analysis_data.get('threat_level', 'N/A')}
+Threat Score:
+{analysis_data.get('threat_score', 'N/A')}
+
+Confidence Score:
+{analysis_data.get('confidence_score', 'N/A')}
+
+Verification Status:
+{analysis_data.get('status', 'N/A')}
 
 Matched Legitimate App:
 {analysis_data.get('matched_app', 'None')}
@@ -60,11 +66,20 @@ Matched Legitimate App:
 Developer Verified:
 {analysis_data.get('developer_verified', False)}
 
+Package Verified:
+{analysis_data.get('package_verified', False)}
+
 Suspicious Keywords:
 {', '.join(analysis_data.get('matched_keywords', []))}
 
-Fraud Indicators:
-{chr(10).join(analysis_data.get('reasons', []))}
+Fraud Indicators (Issues):
+{chr(10).join(analysis_data.get('issues', [])) or 'None'}
+
+Trust Indicators:
+{chr(10).join(analysis_data.get('trust_signals', [])) or 'None'}
+
+Play Store Data Found:
+{analysis_data.get('playstore_data_found', False)}
 
 Generate a JSON object with the following structure:
 {{
@@ -79,9 +94,9 @@ Generate a JSON object with the following structure:
 Keep response concise and professional.
 Do not invent findings. Only use provided evidence.
 Output ONLY valid JSON.
+{f"You may mention: 'The application was cross-verified against Google Play Store records.' since Play Store data was found." if analysis_data.get('playstore_data_found') else ""}
 """
 
-    try:
         response = model.generate_content(prompt, request_options={"timeout": 15})
         text = response.text.strip()
         if text.startswith("```json"):

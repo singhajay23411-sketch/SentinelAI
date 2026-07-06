@@ -20,6 +20,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from app_fetcher import run_full_analysis
 from manual_analyzer import run_manual_analysis
+from services.database_service import init_db
+from services.history_service import save_scan
+from api.history_routes import router as history_router
+from api.dashboard_routes import router as dashboard_router
+from api.sync_routes import router as sync_router
 
 # ─────────────────────────────────────────────
 # App Initialization
@@ -30,6 +35,11 @@ app = FastAPI(
     description="AI-powered fraud detection for Play Store applications",
     version="1.0.0",
 )
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize the database on application startup."""
+    init_db()
 
 # ─────────────────────────────────────────────
 # TASK 9: CORS Configuration
@@ -47,6 +57,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(history_router)
+app.include_router(dashboard_router)
+app.include_router(sync_router)
 
 # ─────────────────────────────────────────────
 # Request / Response Models
@@ -96,6 +109,9 @@ async def analyze_playstore_app(request: AnalyzeRequest):
                 detail=result.get("error", "Analysis failed.")
             )
 
+        # Save to SQLite history
+        scan_uuid = save_scan(result, scan_type="Play Store", source_user="LocalUser")
+        result["id"] = scan_uuid
         return result
 
     except HTTPException:
@@ -125,6 +141,9 @@ async def manual_analysis(request: ManualAnalysisRequest):
                 detail=result.get("error", "Analysis failed.")
             )
 
+        # Save to SQLite history
+        scan_uuid = save_scan(result, scan_type="Manual Analysis", source_user="LocalUser")
+        result["id"] = scan_uuid
         return result
     except HTTPException:
         raise

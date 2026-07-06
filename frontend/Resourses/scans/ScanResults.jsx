@@ -1,11 +1,16 @@
 import React from 'react';
 
-const riskColors = {
-  Critical: { text: 'text-error', bg: 'bg-error', badge: 'bg-error/10 text-error border-error/30', ring: 'stroke-[#EF4444]' },
-  High: { text: 'text-[#ea580c]', bg: 'bg-[#ea580c]', badge: 'bg-[#ea580c]/10 text-[#ea580c] border-[#ea580c]/30', ring: 'stroke-[#ea580c]' },
-  Medium: { text: 'text-[#F59E0B]', bg: 'bg-[#F59E0B]', badge: 'bg-[#F59E0B]/10 text-[#F59E0B] border-[#F59E0B]/30', ring: 'stroke-[#F59E0B]' },
-  Low: { text: 'text-primary', bg: 'bg-primary', badge: 'bg-primary/10 text-primary border-primary/30', ring: 'stroke-[#1A38B0]' },
-  Safe: { text: 'text-[#10B981]', bg: 'bg-[#10B981]', badge: 'bg-[#10B981]/10 text-[#10B981] border-[#10B981]/30', ring: 'stroke-[#10B981]' },
+const statusColors = {
+  'Official Verified Application': { badge: 'bg-[#10B981]/10 text-[#10B981] border-[#10B981]/30' },
+  'Trusted Financial Application': { badge: 'bg-[#10B981]/10 text-[#10B981] border-[#10B981]/30' },
+  'Trusted Application': { badge: 'bg-[#10B981]/10 text-[#10B981] border-[#10B981]/30' },
+  'Likely Legitimate': { badge: 'bg-primary/10 text-primary border-primary/30' },
+  'Needs Review': { badge: 'bg-[#F59E0B]/10 text-[#F59E0B] border-[#F59E0B]/30' },
+  'Suspicious': { badge: 'bg-[#ea580c]/10 text-[#ea580c] border-[#ea580c]/30' },
+  'Potential Impersonation': { badge: 'bg-error/10 text-error border-error/30' },
+  'High Risk Fraud': { badge: 'bg-error/10 text-error border-error/30' },
+  'Critical Threat': { badge: 'bg-error/10 text-error border-error/30' },
+  'Unknown': { badge: 'bg-gray-500/10 text-gray-400 border-gray-500/30' }
 };
 
 const severityColors = {
@@ -22,28 +27,60 @@ const typeLabels = {
   website: 'Website Analysis',
 };
 
+const MetricRing = ({ value, color, label }) => {
+  const circumference = 2 * Math.PI * 30;
+  const offset = circumference - (value / 100) * circumference;
+  
+  return (
+    <div className="flex flex-col items-center">
+      <div className="relative w-24 h-24 shrink-0 mb-2">
+        <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="30" fill="transparent" stroke="#E2E8F0" strokeWidth="6" />
+          <circle
+            cx="50" cy="50" r="30" fill="transparent"
+            className={color}
+            strokeWidth="6"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+            style={{ transition: 'stroke-dashoffset 1s ease-out' }}
+          />
+        </svg>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span className="text-2xl font-bold text-on-surface">{value}</span>
+        </div>
+      </div>
+      <span className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">{label}</span>
+    </div>
+  );
+};
+
 const ScanResults = ({ result, onScanAgain, onBack }) => {
   if (!result) return null;
 
-  const colors = riskColors[result.riskLevel] || riskColors.Medium;
-  const circumference = 2 * Math.PI * 40;
-  const offset = circumference - (result.riskScore / 100) * circumference;
+  const statusStyle = statusColors[result.verificationStatus] || statusColors['Unknown'];
 
   const handleDownloadReport = () => {
     const lines = [
-      `SentinelAI Security Report`,
+      `SentinelAI Trust Intelligence Report`,
       `${'='.repeat(50)}`,
       ``,
       `App Name: ${result.appName}`,
       `Developer: ${result.developer}`,
       `Scan Type: ${typeLabels[result.type] || result.type}`,
-      `Risk Score: ${result.riskScore}/100`,
-      `Risk Level: ${result.riskLevel}`,
+      `Verification Status: ${result.verificationStatus}`,
+      `Trust Score: ${result.trustScore}/100`,
+      `Threat Score: ${result.threatScore}/100`,
+      `Confidence: ${result.confidenceScore}%`,
       `Date: ${new Date(result.timestamp).toLocaleString()}`,
       ``,
       `AI Verdict`,
       `${'-'.repeat(50)}`,
-      result.aiVerdict,
+      ...(typeof result.aiVerdict === 'string' ? [result.aiVerdict] : [
+        ...(result.aiVerdict?.findings?.map(f => `${f.heading}: ${f.detail}`) || []),
+        '',
+        result.aiVerdict?.summary || ''
+      ]),
       ``,
       `Detected Issues (${result.detectedIssues.length})`,
       `${'-'.repeat(50)}`,
@@ -64,41 +101,25 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 hero-fade-in">
-      {/* Header with Score */}
-      <div className="glass-panel rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8">
-        {/* Risk Gauge */}
-        <div className="relative w-40 h-40 shrink-0">
-          <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#E2E8F0" strokeWidth="8" />
-            <circle
-              cx="50" cy="50" r="40" fill="transparent"
-              className={colors.ring}
-              strokeWidth="8"
-              strokeDasharray={circumference}
-              strokeDashoffset={offset}
-              strokeLinecap="round"
-              style={{ transition: 'stroke-dashoffset 1s ease-out' }}
-            />
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className={`text-3xl font-bold ${colors.text}`}>{result.riskScore}</span>
-            <span className="text-[10px] text-outline font-medium uppercase tracking-widest">/ 100</span>
+      {/* Header with New Intelligence Metrics */}
+      <div className="glass-panel rounded-2xl p-8">
+        <div className="text-center mb-6">
+          <h2 className="text-3xl font-extrabold text-on-surface mb-2 tracking-tight">{result.appName}</h2>
+          <div className="flex items-center justify-center gap-3">
+             <span className={`px-4 py-1.5 rounded-full text-sm font-bold border uppercase tracking-wider ${statusStyle.badge}`}>
+               {result.verificationStatus}
+             </span>
           </div>
-        </div>
-
-        {/* Info */}
-        <div className="flex-1 text-center md:text-left">
-          <div className="flex items-center gap-3 justify-center md:justify-start mb-2">
-            <h2 className="text-2xl font-bold text-on-surface">{result.appName}</h2>
-            <span className={`px-3 py-1 rounded-full text-xs font-bold border ${colors.badge}`}>
-              {result.riskLevel}
-            </span>
-          </div>
-          <p className="text-sm text-on-surface-variant mb-1">{result.developer}</p>
-          <p className="text-xs text-outline">
+          <p className="text-sm text-on-surface-variant mt-2">{result.developer}</p>
+          <p className="text-xs text-outline mt-1">
             {typeLabels[result.type]} · {new Date(result.timestamp).toLocaleString()}
           </p>
-          <p className="text-sm text-on-surface-variant mt-3">{result.summary}</p>
+        </div>
+        
+        <div className="flex flex-wrap justify-center gap-8 md:gap-16 mt-8">
+          <MetricRing value={result.trustScore || 0} color="stroke-[#10B981]" label="Trust" />
+          <MetricRing value={result.threatScore || 0} color="stroke-error" label="Threat" />
+          <MetricRing value={result.confidenceScore || 0} color="stroke-[#3B82F6]" label="Confidence" />
         </div>
       </div>
 
@@ -127,14 +148,14 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
           ) : (
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {result.aiVerdict.findings?.map((finding, idx) => (
+                {result.aiVerdict?.findings?.map((finding, idx) => (
                   <div key={idx} className="bg-[#1D2B44] border border-[#3B82F6]/20 p-4 rounded-xl flex flex-col gap-2 shadow-md">
                      <span className="text-[#60A5FA] font-bold text-sm tracking-wide">{finding.heading}</span>
                      <span className="text-slate-100 text-sm leading-relaxed">{finding.detail}</span>
                   </div>
                 ))}
               </div>
-              {result.aiVerdict.summary && (
+              {result.aiVerdict?.summary && (
                 <div className="mt-4 p-4 bg-[#1E2D4A] border border-[#3B82F6]/30 rounded-xl text-slate-100 text-sm leading-relaxed font-normal">
                    {result.aiVerdict.summary}
                 </div>
@@ -144,8 +165,43 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
         </div>
       </div>
 
+      {/* Play Store Data (if hybrid analysis) */}
+      {result.playstoreDataFound && (
+        <div className="glass-panel rounded-2xl p-6 relative overflow-hidden border border-[#3B82F6]/30">
+          <div className="absolute top-0 right-0 bg-[#3B82F6] text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">
+            Verified Data
+          </div>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="material-symbols-outlined text-[#3B82F6] text-xl">shop</span>
+            <h3 className="text-lg font-bold text-on-surface">Play Store Data Retrieved</h3>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div>
+              <span className="text-[10px] text-outline uppercase tracking-widest block mb-0.5 flex items-center gap-1"><span className="material-symbols-outlined text-[12px] text-[#10B981]">check</span> App Name</span>
+              <span className="text-sm font-medium text-on-surface break-all">{result.appName}</span>
+            </div>
+            <div>
+              <span className="text-[10px] text-outline uppercase tracking-widest block mb-0.5 flex items-center gap-1"><span className="material-symbols-outlined text-[12px] text-[#10B981]">check</span> Developer</span>
+              <span className="text-sm font-medium text-on-surface break-all">{result.developer}</span>
+            </div>
+            <div>
+              <span className="text-[10px] text-outline uppercase tracking-widest block mb-0.5 flex items-center gap-1"><span className="material-symbols-outlined text-[12px] text-[#10B981]">check</span> Package Name</span>
+              <span className="text-sm font-medium text-on-surface break-all">{result.packageName}</span>
+            </div>
+            <div>
+              <span className="text-[10px] text-outline uppercase tracking-widest block mb-0.5 flex items-center gap-1"><span className="material-symbols-outlined text-[12px] text-[#10B981]">check</span> Rating</span>
+              <span className="text-sm font-medium text-on-surface break-all">{result.playstoreRating} ★</span>
+            </div>
+            <div>
+              <span className="text-[10px] text-outline uppercase tracking-widest block mb-0.5 flex items-center gap-1"><span className="material-symbols-outlined text-[12px] text-[#10B981]">check</span> Downloads</span>
+              <span className="text-sm font-medium text-on-surface break-all">{result.playstoreDownloads}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Detected Issues */}
-      {result.detectedIssues.length > 0 && (
+      {result.detectedIssues && result.detectedIssues.length > 0 && (
         <div className="glass-panel rounded-2xl p-6">
           <div className="flex items-center gap-3 mb-4">
             <span className="material-symbols-outlined text-error text-xl">bug_report</span>
@@ -168,7 +224,7 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
       {/* Two-column: Permissions + Evidence */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Permissions */}
-        {result.permissions.length > 0 && (
+        {result.permissions && result.permissions.length > 0 && (
           <div className="glass-panel rounded-2xl p-6">
             <div className="flex items-center gap-3 mb-4">
               <span className="material-symbols-outlined text-[#F59E0B] text-xl">key</span>
@@ -185,20 +241,22 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
         )}
 
         {/* Evidence */}
-        <div className="glass-panel rounded-2xl p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="material-symbols-outlined text-secondary text-xl">fact_check</span>
-            <h3 className="text-lg font-bold text-on-surface">Evidence</h3>
+        {result.evidence && result.evidence.length > 0 && (
+          <div className="glass-panel rounded-2xl p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="material-symbols-outlined text-secondary text-xl">fact_check</span>
+              <h3 className="text-lg font-bold text-on-surface">Evidence</h3>
+            </div>
+            <div className="space-y-3">
+              {result.evidence.map((ev, i) => (
+                <div key={i} className="flex justify-between items-center border-b border-outline-variant/20 pb-2 last:border-0">
+                  <span className="text-xs text-on-surface-variant">{ev.label}</span>
+                  <span className="text-xs font-bold text-on-surface">{ev.value}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="space-y-3">
-            {result.evidence.map((ev, i) => (
-              <div key={i} className="flex justify-between items-center border-b border-outline-variant/20 pb-2 last:border-0">
-                <span className="text-xs text-on-surface-variant">{ev.label}</span>
-                <span className="text-xs font-bold text-on-surface">{ev.value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Metadata (type-specific) */}
@@ -220,7 +278,7 @@ const ScanResults = ({ result, onScanAgain, onBack }) => {
       )}
 
       {/* Recommendations */}
-      {result.recommendations.length > 0 && (
+      {result.recommendations && result.recommendations.length > 0 && (
         <div className="glass-panel rounded-2xl p-6">
           <div className="flex items-center gap-3 mb-4">
             <span className="material-symbols-outlined text-[#10B981] text-xl">tips_and_updates</span>
