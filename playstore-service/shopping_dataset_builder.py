@@ -18,7 +18,7 @@ import json
 import os
 import time
 import logging
-from typing import Optional
+from typing import Optional, Dict, List, Any, Union
 
 # pyrefly: ignore [missing-import]
 from google_play_scraper import search, app as fetch_app

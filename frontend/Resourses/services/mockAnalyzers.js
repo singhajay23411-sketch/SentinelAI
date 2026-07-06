@@ -1,3 +1,5 @@
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://161.118.177.73:8000";
+
 // Mock AI analysis engines.
 // Each function returns Promise<ScanResult> with realistic delays.
 
@@ -130,7 +132,7 @@ export async function analyzePlayStore(url, onProgress) {
   ];
 
   // Fire the API request in parallel
-  const apiPromise = fetch('http://127.0.0.1:8080/analyze-playstore-app', {
+  const apiPromise = fetch(`${API_BASE_URL}/analyze-playstore-app`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -225,7 +227,7 @@ export async function analyzeManual(formData, onProgress) {
     { progress: 100, status: 'Verification Complete', detail: 'Manual verification report ready.' },
   ];
 
-  const apiPromise = fetch('http://127.0.0.1:8080/manual-analysis', {
+  const apiPromise = fetch(`${API_BASE_URL}/manual-analysis`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -314,7 +316,7 @@ export async function analyzeAPK(file, onProgress) {
   onProgress?.({ progress: 5, status: 'Requesting Upload Ticket...', detail: `Preparing to upload ${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB)` });
 
   // Step 1: Get upload ticket
-  const ticketRes = await fetch('http://127.0.0.1:8080/api/v1/scans/upload-ticket', {
+  const ticketRes = await fetch(`${API_BASE_URL}/api/v1/scans/upload-ticket`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ file_name: file.name, file_size: file.size }),
@@ -325,7 +327,7 @@ export async function analyzeAPK(file, onProgress) {
   onProgress?.({ progress: 15, status: 'Uploading APK...', detail: `Uploading ${file.name} to analysis server.` });
 
   // Step 2: Upload file
-  const uploadRes = await fetch(`http://127.0.0.1:8080/api/v1/scans/upload/${scan_id}`, {
+  const uploadRes = await fetch(`${API_BASE_URL}/api/v1/scans/upload/${scan_id}`, {
     method: 'PUT',
     body: file,
   });
@@ -334,7 +336,7 @@ export async function analyzeAPK(file, onProgress) {
   onProgress?.({ progress: 25, status: 'Triggering Scan...', detail: 'Starting identity verification pipeline.' });
 
   // Step 3: Trigger scan
-  const triggerRes = await fetch('http://127.0.0.1:8080/api/v1/scans/trigger', {
+  const triggerRes = await fetch(`${API_BASE_URL}/api/v1/scans/trigger`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ scan_id }),
@@ -347,7 +349,7 @@ export async function analyzeAPK(file, onProgress) {
     let completed = false;
     while (!completed) {
       await delay(1500);
-      const statusRes = await fetch(`http://127.0.0.1:8080/api/v1/scans/status/${scan_id}`);
+      const statusRes = await fetch(`${API_BASE_URL}/api/v1/scans/status/${scan_id}`);
       if (!statusRes.ok) throw new Error('Failed to check scan status');
       const statusData = await statusRes.json();
 
@@ -368,7 +370,7 @@ export async function analyzeAPK(file, onProgress) {
   onProgress?.({ progress: 98, status: 'Fetching Results...', detail: 'Retrieving identity verification report.' });
 
   // Step 5: Get results
-  const resultRes = await fetch(`http://127.0.0.1:8080/api/v1/scans/results/${scan_id}`);
+  const resultRes = await fetch(`${API_BASE_URL}/api/v1/scans/results/${scan_id}`);
   if (!resultRes.ok) throw new Error('Failed to retrieve scan results');
   const responseData = await resultRes.json();
 
@@ -456,7 +458,7 @@ export async function analyzeWebsite(url, onProgress) {
   ];
 
   // Fire the API request in parallel
-  const apiPromise = fetch('http://127.0.0.1:8080/analyze-website', {
+  const apiPromise = fetch(`${API_BASE_URL}/analyze-website`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ url }),

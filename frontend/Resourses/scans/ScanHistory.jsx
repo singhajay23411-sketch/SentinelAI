@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://161.118.177.73:8000";
 import { useScanContext } from '../../src/context/ScanContext.jsx';
 import ScanResults from './ScanResults.jsx';
 
@@ -52,7 +53,7 @@ const ScanHistory = () => {
 
   const handleExport = async () => {
     try {
-      const res = await fetch('http://localhost:8080/export-scans');
+      const res = await fetch(`${API_BASE_URL}/export-scans`);
       const data = await res.json();
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
@@ -81,7 +82,7 @@ const ScanHistory = () => {
         try {
           const data = JSON.parse(event.target.result);
           if (!data.records) throw new Error("Invalid format");
-          const res = await fetch('http://localhost:8080/import-scans', {
+          const res = await fetch(`${API_BASE_URL}/import-scans`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ records: data.records })

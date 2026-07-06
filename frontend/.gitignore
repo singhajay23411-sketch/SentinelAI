@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .pyc
+
+# Environment variables (keep secrets out of git)
+.env
+.env.local
+.env.*.local

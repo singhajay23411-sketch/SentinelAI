@@ -12,6 +12,7 @@ Provides utility functions for:
 """
 
 import re
+from typing import Optional, Dict, List, Any, Union
 import json
 import time
 import logging
@@ -23,6 +24,7 @@ import requests
 from rapidfuzz import fuzz
 import data_loader
 import services.gemini_service as gemini_service
+from services.intelligence_engine import IntelligenceEngine
 
 logger = logging.getLogger(__name__)
 
@@ -432,9 +434,6 @@ def _extract_from_meta_tags(html: str, package_name: str) -> Optional[Dict]:
     }
 
 
-from services.intelligence_engine import IntelligenceEngine
-import services.gemini_service as gemini_service
-from typing import Dict, List, Optional, Union
 
 # ─────────────────────────────────────────────
 # Orchestrator: Full Analysis Pipeline

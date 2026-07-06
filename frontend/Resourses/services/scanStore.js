@@ -1,3 +1,5 @@
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://161.118.177.73:8000";
+
 // In-memory scan data store with event-driven updates.
 // Clean interface so it can be replaced with a real backend later.
 
@@ -21,7 +23,7 @@ function notify() {
 
 export async function fetchInitialData() {
   try {
-    const historyRes = await fetch('http://127.0.0.1:8080/scan-history');
+    const historyRes = await fetch(`${API_BASE_URL}/scan-history`);
     if (historyRes.ok) {
       const rawHistory = await historyRes.json();
       scans = rawHistory.map(row => {
@@ -85,7 +87,7 @@ export async function fetchInitialData() {
       });
     }
     
-    const statsRes = await fetch('http://127.0.0.1:8080/dashboard-stats');
+    const statsRes = await fetch(`${API_BASE_URL}/dashboard-stats`);
     if (statsRes.ok) {
       dashboardStats = await statsRes.json();
     }
