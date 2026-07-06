@@ -4,19 +4,16 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'playstore-service/**'
+      - 'frontend/**'
 
 jobs:
   # ───────────────────────────── BACKEND DEPLOY ─────────────────────────────
   deploy-backend:
     name: 🐍 Deploy Backend
     runs-on: ubuntu-latest
-    # Only run when playstore-service files changed in the push
-    outputs:
-      run_backend: ${{ steps.filter.outputs.backend }}
     steps:
-      - name: ✅ Checkout code
-        uses: actions/checkout@v4
-
       - name: 🔍 Check changed files
         id: filter
         uses: dorny/paths-filter@v3
@@ -24,6 +21,10 @@ jobs:
           filters: |
             backend:
               - 'playstore-service/**'
+
+      - name: ✅ Checkout code
+        if: steps.filter.outputs.backend == 'true'
+        uses: actions/checkout@v4
 
       - name: 🔑 Setup SSH agent
         if: steps.filter.outputs.backend == 'true'
@@ -67,9 +68,6 @@ jobs:
     name: ⚛️  Build & Deploy Frontend
     runs-on: ubuntu-latest
     steps:
-      - name: ✅ Checkout code
-        uses: actions/checkout@v4
-
       - name: 🔍 Check changed files
         id: filter
         uses: dorny/paths-filter@v3
@@ -77,6 +75,10 @@ jobs:
           filters: |
             frontend:
               - 'frontend/**'
+
+      - name: ✅ Checkout code
+        if: steps.filter.outputs.frontend == 'true'
+        uses: actions/checkout@v4
 
       - name: 🟢 Setup Node.js
         if: steps.filter.outputs.frontend == 'true'
@@ -135,4 +137,5 @@ jobs:
             echo "❌ Website returned $STATUS"
             exit 1
           fi
+
 
