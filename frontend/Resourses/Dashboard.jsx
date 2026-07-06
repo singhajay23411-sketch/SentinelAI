@@ -708,7 +708,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                     style={{ width: '100%', padding: '9px 0', borderRadius: 50, fontSize: 13, fontWeight: 600, border: '1.5px solid #6366f1', color: '#6366f1', background: 'transparent', cursor: 'pointer', transition: 'all 0.2s' }}
                     onMouseEnter={e => { e.target.style.background = '#6366f1'; e.target.style.color = '#fff'; }}
                     onMouseLeave={e => { e.target.style.background = 'transparent'; e.target.style.color = '#6366f1'; }}
-                  >Analyze App ΓåÆ</button>
+                  >Analyze App →</button>
                 </div>
 
                 {/* Card 2: Manual Verification */}
@@ -729,7 +729,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                     onMouseEnter={e => { e.target.style.background = '#3b82f6'; e.target.style.color = '#fff'; }}
                     onMouseLeave={e => { e.target.style.background = 'transparent'; e.target.style.color = '#3b82f6'; }}
                     onClick={() => navigate('/scan/manual')}
-                  >Analyze Manually ΓåÆ</button>
+                  >Analyze Manually →</button>
                 </div>
 
                 {/* Card 3: APK Security Scanner */}
@@ -750,7 +750,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                     onMouseEnter={e => { e.target.style.background = '#14b8a6'; e.target.style.color = '#fff'; }}
                     onMouseLeave={e => { e.target.style.background = 'transparent'; e.target.style.color = '#14b8a6'; }}
                     onClick={() => navigate('/scan/apk')}
-                  >Upload &amp; Scan ΓåÆ</button>
+                  >Upload &amp; Scan →</button>
                 </div>
 
                 {/* Card 4: Website Analyzer */}
@@ -771,7 +771,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                     onMouseEnter={e => { e.target.style.background = '#f59e0b'; e.target.style.color = '#fff'; }}
                     onMouseLeave={e => { e.target.style.background = 'transparent'; e.target.style.color = '#d97706'; }}
                     onClick={() => navigate('/scan/website')}
-                  >Analyze Website ΓåÆ</button>
+                  >Analyze Website →</button>
                 </div>
 
               </div>
