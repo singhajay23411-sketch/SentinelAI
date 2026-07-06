@@ -3,7 +3,49 @@ import uuid
 from datetime import datetime
 from services.database_service import get_connection
 
+import json
+
 logger = logging.getLogger(__name__)
+
+def check_existing_scan(scan_type: str, match_criteria: dict) -> dict:
+    """
+    Checks if a scan of the given type with the exact same input criteria already exists.
+    Returns the parsed raw_data of the most recent match, or None if not found.
+    """
+    conn = get_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT scan_uuid, raw_data FROM scans WHERE scan_type = ? ORDER BY id DESC", (scan_type,))
+        rows = cursor.fetchall()
+        for row in rows:
+            try:
+                data = json.loads(row["raw_data"])
+                match = True
+                for key, value in match_criteria.items():
+                    current = data
+                    key_parts = key.split('.')
+                    try:
+                        for part in key_parts:
+                            current = current[part]
+                        if current != value:
+                            match = False
+                            break
+                    except (KeyError, TypeError):
+                        match = False
+                        break
+                
+                if match:
+                    # Inject id from db so the frontend router can navigate properly
+                    data["id"] = row["scan_uuid"]
+                    return data
+            except json.JSONDecodeError:
+                continue
+    except Exception as e:
+        logger.error(f"Error checking existing scan: {e}")
+    finally:
+        conn.close()
+    
+    return None
 
 def update_dashboard_stats(cursor=None):
     """Calculates and updates dashboard stats based on the scans table."""
@@ -74,13 +116,13 @@ def save_scan(result_data: dict, scan_type: str = "Play Store", source_user: str
     
     # For Play Store Analysis, scores are in result_data["analysis"].
     # For Manual Analysis, scores are in result_data itself.
+    # For APK scans, threat/trust metrics are at root.
     analysis = result_data.get("analysis", result_data)
     
     status = analysis.get("status", "Unknown")
     trust_score = analysis.get("trust_score", 0)
     threat_score = analysis.get("threat_score", 0)
     confidence_score = analysis.get("confidence_score", 0)
-    
     matched_app = analysis.get("matched_app", "")
     developer_verified = analysis.get("developer_verified", False)
     package_verified = analysis.get("package_verified", False)

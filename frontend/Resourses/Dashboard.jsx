@@ -7,6 +7,9 @@ import APKScanner from './scans/APKScanner.jsx';
 import WebsiteAnalyzer from './scans/WebsiteAnalyzer.jsx';
 import ScanResults from './scans/ScanResults.jsx';
 import ScanHistory from './scans/ScanHistory.jsx';
+import vishalImg from '../src/assets/team/vishal.jpg';
+import ajayImg from '../src/assets/team/ajay.jpg';
+import prachiImg from '../src/assets/team/prachi.jpg';
 
 const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
   const navigate = useNavigate();
@@ -173,7 +176,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
               onClick={(e) => { e.preventDefault(); setActiveTab('flagged'); navigate('/flagged-apps'); }} 
               href="/flagged-apps"
             >
-              <span className="material-symbols-outlined">analytics</span>Flagged Apps
+              <span className="material-symbols-outlined">analytics</span>Flagged Threats
             </a>
           </li>
           <li>
@@ -360,8 +363,8 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           <div className="py-6">
             <header className="mb-stack-xl flex justify-between items-end">
               <div>
-                <h2 className="font-headline-section-mobile md:font-headline-section text-headline-section-mobile md:text-headline-section text-on-surface">Overview</h2>
-                <p className="font-body-lg text-body-lg text-on-surface-variant mt-2">Real-time threat intelligence and system metrics.</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-on-surface">Overview</h2>
+                <p className="text-sm md:text-base text-on-surface-variant mt-2">Real-time threat intelligence and system metrics.</p>
               </div>
               <div className="hidden md:flex items-center gap-4">
                 <button className="glass-panel px-4 py-2 rounded-full flex items-center gap-2 text-primary font-medium hover:bg-primary/5 transition-colors">
@@ -374,28 +377,28 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               <div className="glass-panel rounded-xl p-6 relative overflow-hidden group">
                 <span className="font-label-caps text-xs text-outline uppercase tracking-widest mb-4 block">Total Apps Scanned</span>
-                <div className="text-2xl font-bold text-on-surface mb-1">{(2400000 + scans.length).toLocaleString()}+</div>
+                <div className="text-2xl font-bold text-on-surface mb-1">{(stats.total || 0).toLocaleString()}</div>
                 <div className="text-tertiary text-xs font-medium flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">trending_up</span> +12% this week
+                  <span className="material-symbols-outlined text-sm">trending_up</span> Live metrics
                 </div>
               </div>
               <div className="glass-panel rounded-xl p-6 relative overflow-hidden group">
                 <span className="font-label-caps text-xs text-outline uppercase tracking-widest mb-4 block">High Risk</span>
-                <div className="text-2xl font-bold text-error mb-1">{(12800 + stats.highRisk).toLocaleString()}</div>
+                <div className="text-2xl font-bold text-error mb-1">{(stats.high || 0).toLocaleString()}</div>
                 <div className="text-outline text-xs font-medium flex items-center gap-1">
                   <span className="material-symbols-outlined text-sm">warning</span> Action Required
                 </div>
               </div>
               <div className="glass-panel rounded-xl p-6 relative overflow-hidden group">
                 <span className="font-label-caps text-xs text-outline uppercase tracking-widest mb-4 block">Medium Risk</span>
-                <div className="text-2xl font-bold text-on-surface mb-1">{(25700 + stats.medium).toLocaleString()}</div>
+                <div className="text-2xl font-bold text-on-surface mb-1">{(stats.medium || 0).toLocaleString()}</div>
                 <div className="text-outline text-xs font-medium flex items-center gap-1">
                   <span className="material-symbols-outlined text-sm">info</span> Under Review
                 </div>
               </div>
               <div className="glass-panel rounded-xl p-6 relative overflow-hidden group">
                 <span className="font-label-caps text-xs text-outline uppercase tracking-widest mb-4 block">Safe Apps</span>
-                <div className="text-2xl font-bold text-on-surface mb-1">{(2361500 + stats.safe).toLocaleString()}+</div>
+                <div className="text-2xl font-bold text-on-surface mb-1">{(stats.safe || 0).toLocaleString()}</div>
                 <div className="text-[#10B981] text-xs font-medium flex items-center gap-1">
                   <span className="material-symbols-outlined text-sm">check_circle</span> Verified Secure
                 </div>
@@ -405,23 +408,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
             {/* Charts & Lists */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 flex flex-col gap-6">
-                <div className="glass-panel rounded-xl p-6 flex flex-col h-[350px]">
-                  <h3 className="font-bold text-on-surface mb-4">Risk Distribution</h3>
-                  <div className="flex-grow flex items-center justify-center relative">
-                    <div className="relative w-48 h-48">
-                      <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" fill="transparent" r="40" stroke="#10B981" strokeDasharray="251.2" strokeDashoffset="50" strokeWidth="10" />
-                        <circle cx="50" cy="50" fill="transparent" r="40" stroke="#F59E0B" strokeDasharray="251.2" strokeDashoffset="200" strokeWidth="10" />
-                        <circle cx="50" cy="50" fill="transparent" r="40" stroke="#ba1a1a" strokeDasharray="251.2" strokeDashoffset="230" strokeWidth="10" />
-                      </svg>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center">
-                        <span className="text-2xl font-bold text-on-surface">92%</span>
-                        <span className="text-xs text-outline font-medium uppercase tracking-widest">Secure</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
+                {/* Recent Scans */}
                 <div className="glass-panel rounded-xl p-6">
                   <h3 className="font-bold text-on-surface mb-4">Recent Scans</h3>
                   <table className="w-full text-left border-collapse text-sm">
@@ -433,54 +420,127 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {scans.slice(0, 5).map((scan) => (
-                        <tr key={scan.id} className="border-b border-outline-variant/20 hover:bg-black/5 transition-colors cursor-pointer" onClick={() => navigate(`/scan/results/${scan.id}`)}>
-                          <td className="py-3 px-2 font-medium flex items-center gap-2">
-                            <span className={`w-2 h-2 rounded-full ${scan.riskLevel === 'Critical' || scan.riskLevel === 'High' ? 'bg-error' : scan.riskLevel === 'Medium' ? 'bg-[#F59E0B]' : 'bg-[#10B981]'}`}></span>
-                            {scan.appName}
-                          </td>
-                          <td className="py-3 px-2 text-on-surface-variant">{scan.developer}</td>
-                          <td className={`py-3 px-2 font-bold ${scan.riskScore >= 70 ? 'text-error' : scan.riskScore >= 50 ? 'text-[#ea580c]' : scan.riskScore >= 25 ? 'text-[#F59E0B]' : 'text-[#10B981]'}`}>{scan.riskScore}</td>
+                      {scans.length === 0 ? (
+                        <tr>
+                          <td colSpan="3" className="py-4 text-center text-outline">No scans performed yet.</td>
                         </tr>
-                      ))}
-                      <tr className="border-b border-outline-variant/20">
-                        <td className="py-3 px-2 font-medium">Nexus Sync</td>
-                        <td className="py-3 px-2 text-on-surface-variant">OmniCorp</td>
-                        <td className="py-3 px-2 text-error font-bold">85</td>
-                      </tr>
-                      <tr className="border-b border-outline-variant/20">
-                        <td className="py-3 px-2 font-medium">Aether Drive</td>
-                        <td className="py-3 px-2 text-on-surface-variant">CloudSys Ltd</td>
-                        <td className="py-3 px-2 text-[#F59E0B] font-bold">42</td>
-                      </tr>
-                      <tr className="border-b border-outline-variant/20">
-                        <td className="py-3 px-2 font-medium">PayStream</td>
-                        <td className="py-3 px-2 text-on-surface-variant">FinTech Global</td>
-                        <td className="py-3 px-2 text-[#10B981] font-bold">12</td>
-                      </tr>
+                      ) : (
+                        scans.slice(0, 5).map((scan) => {
+                          const score = scan.threatScore !== undefined ? scan.threatScore : (scan.riskScore || 0);
+                          const severity = score >= 70 ? 'Critical' : (score >= 45 ? 'Medium' : 'Low');
+                          return (
+                            <tr key={scan.id} className="border-b border-outline-variant/20 hover:bg-black/5 transition-colors cursor-pointer" onClick={() => navigate(`/scan/results/${scan.id}`)}>
+                              <td className="py-3 px-2 font-medium flex items-center gap-2">
+                                <span className={`w-2 h-2 rounded-full ${severity === 'Critical' ? 'bg-error' : severity === 'Medium' ? 'bg-[#F59E0B]' : 'bg-[#10B981]'}`}></span>
+                                {scan.appName}
+                              </td>
+                              <td className="py-3 px-2 text-on-surface-variant">{scan.developer}</td>
+                              <td className={`py-3 px-2 font-bold ${score >= 70 ? 'text-error' : score >= 45 ? 'text-[#ea580c]' : score >= 25 ? 'text-[#F59E0B]' : 'text-[#10B981]'}`}>{score}</td>
+                            </tr>
+                          );
+                        })
+                      )}
                     </tbody>
                   </table>
                 </div>
               </div>
 
+              {/* Right column: Risk Distribution & Top Threats */}
               <div className="flex flex-col gap-6">
+                {/* Risk Distribution */}
+                <div className="glass-panel rounded-xl p-6 flex flex-col h-[350px]">
+                  <h3 className="font-bold text-on-surface mb-4">Risk Distribution</h3>
+                  <div className="flex-grow flex items-center justify-center relative">
+                    <div className="relative w-48 h-48">
+                      {(() => {
+                        const total = stats.total || 0;
+                        if (total === 0) {
+                          return (
+                            <>
+                              <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" fill="transparent" r="40" stroke="#e2e8f0" strokeDasharray="251.2" strokeDashoffset="0" strokeWidth="10" />
+                              </svg>
+                              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <span className="text-2xl font-bold text-on-surface">100%</span>
+                                <span className="text-xs text-outline font-medium uppercase tracking-widest">Secure</span>
+                              </div>
+                            </>
+                          );
+                        }
+                        const safePercent = (stats.safe / total) * 100;
+                        const mediumPercent = (stats.medium / total) * 100;
+                        const highPercent = (stats.high / total) * 100;
+
+                        return (
+                          <>
+                            <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                              {/* High Risk (Red) */}
+                              <circle cx="50" cy="50" fill="transparent" r="40" stroke="#ba1a1a" strokeDasharray="251.2" strokeDashoffset={0} strokeWidth="10" />
+                              {/* Medium Risk (Orange) on top */}
+                              <circle cx="50" cy="50" fill="transparent" r="40" stroke="#F59E0B" strokeDasharray="251.2" strokeDashoffset={(highPercent / 100) * 251.2} strokeWidth="10" />
+                              {/* Safe Apps (Green) on top */}
+                              <circle cx="50" cy="50" fill="transparent" r="40" stroke="#10B981" strokeDasharray="251.2" strokeDashoffset={((highPercent + mediumPercent) / 100) * 251.2} strokeWidth="10" />
+                            </svg>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                              <span className="text-2xl font-bold text-on-surface">{Math.round(safePercent)}%</span>
+                              <span className="text-xs text-outline font-medium uppercase tracking-widest">Secure</span>
+                            </div>
+                          </>
+                        );
+                      })()}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Top Threats */}
                 <div className="glass-panel rounded-xl p-6">
                   <h3 className="font-bold text-on-surface mb-4">Top Threats</h3>
                   <ul className="space-y-4">
-                    <li className="flex gap-2">
-                      <span className="material-symbols-outlined text-error">warning</span>
-                      <div>
-                        <h4 className="font-medium text-xs">Zero-Day Payload</h4>
-                        <p className="text-[10px] text-on-surface-variant">Detected in 4 apps across 2 distinct developers.</p>
-                      </div>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="material-symbols-outlined text-[#F59E0B]">policy</span>
-                      <div>
-                        <h4 className="font-medium text-xs">Data Exfiltration Routine</h4>
-                        <p className="text-[10px] text-on-surface-variant">Suspicious background activity pattern identified.</p>
-                      </div>
-                    </li>
+                    {(() => {
+                      const topThreats = [];
+                      scans.forEach(scan => {
+                        if (scan.detectedIssues && scan.detectedIssues.length > 0) {
+                          scan.detectedIssues.forEach(issue => {
+                            const title = issue.description || issue.title;
+                            if (!title) return;
+                            const existing = topThreats.find(t => t.title.toLowerCase() === title.toLowerCase());
+                            if (existing) {
+                              existing.count += 1;
+                              if (!existing.apps.includes(scan.appName)) {
+                                existing.apps.push(scan.appName);
+                              }
+                            } else {
+                              topThreats.push({
+                                title: title,
+                                count: 1,
+                                apps: [scan.appName],
+                                severity: issue.severity || 'Medium'
+                              });
+                            }
+                          });
+                        }
+                      });
+                      
+                      topThreats.sort((a, b) => b.count - a.count);
+
+                      if (topThreats.length === 0) {
+                        return <li className="text-sm text-outline">No active threats detected.</li>;
+                      }
+
+                      return topThreats.slice(0, 5).map((threat, idx) => (
+                        <li key={idx} className="flex gap-2">
+                          <span className={`material-symbols-outlined ${threat.severity === 'High' || threat.severity === 'Critical' ? 'text-error' : 'text-[#F59E0B]'}`}>
+                            {threat.severity === 'High' || threat.severity === 'Critical' ? 'warning' : 'policy'}
+                          </span>
+                          <div>
+                            <h4 className="font-medium text-xs truncate max-w-[200px]" title={threat.title}>{threat.title}</h4>
+                            <p className="text-[10px] text-on-surface-variant">
+                              Detected in {threat.count} {threat.count === 1 ? 'app' : 'apps'} ({threat.apps.slice(0, 2).join(', ')}{threat.apps.length > 2 ? '...' : ''}).
+                            </p>
+                          </div>
+                        </li>
+                      ));
+                    })()}
                   </ul>
                 </div>
               </div>
@@ -654,17 +714,23 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
               <h2 className="text-xl font-bold text-center">Meet the Team</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="glass-card p-6 rounded-2xl text-center space-y-3 hover:border-primary border border-white/35">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white text-lg font-bold mx-auto">VK</div>
+                  <div className="w-20 h-20 rounded-full mx-auto shadow-md overflow-hidden border-2 border-primary/50">
+                    <img src={vishalImg} alt="Vishal Kumar Singh" className="w-full h-full object-cover" />
+                  </div>
                   <h4 className="text-base font-bold">Vishal Kumar Singh</h4>
                   <p className="text-primary font-semibold text-xs">Backend Developer • AI Integration • Deployment</p>
                 </div>
                 <div className="glass-card p-6 rounded-2xl text-center space-y-3 hover:border-secondary border border-white/35">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-secondary to-tertiary flex items-center justify-center text-white text-lg font-bold mx-auto">AR</div>
+                  <div className="w-20 h-20 rounded-full mx-auto shadow-md overflow-hidden border-2 border-secondary/50">
+                    <img src={ajayImg} alt="Ajay Raj" className="w-full h-full object-cover" />
+                  </div>
                   <h4 className="text-base font-bold">Ajay Raj</h4>
                   <p className="text-secondary font-semibold text-xs">Frontend Developer • UI/UX Designer</p>
                 </div>
                 <div className="glass-card p-6 rounded-2xl text-center space-y-3 hover:border-tertiary border border-white/35">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-tertiary to-primary flex items-center justify-center text-white text-lg font-bold mx-auto">PP</div>
+                  <div className="w-20 h-20 rounded-full mx-auto shadow-md overflow-hidden border-2 border-tertiary/50">
+                    <img src={prachiImg} alt="Prachi Phadke" className="w-full h-full object-cover" />
+                  </div>
                   <h4 className="text-base font-bold">Prachi Phadke</h4>
                   <p className="text-tertiary font-semibold text-xs">Project Manager • Spokesperson • Strategy Lead</p>
                 </div>
@@ -673,18 +739,18 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           </div>
         )}
 
-        {/* View 5: Flagged Apps */}
+        {/* View 5: Flagged Threats */}
         {activeTab === 'flagged' && (
           <div className="py-6 space-y-6">
             {/* Header & Summary */}
             <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4 w-full">
               <div>
-                <h1 className="font-headline-section-mobile md:font-headline-section text-headline-section-mobile md:text-headline-section text-on-surface mb-2">Flagged Apps</h1>
-                <p className="font-body-lg text-body-lg text-on-surface-variant">Real-time analysis of potential network threats.</p>
+                <h1 className="text-3xl md:text-4xl font-bold text-on-surface mb-2">Flagged Threats</h1>
+                <p className="text-sm md:text-base text-on-surface-variant">Real-time analysis of potential network threats.</p>
               </div>
               <div className="glass-panel px-6 py-3 rounded-full flex items-center gap-3 border-l-4 border-l-error shrink-0 self-start md:self-auto">
                 <span className="material-symbols-outlined text-error">warning</span>
-                <span className="font-body-md text-body-md font-semibold text-on-surface">Total Flagged: <span className="text-error font-bold text-lg">{(12842 + flaggedApps.length).toLocaleString()}</span></span>
+                <span className="font-body-md text-body-md font-semibold text-on-surface">Total Flagged: <span className="text-error font-bold text-lg">{flaggedApps.length.toLocaleString()}</span></span>
               </div>
             </div>
             
@@ -694,7 +760,7 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                 <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
                 <input 
                   className="w-full pl-12 pr-4 py-3 rounded-full bg-surface-container-lowest border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-on-surface font-body-md text-body-md placeholder-outline" 
-                  placeholder="Search by app name or developer..." 
+                  placeholder="Search by app name, domain, or developer..." 
                   type="text" 
                 />
               </div>
@@ -723,167 +789,61 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
             
             {/* Bento Grid List */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full flex-grow">
-              {flaggedApps.map((scan) => (
-                <div key={scan.id} className="glass-panel rounded-[2rem] p-6 flex flex-col relative overflow-hidden group hover:shadow-lg transition-all duration-300 h-full">
-                  <div className={`absolute -top-10 -right-10 w-32 h-32 ${scan.riskLevel === 'Critical' ? 'bg-error/10 group-hover:bg-error/20' : 'bg-[#ea580c]/10 group-hover:bg-[#ea580c]/20'} rounded-full blur-2xl transition-colors`}></div>
-                  <div className="flex justify-between items-start mb-6 z-10 w-full">
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-2xl bg-white border border-outline-variant flex items-center justify-center overflow-hidden shadow-sm shrink-0">
-                        {scan.type === 'apk' ? (
-                          <span className="material-symbols-outlined text-secondary text-3xl">android</span>
-                        ) : scan.type === 'website' ? (
-                          <span className="material-symbols-outlined text-[#E67E22] text-3xl">language</span>
-                        ) : (
-                          <span className="material-symbols-outlined text-primary text-3xl">shop</span>
-                        )}
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="font-title-lg text-[22px] leading-tight font-semibold text-on-surface truncate">{scan.appName}</h3>
-                        <p className="font-body-md text-sm text-on-surface-variant truncate">{scan.developer}</p>
-                      </div>
-                    </div>
-                    <span className={`${scan.riskLevel === 'Critical' ? 'risk-badge-critical' : 'risk-badge-high'} font-label-caps text-label-caps px-3 py-1.5 rounded-full flex items-center gap-1 shrink-0`}>
-                      <span className="material-symbols-outlined text-[14px]">{scan.riskLevel === 'Critical' ? 'dangerous' : 'warning'}</span> {scan.riskLevel.toUpperCase()}
-                    </span>
-                  </div>
-                  <div className="mb-6 z-10 w-full flex-grow">
-                    <div className="flex justify-between items-end mb-2">
-                      <span className="font-body-md text-sm text-on-surface-variant">Threat Score</span>
-                      <span className={`font-title-lg text-2xl font-bold ${scan.riskLevel === 'Critical' ? 'text-error' : 'text-[#ea580c]'}`}>{scan.riskScore}<span className="text-sm font-normal text-outline">/100</span></span>
-                    </div>
-                    <div className="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
-                      <div className={`${scan.riskLevel === 'Critical' ? 'bg-error' : 'bg-[#ea580c]'} h-2 rounded-full`} style={{ width: `${scan.riskScore}%` }}></div>
-                    </div>
-                    <div className="flex gap-2 mt-4 flex-wrap">
-                      {scan.detectedIssues.slice(0, 2).map((issue, idx) => (
-                        <span key={idx} className="px-2 py-1 rounded-md bg-surface-variant text-xs font-medium text-on-surface-variant truncate max-w-[150px]">
-                          {issue.title}
+              {flaggedApps.length === 0 ? (
+                <div className="col-span-full py-12 text-center text-outline glass-panel rounded-2xl">
+                  No flagged threats, websites, or suspicious applications detected in history.
+                </div>
+              ) : (
+                flaggedApps.map((scan) => {
+                  const score = scan.threatScore !== undefined ? scan.threatScore : (scan.riskScore || 0);
+                  const level = score >= 75 ? 'Critical' : 'High';
+                  const isCritical = level === 'Critical';
+                  return (
+                    <div key={scan.id} className="glass-panel rounded-[2rem] p-6 flex flex-col relative overflow-hidden group hover:shadow-lg transition-all duration-300 h-full">
+                      <div className={`absolute -top-10 -right-10 w-32 h-32 ${isCritical ? 'bg-error/10 group-hover:bg-error/20' : 'bg-[#ea580c]/10 group-hover:bg-[#ea580c]/20'} rounded-full blur-2xl transition-colors`}></div>
+                      <div className="flex justify-between items-start mb-6 z-10 w-full">
+                        <div className="flex items-center gap-4">
+                          <div className="w-14 h-14 rounded-2xl bg-white border border-outline-variant flex items-center justify-center overflow-hidden shadow-sm shrink-0">
+                            {scan.type === 'apk' ? (
+                              <span className="material-symbols-outlined text-secondary text-3xl">android</span>
+                            ) : scan.type === 'website' ? (
+                              <span className="material-symbols-outlined text-[#E67E22] text-3xl">language</span>
+                            ) : (
+                              <span className="material-symbols-outlined text-primary text-3xl">shop</span>
+                            )}
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="font-title-lg text-[22px] leading-tight font-semibold text-on-surface truncate">{scan.appName}</h3>
+                            <p className="font-body-md text-sm text-on-surface-variant truncate">{scan.developer}</p>
+                          </div>
+                        </div>
+                        <span className={`${isCritical ? 'risk-badge-critical' : 'risk-badge-high'} font-label-caps text-label-caps px-3 py-1.5 rounded-full flex items-center gap-1 shrink-0`}>
+                          <span className="material-symbols-outlined text-[14px]">{isCritical ? 'dangerous' : 'warning'}</span> {level.toUpperCase()}
                         </span>
-                      ))}
+                      </div>
+                      <div className="mb-6 z-10 w-full flex-grow">
+                        <div className="flex justify-between items-end mb-2">
+                          <span className="font-body-md text-sm text-on-surface-variant">Threat Score</span>
+                          <span className={`font-title-lg text-2xl font-bold ${isCritical ? 'text-error' : 'text-[#ea580c]'}`}>{score}<span className="text-sm font-normal text-outline">/100</span></span>
+                        </div>
+                        <div className="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
+                          <div className={`${isCritical ? 'bg-error' : 'bg-[#ea580c]'} h-2 rounded-full`} style={{ width: `${score}%` }}></div>
+                        </div>
+                        <div className="flex gap-2 mt-4 flex-wrap">
+                          {(scan.detectedIssues || []).slice(0, 2).map((issue, idx) => (
+                            <span key={idx} className="px-2 py-1 rounded-md bg-surface-variant text-xs font-medium text-on-surface-variant truncate max-w-[150px]" title={issue.description || issue.title}>
+                              {issue.title || issue.description}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <button onClick={() => navigate(`/scan/results/${scan.id}`)} className="mt-auto w-full py-3 rounded-xl bg-white/50 border border-outline-variant text-on-surface font-body-md text-body-md font-semibold hover:bg-primary hover:text-white hover:border-primary transition-colors z-10 flex items-center justify-center gap-2 cursor-pointer">
+                        View Analysis <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                      </button>
                     </div>
-                  </div>
-                  <button onClick={() => navigate(`/scan/results/${scan.id}`)} className="mt-auto w-full py-3 rounded-xl bg-white/50 border border-outline-variant text-on-surface font-body-md text-body-md font-semibold hover:bg-primary hover:text-white hover:border-primary transition-colors z-10 flex items-center justify-center gap-2 cursor-pointer">
-                    View Analysis <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-                  </button>
-                </div>
-              ))}
-              
-              {/* Card 1 (Critical) */}
-              <div className="glass-panel rounded-[2rem] p-6 flex flex-col relative overflow-hidden group hover:shadow-lg transition-all duration-300 h-full">
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-error/10 rounded-full blur-2xl group-hover:bg-error/20 transition-colors"></div>
-                <div className="flex justify-between items-start mb-6 z-10 w-full">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-white border border-outline-variant flex items-center justify-center overflow-hidden shadow-sm">
-                      <img 
-                        className="w-10 h-10 object-contain" 
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHWUiseAUrZogNAhYQz0V6ePWEvCfkhoVj89u3ojCzZ79lWS5bN9g-N_v3h8kndb-JPLDE18D99C_-1JCgBeV34gIqU0y7DM7Wp2ceyfPpjVKytFGkrmNuQB4b6FNbBqE8VHF-E8agENyjxcn6yiFbfB1XnnO0v06G3WBznEkY7R64EBZpevwMXaGuw2HAs-ngvqxjnAo0UuqK-qsz0w4_BtduJoFFLl4vwbs3MN8IXi-1yPzln34Ukt0Hdt-qkYSIVNWlwt4QYcc" 
-                        alt="WhisperChat"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="font-title-lg text-[22px] leading-tight font-semibold text-on-surface">WhisperChat</h3>
-                      <p className="font-body-md text-sm text-on-surface-variant">Nexus Dev Corp</p>
-                    </div>
-                  </div>
-                  <span className="risk-badge-critical font-label-caps text-label-caps px-3 py-1.5 rounded-full flex items-center gap-1 shrink-0">
-                    <span className="material-symbols-outlined text-[14px]">dangerous</span> CRITICAL
-                  </span>
-                </div>
-                <div className="mb-6 z-10 w-full flex-grow">
-                  <div className="flex justify-between items-end mb-2">
-                    <span className="font-body-md text-sm text-on-surface-variant">Threat Score</span>
-                    <span className="font-title-lg text-2xl font-bold text-error">98<span className="text-sm font-normal text-outline">/100</span></span>
-                  </div>
-                  <div className="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
-                    <div className="bg-error h-2 rounded-full" style={{ width: '98%' }}></div>
-                  </div>
-                  <div className="flex gap-2 mt-4 flex-wrap">
-                    <span className="px-2 py-1 rounded-md bg-surface-variant text-xs font-medium text-on-surface-variant">Data Exfiltration</span>
-                    <span className="px-2 py-1 rounded-md bg-surface-variant text-xs font-medium text-on-surface-variant">Background Audio</span>
-                  </div>
-                </div>
-                <button className="mt-auto w-full py-3 rounded-xl bg-white/50 border border-outline-variant text-on-surface font-body-md text-body-md font-semibold hover:bg-primary hover:text-white hover:border-primary transition-colors z-10 flex items-center justify-center gap-2 cursor-pointer">
-                  View Analysis <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-                </button>
-              </div>
-
-              {/* Card 2 (High) */}
-              <div className="glass-panel rounded-[2rem] p-6 flex flex-col relative overflow-hidden group hover:shadow-lg transition-all duration-300 h-full">
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#ea580c]/10 rounded-full blur-2xl group-hover:bg-[#ea580c]/20 transition-colors"></div>
-                <div className="flex justify-between items-start mb-6 z-10 w-full">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-white border border-outline-variant flex items-center justify-center overflow-hidden shadow-sm">
-                      <img 
-                        className="w-10 h-10 object-contain" 
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHXXtIxKvhNbvhJT0D1Em5c3fO-WPeb42aFmVxU7Qef-I4_-qyZyTA9feYniiLedAxeYHX8vJ5mzOWhHZu4Iq0AL6V9ZKp5PtN2Ds1q1tmYwUpg4wX8FPlWjxoNb7082-qdSR4L4pN4g2vCk_6b3oFmWA0Fs4qiGFBCqipaYBcJHzrzHr8XIt_-g8ETzbseocigGG1jSqncZ0YOF3R78s8xVGAr9WRHRnvRqVOG0ksTSoRWITCUiRPtlKP9YfzwgRmyvL3d0TYEZI" 
-                        alt="PowerBoost Pro"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="font-title-lg text-[22px] leading-tight font-semibold text-on-surface">PowerBoost Pro</h3>
-                      <p className="font-body-md text-sm text-on-surface-variant">Unknown Developer</p>
-                    </div>
-                  </div>
-                  <span className="risk-badge-high font-label-caps text-label-caps px-3 py-1.5 rounded-full flex items-center gap-1 shrink-0">
-                    <span className="material-symbols-outlined text-[14px]">warning</span> HIGH
-                  </span>
-                </div>
-                <div className="mb-6 z-10 w-full flex-grow">
-                  <div className="flex justify-between items-end mb-2">
-                    <span className="font-body-md text-sm text-on-surface-variant">Threat Score</span>
-                    <span className="font-title-lg text-2xl font-bold text-[#ea580c]">84<span className="text-sm font-normal text-outline">/100</span></span>
-                  </div>
-                  <div className="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
-                    <div className="bg-[#ea580c] h-2 rounded-full" style={{ width: '84%' }}></div>
-                  </div>
-                  <div className="flex gap-2 mt-4 flex-wrap">
-                    <span className="px-2 py-1 rounded-md bg-surface-variant text-xs font-medium text-on-surface-variant">Crypto Mining</span>
-                    <span className="px-2 py-1 rounded-md bg-surface-variant text-xs font-medium text-on-surface-variant">CPU Spike</span>
-                  </div>
-                </div>
-                <button className="mt-auto w-full py-3 rounded-xl bg-white/50 border border-outline-variant text-on-surface font-body-md text-body-md font-semibold hover:bg-primary hover:text-white hover:border-primary transition-colors z-10 flex items-center justify-center gap-2 cursor-pointer">
-                  View Analysis <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-                </button>
-              </div>
-
-              {/* Card 3 (Critical) */}
-              <div className="glass-panel rounded-[2rem] p-6 flex flex-col relative overflow-hidden group hover:shadow-lg transition-all duration-300 h-full">
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-error/10 rounded-full blur-2xl group-hover:bg-error/20 transition-colors"></div>
-                <div className="flex justify-between items-start mb-6 z-10 w-full">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-white border border-outline-variant flex items-center justify-center overflow-hidden shadow-sm">
-                      <img 
-                        className="w-10 h-10 object-contain" 
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaPUbcX9Ur-PYDZ68u4KqKeM2qlbT9ZEjfZlc3vaTMe9EO5G22vxiHuGa-P_7-i4Dda2E0EwtdHGDOjWvAISSDSECpGhN7lMDCK7RYRVF6wJuC61om3Rg1VeQ3qS8I60PzwzcxpmiCZnDI_2_b9iyk11rftVFCVnXIGz-60GSXoLRvS_mW9cx0sMR2sWCxagA5v2LEXnKb-IXAkdfqYO6DBUYQfGCThBbRC7NHJOfRri09Bqjxl-AbYM_AO_Jk6a1D2hzaITMxiwk" 
-                        alt="SecureVPN Free"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="font-title-lg text-[22px] leading-tight font-semibold text-on-surface">SecureVPN Free</h3>
-                      <p className="font-body-md text-sm text-on-surface-variant">GlobalNet Solutions</p>
-                    </div>
-                  </div>
-                  <span className="risk-badge-critical font-label-caps text-label-caps px-3 py-1.5 rounded-full flex items-center gap-1 shrink-0">
-                    <span className="material-symbols-outlined text-[14px]">dangerous</span> CRITICAL
-                  </span>
-                </div>
-                <div className="mb-6 z-10 w-full flex-grow">
-                  <div className="flex justify-between items-end mb-2">
-                    <span className="font-body-md text-sm text-on-surface-variant">Threat Score</span>
-                    <span className="font-title-lg text-2xl font-bold text-error">95<span className="text-sm font-normal text-outline">/100</span></span>
-                  </div>
-                  <div className="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
-                    <div className="bg-error h-2 rounded-full" style={{ width: '95%' }}></div>
-                  </div>
-                  <div className="flex gap-2 mt-4 flex-wrap">
-                    <span className="px-2 py-1 rounded-md bg-surface-variant text-xs font-medium text-on-surface-variant">Man-in-the-Middle</span>
-                    <span className="px-2 py-1 rounded-md bg-surface-variant text-xs font-medium text-on-surface-variant">Cert Forgery</span>
-                  </div>
-                </div>
-                <button className="mt-auto w-full py-3 rounded-xl bg-white/50 border border-outline-variant text-on-surface font-body-md text-body-md font-semibold hover:bg-primary hover:text-white hover:border-primary transition-colors z-10 flex items-center justify-center gap-2 cursor-pointer">
-                  View Analysis <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-                </button>
-              </div>
+                  );
+                })
+              )}
             </div>
             
             {/* Load More Button */}
@@ -900,8 +860,8 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           <div className="py-6">
             {/* Header */}
             <header className="flex flex-col gap-2 mb-8">
-              <h1 className="font-headline-section-mobile text-headline-section-mobile md:font-headline-section md:text-headline-section text-on-surface tracking-tight leading-tight">Threat Intelligence</h1>
-              <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">AI-powered insights into fake investment app activity, impersonation trends, and fraud patterns.</p>
+              <h1 className="text-3xl md:text-4xl font-bold text-on-surface tracking-tight leading-tight">Threat Intelligence</h1>
+              <p className="text-sm md:text-base text-on-surface-variant max-w-2xl">AI-powered insights into fake investment app activity, impersonation trends, and fraud patterns.</p>
             </header>
 
             {/* KPI Grid */}
@@ -909,95 +869,109 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
               <div className="glass-panel rounded-xl p-6 flex flex-col gap-4">
                 <div className="flex justify-between items-start">
                   <span className="material-symbols-outlined text-error text-3xl">warning</span>
-                  <span className="flex items-center text-error font-semibold bg-error/10 px-2 py-1 rounded-full text-xs"><span className="material-symbols-outlined text-[14px] mr-1">trending_up</span> +12%</span>
+                  <span className="flex items-center text-error font-semibold bg-error/10 px-2 py-1 rounded-full text-xs"><span className="material-symbols-outlined text-[14px] mr-1">trending_up</span> Active</span>
                 </div>
                 <div>
                   <h3 className="text-sm text-on-surface-variant font-medium">High Risk Entities</h3>
-                  <p className="text-2xl font-bold text-on-surface">{(1248 + threatMetrics.highRisk).toLocaleString()}</p>
+                  <p className="text-2xl font-bold text-on-surface">{(stats.high || 0).toLocaleString()}</p>
                 </div>
               </div>
               <div className="glass-panel rounded-xl p-6 flex flex-col gap-4">
                 <div className="flex justify-between items-start">
                   <span className="material-symbols-outlined text-tertiary text-3xl">shield_moon</span>
-                  <span className="flex items-center text-outline font-semibold bg-surface-variant/50 px-2 py-1 rounded-full text-xs"><span className="material-symbols-outlined text-[14px] mr-1">trending_flat</span> 0%</span>
+                  <span className="flex items-center text-outline font-semibold bg-surface-variant/50 px-2 py-1 rounded-full text-xs"><span className="material-symbols-outlined text-[14px] mr-1">trending_flat</span> Monitor</span>
                 </div>
                 <div>
                   <h3 className="text-sm text-on-surface-variant font-medium">Medium Risk</h3>
-                  <p className="text-2xl font-bold text-on-surface">{(3402 + threatMetrics.mediumRisk).toLocaleString()}</p>
+                  <p className="text-2xl font-bold text-on-surface">{(stats.medium || 0).toLocaleString()}</p>
                 </div>
               </div>
               <div className="glass-panel rounded-xl p-6 flex flex-col gap-4">
                 <div className="flex justify-between items-start">
                   <span className="material-symbols-outlined text-primary text-3xl">fiber_new</span>
-                  <span className="flex items-center text-primary font-semibold bg-primary/10 px-2 py-1 rounded-full text-xs"><span className="material-symbols-outlined text-[14px] mr-1">trending_up</span> +5%</span>
+                  <span className="flex items-center text-primary font-semibold bg-primary/10 px-2 py-1 rounded-full text-xs"><span className="material-symbols-outlined text-[14px] mr-1">trending_up</span> Live</span>
                 </div>
                 <div>
-                  <h3 className="text-sm text-on-surface-variant font-medium">Newly Detected</h3>
-                  <p className="text-2xl font-bold text-on-surface">{(84 + threatMetrics.newlyDetected).toLocaleString()}</p>
+                  <h3 className="text-sm text-on-surface-variant font-medium">Newly Detected (24h)</h3>
+                  <p className="text-2xl font-bold text-on-surface">
+                    {(() => {
+                      const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+                      return scans.filter(s => new Date(s.timestamp) > oneDayAgo).length.toLocaleString();
+                    })()}
+                  </p>
                 </div>
               </div>
               <div className="glass-panel rounded-xl p-6 flex flex-col gap-4">
                 <div className="flex justify-between items-start">
                   <span className="material-symbols-outlined text-[#06B6D4] text-3xl">domain</span>
-                  <span className="flex items-center text-[#06B6D4] font-semibold bg-[#06B6D4]/10 px-2 py-1 rounded-full text-xs"><span className="material-symbols-outlined text-[14px] mr-1">trending_up</span> +2</span>
+                  <span className="flex items-center text-[#06B6D4] font-semibold bg-[#06B6D4]/10 px-2 py-1 rounded-full text-xs"><span className="material-symbols-outlined text-[14px] mr-1">trending_up</span> Target</span>
                 </div>
                 <div>
                   <h3 className="text-sm text-on-surface-variant font-medium">Brands Under Attack</h3>
-                  <p className="text-2xl font-bold text-on-surface">14</p>
+                  <p className="text-2xl font-bold text-on-surface">
+                    {(() => {
+                      const suspiciousApps = scans.filter(s => {
+                        const score = s.threatScore !== undefined ? s.threatScore : (s.riskScore || 0);
+                        return score >= 30; // suspicious or high threat
+                      });
+                      const uniqueBrands = new Set(suspiciousApps.map(s => s.appName ? s.appName.split(':')[0].split(' ')[0].trim() : 'Unknown'));
+                      return uniqueBrands.size.toLocaleString();
+                    })()}
+                  </p>
                 </div>
               </div>
             </section>
 
             {/* Bottom Two-Column Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              {/* Left: Most Targeted Brands */}
-              <div className="lg:col-span-8 flex flex-col gap-6">
-                <section className="glass-panel rounded-xl p-8 flex flex-col gap-6">
-                  <h2 className="text-xl font-bold text-on-surface">Most Targeted Brands</h2>
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-center gap-4">
-                      <span className="w-20 text-sm font-medium text-on-surface">Groww</span>
-                      <div className="flex-1 h-3 bg-surface-variant rounded-full overflow-hidden">
-                        <div className="h-full bg-primary rounded-full" style={{ width: '85%' }}></div>
-                      </div>
-                      <span className="w-10 text-right text-sm font-semibold text-on-surface">85%</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <span className="w-20 text-sm font-medium text-on-surface">Zerodha</span>
-                      <div className="flex-1 h-3 bg-surface-variant rounded-full overflow-hidden">
-                        <div className="h-full bg-secondary rounded-full" style={{ width: '72%' }}></div>
-                      </div>
-                      <span className="w-10 text-right text-sm font-semibold text-on-surface">72%</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <span className="w-20 text-sm font-medium text-on-surface">Upstox</span>
-                      <div className="flex-1 h-3 bg-surface-variant rounded-full overflow-hidden">
-                        <div className="h-full bg-tertiary rounded-full" style={{ width: '45%' }}></div>
-                      </div>
-                      <span className="w-10 text-right text-sm font-semibold text-on-surface">45%</span>
-                    </div>
-                  </div>
-                </section>
-              </div>
-
-              {/* Right: Risk Taxonomy + Vector Analysis */}
-              <div className="lg:col-span-4 flex flex-col gap-6">
+              {/* Left: Risk Taxonomy & Vector Analysis (side-by-side) */}
+              <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Risk Taxonomy */}
                 <section className="glass-panel rounded-xl p-8 flex flex-col items-center gap-6">
                   <h2 className="text-xl font-bold text-on-surface w-full">Risk Taxonomy</h2>
-                  <div className="w-48 h-48 rounded-full border-[12px] border-surface-container relative flex items-center justify-center">
-                    <div className="absolute inset-[-12px] rounded-full border-[12px] border-error" style={{ clipPath: 'polygon(50% 50%, 100% 0, 100% 100%, 0 100%, 0 0, 50% 0)' }}></div>
-                    <div className="text-center">
-                      <span className="block text-3xl font-bold text-on-surface">{((4700 + threatMetrics.totalEvaluated) / 1000).toFixed(1)}k</span>
-                      <span className="text-xs text-on-surface-variant font-medium">Total Evaluated</span>
-                    </div>
+                  <div className="relative w-48 h-48 flex items-center justify-center">
+                    {(() => {
+                      const total = stats.total || 0;
+                      if (total === 0) {
+                        return (
+                          <>
+                            <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                              <circle cx="50" cy="50" fill="transparent" r="40" stroke="#e2e8f0" strokeDasharray="251.2" strokeDashoffset="0" strokeWidth="10" />
+                            </svg>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                              <span className="text-2xl font-bold text-on-surface">0</span>
+                              <span className="text-xs text-outline font-medium uppercase tracking-widest">Total</span>
+                            </div>
+                          </>
+                        );
+                      }
+                      const safePercent = (stats.safe / total) * 100;
+                      const mediumPercent = (stats.medium / total) * 100;
+                      const highPercent = (stats.high / total) * 100;
+
+                      return (
+                        <>
+                          <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" fill="transparent" r="40" stroke="#ba1a1a" strokeDasharray="251.2" strokeDashoffset={0} strokeWidth="10" />
+                            <circle cx="50" cy="50" fill="transparent" r="40" stroke="#F59E0B" strokeDasharray="251.2" strokeDashoffset={(highPercent / 100) * 251.2} strokeWidth="10" />
+                            <circle cx="50" cy="50" fill="transparent" r="40" stroke="#10B981" strokeDasharray="251.2" strokeDashoffset={((highPercent + mediumPercent) / 100) * 251.2} strokeWidth="10" />
+                          </svg>
+                          <div className="absolute inset-0 flex flex-col items-center justify-center">
+                            <span className="text-2xl font-bold text-on-surface">{total}</span>
+                            <span className="text-xs text-outline font-medium uppercase tracking-widest">Total Scans</span>
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
                   <div className="w-full flex justify-center gap-6">
                     <span className="flex items-center text-xs font-semibold"><span className="w-2.5 h-2.5 rounded-full bg-error mr-2"></span>High</span>
                     <span className="flex items-center text-xs font-semibold"><span className="w-2.5 h-2.5 rounded-full bg-tertiary mr-2"></span>Medium</span>
-                    <span className="flex items-center text-xs font-semibold"><span className="w-2.5 h-2.5 rounded-full bg-surface-container mr-2"></span>Safe</span>
+                    <span className="flex items-center text-xs font-semibold"><span className="w-2.5 h-2.5 rounded-full bg-[#10B981] mr-2"></span>Safe</span>
                   </div>
                 </section>
 
+                {/* Vector Analysis */}
                 <section className="glass-panel rounded-xl p-8 flex flex-col gap-6">
                   <h2 className="text-xl font-bold text-on-surface">Vector Analysis</h2>
                   <div className="flex flex-col gap-6">
@@ -1021,6 +995,48 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
                       </div>
                       <span className="text-sm font-bold text-tertiary">64%</span>
                     </div>
+                  </div>
+                </section>
+              </div>
+
+              {/* Right: Most Targeted Brands */}
+              <div className="lg:col-span-4 flex flex-col gap-6">
+                <section className="glass-panel rounded-xl p-8 flex flex-col gap-6">
+                  <h2 className="text-xl font-bold text-on-surface">Most Targeted Brands</h2>
+                  <div className="flex flex-col gap-4">
+                    {(() => {
+                      const brandAttackCounts = {};
+                      scans.forEach(scan => {
+                        const score = scan.threatScore !== undefined ? scan.threatScore : (scan.riskScore || 0);
+                        if (score >= 30) {
+                          const brand = scan.appName ? scan.appName.split(':')[0].split(' ')[0].trim() : 'Unknown';
+                          brandAttackCounts[brand] = (brandAttackCounts[brand] || 0) + 1;
+                        }
+                      });
+                      const sortedBrands = Object.entries(brandAttackCounts)
+                        .map(([name, count]) => ({ name, count }))
+                        .sort((a, b) => b.count - a.count);
+                      
+                      const totalThreatScans = sortedBrands.reduce((sum, b) => sum + b.count, 0) || 1;
+
+                      if (sortedBrands.length === 0) {
+                        return <div className="text-sm text-outline py-4 text-center">No targeted brands recorded in history.</div>;
+                      }
+
+                      const colors = ['bg-primary', 'bg-secondary', 'bg-tertiary'];
+                      return sortedBrands.slice(0, 3).map((brand, idx) => {
+                        const percent = Math.round((brand.count / totalThreatScans) * 100);
+                        return (
+                          <div key={idx} className="flex items-center gap-4">
+                            <span className="w-24 text-sm font-medium text-on-surface truncate" title={brand.name}>{brand.name}</span>
+                            <div className="flex-grow h-3 bg-surface-variant rounded-full overflow-hidden">
+                              <div className={`h-full ${colors[idx % 3]} rounded-full`} style={{ width: `${percent}%` }}></div>
+                            </div>
+                            <span className="w-12 text-right text-sm font-semibold text-on-surface">{percent}%</span>
+                          </div>
+                        );
+                      });
+                    })()}
                   </div>
                 </section>
               </div>

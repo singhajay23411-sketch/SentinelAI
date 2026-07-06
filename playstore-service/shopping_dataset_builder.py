@@ -37,7 +37,7 @@ SEARCH_HITS = 100
 MAX_RETRIES = 3
 RETRY_DELAY = 2  # seconds
 
-SEARCH_CATEGORIES: dict[str, list[str]] = {
+SEARCH_CATEGORIES: Dict[str, List[str]] = {
     "E-Commerce Marketplaces": [
         "shopping app",
         "online shopping",
@@ -100,7 +100,7 @@ def _retry(fn, *args, retries: int = MAX_RETRIES, **kwargs):
             logger.debug("  Retry %d/%d in %ds – %s", attempt, retries, wait, exc)
             time.sleep(wait)
 
-def _parse_installs(raw: str | int | None) -> int:
+def _parse_installs(raw: Optional[Union[str, int]]) -> int:
     """Convert install strings like '10,000,000+' → 10000000."""
     if raw is None:
         return 0
@@ -146,9 +146,9 @@ def _classify_category(
 # Pipeline stages
 # ─────────────────────────────────────────────
 
-def discover_apps(category: str, keywords: list[str]) -> dict[str, dict]:
+def discover_apps(category: str, keywords: List[str]) -> Dict[str, dict]:
     """Search Play Store for *keywords* and return deduplicated hits."""
-    discovered: dict[str, dict] = {}  # appId → basic info
+    discovered: Dict[str, dict] = {}  # appId → basic info
 
     for keyword in keywords:
         logger.info("  🔍  Searching: '%s'", keyword)
@@ -170,9 +170,9 @@ def discover_apps(category: str, keywords: list[str]) -> dict[str, dict]:
 
     return discovered
 
-def fetch_details(discovered: dict[str, dict]) -> list[dict]:
+def fetch_details(discovered: Dict[str, dict]) -> List[dict]:
     """Fetch full metadata for each discovered app and apply quality filters."""
-    accepted: list[dict] = []
+    accepted: List[dict] = []
     rejected_count = 0
 
     total = len(discovered)
@@ -227,9 +227,9 @@ def fetch_details(discovered: dict[str, dict]) -> list[dict]:
     logger.info("  ── Accepted: %d  |  Rejected: %d", len(accepted), rejected_count)
     return accepted
 
-def deduplicate(records: list[dict]) -> list[dict]:
+def deduplicate(records: List[dict]) -> List[dict]:
     """Remove duplicate entries by package_name, keeping the richer record."""
-    seen: dict[str, dict] = {}
+    seen: Dict[str, dict] = {}
     for rec in records:
         pkg = rec["package_name"]
         if pkg not in seen:
@@ -244,14 +244,14 @@ def deduplicate(records: list[dict]) -> list[dict]:
 # Dataset generation
 # ─────────────────────────────────────────────
 
-def generate_datasets(records: list[dict]) -> None:
+def generate_datasets(records: List[dict]) -> None:
     """Write the four JSON dataset files from accepted records."""
     os.makedirs(DATASETS_DIR, exist_ok=True)
 
     trusted_apps: dict = {}
     trusted_developers: dict = {}
     trusted_packages: dict = {}
-    trusted_metadata: list[dict] = []
+    trusted_metadata: List[dict] = []
 
     for rec in sorted(records, key=lambda r: r["app_name"]):
         name = rec["app_name"]
@@ -314,7 +314,7 @@ def main() -> None:
     logger.info("SentinelAI – Automated Play Store Shopping Dataset Builder")
     logger.info("=" * 60)
 
-    all_discovered: dict[str, dict] = {}
+    all_discovered: Dict[str, dict] = {}
     stats = {"discovered": 0, "keywords": 0}
 
     for category, keywords in SEARCH_CATEGORIES.items():

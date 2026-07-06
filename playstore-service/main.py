@@ -10,6 +10,7 @@ Endpoints:
 
 import sys
 import os
+# pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env"))
 
@@ -24,7 +25,7 @@ from pydantic import BaseModel, Field
 from app_fetcher import run_full_analysis
 from manual_analyzer import run_manual_analysis
 from services.database_service import init_db
-from services.history_service import save_scan
+from services.history_service import save_scan, check_existing_scan
 from api.history_routes import router as history_router
 from api.dashboard_routes import router as dashboard_router
 from api.sync_routes import router as sync_router
@@ -50,16 +51,13 @@ async def startup_event():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",   # Vite dev server
-        "http://127.0.0.1:5173",
-        "http://localhost:3000",   # Fallback
-    ],
+    allow_origins=["*"],          # Allow all origins for local development
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# pyrefly: ignore [missing-import]
 from fastapi import Request
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
@@ -116,6 +114,11 @@ async def analyze_playstore_app(request: AnalyzeRequest):
     AI analysis pipeline, and returns a structured risk report.
     """
     try:
+        # Check cache
+        cached = check_existing_scan("Play Store", {"original_request.url": request.url})
+        if cached:
+            return cached
+
         result = run_full_analysis(request.url)
 
         if not result.get("success"):
@@ -123,6 +126,9 @@ async def analyze_playstore_app(request: AnalyzeRequest):
                 status_code=400,
                 detail=result.get("error", "Analysis failed.")
             )
+
+        # Attach original request for future cache matches
+        result["original_request"] = request.model_dump()
 
         # Save to SQLite history
         scan_uuid = save_scan(result, scan_type="Play Store", source_user="LocalUser")
@@ -147,8 +153,13 @@ import time
 from datetime import datetime
 # pyrefly: ignore [missing-import]
 import pymongo
+# pyrefly: ignore [missing-import]
 from fastapi import Request, BackgroundTasks
 from apk_analyzer import analyze_apk_file
+
+# Absolute upload directory — prevents CWD-relative path issues
+UPLOAD_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "uploads")
+os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 # In-memory database of scan states
 _scans_db = {}
@@ -224,45 +235,55 @@ def run_apk_scan_task(scan_id: str, file_path: str, file_hash: str, original_fil
     try:
         # State: Validating
         _scans_db[scan_id]["status"] = "PROCESSING"
-        _scans_db[scan_id]["progress"] = 25
-        _scans_db[scan_id]["current_stage"] = "Validating File Structure"
-        _scans_db[scan_id]["detail"] = "Verifying APK magic bytes and checking zip indexes."
+        _scans_db[scan_id]["progress"] = 20
+        _scans_db[scan_id]["current_stage"] = "Validating APK Structure"
+        _scans_db[scan_id]["detail"] = "Verifying APK magic bytes and archive integrity."
         time.sleep(1.0)
         
         # State: Extracting
-        _scans_db[scan_id]["progress"] = 50
-        _scans_db[scan_id]["current_stage"] = "Extracting AndroidManifest.xml"
-        _scans_db[scan_id]["detail"] = "Opening classes.dex and locating permission signatures."
+        _scans_db[scan_id]["progress"] = 40
+        _scans_db[scan_id]["current_stage"] = "Extracting App Metadata"
+        _scans_db[scan_id]["detail"] = "Reading package name, version, certificate, and permissions."
         time.sleep(1.0)
         
-        # State: Analyzing
-        _scans_db[scan_id]["progress"] = 75
-        _scans_db[scan_id]["current_stage"] = "Static Code Auditing"
-        _scans_db[scan_id]["detail"] = "Applying weighted threat scoring models and checking brand signatures."
+        # State: Identity Verification
+        _scans_db[scan_id]["progress"] = 65
+        _scans_db[scan_id]["current_stage"] = "Running Identity Verification"
+        _scans_db[scan_id]["detail"] = "Checking against trusted datasets and verifying app identity."
         time.sleep(1.0)
+        
+        # State: AI Assessment
+        _scans_db[scan_id]["progress"] = 85
+        _scans_db[scan_id]["current_stage"] = "Generating AI Assessment"
+        _scans_db[scan_id]["detail"] = "Producing trust score and AI security report."
+        time.sleep(0.5)
         
         # Real Analysis Execution
         result = analyze_apk_file(file_path, original_filename=original_filename)
         
         if result.get("success"):
             # Set deterministic values
-            result["timestamp"] = datetime.utcnow()
+            result["timestamp"] = datetime.utcnow().isoformat() + "Z"
             result["scan_id"] = f"apk_{file_hash}"
             result["sha256"] = file_hash
             
             # Cache the completed result to MongoDB
             save_scan_to_mongodb(result)
             
+            # Save to SQLite history
+            scan_uuid = save_scan(result, scan_type="APK Scan", source_user="LocalUser")
+            result["id"] = scan_uuid
+            
             _scans_db[scan_id]["status"] = "COMPLETED"
             _scans_db[scan_id]["progress"] = 100
-            _scans_db[scan_id]["current_stage"] = "Scan Complete"
-            _scans_db[scan_id]["detail"] = "Security report generated successfully."
+            _scans_db[scan_id]["current_stage"] = "Verification Complete"
+            _scans_db[scan_id]["detail"] = "Identity verification report generated successfully."
             _scans_db[scan_id]["result"] = result
         else:
             _scans_db[scan_id]["status"] = "FAILED"
             _scans_db[scan_id]["progress"] = 100
-            _scans_db[scan_id]["current_stage"] = "Scan Failed"
-            _scans_db[scan_id]["detail"] = result.get("error", "Static analysis failed.")
+            _scans_db[scan_id]["current_stage"] = "Verification Failed"
+            _scans_db[scan_id]["detail"] = result.get("error", "Identity verification failed.")
             
     except Exception as e:
         _scans_db[scan_id]["status"] = "FAILED"
@@ -286,7 +307,7 @@ def create_upload_ticket(request: UploadTicketRequest):
     global _ticket_counter
     _ticket_counter += 1
     scan_id = f"apk_ticket_{_ticket_counter}"
-    file_path = os.path.join("uploads", f"{scan_id}.apk")
+    file_path = os.path.join(UPLOAD_DIR, f"{scan_id}.apk")
     
     _scans_db[scan_id] = {
         "status": "PENDING",
@@ -311,7 +332,7 @@ async def upload_apk_file(scan_id: str, request: Request):
     file_path = _scans_db[scan_id]["file_path"]
     
     try:
-        os.makedirs("uploads", exist_ok=True)
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
         with open(file_path, "wb") as f:
             async for chunk in request.stream():
                 f.write(chunk)
@@ -417,6 +438,12 @@ async def manual_analysis(request: ManualAnalysisRequest):
     """
     try:
         data = request.model_dump() if hasattr(request, 'model_dump') else request.dict()
+        
+        # Check cache (compare all fields)
+        cached = check_existing_scan("Manual Analysis", {"original_request." + k: v for k, v in data.items()})
+        if cached:
+            return cached
+
         result = run_manual_analysis(data)
 
         if not result.get("success"):
@@ -425,8 +452,55 @@ async def manual_analysis(request: ManualAnalysisRequest):
                 detail=result.get("error", "Analysis failed.")
             )
 
+        # Attach original request
+        result["original_request"] = data
+
         # Save to SQLite history
         scan_uuid = save_scan(result, scan_type="Manual Analysis", source_user="LocalUser")
+        result["id"] = scan_uuid
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal server error: {str(e)}"
+        )
+
+# ─────────────────────────────────────────────
+# Website Analysis Endpoint
+# ─────────────────────────────────────────────
+
+from website_analyzer import run_website_analysis
+
+class WebsiteAnalysisRequest(BaseModel):
+    url: str = Field(..., description="Website URL to analyze")
+
+@app.post("/analyze-website")
+async def analyze_website(request: WebsiteAnalysisRequest):
+    """
+    Analyzes a website URL for phishing, brand impersonation, and fraud indicators
+    using the SentinelAI Intelligence Engine's domain intelligence layer.
+    """
+    try:
+        # Check cache
+        cached = check_existing_scan("Website Analysis", {"original_request.url": request.url})
+        if cached:
+            return cached
+
+        result = run_website_analysis(request.url)
+
+        if not result.get("success"):
+            raise HTTPException(
+                status_code=400,
+                detail=result.get("error", "Analysis failed.")
+            )
+
+        # Attach original request
+        result["original_request"] = request.model_dump()
+
+        # Save to SQLite history
+        scan_uuid = save_scan(result, scan_type="Website Analysis", source_user="LocalUser")
         result["id"] = scan_uuid
         return result
     except HTTPException:

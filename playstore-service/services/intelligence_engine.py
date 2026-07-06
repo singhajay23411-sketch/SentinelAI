@@ -23,7 +23,9 @@ class IntelligenceEngine:
         description: str = "",
         rating: float = 0.0,
         downloads: int = 0,
-        category: str = ""
+        category: str = "",
+        certificate_present: bool = None,
+        dangerous_permission_count: int = 0
     ) -> dict:
         """
         Run the complete intelligence pipeline on the provided application data.
@@ -97,6 +99,7 @@ class IntelligenceEngine:
         # Layer 4: Metadata Verification
         # ==========================================
         metadata_verified = False
+        metadata_trust_bonus = 0
         if matched_app and (category or downloads > 0 or rating > 0):
             trusted_metadata = data_loader.load_trusted_metadata()
             # Find metadata for matched app
@@ -116,6 +119,20 @@ class IntelligenceEngine:
                 # If they have significant downloads/rating, matches profile
                 if cat_match or (downloads >= 1000 and rating >= 3.0):
                     metadata_verified = True
+        elif not matched_app and (downloads > 0 or rating > 0):
+            # Thorough analysis for apps not in our database
+            if downloads >= 500000 and rating >= 4.0:
+                metadata_trust_bonus = 50
+                metadata_verified = True
+            elif downloads >= 50000 and rating >= 3.5:
+                metadata_trust_bonus = 30
+                metadata_verified = True
+            elif downloads >= 10000 and rating >= 3.0:
+                metadata_trust_bonus = 15
+                metadata_verified = True
+            elif downloads >= 1000 and rating >= 3.0:
+                metadata_trust_bonus = 5
+                metadata_verified = True
 
         # ==========================================
         # Layer 5: Suspicious Keyword Analysis
@@ -177,6 +194,12 @@ class IntelligenceEngine:
             trust_score += 20
         if metadata_verified:
             trust_score += 10
+        if metadata_trust_bonus > 0:
+            trust_score += metadata_trust_bonus
+            
+        # Certificate trust boost (APK scans)
+        if certificate_present is True:
+            trust_score += 10
             
         # New Risk Reduction Logic: Large Trust Boost
         if developer_verified and package_verified:
@@ -205,11 +228,25 @@ class IntelligenceEngine:
         threat_score += (domain_risk * 0.4)
         
         if not matched_app and keyword_risk_score > 0:
-            threat_score += 20 # Fake financial claims from unknown app
+            # Only apply generic threat penalty if we didn't establish high metadata trust
+            if metadata_trust_bonus < 30:
+                threat_score += 20 # Fake financial claims from unknown app
+
+        # Missing certificate increases threat (APK scans)
+        if certificate_present is False:
+            threat_score += 15
+            
+        # Excessive dangerous permissions — supporting evidence only
+        if dangerous_permission_count >= 5:
+            threat_score += 10
 
         # Reduce threat significantly if both verified
         if developer_verified and package_verified:
             threat_score = max(0, threat_score - 50)
+            
+        # Reduce threat for highly downloaded/rated apps even if not in DB
+        if not matched_app and metadata_trust_bonus >= 30:
+            threat_score = max(0, threat_score - (metadata_trust_bonus / 2))
 
         threat_score = min(100, max(0, int(threat_score)))
 
@@ -231,6 +268,10 @@ class IntelligenceEngine:
         if developer_verified: confidence_score += 10
         if package_verified: confidence_score += 10
         if domain_verified: confidence_score += 10
+        
+        # Certificate data provides additional evidence (APK scans)
+        if certificate_present is not None:
+            confidence_score += 10
         
         confidence_score = min(100, confidence_score)
 
@@ -277,8 +318,25 @@ class IntelligenceEngine:
         elif domain_reason:
             issues.append(domain_reason)
             
+        if not matched_app and metadata_trust_bonus >= 15:
+            trust_signals.append(f"Strong app metadata: {downloads}+ downloads and {rating} rating")
+            
+        if certificate_present is True:
+            trust_signals.append("Signing certificate present")
+        elif certificate_present is False:
+            issues.append("Missing or invalid signing certificate")
+            
         if matched_keywords:
             issues.append(f"Suspicious claims detected: {', '.join(matched_keywords[:3])}")
+
+        # Resolve matched category from trusted metadata
+        matched_category = ""
+        if matched_app:
+            trusted_metadata = data_loader.load_trusted_metadata()
+            for meta in trusted_metadata:
+                if meta.get("app_name") == matched_app:
+                    matched_category = meta.get("category", "")
+                    break
 
         return {
             "success": True,
@@ -287,6 +345,7 @@ class IntelligenceEngine:
             "confidence_score": confidence_score,
             "status": status,
             "matched_app": matched_app,
+            "matched_category": matched_category,
             "developer_verified": developer_verified,
             "package_verified": package_verified,
             "matched_keywords": matched_keywords,

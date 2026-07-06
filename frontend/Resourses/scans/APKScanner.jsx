@@ -91,8 +91,8 @@ const APKScanner = () => {
             <span className="material-symbols-outlined text-secondary text-2xl">android</span>
           </div>
           <div>
-            <h2 className="text-xl font-bold text-on-surface">APK Security Scanner</h2>
-            <p className="text-xs text-on-surface-variant">Upload an APK file for deep security analysis.</p>
+            <h2 className="text-xl font-bold text-on-surface">APK Identity Scanner</h2>
+            <p className="text-xs text-on-surface-variant">Upload an APK file for identity verification and trust analysis.</p>
           </div>
         </div>
 
@@ -144,17 +144,17 @@ const APKScanner = () => {
         {/* Info */}
         <div className="mt-6 p-4 bg-secondary/5 rounded-xl border border-secondary/20">
           <h4 className="text-xs font-bold text-on-surface mb-2 flex items-center gap-2">
-            <span className="material-symbols-outlined text-secondary text-sm">info</span> Deep scan covers
+            <span className="material-symbols-outlined text-secondary text-sm">info</span> Identity verification covers
           </h4>
           <div className="grid grid-cols-2 gap-2 text-[11px] text-on-surface-variant">
-            <span>• AndroidManifest.xml</span>
-            <span>• Permissions Analysis</span>
-            <span>• Certificate Validation</span>
-            <span>• Malware Detection</span>
-            <span>• Obfuscation Check</span>
-            <span>• Dynamic Code Loading</span>
-            <span>• Banking Trojan Patterns</span>
-            <span>• Background Services</span>
+            <span>• Package Identity Verification</span>
+            <span>• Brand Recognition</span>
+            <span>• Developer Verification</span>
+            <span>• Certificate Analysis</span>
+            <span>• Trusted Dataset Matching</span>
+            <span>• Metadata Verification</span>
+            <span>• Permission Analysis</span>
+            <span>• AI Trust Assessment</span>
           </div>
         </div>
       </div>

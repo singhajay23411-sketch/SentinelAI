@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import vishalImg from '../src/assets/team/vishal.jpg';
+import ajayImg from '../src/assets/team/ajay.jpg';
+import prachiImg from '../src/assets/team/prachi.jpg';
 
 const SentinelAI = () => {
   const navigate = useNavigate();
@@ -604,8 +607,8 @@ const SentinelAI = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Member 1: Vishal */}
               <div className="glass-card p-6 rounded-2xl text-center space-y-4 hover:border-primary border border-white/35">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white text-xl font-bold mx-auto shadow-sm">
-                  VK
+                <div className="w-24 h-24 rounded-full mx-auto shadow-md overflow-hidden border-2 border-primary/50">
+                  <img src={vishalImg} alt="Vishal Kumar Singh" className="w-full h-full object-cover" />
                 </div>
                 <div className="space-y-1">
                   <h4 className="text-lg font-bold text-on-surface">Vishal Kumar Singh</h4>
@@ -616,8 +619,8 @@ const SentinelAI = () => {
 
               {/* Member 2: Ajay */}
               <div className="glass-card p-6 rounded-2xl text-center space-y-4 hover:border-secondary border border-white/35">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-secondary to-tertiary flex items-center justify-center text-white text-xl font-bold mx-auto shadow-sm">
-                  AR
+                <div className="w-24 h-24 rounded-full mx-auto shadow-md overflow-hidden border-2 border-secondary/50">
+                  <img src={ajayImg} alt="Ajay Raj" className="w-full h-full object-cover" />
                 </div>
                 <div className="space-y-1">
                   <h4 className="text-lg font-bold text-on-surface">Ajay Raj</h4>
@@ -628,8 +631,8 @@ const SentinelAI = () => {
 
               {/* Member 3: Prachi */}
               <div className="glass-card p-6 rounded-2xl text-center space-y-4 hover:border-tertiary border border-white/35">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-tertiary to-primary flex items-center justify-center text-white text-xl font-bold mx-auto shadow-sm">
-                  PP
+                <div className="w-24 h-24 rounded-full mx-auto shadow-md overflow-hidden border-2 border-tertiary/50">
+                  <img src={prachiImg} alt="Prachi Phadke" className="w-full h-full object-cover" />
                 </div>
                 <div className="space-y-1">
                   <h4 className="text-lg font-bold text-on-surface">Prachi Phadke</h4>

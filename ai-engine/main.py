@@ -16,6 +16,7 @@ from name_detector import analyze_app_name
 from text_detector import analyze_description
 # logo_detector is not currently integrated, but imported for future use
 from logo_detector import analyze_logo
+from typing import Dict, List, Optional, Union
 
 # Configure Logging
 logging.basicConfig(
@@ -46,14 +47,14 @@ class AnalysisRequest(BaseModel):
     )
 
 class NameAnalysis(BaseModel):
-    matched_app: str | None = Field(None, description="The closest matching trusted app name")
+    matched_app: Optional[str] = Field(None, description="The closest matching trusted app name")
     similarity_score: int = Field(..., description="The name similarity score (0-100)")
     risk_score: int = Field(..., description="The calculated risk score for name similarity")
     reason: str = Field(..., description="Justification for the similarity score")
 
 class DescriptionAnalysis(BaseModel):
     risk_score: int = Field(..., description="The calculated risk score for description claims")
-    matched_keywords: list[str] = Field(..., description="List of detected suspicious keywords")
+    matched_keywords: List[str] = Field(..., description="List of detected suspicious keywords")
     reason: str = Field(..., description="Justification for the description risk score")
 
 class AnalysisResponse(BaseModel):

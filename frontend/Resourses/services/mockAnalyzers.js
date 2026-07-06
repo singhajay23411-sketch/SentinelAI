@@ -130,7 +130,7 @@ export async function analyzePlayStore(url, onProgress) {
   ];
 
   // Fire the API request in parallel
-  const apiPromise = fetch('http://localhost:8080/analyze-playstore-app', {
+  const apiPromise = fetch('http://127.0.0.1:8080/analyze-playstore-app', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -225,7 +225,7 @@ export async function analyzeManual(formData, onProgress) {
     { progress: 100, status: 'Verification Complete', detail: 'Manual verification report ready.' },
   ];
 
-  const apiPromise = fetch('http://localhost:8080/manual-analysis', {
+  const apiPromise = fetch('http://127.0.0.1:8080/manual-analysis', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -308,75 +308,227 @@ export async function analyzeManual(formData, onProgress) {
   };
 }
 
-// ── APK Security Scanner ─────────────────────────────────────────────────
+// ── APK Identity Scanner ─────────────────────────────────────────────────
 export async function analyzeAPK(file, onProgress) {
-  const stages = [
-    { progress: 10, status: 'Uploading APK...', detail: `Processing ${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB)` },
-    { progress: 25, status: 'Extracting Manifest...', detail: 'Reading AndroidManifest.xml for package info and permissions.' },
-    { progress: 40, status: 'Analyzing Permissions...', detail: 'Evaluating requested permissions against security policies.' },
-    { progress: 55, status: 'Scanning Activities & Services...', detail: 'Checking for background services, receivers, and hidden activities.' },
-    { progress: 70, status: 'Certificate Verification...', detail: 'Validating APK signature and developer certificate chain.' },
-    { progress: 85, status: 'AI Malware Detection...', detail: 'Running deep neural network analysis for malware signatures.' },
-    { progress: 95, status: 'Generating Threat Report...', detail: 'Compiling security findings and recommendations.' },
-    { progress: 100, status: 'Scan Complete', detail: 'APK security report generated.' },
-  ];
 
-  for (const stage of stages) {
-    await delay(randomBetween(400, 800));
-    onProgress?.(stage);
+  onProgress?.({ progress: 5, status: 'Requesting Upload Ticket...', detail: `Preparing to upload ${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB)` });
+
+  // Step 1: Get upload ticket
+  const ticketRes = await fetch('http://127.0.0.1:8080/api/v1/scans/upload-ticket', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ file_name: file.name, file_size: file.size }),
+  });
+  if (!ticketRes.ok) throw new Error('Failed to create upload ticket');
+  const { scan_id } = await ticketRes.json();
+
+  onProgress?.({ progress: 15, status: 'Uploading APK...', detail: `Uploading ${file.name} to analysis server.` });
+
+  // Step 2: Upload file
+  const uploadRes = await fetch(`http://127.0.0.1:8080/api/v1/scans/upload/${scan_id}`, {
+    method: 'PUT',
+    body: file,
+  });
+  if (!uploadRes.ok) throw new Error('File upload failed');
+
+  onProgress?.({ progress: 25, status: 'Triggering Scan...', detail: 'Starting identity verification pipeline.' });
+
+  // Step 3: Trigger scan
+  const triggerRes = await fetch('http://127.0.0.1:8080/api/v1/scans/trigger', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ scan_id }),
+  });
+  if (!triggerRes.ok) throw new Error('Failed to trigger scan');
+  const triggerData = await triggerRes.json();
+
+  // Step 4: Poll for completion (or return immediately if cache hit)
+  if (triggerData.status !== 'COMPLETED') {
+    let completed = false;
+    while (!completed) {
+      await delay(1500);
+      const statusRes = await fetch(`http://127.0.0.1:8080/api/v1/scans/status/${scan_id}`);
+      if (!statusRes.ok) throw new Error('Failed to check scan status');
+      const statusData = await statusRes.json();
+
+      onProgress?.({
+        progress: Math.min(statusData.progress || 30, 95),
+        status: statusData.current_stage || 'Processing...',
+        detail: statusData.detail || 'Running identity verification.',
+      });
+
+      if (statusData.status === 'COMPLETED') {
+        completed = true;
+      } else if (statusData.status === 'FAILED') {
+        throw new Error(statusData.detail || 'APK analysis failed');
+      }
+    }
   }
 
-  return buildResult('apk', {
-    appName: file.name.replace('.apk', ''),
+  onProgress?.({ progress: 98, status: 'Fetching Results...', detail: 'Retrieving identity verification report.' });
+
+  // Step 5: Get results
+  const resultRes = await fetch(`http://127.0.0.1:8080/api/v1/scans/results/${scan_id}`);
+  if (!resultRes.ok) throw new Error('Failed to retrieve scan results');
+  const responseData = await resultRes.json();
+
+  onProgress?.({ progress: 100, status: 'Verification Complete', detail: 'Identity verification report generated.' });
+
+  // Map backend response to shared ScanResult shape
+  const trustScore = responseData.trust_score || 0;
+  const threatScore = responseData.threat_score || 0;
+  const confidenceScore = responseData.confidence_score || 0;
+  const verificationStatus = responseData.status || 'Unknown';
+
+  const detectedIssues = (responseData.issues || []).map(r => ({
+    severity: threatScore >= 70 ? 'High' : threatScore >= 40 ? 'Medium' : 'Low',
+    title: 'Fraud Indicator',
+    description: r
+  }));
+
+  const evidence = [
+    { type: 'metric', label: 'Trust Score', value: `${trustScore}/100` },
+    { type: 'metric', label: 'Threat Score', value: `${threatScore}/100` },
+    { type: 'metric', label: 'Confidence', value: `${confidenceScore}%` },
+    { type: 'text', label: 'Package Verified', value: responseData.package_verified ? 'Yes' : 'No' },
+    { type: 'text', label: 'Developer Verified', value: responseData.developer_verified ? 'Yes' : 'No' },
+    { type: 'text', label: 'Certificate Present', value: responseData.certificate_present ? 'Yes' : 'No' },
+    { type: 'text', label: 'Analysis Engine', value: 'SentinelAI Intelligence Engine 2.0' },
+  ];
+
+  if (responseData.trust_signals) {
+    responseData.trust_signals.forEach(signal => {
+      evidence.push({ type: 'text', label: 'Verified Signal', value: signal });
+    });
+  }
+
+  const recommendations = [];
+  if (threatScore >= 70) recommendations.push('Do not install this APK. It shows significant fraud indicators.');
+  if (threatScore >= 50) recommendations.push('Do not enter any personal or financial information into this application.');
+  if (threatScore >= 30) recommendations.push('Verify the application identity through official channels before trusting this APK.');
+  if (responseData.certificate_present === false) recommendations.push('This APK lacks a valid signing certificate — authenticity cannot be verified.');
+  recommendations.push('Always download applications from official sources like the Google Play Store.');
+
+  const meta = responseData.metadata || {};
+  const permissions = responseData.permissions?.requested || [];
+
+  return {
+    id: responseData.id || 'scan_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+    type: 'apk',
+    appName: responseData.app_name || file.name.replace('.apk', ''),
+    developer: responseData.developer_verified ? 'Verified Developer' : 'Unknown',
+    trustScore,
+    threatScore,
+    confidenceScore,
+    verificationStatus,
+    summary: `APK identity verification completed. ${responseData.matched_app ? `Matched to: ${responseData.matched_app}.` : 'No known brand match.'} Trust score: ${trustScore}/100.`,
+    detectedIssues,
+    permissions,
+    recommendations,
+    evidence,
     metadata: {
-      fileName: file.name,
-      fileSize: `${(file.size / 1024 / 1024).toFixed(2)} MB`,
-      packageName: `com.${file.name.replace('.apk', '').toLowerCase().replace(/[^a-z0-9]/g, '')}.app`,
-      minSdkVersion: randomBetween(21, 28),
-      targetSdkVersion: randomBetween(30, 34),
-      certificate: randomBetween(0, 1) ? 'Valid (SHA-256)' : 'Self-Signed (Untrusted)',
-      obfuscation: randomBetween(0, 1) ? 'ProGuard Detected' : 'No Obfuscation',
-      activities: randomBetween(5, 25),
-      services: randomBetween(2, 12),
-      receivers: randomBetween(1, 8),
+      packageName: meta.package_name || 'Unknown',
+      versionName: meta.version_name || 'N/A',
+      versionCode: meta.version_code || 'N/A',
+      minSdk: meta.min_sdk || 'N/A',
+      targetSdk: meta.target_sdk || 'N/A',
+      fileName: meta.file_name || file.name,
+      fileSize: meta.file_size || `${(file.size / 1024 / 1024).toFixed(2)} MB`,
+      certificate: responseData.certificate_present ? 'Valid' : 'Not Found',
     },
-  });
+    timestamp: new Date().toISOString(),
+    aiVerdict: responseData.ai_report || 'AI assessment unavailable',
+    matchedApp: responseData.matched_app,
+    packageVerified: responseData.package_verified,
+    developerVerified: responseData.developer_verified,
+    certificatePresent: responseData.certificate_present,
+  };
 }
 
 // ── Website Analyzer ─────────────────────────────────────────────────────
 export async function analyzeWebsite(url, onProgress) {
   const stages = [
     { progress: 15, status: 'Checking SSL Certificate...', detail: 'Validating HTTPS encryption and certificate authority.' },
-    { progress: 30, status: 'WHOIS Lookup...', detail: 'Retrieving domain registration and ownership information.' },
-    { progress: 50, status: 'Content Analysis...', detail: 'Scanning page content for investment scam indicators.' },
-    { progress: 65, status: 'Phishing Detection...', detail: 'Checking against known phishing URL databases.' },
-    { progress: 80, status: 'Redirect Chain Analysis...', detail: 'Tracing URL redirects for suspicious destinations.' },
-    { progress: 92, status: 'Trust Score Calculation...', detail: 'Computing overall website trust score.' },
+    { progress: 40, status: 'Performing Domain Intelligence...', detail: 'Retrieving WHOIS, domain reputation, and brand similarity.' },
+    { progress: 70, status: 'Running AI Security Assessment...', detail: 'Evaluating phishing signatures and keyword matches.' },
+    { progress: 95, status: 'Compiling Report...', detail: 'Generating website security report.' },
     { progress: 100, status: 'Analysis Complete', detail: 'Website security report generated.' },
   ];
 
+  // Fire the API request in parallel
+  const apiPromise = fetch('http://127.0.0.1:8080/analyze-website', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url }),
+  }).then(async (res) => {
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.detail || 'Website analysis failed');
+    }
+    return res.json();
+  });
+
   for (const stage of stages) {
-    await delay(randomBetween(500, 900));
+    await delay(randomBetween(400, 750));
     onProgress?.(stage);
   }
 
-  const hasSSL = url.startsWith('https');
-  const domainAge = randomBetween(1, 3650);
+  const responseData = await apiPromise;
 
-  return buildResult('website', {
-    appName: new URL(url.startsWith('http') ? url : 'https://' + url).hostname,
-    developer: 'Domain Owner',
-    threatScore: hasSSL ? randomBetween(10, 75) : randomBetween(50, 98),
+  const trustScore = responseData.trust_score || 0;
+  const threatScore = responseData.threat_score || 0;
+  const confidenceScore = responseData.confidence_score || 0;
+  const verificationStatus = responseData.status || 'Unknown';
+
+  const detectedIssues = (responseData.issues || []).map(r => ({
+    severity: threatScore >= 70 ? 'High' : threatScore >= 40 ? 'Medium' : 'Low',
+    title: 'Fraud Indicator',
+    description: r
+  }));
+
+  const recommendations = [];
+  if (threatScore >= 70) recommendations.push('Avoid interacting with this website immediately.');
+  if (threatScore >= 50) recommendations.push('Do not enter personal, login, or financial information.');
+  recommendations.push('Cross-verify through official applications or verified developer contacts.');
+
+  const evidence = [
+    { type: 'metric', label: 'Trust Score', value: `${trustScore}/100` },
+    { type: 'metric', label: 'Threat Score', value: `${threatScore}/100` },
+    { type: 'metric', label: 'Confidence', value: `${confidenceScore}%` },
+    { type: 'text', label: 'Analysis Engine', value: 'SentinelAI Domain Intelligence 2.0' },
+  ];
+
+  if (responseData.trust_signals) {
+    responseData.trust_signals.forEach(signal => {
+      evidence.push({ type: 'text', label: 'Verified Signal', value: signal });
+    });
+  }
+
+  const meta = responseData.metadata || {};
+
+  return {
+    id: responseData.id || 'scan_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+    type: 'website',
+    appName: responseData.app_name || url,
+    developer: 'Domain Host',
+    trustScore,
+    threatScore,
+    confidenceScore,
+    verificationStatus,
+    summary: `Website verification completed. ${responseData.matched_app ? `Matches brand pattern: ${responseData.matched_app}.` : 'No direct brand association found.'} Threat score: ${threatScore}/100.`,
+    detectedIssues,
+    permissions: [],
+    recommendations,
+    evidence,
     metadata: {
-      url,
-      ssl: hasSSL ? 'Valid (Let\'s Encrypt)' : 'Not Found',
-      domainAge: domainAge > 365 ? `${Math.floor(domainAge / 365)} years` : `${domainAge} days`,
-      whois: randomBetween(0, 1) ? 'Privacy Protected' : 'Public',
-      https: hasSSL ? 'Enabled' : 'Disabled',
-      blacklisted: randomBetween(0, 5) === 0 ? 'Yes (Google Safe Browsing)' : 'No',
-      redirects: randomBetween(0, 4),
-      suspiciousForms: randomBetween(0, 3),
-      dangerousJS: randomBetween(0, 2),
+      url: meta.url || url,
+      ssl: meta.ssl || 'Valid',
+      https: meta.https || 'Enabled',
+      domainAge: 'N/A',
+      whois: 'N/A',
+      blacklisted: 'No',
     },
-  });
+    timestamp: new Date().toISOString(),
+    aiVerdict: responseData.ai_report || 'AI assessment unavailable',
+  };
 }

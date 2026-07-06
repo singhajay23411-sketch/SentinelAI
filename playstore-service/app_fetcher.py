@@ -372,7 +372,7 @@ def fetch_app_details(package_name: str) -> dict:
         return {"success": False, "error": f"Failed to fetch app details: {str(e)}"}
 
 
-def _extract_from_meta_tags(html: str, package_name: str) -> dict | None:
+def _extract_from_meta_tags(html: str, package_name: str) -> Optional[Dict]:
     """
     Fallback: Extract basic app info from HTML meta/title tags.
     More reliable than parsing the AF_initDataCallback datasets
@@ -434,6 +434,7 @@ def _extract_from_meta_tags(html: str, package_name: str) -> dict | None:
 
 from services.intelligence_engine import IntelligenceEngine
 import services.gemini_service as gemini_service
+from typing import Dict, List, Optional, Union
 
 # ─────────────────────────────────────────────
 # Orchestrator: Full Analysis Pipeline

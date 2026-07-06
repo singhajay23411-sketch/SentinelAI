@@ -21,7 +21,7 @@ function notify() {
 
 export async function fetchInitialData() {
   try {
-    const historyRes = await fetch('http://localhost:8080/scan-history');
+    const historyRes = await fetch('http://127.0.0.1:8080/scan-history');
     if (historyRes.ok) {
       const rawHistory = await historyRes.json();
       scans = rawHistory.map(row => {
@@ -41,7 +41,7 @@ export async function fetchInitialData() {
         return {
           id: row.scan_uuid,
           scan_uuid: row.scan_uuid,
-          type: row.scan_type === 'Play Store' ? 'playstore' : (row.scan_type === 'Manual Analysis' ? 'manual' : 'unknown'),
+          type: row.scan_type === 'Play Store' ? 'playstore' : (row.scan_type === 'Manual Analysis' ? 'manual' : (row.scan_type === 'APK Scan' ? 'apk' : 'unknown')),
           verificationStatus: row.status,
           appName: row.app_name,
           developer: rawData.developer || appDetails.developer || 'Unknown',
@@ -85,7 +85,7 @@ export async function fetchInitialData() {
       });
     }
     
-    const statsRes = await fetch('http://localhost:8080/dashboard-stats');
+    const statsRes = await fetch('http://127.0.0.1:8080/dashboard-stats');
     if (statsRes.ok) {
       dashboardStats = await statsRes.json();
     }
