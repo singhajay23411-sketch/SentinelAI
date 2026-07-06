@@ -227,7 +227,7 @@ export async function analyzePlayStore(url, onProgress) {
       rating: appDetails.score ? Number(appDetails.score).toFixed(1) : 'N/A',
     },
     timestamp: new Date().toISOString(),
-    aiVerdict: verdicts[riskLevel],
+    aiVerdict: analysis.ai_report || verdicts[riskLevel],
   };
 }
 
@@ -242,20 +242,77 @@ export async function analyzeManual(formData, onProgress) {
     { progress: 100, status: 'Verification Complete', detail: 'Manual verification report ready.' },
   ];
 
+  const apiPromise = fetch('http://localhost:8080/manual-analysis', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      app_name: formData.appName,
+      description: formData.description,
+      developer: formData.developer,
+      website: formData.website,
+      apk_link: formData.apkLink
+    }),
+  }).then(async (res) => {
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.detail || 'Analysis failed');
+    }
+    return res.json();
+  });
+
   for (const stage of stages) {
     await delay(randomBetween(500, 800));
     onProgress?.(stage);
   }
 
-  return buildResult('manual', {
+  const responseData = await apiPromise;
+  
+  onProgress?.({ progress: 100, status: 'Analysis Complete', detail: 'Security report generated successfully.' });
+
+  const riskScore = responseData.risk_score;
+  let riskLevel = 'Low';
+  if (riskScore >= 70) riskLevel = 'High';
+  else if (riskScore >= 40) riskLevel = 'Medium';
+  else if (riskScore >= 20) riskLevel = 'Low';
+  else riskLevel = 'Safe';
+
+  const detectedIssues = responseData.reasons.map(r => ({
+      severity: riskLevel === 'High' ? 'High' : riskLevel === 'Medium' ? 'Medium' : 'Low',
+      title: 'Fraud Indicator',
+      description: r
+  }));
+
+  const evidence = [
+    { type: 'metric', label: 'Threat Score', value: `${riskScore}/100` },
+    { type: 'text', label: 'Matched Brand', value: responseData.matched_app },
+    { type: 'text', label: 'Developer Verified', value: responseData.developer_verified ? 'Yes' : 'No' },
+    { type: 'metric', label: 'Confidence', value: `${responseData.confidence}%` },
+  ];
+
+  const recommendations = [];
+  if (riskScore >= 70) recommendations.push('Immediately avoid this application and do not share personal information.');
+  if (riskScore >= 50) recommendations.push('Do not enter any personal or financial information into this application.');
+  if (riskScore >= 30) recommendations.push('Verify the developer identity through official channels before trusting this app.');
+
+  return {
+    id: generateId(),
+    type: 'manual',
     appName: formData.appName,
-    developer: formData.developer || 'Not Specified',
+    developer: formData.developer || 'Unknown',
+    riskScore,
+    riskLevel,
+    summary: `Manual verification completed. Risk score: ${riskScore}/100.`,
+    detectedIssues,
+    permissions: [],
+    recommendations,
+    evidence,
     metadata: {
-      providedDescription: formData.description,
       website: formData.website || 'N/A',
       apkLink: formData.apkLink || 'N/A',
     },
-  });
+    timestamp: new Date().toISOString(),
+    aiVerdict: responseData.ai_report || 'AI assessment unavailable',
+  };
 }
 
 // ── APK Security Scanner ─────────────────────────────────────────────────

@@ -21,6 +21,8 @@ from urllib.parse import urlparse, parse_qs
 import requests
 # pyrefly: ignore [missing-import]
 from rapidfuzz import fuzz
+import data_loader
+import services.gemini_service as gemini_service
 
 logger = logging.getLogger(__name__)
 
@@ -44,50 +46,8 @@ RETRY_DELAY = 2  # seconds, doubles each retry
 
 
 # ─────────────────────────────────────────────
-# Constants: Trusted Apps & Developers
+# (Constants have been moved to JSON datasets and data_loader.py)
 # ─────────────────────────────────────────────
-
-KNOWN_APPS = [
-    "Groww",
-    "Upstox",
-    "Zerodha",
-    "Angel One",
-    "Paytm Money",
-    "ICICI Direct",
-    "HDFC Securities",
-    "Kite by Zerodha",
-    "5paisa",
-    "Sharekhan",
-    "Motilal Oswal",
-    "Kotak Securities",
-]
-
-TRUSTED_DEVELOPERS = {
-    "Groww": "Groww Technologies Pvt Ltd",
-    "Upstox": "Upstox Securities",
-    "Zerodha": "Zerodha Broking Ltd",
-    "Angel One": "Angel One Limited",
-    "Paytm Money": "Paytm Money Limited",
-    "ICICI Direct": "ICICI Securities Ltd",
-    "HDFC Securities": "HDFC securities Ltd",
-    "5paisa": "5paisa Capital Ltd",
-    "Sharekhan": "Sharekhan Ltd",
-}
-
-SUSPICIOUS_KEYWORDS = [
-    "guaranteed returns",
-    "double your money",
-    "100% profit",
-    "risk free",
-    "instant income",
-    "daily profit",
-    "fixed returns",
-    "earn money fast",
-    "no loss",
-    "quick profit",
-    "assured returns",
-    "zero risk",
-]
 
 
 # ─────────────────────────────────────────────
@@ -475,9 +435,10 @@ def analyze_name_similarity(app_name: str) -> dict:
     best_match = None
     best_score = 0
 
-    for known in KNOWN_APPS:
-        # Use token_sort_ratio for flexibility with word ordering
-        score = fuzz.token_sort_ratio(app_name.lower(), known.lower())
+    legitimate_apps = data_loader.load_legitimate_apps()
+    for known in legitimate_apps:
+        # Use token_set_ratio for flexibility with word ordering and subset matching
+        score = fuzz.token_set_ratio(app_name.lower(), known.lower())
         if score > best_score:
             best_score = score
             best_match = known
@@ -515,7 +476,8 @@ def analyze_description(description: str) -> dict:
         return {"matches": [], "risk": 0}
 
     desc_lower = description.lower()
-    matches = [kw for kw in SUSPICIOUS_KEYWORDS if kw in desc_lower]
+    suspicious_keywords = data_loader.load_suspicious_keywords()
+    matches = [kw for kw in suspicious_keywords if kw in desc_lower]
 
     # Risk scales with number of matches
     if len(matches) >= 4:
@@ -554,12 +516,13 @@ def verify_developer(app_name: str, developer: str) -> dict:
     if similarity_score < 60 or not matched_app:
         return {"trusted": True, "expected_developer": None, "risk": 0}
 
-    expected = TRUSTED_DEVELOPERS.get(matched_app)
+    trusted_devs = data_loader.load_trusted_developers()
+    expected = trusted_devs.get(matched_app)
     if not expected:
         return {"trusted": True, "expected_developer": None, "risk": 0}
 
     # Fuzzy match developer names (allow for minor variations)
-    dev_similarity = fuzz.token_sort_ratio(developer.lower(), expected.lower())
+    dev_similarity = fuzz.token_set_ratio(developer.lower(), expected.lower())
 
     if dev_similarity >= 85:
         return {"trusted": True, "expected_developer": expected, "risk": 0}
@@ -752,3 +715,17 @@ def run_full_analysis(url: str) -> dict:
             },
         },
     }
+    
+    # Generate Gemini report
+    gemini_payload = {
+        "app_name": details["title"],
+        "risk_score": risk_result["risk_score"],
+        "threat_level": risk_result["threat_level"],
+        "matched_app": name_analysis["matched_app"] or "None",
+        "developer_verified": dev_analysis["trusted"],
+        "matched_keywords": desc_analysis["matches"],
+        "reasons": reasons
+    }
+    result["analysis"]["ai_report"] = gemini_service.generate_ai_report(gemini_payload)
+
+    return result

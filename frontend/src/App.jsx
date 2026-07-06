@@ -11,9 +11,11 @@ function AnimatedRoutes() {
     <div key={location.pathname} className="page-transition">
       <Routes location={location}>
         <Route path="/" element={<SentinelAI />} />
+        <Route path="/home" element={<SentinelAIDashboard defaultTab="home" />} />
         <Route path="/dashboard" element={<SentinelAIDashboard defaultTab="dashboard" />} />
         <Route path="/scan-app" element={<SentinelAIDashboard defaultTab="scan" />} />
         <Route path="/flagged-apps" element={<SentinelAIDashboard defaultTab="flagged" />} />
+        <Route path="/about" element={<SentinelAIDashboard defaultTab="about" />} />
         <Route path="/threat-intelligence" element={<SentinelAIDashboard defaultTab="threats" />} />
         <Route path="/scan/playstore" element={<SentinelAIDashboard defaultTab="scan-playstore" />} />
         <Route path="/scan/manual" element={<SentinelAIDashboard defaultTab="scan-manual" />} />
