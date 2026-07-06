@@ -8,26 +8,38 @@ from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
 
-# Load .env from the backend directory
-load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', 'backend', '.env'))
+# Load environment variables
+load_dotenv()
+# Fallback to backend/.env for backward compatibility with local workspace setups
+backend_env = os.path.join(os.path.dirname(__file__), '..', '..', 'backend', '.env')
+if os.path.exists(backend_env):
+    load_dotenv(backend_env)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
+    logger.info("Gemini service initialized successfully")
 else:
     logger.warning("GEMINI_API_KEY is not set. AI assessment will fail gracefully.")
 
 # Initialize the model
-model = genai.GenerativeModel('gemini-2.5-flash')
+try:
+    model = genai.GenerativeModel('gemini-2.5-flash')
+except Exception as e:
+    logger.error(f"Failed to initialize Gemini model: {e}")
+    model = None
 
 def generate_ai_report(analysis_data: dict) -> str:
     """
     Generates a professional AI Security Assessment based on rule-based evidence.
     Will not break the pipeline if it fails.
     """
-    if not GEMINI_API_KEY:
-        return "AI assessment temporarily unavailable."
+    try:
+        if not GEMINI_API_KEY:
+            raise ValueError("GEMINI_API_KEY not configured")
+        if not model:
+            raise ValueError("Gemini model not initialized")
 
     prompt = f"""
 You are SentinelAI, an expert cybersecurity fraud analyst.
@@ -79,9 +91,5 @@ Output ONLY valid JSON.
         return json.loads(text.strip())
     except Exception as e:
         logger.error(f"Failed to generate Gemini AI report: {e}")
-        return {
-            "findings": [
-                {"heading": "Status", "detail": "AI assessment temporarily unavailable."}
-            ],
-            "summary": "Please review the manual indicators."
-        }
+        # Secure: Never log the API key or raw credentials, only the clean error message.
+        return "AI assessment temporarily unavailable."

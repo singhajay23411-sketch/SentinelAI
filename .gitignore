@@ -1,7 +1,22 @@
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
+# Node.js
+node_modules/
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
