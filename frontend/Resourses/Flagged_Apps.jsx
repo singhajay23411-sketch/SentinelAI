@@ -73,8 +73,11 @@ const SentinelAIFlaggedApps = () => {
               <span className="material-symbols-outlined font-bold text-primary">analytics</span>Flagged Apps
             </a>
           </li>
-          <li></li>
-          <li></li>
+          <li>
+            <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" href="/about" onClick={(e) => { e.preventDefault(); navigate('/about'); }}>
+              <span className="material-symbols-outlined font-normal text-outline group-hover:text-primary">info</span>About Us
+            </a>
+          </li>
           <li>
             <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" href="#">
               <span className="material-symbols-outlined font-normal text-outline group-hover:text-primary">security</span>Threat Intelligence

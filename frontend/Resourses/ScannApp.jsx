@@ -289,7 +289,7 @@ const ScanApplication = () => {
             </a>
           </li>
           <li>
-            <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" onClick={(e) => { e.preventDefault(); navigate('/', { state: { view: 'about' } }); }} href="/#about">
+            <a className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-primary-container/20 transition-all duration-300 cursor-pointer" onClick={(e) => { e.preventDefault(); navigate('/about'); }} href="/about">
               <span className="material-symbols-outlined">info</span>About Us
             </a>
           </li>
