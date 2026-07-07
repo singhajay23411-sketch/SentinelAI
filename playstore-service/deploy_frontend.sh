@@ -28,6 +28,7 @@ server {
 
     # --- Proxy API routes to FastAPI on port 8080 ---
     location ~ ^/(health|docs|openapi.json|redoc|api|scan-history|dashboard-stats|export-scans|import-scans|analyze-playstore-app|analyze-website|manual-analysis|upload-apk|scan-status|scan-results) {
+        rewrite ^(.*)$ $1 break;
         proxy_pass http://127.0.0.1:8080;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -60,6 +61,7 @@ server {
 
     # --- Proxy /api/v1 routes ---
     location /api/ {
+        rewrite ^(.*)$ $1 break;
         proxy_pass http://127.0.0.1:8080;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
