@@ -98,8 +98,8 @@ pytesseract==0.3.13
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
 python-multipart==0.0.29
-PyWavelets==1.9.0
-pywin32-ctypes==0.2.3
+PyWavelets
+pywin32-ctypes
 PyYAML==6.0.3
 RapidFuzz==3.14.5
 referencing==0.37.0
@@ -130,4 +130,4 @@ watchdog==6.0.0
 watchfiles==1.2.0
 wcwidth==0.8.2
 websockets==16.0
-win32_setctime==1.2.0
+win32_setctime
