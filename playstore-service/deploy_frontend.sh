@@ -26,9 +26,9 @@ server {
         add_header Cache-Control "public, immutable";
     }
 
-    # --- Proxy API routes to FastAPI on port 8000 ---
+    # --- Proxy API routes to FastAPI on port 8080 ---
     location ~ ^/(health|docs|openapi.json|redoc|api|scan-history|dashboard-stats|export-scans|import-scans|analyze-playstore-app|analyze-website|manual-analysis|upload-apk|scan-status|scan-results) {
-        proxy_pass http://127.0.0.1:8000;
+        proxy_pass http://127.0.0.1:8080;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -60,7 +60,7 @@ server {
 
     # --- Proxy /api/v1 routes ---
     location /api/ {
-        proxy_pass http://127.0.0.1:8000;
+        proxy_pass http://127.0.0.1:8080;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;

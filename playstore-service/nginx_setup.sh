@@ -33,8 +33,8 @@ server {
             return 204;
         }
 
-        # Proxy all requests to FastAPI on port 8000
-        proxy_pass http://127.0.0.1:8000;
+        # Proxy all requests to FastAPI on port 8080
+        proxy_pass http://127.0.0.1:8080;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
