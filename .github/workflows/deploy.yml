@@ -66,19 +66,27 @@ jobs:
             echo "=== 5. Restarting SentinelAI service ==="
             sudo systemctl restart sentinelai
 
-            echo "=== 6. Verifying service is active ==="
-            sleep 4
-            if sudo systemctl is-active --quiet sentinelai; then
-              echo "✅ sentinelai service is running!"
-            else
-              echo "❌ sentinelai failed to start. Recent system logs:"
-              sudo journalctl -u sentinelai -n 40 --no-pager
+            echo "=== 6. Waiting for FastAPI to initialize on port 8080 ==="
+            HEALTH_OK=false
+            for i in $(seq 1 30); do
+              if curl -s -f http://127.0.0.1:8080/health > /dev/null 2>&1; then
+                echo "✅ Backend is healthy and responding on port 8080 (attempt $i)!"
+                HEALTH_OK=true
+                break
+              fi
+              echo "Waiting for FastAPI to initialize on port 8080... ($i/30)"
+              sleep 2
+            done
+
+            if [ "$HEALTH_OK" = "false" ]; then
+              echo "❌ Health check failed on port 8080 after 60s. Recent service logs:"
+              sudo journalctl -u sentinelai -n 50 --no-pager
               exit 1
             fi
 
-            echo "=== 7. Verifying FastAPI health endpoint on port 8080 ==="
-            curl -s -f http://127.0.0.1:8080/health || (echo "❌ Health check failed on port 8080" && exit 1)
-            echo "✅ Backend is healthy and responding on port 8080!"
+            echo "=== 7. Verifying through Nginx reverse proxy ==="
+            curl -s -f http://127.0.0.1/health
+            echo "✅ Backend is live and verified through Nginx reverse proxy!"
           EOF
 
   # ─────────────────────────── FRONTEND DEPLOY ──────────────────────────────
