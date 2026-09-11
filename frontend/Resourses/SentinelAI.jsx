@@ -79,10 +79,24 @@ const SentinelAI = () => {
           >
             About Us
           </a>
+          <a
+            className="text-indigo-600 font-semibold hover:text-indigo-800 transition-colors text-body-md cursor-pointer flex items-center gap-1.5"
+            onClick={() => navigate('/enterprise')}
+          >
+            <span className="material-symbols-outlined text-sm">domain</span>
+            Enterprise Risk
+            <span className="text-[10px] bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded-full font-bold">NEW</span>
+          </a>
         </div>
-        <button className="bg-[#0A0F29] text-white px-6 py-2.5 rounded-full text-body-md font-semibold hover:opacity-90 transition-all active:scale-95 cursor-pointer" onClick={() => navigate('/dashboard')}>
-          Get Started
-        </button>
+        <div className="flex items-center gap-3">
+          <button className="bg-indigo-600 text-white px-5 py-2 rounded-full text-body-md font-semibold hover:bg-indigo-700 transition-all active:scale-95 cursor-pointer flex items-center gap-1.5 shadow-md shadow-indigo-500/20" onClick={() => navigate('/enterprise')}>
+            <span className="material-symbols-outlined text-sm">shield</span>
+            Enterprise Portal
+          </button>
+          <button className="bg-[#0A0F29] text-white px-5 py-2 rounded-full text-body-md font-semibold hover:opacity-90 transition-all active:scale-95 cursor-pointer" onClick={() => navigate('/dashboard')}>
+            Scanner App
+          </button>
+        </div>
       </nav>
       {/* END: TopNavBar */}
 
@@ -93,16 +107,27 @@ const SentinelAI = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center w-full">
           {/* BEGIN: Hero Content */}
           <div className="lg:col-span-5 space-y-4 z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant">
-              <span
-                className="material-symbols-outlined text-primary text-sm"
-                style={{ fontVariationSettings: '"FILL" 1' }}
+            <div className="flex flex-wrap gap-2">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant">
+                <span
+                  className="material-symbols-outlined text-primary text-sm"
+                  style={{ fontVariationSettings: '"FILL" 1' }}
+                >
+                  shield
+                </span>
+                <span className="font-label-caps text-label-caps text-primary tracking-widest uppercase">
+                  Advanced Threat Defense
+                </span>
+              </div>
+              <div
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 cursor-pointer hover:bg-indigo-100 transition-all"
+                onClick={() => navigate('/enterprise')}
               >
-                shield
-              </span>
-              <span className="font-label-caps text-label-caps text-primary tracking-widest uppercase">
-                Advanced Threat Defense
-              </span>
+                <span className="material-symbols-outlined text-indigo-600 text-sm">domain</span>
+                <span className="text-xs text-indigo-700 font-bold tracking-wider uppercase">
+                  SIH-26105 Enterprise Platform →
+                </span>
+              </div>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-on-surface">
               Detect Fake <br />
@@ -123,9 +148,13 @@ const SentinelAI = () => {
               to identify fake and look-alike investment applications in
               real-time and protect users from financial fraud.
             </p>
-            <div className="flex flex-wrap gap-4 mt-16">
-              <button className="bg-[#0A0F29] text-white px-8 py-3.5 rounded-full font-bold hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer" onClick={() => navigate('/dashboard')}>
-                Get Started
+            <div className="flex flex-wrap gap-4 mt-6">
+              <button className="bg-indigo-600 text-white px-7 py-3.5 rounded-full font-bold hover:shadow-lg hover:bg-indigo-700 transition-all hover:-translate-y-1 cursor-pointer flex items-center gap-2 shadow-md shadow-indigo-500/25" onClick={() => navigate('/enterprise')}>
+                <span className="material-symbols-outlined text-sm">domain</span>
+                Enterprise Cyber Risk
+              </button>
+              <button className="bg-[#0A0F29] text-white px-7 py-3.5 rounded-full font-bold hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer" onClick={() => navigate('/dashboard')}>
+                Explore Scanner App
               </button>
             </div>
           </div>

@@ -204,6 +204,18 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
           </li>
           <li>
             <a
+              className="flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer bg-gradient-to-r from-indigo-500/10 to-teal-500/10 text-indigo-600 font-bold border border-indigo-200 hover:from-indigo-500/20 hover:to-teal-500/20 shadow-sm"
+              onClick={(e) => { e.preventDefault(); navigate('/enterprise'); }}
+              href="/enterprise"
+            >
+              <span className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-indigo-600">domain</span>Enterprise Risk
+              </span>
+              <span className="text-[10px] bg-indigo-600 text-white font-black px-1.5 py-0.5 rounded-full uppercase tracking-wider">NEW</span>
+            </a>
+          </li>
+          <li>
+            <a
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 cursor-pointer ${activeTab === 'about' ? 'text-primary font-bold border-b-2 border-primary pb-1 bg-primary/5' : 'text-on-surface-variant hover:bg-primary-container/20'}`}
               onClick={(e) => { e.preventDefault(); setActiveTab('about'); navigate('/about'); }}
               href="/about"
@@ -212,7 +224,15 @@ const SentinelAIDashboard = ({ defaultTab = 'dashboard' }) => {
             </a>
           </li>
         </ul>
-        <div className="mt-auto pt-6"></div>
+        <div className="mt-auto pt-6 border-t border-slate-200/60">
+          <button
+            onClick={() => navigate('/enterprise')}
+            className="w-full flex items-center justify-center gap-2 bg-[#0A0F29] text-white py-2.5 px-4 rounded-lg font-semibold text-sm hover:bg-slate-800 transition-all shadow-sm cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-sm">shield</span>
+            Enterprise Portal
+          </button>
+        </div>
       </nav>
 
       {/* Main Content Canvas */}
