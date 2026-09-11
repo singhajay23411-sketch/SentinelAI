@@ -15,31 +15,17 @@ jobs:
       - name: ✅ Checkout code
         uses: actions/checkout@v4
 
-      - name: 🔍 Check changed files
-        id: filter
-        uses: dorny/paths-filter@v3
-        with:
-          filters: |
-            backend:
-              - 'playstore-service/**'
-              - '.github/workflows/deploy.yml'
-              - 'docker-compose.yml'
-              - '.env*'
-
       - name: 🔑 Setup SSH agent
-        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.backend == 'true'
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: 📡 Add VM to known hosts
-        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.backend == 'true'
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.VM_HOST || '161.118.177.73' }} >> ~/.ssh/known_hosts
 
       - name: 🚀 Pull latest code & restart backend
-        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.backend == 'true'
         env:
           HOST: ${{ secrets.VM_HOST || '161.118.177.73' }}
           USER: ${{ secrets.VM_USER || 'ubuntu' }}
@@ -97,17 +83,7 @@ jobs:
       - name: ✅ Checkout code
         uses: actions/checkout@v4
 
-      - name: 🔍 Check changed files
-        id: filter
-        uses: dorny/paths-filter@v3
-        with:
-          filters: |
-            frontend:
-              - 'frontend/**'
-              - '.github/workflows/deploy.yml'
-
       - name: 🟢 Setup Node.js
-        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -115,31 +91,26 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: 📦 Install dependencies
-        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
         working-directory: frontend
         run: npm ci
 
       - name: 🏗️ Build production bundle
-        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
         working-directory: frontend
         env:
           VITE_API_URL: http://${{ secrets.VM_HOST || '161.118.177.73' }}
         run: npm run build
 
       - name: 🔑 Setup SSH agent
-        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: 📡 Add VM to known hosts
-        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.VM_HOST || '161.118.177.73' }} >> ~/.ssh/known_hosts
 
       - name: 📤 Upload dist & deploy to Nginx web root
-        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
         env:
           HOST: ${{ secrets.VM_HOST || '161.118.177.73' }}
           USER: ${{ secrets.VM_USER || 'ubuntu' }}
@@ -161,7 +132,6 @@ jobs:
           EOF
 
       - name: 🌐 Smoke test website
-        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
         env:
           HOST: ${{ secrets.VM_HOST || '161.118.177.73' }}
         run: |
