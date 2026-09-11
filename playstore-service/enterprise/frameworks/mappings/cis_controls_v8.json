@@ -1,0 +1,66 @@
+{
+  "framework_id": "cis_controls_v8",
+  "name": "CIS Critical Security Controls v8",
+  "controls": [
+    {
+      "control_id": "CIS-01",
+      "name": "Inventory and Control of Enterprise Assets",
+      "clause": "Control 1",
+      "status": "implemented",
+      "mapped_internal_controls": ["ASSET-INV"],
+      "evidence_refs": ["ASSET-001", "ASSET-002"],
+      "gap_description": "Full asset register with active network and cloud assets mapped.",
+      "remediation_action": null
+    },
+    {
+      "control_id": "CIS-06",
+      "name": "Access Control Management",
+      "clause": "Control 6",
+      "status": "gap",
+      "mapped_internal_controls": ["MFA-01"],
+      "evidence_refs": ["EVD-002"],
+      "gap_description": "Privileged credentials lack enforced MFA hardware tokens.",
+      "remediation_action": "MFA-01"
+    },
+    {
+      "control_id": "CIS-07",
+      "name": "Continuous Vulnerability Management",
+      "clause": "Control 7",
+      "status": "partial",
+      "mapped_internal_controls": ["PTC-01"],
+      "evidence_refs": ["EVD-001", "VULN-101"],
+      "gap_description": "Scans execute monthly; automated remediation pipeline required to meet 14-day SLA.",
+      "remediation_action": "PTC-01"
+    },
+    {
+      "control_id": "CIS-11",
+      "name": "Data Recovery",
+      "clause": "Control 11",
+      "status": "gap",
+      "mapped_internal_controls": ["BCK-01"],
+      "evidence_refs": [],
+      "gap_description": "Air-gapped immutable backup architecture missing.",
+      "remediation_action": "BCK-01"
+    },
+    {
+      "control_id": "CIS-12",
+      "name": "Network Infrastructure Management",
+      "clause": "Control 12",
+      "status": "partial",
+      "mapped_internal_controls": ["SEG-01"],
+      "evidence_refs": ["ASSET-012"],
+      "gap_description": "Firewalls present, but east-west segmentation between web tiers and DB tiers incomplete.",
+      "remediation_action": "SEG-01"
+    },
+    {
+      "control_id": "CIS-16",
+      "name": "Application Software Security",
+      "clause": "Control 16",
+      "status": "implemented",
+      "mapped_internal_controls": ["WAF-01"],
+      "evidence_refs": ["SCAN-APK-001"],
+      "gap_description": "Continuous mobile APK and web application vulnerability scanning active.",
+      "remediation_action": null
+    }
+  ]
+}

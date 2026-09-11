@@ -27,7 +27,7 @@ server {
     }
 
     # --- Proxy API routes to FastAPI on port 8080 ---
-    location ~ ^/(health|docs|openapi.json|redoc|api|scan-history|dashboard-stats|export-scans|import-scans|analyze-playstore-app|analyze-website|manual-analysis|upload-apk|scan-status|scan-results) {
+    location ~ ^/(health|docs|openapi.json|redoc|api|auth|enterprise|scan-history|dashboard-stats|export-scans|import-scans|analyze-playstore-app|analyze-website|manual-analysis|upload-apk|scan-status|scan-results) {
         rewrite ^(.*)$ $1 break;
         proxy_pass http://127.0.0.1:8080;
         proxy_http_version 1.1;
@@ -59,8 +59,8 @@ server {
         client_max_body_size 100M;
     }
 
-    # --- Proxy /api/v1 routes ---
-    location /api/ {
+    # --- Proxy /api/, /auth/, and /enterprise/ routes ---
+    location ~ ^/(api|auth|enterprise)/ {
         rewrite ^(.*)$ $1 break;
         proxy_pass http://127.0.0.1:8080;
         proxy_http_version 1.1;
@@ -80,7 +80,9 @@ server {
 }
 NGINX_CONF
 
-echo "=== Step 3: Test and reload Nginx ==="
+echo "=== Step 3: Enable site, test and reload Nginx ==="
+sudo ln -sf /etc/nginx/sites-available/sentinelai /etc/nginx/sites-enabled/sentinelai
+sudo rm -f /etc/nginx/sites-enabled/default
 sudo nginx -t
 sudo systemctl reload nginx
 

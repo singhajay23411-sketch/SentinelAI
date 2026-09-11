@@ -1,0 +1,76 @@
+{
+  "framework_id": "rbi_csf_2023",
+  "name": "RBI Cyber Security Framework for Banks & NBFCs",
+  "controls": [
+    {
+      "control_id": "RBI-01",
+      "name": "Board-level Cybersecurity Governance & Cyber Crisis Management",
+      "clause": "Annex 1, Section 1",
+      "status": "implemented",
+      "mapped_internal_controls": ["ORG-SETTINGS"],
+      "evidence_refs": [],
+      "gap_description": "Quantified risk metrics (EAL, VaR) provided directly to Risk Management Committee (RMC).",
+      "remediation_action": null
+    },
+    {
+      "control_id": "RBI-02",
+      "name": "Inventory of Authorized and Unauthorized Assets",
+      "clause": "Annex 1, Section 2",
+      "status": "implemented",
+      "mapped_internal_controls": ["ASSET-INV"],
+      "evidence_refs": ["ASSET-001", "ASSET-005"],
+      "gap_description": "Comprehensive tracking of core banking applications, payment switches, and databases.",
+      "remediation_action": null
+    },
+    {
+      "control_id": "RBI-03",
+      "name": "Multi-Factor Authentication for Privileged Access",
+      "clause": "Annex 1, Section 4",
+      "status": "gap",
+      "mapped_internal_controls": ["MFA-01"],
+      "evidence_refs": ["EVD-002"],
+      "gap_description": "RBI mandates strict 2FA/MFA for all administrative sessions and critical database access.",
+      "remediation_action": "MFA-01"
+    },
+    {
+      "control_id": "RBI-04",
+      "name": "Network Segmentation and Subnetting",
+      "clause": "Annex 1, Section 5",
+      "status": "partial",
+      "mapped_internal_controls": ["SEG-01"],
+      "evidence_refs": ["ASSET-003"],
+      "gap_description": "Core transaction database (ASSET-003) requires isolated network zone.",
+      "remediation_action": "SEG-01"
+    },
+    {
+      "control_id": "RBI-05",
+      "name": "Vulnerability Remediation & Patching SLAs",
+      "clause": "Annex 1, Section 6",
+      "status": "gap",
+      "mapped_internal_controls": ["PTC-01"],
+      "evidence_refs": ["VULN-101"],
+      "gap_description": "Critical web vulnerabilities must be remediated within RBI's emergency timeline.",
+      "remediation_action": "PTC-01"
+    },
+    {
+      "control_id": "RBI-06",
+      "name": "Immutable Backup Architecture and RPO/RTO Validation",
+      "clause": "Annex 3, Section 1",
+      "status": "gap",
+      "mapped_internal_controls": ["BCK-01"],
+      "evidence_refs": [],
+      "gap_description": "Mandates off-site immutable backup copies protected from ransomware.",
+      "remediation_action": "BCK-01"
+    },
+    {
+      "control_id": "RBI-07",
+      "name": "CERT-In 6-Hour Security Incident Reporting",
+      "clause": "Annex 4, Section 2",
+      "status": "implemented",
+      "mapped_internal_controls": ["INCIDENT-MODULE"],
+      "evidence_refs": ["SIEM-501"],
+      "gap_description": "Real-time alert correlation flags CERT-In reportable breaches with automated notification prep.",
+      "remediation_action": null
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "framework_id": "nist_csf_2_0",
+  "name": "NIST Cybersecurity Framework 2.0",
+  "controls": [
+    {
+      "control_id": "GV.OC-01",
+      "name": "Organizational Context & Risk Appetite",
+      "clause": "GOVERN (GV)",
+      "status": "implemented",
+      "mapped_internal_controls": ["ORG-SETTINGS"],
+      "evidence_refs": [],
+      "gap_description": "Board-approved EAL and 95% VaR risk appetite thresholds established in SentinelAI.",
+      "remediation_action": null
+    },
+    {
+      "control_id": "ID.AM-01",
+      "name": "Physical and Logical Asset Inventories",
+      "clause": "IDENTIFY (ID)",
+      "status": "implemented",
+      "mapped_internal_controls": ["CMDB-SYNC"],
+      "evidence_refs": ["ASSET-001", "ASSET-002", "ASSET-003"],
+      "gap_description": "Complete CMDB inventory with criticality levels, owners, and data sensitivity.",
+      "remediation_action": null
+    },
+    {
+      "control_id": "PR.AA-01",
+      "name": "Identities and Credentials Authenticated",
+      "clause": "PROTECT (PR)",
+      "status": "gap",
+      "mapped_internal_controls": ["MFA-01"],
+      "evidence_refs": ["EVD-002"],
+      "gap_description": "4 privileged administrators without hardware MFA.",
+      "remediation_action": "MFA-01"
+    },
+    {
+      "control_id": "PR.IP-04",
+      "name": "Backups Maintained and Tested",
+      "clause": "PROTECT (PR)",
+      "status": "gap",
+      "mapped_internal_controls": ["BCK-01"],
+      "evidence_refs": [],
+      "gap_description": "Lack immutable air-gapped snapshots for rapid disaster recovery.",
+      "remediation_action": "BCK-01"
+    },
+    {
+      "control_id": "DE.CM-01",
+      "name": "Continuous Security Monitoring",
+      "clause": "DETECT (DE)",
+      "status": "partial",
+      "mapped_internal_controls": ["SOC-01"],
+      "evidence_refs": ["SIEM-501", "SIEM-502"],
+      "gap_description": "SIEM ingestion active; 24/7 MDR containment coverage required for sub-hour MTTR.",
+      "remediation_action": "SOC-01"
+    },
+    {
+      "control_id": "RS.MA-01",
+      "name": "Incident Response Plan Execution",
+      "clause": "RESPOND (RS)",
+      "status": "implemented",
+      "mapped_internal_controls": ["IR-PLAYBOOK"],
+      "evidence_refs": [],
+      "gap_description": "Automated incident ticketing and forensics evidence capture operational.",
+      "remediation_action": null
+    },
+    {
+      "control_id": "RC.RP-01",
+      "name": "Recovery Execution and Restoration",
+      "clause": "RECOVER (RC)",
+      "status": "partial",
+      "mapped_internal_controls": ["BCK-01"],
+      "evidence_refs": [],
+      "gap_description": "Recovery playbooks documented, but RTO exceeds 4-hour financial SLA without automated DR.",
+      "remediation_action": "BCK-01"
+    }
+  ]
+}

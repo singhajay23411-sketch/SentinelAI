@@ -1,11 +1,20 @@
 """
-SentinelAI Play Store Analysis API
-====================================
-FastAPI server exposing endpoints for Play Store app fraud analysis.
+SentinelAI Enterprise Platform
+================================
+FastAPI unified backend for SIH-26105 enterprise cyber risk quantification.
 
-Endpoints:
+Scanner endpoints (existing, preserved):
     GET  /health                → Health check
-    POST /analyze-playstore-app → Full Play Store app analysis
+    POST /analyze-playstore-app → Play Store fraud analysis
+    POST /manual-analysis       → Manual app verification
+    POST /analyze-website       → Website domain intelligence
+    POST/PUT/GET /api/v1/scans/ → APK upload and analysis workflow
+
+Enterprise endpoints (new):
+    POST/GET /auth/*            → Authentication and token management
+    GET/PUT  /enterprise/orgs/* → Organization and business unit CRUD
+    GET/POST /enterprise/orgs/*/assets → Asset inventory
+    GET/POST /enterprise/demo/* → Demo fixture management
 """
 
 import sys
@@ -35,15 +44,55 @@ from api.sync_routes import router as sync_router
 # ─────────────────────────────────────────────
 
 app = FastAPI(
-    title="SentinelAI Play Store Analysis API",
-    description="AI-powered fraud detection for Play Store applications",
-    version="1.0.0",
+    title="SentinelAI Enterprise Platform",
+    description="AI-powered continuous cyber risk quantification platform — SIH 2026 Problem 26105",
+    version="2.0.0",
 )
 
 @app.on_event("startup")
 async def startup_event():
-    """Initialize the database on application startup."""
+    """Initialize databases and enterprise indexes on application startup."""
+    # Scanner SQLite DB (existing)
     init_db()
+
+    # Enterprise MongoDB indexes (new)
+    try:
+        from enterprise.db.collections import init_indexes
+        from enterprise.db.connection import ping
+        if ping():
+            init_indexes()
+        else:
+            import logging
+            logging.getLogger(__name__).warning(
+                "MongoDB not reachable at startup. Enterprise features unavailable until connection is established."
+            )
+    except Exception as exc:
+        import logging
+        logging.getLogger(__name__).warning(f"Enterprise DB initialization skipped: {exc}")
+
+    # Enterprise Durable Job Queue recovery & worker startup
+    try:
+        from enterprise.jobs.queue import recover_stalled_jobs
+        from enterprise.jobs.worker import start_worker_thread
+        recover_stalled_jobs()
+        start_worker_thread()
+    except Exception as exc:
+        import logging
+        logging.getLogger(__name__).warning(f"Durable queue worker startup skipped: {exc}")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Clean up enterprise DB connection and worker."""
+    try:
+        from enterprise.jobs.worker import stop_worker_thread
+        stop_worker_thread()
+    except Exception:
+        pass
+    try:
+        from enterprise.db.connection import close
+        close()
+    except Exception:
+        pass
 
 # ─────────────────────────────────────────────
 # TASK 9: CORS Configuration
@@ -51,7 +100,15 @@ async def startup_event():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],          # Allow all origins for local development
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:80",
+        "http://localhost",
+        "http://127.0.0.1",
+        "http://localhost:8080",
+    ],
+    allow_origin_regex=r"http://(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+)(:\d+)?",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -70,9 +127,27 @@ async def log_requests(request: Request, call_next):
         print(f"Response status: {response.status_code}")
     return response
 
+# ─── Existing Scanner Routes (preserved) ───────────────────────────────────
 app.include_router(history_router)
 app.include_router(dashboard_router)
 app.include_router(sync_router)
+
+# ─── Enterprise Routes (new M1) ─────────────────────────────────────────────
+try:
+    from enterprise.auth.routes import router as auth_router
+    from enterprise.routes.org_routes import router as org_router
+    from enterprise.routes.asset_routes import router as asset_router
+    from enterprise.routes.demo_routes import router as demo_router
+    app.include_router(auth_router)
+    app.include_router(org_router)
+    app.include_router(asset_router)
+    app.include_router(demo_router)
+except Exception as _enterprise_exc:
+    import logging
+    logging.getLogger(__name__).warning(
+        f"Enterprise routes not loaded (missing dependency?): {_enterprise_exc}. "
+        "Scanner endpoints are still available."
+    )
 
 # ─────────────────────────────────────────────
 # Request / Response Models
@@ -510,6 +585,37 @@ async def analyze_website(request: WebsiteAnalysisRequest):
             status_code=500,
             detail=f"Internal server error: {str(e)}"
         )
+
+# ─────────────────────────────────────────────
+# SentinelAI Enterprise Cyber Risk Platform Routes (SIH-26105)
+# ─────────────────────────────────────────────
+from enterprise.auth.routes import router as auth_router
+from enterprise.routes.org_routes import router as org_router
+from enterprise.routes.asset_routes import router as asset_router
+from enterprise.routes.demo_routes import router as demo_router
+from enterprise.routes.ingest_routes import router as ingest_router
+from enterprise.routes.assessment_routes import router as assessment_router
+from enterprise.routes.simulation_routes import router as simulation_router
+from enterprise.routes.optimizer_routes import router as optimizer_router
+from enterprise.routes.ai_routes import router as ai_router
+from enterprise.routes.analytics_routes import router as analytics_router
+from enterprise.routes.job_routes import router as job_router
+from enterprise.frameworks.routes import router as framework_router
+from enterprise.reporting.routes import router as report_router
+
+app.include_router(auth_router)
+app.include_router(org_router)
+app.include_router(asset_router)
+app.include_router(demo_router)
+app.include_router(ingest_router)
+app.include_router(assessment_router)
+app.include_router(simulation_router)
+app.include_router(optimizer_router)
+app.include_router(ai_router)
+app.include_router(analytics_router)
+app.include_router(job_router)
+app.include_router(framework_router)
+app.include_router(report_router)
 
 if __name__ == "__main__":
     # pyrefly: ignore [missing-import]

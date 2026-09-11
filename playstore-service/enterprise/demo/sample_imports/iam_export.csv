@@ -1,0 +1,9 @@
+account_name,role,mfa_enabled,last_login,asset_id
+admin.suresh@sentinelfin.demo,Cloud Infrastructure SuperAdmin,false,2026-02-28,ASSET-006
+dba.rohit@sentinelfin.demo,Primary Database Administrator,false,2026-03-01,ASSET-006
+devops.lead@sentinelfin.demo,Kubernetes Cluster Root Admin,false,2026-03-02,ASSET-006
+treasury.ops@sentinelfin.demo,Treasury System Operator,true,2026-03-02,ASSET-006
+priya.sharma@sentinelfin.demo,Business Unit Head (Retail),true,2026-03-02,ASSET-006
+corp.analyst1@sentinelfin.demo,Financial Risk Analyst,false,2026-02-25,ASSET-006
+secops.lead@sentinelfin.demo,SOC Operations Lead,true,2026-03-03,ASSET-006
+service.backup_bot@sentinelfin.demo,Automated Backup Service Account,false,2026-03-03,ASSET-006

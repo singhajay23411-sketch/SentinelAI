@@ -1,0 +1,14 @@
+internal_id,name,asset_type,criticality,data_sensitivity,owner_name,environment,internet_exposed,record_volume_estimate,supporting_services,dependencies
+ASSET-001,Core Banking Transaction API,application,critical,restricted,Rohan Verma,production,true,5000000,Retail Banking & Investments,ASSET-003;ASSET-006
+ASSET-002,Customer Web NetBanking Portal,application,critical,confidential,Ananya Deshmukh,production,true,3500000,Retail Banking & Investments,ASSET-001;ASSET-006
+ASSET-003,Customer Primary PostgreSQL Database,database,critical,restricted,Suresh Iyer,production,false,5000000,Retail Banking & Investments;Corporate Treasury,
+ASSET-004,Mobile Banking Backend Gateway,application,high,confidential,Priya Sharma,production,true,2000000,Retail Banking & Investments,ASSET-001
+ASSET-005,UPI Payment Processing Switch,application,critical,restricted,Vikram Sen,production,true,10000000,Retail Banking & Investments,ASSET-003
+ASSET-006,Enterprise Keycloak & IAM Directory,identity_system,critical,restricted,Kavitha Nair,production,false,25000,All Services,
+ASSET-007,Corporate Loan Origination System,application,high,confidential,Arjun Mehta,production,false,450000,Corporate Treasury,ASSET-003
+ASSET-008,Treasury Trade Execution Platform,application,critical,restricted,Rajesh Kulkarni,production,false,150000,Corporate Treasury,
+ASSET-009,Customer Analytics & Data Warehouse,database,medium,internal,Pooja Patel,production,false,12000000,Retail Banking & Investments,ASSET-003
+ASSET-010,Kubernetes Production Cluster (EKS),cloud_resource,critical,confidential,DevOps Team,production,true,0,All Services,
+ASSET-011,AWS S3 Customer Statements Storage,cloud_resource,high,restricted,Cloud Eng,production,false,8000000,Retail Banking & Investments,
+ASSET-012,Corporate VPN Gateway (Firewall),network_device,high,internal,SecOps Team,production,true,0,Enterprise IT,
+ASSET-013,Security Operations SIEM & Logging Cluster,server,high,internal,SecOps Team,production,false,0,Enterprise IT,

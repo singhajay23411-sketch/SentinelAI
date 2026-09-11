@@ -1,0 +1,9 @@
+finding_id,title,asset_id,severity,cvss,cve_id,status,first_detected,remediation
+VULN-101,Remote Code Execution in Apache Struts 2,ASSET-002,critical,9.8,CVE-2023-50164,open,2026-01-15,Upgrade Apache Struts library to version 6.3.0.2 or higher
+VULN-102,Spring Framework Path Traversal Vulnerability,ASSET-001,high,8.1,CVE-2024-22234,open,2026-01-20,Update Spring Boot framework dependencies to 3.2.2+
+VULN-103,PostgreSQL Authentication Bypass via Insecure Pg_hba,ASSET-003,high,7.5,,open,2026-02-01,Restrict pg_hba.conf client CIDR ranges and require scram-sha-256
+VULN-104,OpenSSL TLS Session Renegotiation Weakness,ASSET-012,medium,5.3,CVE-2022-0778,open,2026-02-10,Apply vendor firmware patch 4.2.1 on VPN concentrator
+VULN-105,Kubernetes API Server Unauthorized Access Token Leak,ASSET-010,high,8.8,CVE-2023-2728,resolved,2026-01-05,Rotate cluster service account signing keys and restrict node auth
+VULN-106,Missing Content-Security-Policy and Clickjacking,ASSET-004,low,3.8,,open,2026-02-15,Configure strict CSP headers in NGINX ingress controller
+VULN-107,Log4j Remote JNDI Injection Dependency Detected,ASSET-007,critical,9.8,CVE-2021-44228,open,2026-02-18,Upgrade log4j-core to 2.17.1 across loan service microservices
+VULN-108,Weak SSH Host Key Ciphers Enabled,ASSET-013,low,4.0,,open,2026-02-22,Disable diffie-hellman-group1-sha1 in sshd_config

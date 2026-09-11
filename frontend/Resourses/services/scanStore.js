@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://161.118.177.73:8000";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 // In-memory scan data store with event-driven updates.
 // Clean interface so it can be replaced with a real backend later.

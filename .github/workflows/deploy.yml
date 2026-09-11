@@ -1,0 +1,168 @@
+name: 🚀 Deploy SentinelAI to Oracle VM
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  # ───────────────────────────── BACKEND DEPLOY ─────────────────────────────
+  deploy-backend:
+    name: 🐍 Deploy Backend
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check changed files
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            backend:
+              - 'playstore-service/**'
+              - '.github/workflows/deploy.yml'
+              - 'docker-compose.yml'
+              - '.env*'
+
+      - name: 🔑 Setup SSH agent
+        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.backend == 'true'
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: 📡 Add VM to known hosts
+        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.backend == 'true'
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.VM_HOST || '161.118.177.73' }} >> ~/.ssh/known_hosts
+
+      - name: 🚀 Pull latest code & restart backend
+        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.backend == 'true'
+        env:
+          HOST: ${{ secrets.VM_HOST || '161.118.177.73' }}
+          USER: ${{ secrets.VM_USER || 'ubuntu' }}
+        run: |
+          ssh -o StrictHostKeyChecking=no "$USER@$HOST" << 'EOF'
+            set -e
+            echo "=== 1. Pulling latest code ==="
+            cd ~/SentinelAI
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "=== 2. Installing Python dependencies ==="
+            source ~/venv/bin/activate
+            pip install --upgrade pip -q
+            pip install -r playstore-service/requirements.txt -q
+
+            echo "=== 3. Updating systemd service definition ==="
+            sudo cp playstore-service/sentinelai.service /etc/systemd/system/sentinelai.service
+            sudo systemctl daemon-reload
+
+            echo "=== 4. Updating Nginx reverse proxy configuration ==="
+            sudo bash playstore-service/deploy_frontend.sh || true
+
+            echo "=== 5. Restarting SentinelAI service ==="
+            sudo systemctl restart sentinelai
+
+            echo "=== 6. Verifying service is active ==="
+            sleep 4
+            if sudo systemctl is-active --quiet sentinelai; then
+              echo "✅ sentinelai service is running!"
+            else
+              echo "❌ sentinelai failed to start. Recent system logs:"
+              sudo journalctl -u sentinelai -n 40 --no-pager
+              exit 1
+            fi
+
+            echo "=== 7. Verifying FastAPI health endpoint on port 8080 ==="
+            curl -s -f http://127.0.0.1:8080/health || (echo "❌ Health check failed on port 8080" && exit 1)
+            echo "✅ Backend is healthy and responding on port 8080!"
+          EOF
+
+  # ─────────────────────────── FRONTEND DEPLOY ──────────────────────────────
+  deploy-frontend:
+    name: ⚛️ Build & Deploy Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔍 Check changed files
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            frontend:
+              - 'frontend/**'
+              - '.github/workflows/deploy.yml'
+
+      - name: 🟢 Setup Node.js
+        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 📦 Install dependencies
+        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
+        working-directory: frontend
+        run: npm ci
+
+      - name: 🏗️ Build production bundle
+        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
+        working-directory: frontend
+        env:
+          VITE_API_URL: http://${{ secrets.VM_HOST || '161.118.177.73' }}
+        run: npm run build
+
+      - name: 🔑 Setup SSH agent
+        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: 📡 Add VM to known hosts
+        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.VM_HOST || '161.118.177.73' }} >> ~/.ssh/known_hosts
+
+      - name: 📤 Upload dist & deploy to Nginx web root
+        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
+        env:
+          HOST: ${{ secrets.VM_HOST || '161.118.177.73' }}
+          USER: ${{ secrets.VM_USER || 'ubuntu' }}
+        run: |
+          echo "=== 1. Transferring built frontend files to staging directory ==="
+          ssh -o StrictHostKeyChecking=no "$USER@$HOST" "mkdir -p ~/frontend_staging"
+          scp -o StrictHostKeyChecking=no -r frontend/dist/* "$USER@$HOST:~/frontend_staging/"
+
+          echo "=== 2. Deploying files to /var/www/sentinelai/ and reloading Nginx ==="
+          ssh -o StrictHostKeyChecking=no "$USER@$HOST" << 'EOF'
+            set -e
+            sudo mkdir -p /var/www/sentinelai
+            sudo rm -rf /var/www/sentinelai/*
+            sudo cp -r ~/frontend_staging/* /var/www/sentinelai/
+            sudo chown -R ubuntu:ubuntu /var/www/sentinelai
+            rm -rf ~/frontend_staging
+            sudo systemctl reload nginx
+            echo "✅ Frontend uploaded and Nginx reloaded successfully!"
+          EOF
+
+      - name: 🌐 Smoke test website
+        if: github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true'
+        env:
+          HOST: ${{ secrets.VM_HOST || '161.118.177.73' }}
+        run: |
+          sleep 3
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "http://$HOST/")
+          echo "HTTP Status: $STATUS"
+          if [ "$STATUS" = "200" ]; then
+            echo "✅ Website is live and responding 200 OK at http://$HOST/"
+          else
+            echo "❌ Website returned $STATUS"
+            exit 1
+          fi

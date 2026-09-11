@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://161.118.177.73:8000";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 import { useScanContext } from '../../src/context/ScanContext.jsx';
 import ScanResults from './ScanResults.jsx';
 

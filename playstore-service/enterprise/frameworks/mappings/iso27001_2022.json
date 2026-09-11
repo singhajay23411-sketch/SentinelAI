@@ -1,0 +1,76 @@
+{
+  "framework_id": "iso27001_2022",
+  "name": "ISO/IEC 27001:2022 Annex A",
+  "controls": [
+    {
+      "control_id": "A.5.15",
+      "name": "Access Control",
+      "clause": "Annex A.5.15",
+      "status": "partial",
+      "mapped_internal_controls": ["MFA-01"],
+      "evidence_refs": ["EVD-002"],
+      "gap_description": "Administrative accounts in Keycloak lack enforced MFA. Partial compliance.",
+      "remediation_action": "MFA-01"
+    },
+    {
+      "control_id": "A.8.7",
+      "name": "Protection Against Malware",
+      "clause": "Annex A.8.7",
+      "status": "partial",
+      "mapped_internal_controls": ["SOC-01"],
+      "evidence_refs": ["SIEM-502"],
+      "gap_description": "Need 24/7 EDR containment capability across database and API hosts.",
+      "remediation_action": "SOC-01"
+    },
+    {
+      "control_id": "A.8.8",
+      "name": "Management of Technical Vulnerabilities",
+      "clause": "Annex A.8.8",
+      "status": "gap",
+      "mapped_internal_controls": ["PTC-01"],
+      "evidence_refs": ["EVD-001", "VULN-101"],
+      "gap_description": "Unpatched Apache Struts CVE-2023-50164 and Spring Boot CVE on public web tiers.",
+      "remediation_action": "PTC-01"
+    },
+    {
+      "control_id": "A.8.12",
+      "name": "Data Leakage Prevention",
+      "clause": "Annex A.8.12",
+      "status": "implemented",
+      "mapped_internal_controls": ["DLP-01"],
+      "evidence_refs": ["ASSET-011"],
+      "gap_description": "S3 bucket exfiltration monitored; DLP policies active.",
+      "remediation_action": null
+    },
+    {
+      "control_id": "A.8.13",
+      "name": "Information Backup",
+      "clause": "Annex A.8.13",
+      "status": "gap",
+      "mapped_internal_controls": ["BCK-01"],
+      "evidence_refs": [],
+      "gap_description": "Backups currently lack WORM immutability against active ransomware encryption.",
+      "remediation_action": "BCK-01"
+    },
+    {
+      "control_id": "A.8.20",
+      "name": "Network Security",
+      "clause": "Annex A.8.20",
+      "status": "partial",
+      "mapped_internal_controls": ["SEG-01"],
+      "evidence_refs": ["ASSET-012"],
+      "gap_description": "Perimeter VPN configured; internal micro-segmentation between Core Banking and Web needed.",
+      "remediation_action": "SEG-01"
+    },
+    {
+      "control_id": "A.8.26",
+      "name": "Application Security Requirements",
+      "clause": "Annex A.8.26",
+      "status": "implemented",
+      "mapped_internal_controls": ["WAF-01"],
+      "evidence_refs": ["SCAN-APK-001"],
+      "gap_description": "SentinelAI automated scanner continuously audits mobile and web application attack surfaces.",
+      "remediation_action": null
+    }
+  ]
+}

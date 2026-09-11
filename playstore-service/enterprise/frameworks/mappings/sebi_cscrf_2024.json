@@ -1,0 +1,66 @@
+{
+  "framework_id": "sebi_cscrf_2024",
+  "name": "SEBI Cybersecurity and Cyber Resilience Framework (CSCRF)",
+  "controls": [
+    {
+      "control_id": "SEBI-01",
+      "name": "Governance & Cybersecurity Resilience Policy",
+      "clause": "Part 1, Chapter 2",
+      "status": "implemented",
+      "mapped_internal_controls": ["ORG-SETTINGS"],
+      "evidence_refs": [],
+      "gap_description": "Formal risk appetite, Board reporting, and annual cyber resilience reviews.",
+      "remediation_action": null
+    },
+    {
+      "control_id": "SEBI-02",
+      "name": "Critical Asset Identification & Dependency Mapping",
+      "clause": "Part 2, Chapter 3",
+      "status": "implemented",
+      "mapped_internal_controls": ["ASSET-INV"],
+      "evidence_refs": ["ASSET-001", "ASSET-008"],
+      "gap_description": "Trading platform and treasury assets mapped with upstream dependencies.",
+      "remediation_action": null
+    },
+    {
+      "control_id": "SEBI-03",
+      "name": "Multi-Factor Authentication & Identity Lifecycle",
+      "clause": "Part 3, Chapter 4",
+      "status": "gap",
+      "mapped_internal_controls": ["MFA-01"],
+      "evidence_refs": ["EVD-002"],
+      "gap_description": "Hardware-backed MFA required for all systems handling investor and trading data.",
+      "remediation_action": "MFA-01"
+    },
+    {
+      "control_id": "SEBI-04",
+      "name": "Application Security & API Protection",
+      "clause": "Part 3, Chapter 5",
+      "status": "implemented",
+      "mapped_internal_controls": ["WAF-01"],
+      "evidence_refs": ["SCAN-APK-001"],
+      "gap_description": "API rate limiting, WAF filtering, and continuous mobile banking static testing active.",
+      "remediation_action": null
+    },
+    {
+      "control_id": "SEBI-05",
+      "name": "24/7 Security Operations Center (SOC) & Telemetry",
+      "clause": "Part 4, Chapter 6",
+      "status": "partial",
+      "mapped_internal_controls": ["SOC-01"],
+      "evidence_refs": ["SIEM-501"],
+      "gap_description": "SIEM logs ingested; 24/7 proactive threat hunting and rapid containment needed.",
+      "remediation_action": "SOC-01"
+    },
+    {
+      "control_id": "SEBI-06",
+      "name": "Disaster Recovery & Business Continuity Testing",
+      "clause": "Part 5, Chapter 7",
+      "status": "gap",
+      "mapped_internal_controls": ["BCK-01"],
+      "evidence_refs": [],
+      "gap_description": "Secondary DR site requires immutable sync to achieve SEBI 2-hour RTO mandate.",
+      "remediation_action": "BCK-01"
+    }
+  ]
+}
